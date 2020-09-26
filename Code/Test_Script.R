@@ -5,6 +5,7 @@
 setwd("~/OR2 SED LN")
 library(ggplot2)
 library(dplyr)
+#On my computer the data file is stored in a seperate directory than what is seen on Github
 Nuts_For_SSL1<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 1.csv", sep=";", header=TRUE)
 #Deletes the 1st row, which just has unit designation (umol/L)
 #SSL is the Soil Solution Layer, SSLL is leaching layer, number designates layer
@@ -254,7 +255,7 @@ plot(SSL3Si.G)
 dev.off()
 
 
-#Gets rid of issue where values show up as characters on the graph
+#Gets rid of issue where values show up as characters on the graph, original program outputs results as characters rather than numerical
 Nuts_For_SSL4$Ca<-as.numeric(as.character(Nuts_For_SSL4$Ca))
 Nuts_For_SSL4$Mg<-as.numeric(as.character(Nuts_For_SSL4$Mg))
 Nuts_For_SSL4$K<-as.numeric(as.character(Nuts_For_SSL4$K))
