@@ -4,10 +4,10 @@ library(dplyr)
 library(magrittr)
 library(multipanelfigure)
 
-setwd("~/Project_Master/Test_Rep/Output/Soil_Solution")
+setwd("~/Project_Master/Test_Rep/Output_HN_SED/Soil_Solution")
 #Data is stored on my computer, data for student inspection is in "Data" folder on Github
 
-Nuts_For_SSL1<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 1.csv", sep=";", header=TRUE)
+Nuts_For_SSL1<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 1.csv", sep=";", header=TRUE)
 Nuts_For_SSL1<-Nuts_For_SSL1[-c(1),]
 Nuts_For_SSL1$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
@@ -51,13 +51,13 @@ SSL1Al.G<-ggplot(Nuts_For_SSL1, aes(x=Date, y=Al))+ geom_line()+labs(y="Soil Sol
 
 SSL1Si.G<-ggplot(Nuts_For_SSL1, aes(x=Date, y=Si))+ geom_line()+labs(y="Soil Solution  Si (umol/L)")+theme(text = element_text(size = 5))
 
-Nuts_For_SSL2<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 2.csv", sep=";", header=TRUE)
-Nuts_For_SSL3<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 3.csv", sep=";", header=TRUE)
-Nuts_For_SSL4<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 4.csv", sep=";", header=TRUE)
-Nuts_For_SSL5<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 5.csv", sep=";", header=TRUE)
-Nuts_For_SSL6<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 6.csv", sep=";", header=TRUE)
-Nuts_For_SSL7<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 7.csv", sep=";", header=TRUE)
-Nuts_For_SSL8<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 8.csv", sep=";", header=TRUE)
+Nuts_For_SSL2<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 2.csv", sep=";", header=TRUE)
+Nuts_For_SSL3<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 3.csv", sep=";", header=TRUE)
+Nuts_For_SSL4<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 4.csv", sep=";", header=TRUE)
+Nuts_For_SSL5<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 5.csv", sep=";", header=TRUE)
+Nuts_For_SSL6<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 6.csv", sep=";", header=TRUE)
+Nuts_For_SSL7<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 7.csv", sep=";", header=TRUE)
+Nuts_For_SSL8<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 8.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL2<-Nuts_For_SSL2[-c(1),]
 Nuts_For_SSL2$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
@@ -722,4 +722,7 @@ ANC_8<-ggplot()+geom_line(Nuts_For_SSL8, mapping= (aes(x=Date, y=Anions_Eq_8, co
 pdf("ANC_8.pdf")
 plot(ANC_8)
 dev.off()
+
+
+
 

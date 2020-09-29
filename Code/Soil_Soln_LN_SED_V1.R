@@ -4,6 +4,8 @@ library(dplyr)
 library(magrittr)
 library(multipanelfigure)
 
+#Edit code to see how git responds
+
 setwd("~/Project_Master/Test_Rep/Output_LN_SED/Soil_Solution")
 #Data is stored on my computer, data for student inspection is in "Data" folder on Github
 
