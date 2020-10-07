@@ -1,4 +1,5 @@
 #Faster Aggregated Graphs for Test_Script
+rm(list = ls())
 library(ggplot2)
 library(dplyr)
 library(magrittr)

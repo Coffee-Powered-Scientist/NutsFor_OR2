@@ -24,7 +24,7 @@ Nuts_For_Weathering1$Si<-as.numeric(as.character(Nuts_For_Weathering1$Si))
 Nuts_For_Weathering1$P<-as.numeric(as.character(Nuts_For_Weathering1$P))
 
 Nuts_For_Weathering2<-read.csv("~/NutsForSEDHN/Output data/Weathering/Weathering Layer 2.csv", sep=";", header=FALSE)
-Nuts_For_Weathering2<-Nuts_For_Weathering1[-c(1:2),]
+Nuts_For_Weathering2<-Nuts_For_Weathering2[-c(1:2),]
 Nuts_For_Weathering2$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
 Nuts_For_Weathering2$Ca<-Nuts_For_Weathering2$V3
@@ -44,7 +44,7 @@ Nuts_For_Weathering2$Si<-as.numeric(as.character(Nuts_For_Weathering2$Si))
 Nuts_For_Weathering2$P<-as.numeric(as.character(Nuts_For_Weathering2$P))
 
 Nuts_For_Weathering3<-read.csv("~/NutsForSEDHN/Output data/Weathering/Weathering Layer 3.csv", sep=";", header=FALSE)
-Nuts_For_Weathering3<-Nuts_For_Weathering1[-c(1:2),]
+Nuts_For_Weathering3<-Nuts_For_Weathering3[-c(1:2),]
 Nuts_For_Weathering3$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
 Nuts_For_Weathering3$Ca<-Nuts_For_Weathering3$V3
@@ -157,7 +157,7 @@ plot(Weathering3P.G)
 dev.off()
 
 Nuts_For_Weathering4<-read.csv("~/NutsForSEDHN/Output data/Weathering/Weathering Layer 4.csv", sep=";", header=FALSE)
-Nuts_For_Weathering4<-Nuts_For_Weathering1[-c(1:2),]
+Nuts_For_Weathering4<-Nuts_For_Weathering4[-c(1:2),]
 Nuts_For_Weathering4$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
 Nuts_For_Weathering4$Ca<-Nuts_For_Weathering4$V3
@@ -206,7 +206,7 @@ plot(Weathering4P.G)
 dev.off()
 
 Nuts_For_Weathering5<-read.csv("~/NutsForSEDHN/Output data/Weathering/Weathering Layer 5.csv", sep=";", header=FALSE)
-Nuts_For_Weathering5<-Nuts_For_Weathering1[-c(1:2),]
+Nuts_For_Weathering5<-Nuts_For_Weathering5[-c(1:2),]
 Nuts_For_Weathering5$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
 Nuts_For_Weathering5$Ca<-Nuts_For_Weathering5$V3
@@ -256,7 +256,7 @@ plot(Weathering5P.G)
 dev.off()
 
 Nuts_For_Weathering6<-read.csv("~/NutsForSEDHN/Output data/Weathering/Weathering Layer 6.csv", sep=";", header=FALSE)
-Nuts_For_Weathering6<-Nuts_For_Weathering1[-c(1:2),]
+Nuts_For_Weathering6<-Nuts_For_Weathering6[-c(1:2),]
 Nuts_For_Weathering6$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
 Nuts_For_Weathering6$Ca<-Nuts_For_Weathering6$V3
@@ -306,7 +306,7 @@ plot(Weathering6P.G)
 dev.off()
 
 Nuts_For_Weathering7<-read.csv("~/NutsForSEDHN/Output data/Weathering/Weathering Layer 7.csv", sep=";", header=FALSE)
-Nuts_For_Weathering7<-Nuts_For_Weathering1[-c(1:2),]
+Nuts_For_Weathering7<-Nuts_For_Weathering7[-c(1:2),]
 Nuts_For_Weathering7$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
 Nuts_For_Weathering7$Ca<-Nuts_For_Weathering7$V3
@@ -356,7 +356,7 @@ plot(Weathering7P.G)
 dev.off()
 
 Nuts_For_Weathering8<-read.csv("~/NutsForSEDHN/Output data/Weathering/Weathering Layer 8.csv", sep=";", header=FALSE)
-Nuts_For_Weathering8<-Nuts_For_Weathering1[-c(1:2),]
+Nuts_For_Weathering8<-Nuts_For_Weathering8[-c(1:2),]
 Nuts_For_Weathering8$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 132)
 
 Nuts_For_Weathering8$Ca<-Nuts_For_Weathering8$V3
