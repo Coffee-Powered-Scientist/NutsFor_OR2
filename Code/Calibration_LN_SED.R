@@ -2,3 +2,5 @@
 rm(list = ls())
 source("~/Project_Master/Test_Rep/Code/Soil_Soln_LN_SED_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/Soil_Soln_LN_SED_Grapher.R")
+source("~/Project_Master/Test_Rep/Code/Weathering_LN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/Weathering_LN_SED_Grapher.R")
