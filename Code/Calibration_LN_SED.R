@@ -2,12 +2,12 @@
 rm(list = ls())
 
 #Soil Solution
-source("~/Project_Master/Test_Rep/Code/Soil_Soln_LN_SED_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/Soil_Soln_LN_SED_Grapher.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Soil_Soln_LN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Soil_Soln_LN_SED_Grapher.R")
 
 #Weathering
-source("~/Project_Master/Test_Rep/Code/Weathering_LN_SED_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/Weathering_LN_SED_Grapher.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Weathering_LN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Weathering_LN_SED_Grapher.R")
 
 #Total stand acquisition (pool) over time
 
