@@ -31,11 +31,22 @@ Tree_Nut[,c(1:41)] <- lapply(Tree_Nut[,c(1:41)], as.numeric)
 
 
 
-#Convert biomass from g/meters squared to kg/hectare
+#Convert biomass from g/meters squared to kg/hectare, generate "total" pools
 Tree_Nut$WoodBiomass<-Tree_Nut$V16*10
 Tree_Nut$FoliarBiomass<-Tree_Nut$V3*10
 
+#Totals
+Tree_Nut$TotBiomass<-Tree_Nut$WoodBiomass+Tree_Nut$WoodBiomass
+Tree_Nut$Ca_Tot<-Tree_Nut$Ca_F+Tree_Nut$Ca_W
+Tree_Nut$Mg_Tot<-Tree_Nut$Mg_F+Tree_Nut$Mg_W
+Tree_Nut$N_Tot<-Tree_Nut$N_F+Tree_Nut$N_W
+Tree_Nut$S_Tot<-Tree_Nut$S_F+Tree_Nut$S_W
+Tree_Nut$P_Tot<-Tree_Nut$P_F+Tree_Nut$P_W
+Tree_Nut$K_Tot<-Tree_Nut$K_F+Tree_Nut$K_W
+
+
 #Get rid of variables in the wrong unit, and of duplicated data
 Tree_Nut<-Tree_Nut[-c(1:29)]
+
 
 write.csv2(Tree_Nut, "Tree_Nutrients_Biomass.csv")
