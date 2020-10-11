@@ -3,9 +3,9 @@
 #The code will then source to another 2 graphing codes, which tend to be very slow
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output_LN_BAS/Edited Data")
 library(dplyr)
-Nuts_For_Weathering1<-read.csv2("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 1.csv", header=FALSE)
+Nuts_For_Weathering1<-read.csv2("~/NutsForBASLN/Output data/Weathering/Weathering Layer 1.csv", header=FALSE)
 
 Nuts_For_Weathering1$Ca_L1<-Nuts_For_Weathering1$V3
 Nuts_For_Weathering1$Mg_L1<-Nuts_For_Weathering1$V4
@@ -15,7 +15,7 @@ Nuts_For_Weathering1$Al_L1<-Nuts_For_Weathering1$V7
 Nuts_For_Weathering1$Si_L1<-Nuts_For_Weathering1$V8
 Nuts_For_Weathering1$P_L1<-Nuts_For_Weathering1$V9
 
-Nuts_For_Weathering2<-read.csv("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 2.csv", sep=";", header=FALSE)
+Nuts_For_Weathering2<-read.csv("~/NutsForBASLN/Output data/Weathering/Weathering Layer 2.csv", sep=";", header=FALSE)
 
 Nuts_For_Weathering2$Ca_L2<-Nuts_For_Weathering2$V3
 Nuts_For_Weathering2$Mg_L2<-Nuts_For_Weathering2$V4
@@ -25,7 +25,7 @@ Nuts_For_Weathering2$Al_L2<-Nuts_For_Weathering2$V7
 Nuts_For_Weathering2$Si_L2<-Nuts_For_Weathering2$V8
 Nuts_For_Weathering2$P_L2<-Nuts_For_Weathering2$V9
 
-Nuts_For_Weathering3<-read.csv("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 3.csv", sep=";", header=FALSE)
+Nuts_For_Weathering3<-read.csv("~/NutsForBASLN/Output data/Weathering/Weathering Layer 3.csv", sep=";", header=FALSE)
 
 Nuts_For_Weathering3$Ca_L3<-Nuts_For_Weathering3$V3
 Nuts_For_Weathering3$Mg_L3<-Nuts_For_Weathering3$V4
@@ -35,7 +35,7 @@ Nuts_For_Weathering3$Al_L3<-Nuts_For_Weathering3$V7
 Nuts_For_Weathering3$Si_L3<-Nuts_For_Weathering3$V8
 Nuts_For_Weathering3$P_L3<-Nuts_For_Weathering3$V9
 
-Nuts_For_Weathering4<-read.csv("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 4.csv", sep=";", header=FALSE)
+Nuts_For_Weathering4<-read.csv("~/NutsForBASLN/Output data/Weathering/Weathering Layer 4.csv", sep=";", header=FALSE)
 
 Nuts_For_Weathering4$Ca_L4<-Nuts_For_Weathering4$V3
 Nuts_For_Weathering4$Mg_L4<-Nuts_For_Weathering4$V4
@@ -45,7 +45,7 @@ Nuts_For_Weathering4$Al_L4<-Nuts_For_Weathering4$V7
 Nuts_For_Weathering4$Si_L4<-Nuts_For_Weathering4$V8
 Nuts_For_Weathering4$P_L4<-Nuts_For_Weathering4$V9
 
-Nuts_For_Weathering5<-read.csv("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 5.csv", sep=";", header=FALSE)
+Nuts_For_Weathering5<-read.csv("~/NutsForBASLN/Output data/Weathering/Weathering Layer 5.csv", sep=";", header=FALSE)
 
 Nuts_For_Weathering5$Ca_L5<-Nuts_For_Weathering5$V3
 Nuts_For_Weathering5$Mg_L5<-Nuts_For_Weathering5$V4
@@ -55,7 +55,7 @@ Nuts_For_Weathering5$Al_L5<-Nuts_For_Weathering5$V7
 Nuts_For_Weathering5$Si_L5<-Nuts_For_Weathering5$V8
 Nuts_For_Weathering5$P_L5<-Nuts_For_Weathering5$V9
 
-Nuts_For_Weathering6<-read.csv("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 6.csv", sep=";", header=FALSE)
+Nuts_For_Weathering6<-read.csv("~/NutsForBASLN/Output data/Weathering/Weathering Layer 6.csv", sep=";", header=FALSE)
 
 Nuts_For_Weathering6$Ca_L6<-Nuts_For_Weathering6$V3
 Nuts_For_Weathering6$Mg_L6<-Nuts_For_Weathering6$V4
@@ -65,7 +65,7 @@ Nuts_For_Weathering6$Al_L6<-Nuts_For_Weathering6$V7
 Nuts_For_Weathering6$Si_L6<-Nuts_For_Weathering6$V8
 Nuts_For_Weathering6$P_L6<-Nuts_For_Weathering6$V9
 
-Nuts_For_Weathering7<-read.csv("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 7.csv", sep=";", header=FALSE)
+Nuts_For_Weathering7<-read.csv("~/NutsForBASLN/Output data/Weathering/Weathering Layer 7.csv", sep=";", header=FALSE)
 
 Nuts_For_Weathering7$Ca_L7<-Nuts_For_Weathering7$V3
 Nuts_For_Weathering7$Mg_L7<-Nuts_For_Weathering7$V4
@@ -75,7 +75,7 @@ Nuts_For_Weathering7$Al_L7<-Nuts_For_Weathering7$V7
 Nuts_For_Weathering7$Si_L7<-Nuts_For_Weathering7$V8
 Nuts_For_Weathering7$P_L7<-Nuts_For_Weathering7$V9
 
-Nuts_For_Weathering8<-read.csv("~/NutsForSEDLN/Output data/Weathering/Weathering Layer 8.csv", sep=";", header=FALSE)
+Nuts_For_Weathering8<-read.csv("~/NutsForBASLN/Output data/Weathering/Weathering Layer 8.csv", sep=";", header=FALSE)
 
 Nuts_For_Weathering8$Ca_L8<-Nuts_For_Weathering8$V3
 Nuts_For_Weathering8$Mg_L8<-Nuts_For_Weathering8$V4

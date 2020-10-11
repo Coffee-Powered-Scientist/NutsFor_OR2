@@ -1,10 +1,10 @@
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output_LN_SED/Weathering")
+setwd("~/Project_Master/Test_Rep/Output_LN_BAS/Weathering")
 
 library(ggplot2)
 
-Weathering_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data/Weathering_All.csv", header=TRUE)
+Weathering_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_BAS/Edited Data/Weathering_All.csv", header=TRUE)
 
 Weathering_All$Month<-as.Date(Weathering_All$Date)
 
@@ -12,7 +12,7 @@ Ca_Weathering<-ggplot(Weathering_All, aes(x=Month))+geom_line(aes(y=Ca_L1, color
   geom_line(aes(y=Ca_L3, color="Layer 3"))+geom_line(aes(y=Ca_L4, color="Layer 4"))+geom_line(aes(y=Ca_L5, color="Layer 5"))+
   geom_line(aes(y=Ca_L6, color="Layer 6"))+geom_line(aes(y=Ca_L7, color="Layer 7"))+geom_line(aes(y=Ca_L8, color="Layer 8"))+ 
   geom_line(aes(y=Total_Ca, color="Total Weathering"))
-  labs(y="Ca Weathering (kg/ha/month)")
+labs(y="Ca Weathering (kg/ha/month)")
 pdf("Ca_Weathering.pdf", height=5, width=10)
 plot(Ca_Weathering)
 dev.off()
@@ -65,5 +65,3 @@ P_Weathering<-ggplot(Weathering_All, aes(x=Month))+geom_line(aes(y=P_L1, color="
 pdf("P_Weathering.pdf", height=5, width=10)
 plot(P_Weathering)
 dev.off()
-
-
