@@ -9,15 +9,25 @@ rm(list = ls())
 setwd("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data")
 
 library(dplyr)
+library(tidyverse)
+library(lubridate)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/NutsforBASLN/Output data/Soil solution", pattern = "*.csv", full.names = T)
+files <- list.files(path = "~/NutsforSEDLN/Output data/Soil solution", pattern = "*.csv", full.names = T)
 Soil_Soln<- sapply(files, read.csv2, simplify=FALSE) %>% 
   bind_rows(.id = "id")
 
 Soil_Soln[,c(2:19)] <- lapply(Soil_Soln[,c(2:19)], as.numeric)
 
+
 Soil_Soln<-filter(Soil_Soln,  !is.na(YEAR))
+
+Soil_Soln<- Soil_Soln %>%
+  mutate(Date = make_date(YEAR, Month))
+
+Soil_Soln$group_id <- Soil_Soln %>% 
+  group_by(id)%>%
+  group_indices(id) 
 
 write.csv2(Soil_Soln, "Soil_Solution_All2.csv", row.names=TRUE)
 

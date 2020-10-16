@@ -1,13 +1,20 @@
 rm(list = ls())
 library(ggplot2)
-library(magrittr)
+
 setwd("~/Project_Master/Test_Rep/Output_LN_SED/Soil_Solution")
 
-Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data/Soil_Solution_All.csv", header=TRUE)
+Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
 
-#Pass Date through as.Date; some error in code which causes Date to output as character
-Soil_Solution_All$Month<-as.Date(Soil_Solution_All$Date)
+TestX<-subset(Soil_Solution_All, group_id==1)
 
+TestY<-ggplot(subset(Soil_Solution_All,group_id == 1)) + 
+  geom_line(aes(x=Date, y=Ca, group=1, color="Ca Leaching Layer 1"))+
+  scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+
+  labs(y="Ca Leached (kg/ha/month)")
+
+Test<-ggplot(Soil_Solution_All ,aes(x = Date, y = Ca, group=1)) +
+  geom_line()+
+  facet_wrap(. ~ group_id)
 #Generate ggplots for every species in every layer, then use magrittr to stitch them together into one big graph
 
 #Layer 1
