@@ -3,10 +3,10 @@
 #The code will then source to another 2 graphing codes, which tend to be very slow
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output_HN_SED/Edited Data")
 library(dplyr)
 library(multipanelfigure)
-Nuts_For_SSL1<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 1.csv", sep=";", header=TRUE)
+Nuts_For_SSL1<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 1.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL1$Ca_L1<-Nuts_For_SSL1$Ca
 Nuts_For_SSL1$Mg_L1<-Nuts_For_SSL1$Mg
@@ -27,7 +27,7 @@ Nuts_For_SSL1$Si_L1<-Nuts_For_SSL1$Si
 
 
 
-Nuts_For_SSL2<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 2.csv", sep=";", header=TRUE)
+Nuts_For_SSL2<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 2.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL2$Ca_L2<-Nuts_For_SSL2$Ca
 Nuts_For_SSL2$Mg_L2<-Nuts_For_SSL2$Mg
@@ -48,7 +48,7 @@ Nuts_For_SSL2$Si_L2<-Nuts_For_SSL2$Si
 
 
 
-Nuts_For_SSL3<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 3.csv", sep=";", header=TRUE)
+Nuts_For_SSL3<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 3.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL3$Ca_L3<-Nuts_For_SSL3$Ca
 Nuts_For_SSL3$Mg_L3<-Nuts_For_SSL3$Mg
@@ -69,7 +69,7 @@ Nuts_For_SSL3$Si_L3<-Nuts_For_SSL3$Si
 
 
 
-Nuts_For_SSL4<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 4.csv", sep=";", header=TRUE)
+Nuts_For_SSL4<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 4.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL4$Ca_L4<-Nuts_For_SSL4$Ca
 Nuts_For_SSL4$Mg_L4<-Nuts_For_SSL4$Mg
@@ -89,7 +89,7 @@ Nuts_For_SSL4$HR_L4<-Nuts_For_SSL4$HR
 Nuts_For_SSL4$Si_L4<-Nuts_For_SSL4$Si
 
 
-Nuts_For_SSL5<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 5.csv", sep=";", header=TRUE)
+Nuts_For_SSL5<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 5.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL5$Ca_L5<-Nuts_For_SSL5$Ca
 Nuts_For_SSL5$Mg_L5<-Nuts_For_SSL5$Mg
@@ -110,7 +110,7 @@ Nuts_For_SSL5$Si_L5<-Nuts_For_SSL5$Si
 
 
 
-Nuts_For_SSL6<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 6.csv", sep=";", header=TRUE)
+Nuts_For_SSL6<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 6.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL6$Ca_L6<-Nuts_For_SSL6$Ca
 Nuts_For_SSL6$Mg_L6<-Nuts_For_SSL6$Mg
@@ -131,7 +131,7 @@ Nuts_For_SSL6$Si_L6<-Nuts_For_SSL6$Si
 
 
 
-Nuts_For_SSL7<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 7.csv", sep=";", header=TRUE)
+Nuts_For_SSL7<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 7.csv", sep=";", header=TRUE)
 
 Nuts_For_SSL7$Ca_L7<-Nuts_For_SSL7$Ca
 Nuts_For_SSL7$Mg_L7<-Nuts_For_SSL7$Mg
@@ -151,7 +151,7 @@ Nuts_For_SSL7$HR_L7<-Nuts_For_SSL7$HR
 Nuts_For_SSL7$Si_L7<-Nuts_For_SSL7$Si
 
 
-Nuts_For_SSL8<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 8.csv", sep=";", header=TRUE)
+Nuts_For_SSL8<-read.csv("~/NutsForSEDHN/Output data/Soil solution/Soil solution chemistry Layer 8.csv", sep=";", header=TRUE)
 
 
 
@@ -205,6 +205,3 @@ Nuts_For_All_Layers$Date<-seq(as.Date("2005/1/1"), by = "month", length.out = 13
 #write csv
 
 write.csv2(Nuts_For_All_Layers, "Soil_Solution_All.csv", row.names=TRUE)
-
-
-
