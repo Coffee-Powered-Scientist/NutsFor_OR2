@@ -1,0 +1,542 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Test\_Report1},
+  pdfauthor={Kaveh G. Siah},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Test\_Report1}
+\author{Kaveh G. Siah}
+\date{10/27/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{nutrient-cycling-in-forest-ecosystems}{%
+\section{Nutrient Cycling in Forest
+Ecosystems}\label{nutrient-cycling-in-forest-ecosystems}}
+
+\hypertarget{nutsfor}{%
+\subsection{(NutsFor)}\label{nutsfor}}
+
+Programmer:
+
+Manual Author:
+
+\hypertarget{user-manual-for-version}{%
+\subsection{User Manual for Version ()}\label{user-manual-for-version}}
+
+\hypertarget{introduction}{%
+\subsubsection{Introduction}\label{introduction}}
+
+The Nutrient Cycling in Forested Ecosystems (NutsFor) model is a
+stand-level biogeochemical model which simulates the forest nutrient
+dynamics of 16 chemical species These processes include hydrology, soil
+exchange site chemistry, mineral weathering, stand growth and uptake,
+and atmospheric deposition. This manual describes the most recent
+iteration of NutsFor (version \ldots\ldots), which further includes
+stand harvest, biomass residues, separate pools of soil water, and other
+small changes made to the original model described in van der Heijden et
+al, 2017. All changes from the original model are noted with an asterisk
+(``*''). As NutsFor is an active project of Gregory van der Heijden,
+model capabilities are open to change based on collaboration.
+
+This user manual is intended to give relevant information about the
+model's capabilities, useful tips regarding its usage, and insight into
+the equations and theory which link model parameters. A list of
+equations used to parameterize NutsFor are also included, along with
+some description of how these equations are used.
+
+\hypertarget{model-start-up}{%
+\subsubsection{Model Start Up}\label{model-start-up}}
+
+Prior to running or implementing change to model parameters, the user
+should go through the input and output files for NutsFor using excel.
+NutsFor does not currently have a built-in method to visualize results,
+it is recommended that the user use excel macro commands or R to
+automatically read generated files (which will always output with the
+same structure) to visualize results. This is highly important in the
+calibration phase of model implementation.
+
+The model is simple to run, simply double-click or other wise enact the
+NutsFor.exe file. The model will run and output results to its
+corresponding .csv files automatically. If the output files are moved
+from the NutsFor directory or removed, NutsFor will generate new csv
+files as long as the Output folder is still present in the NutsFor.exe
+directory. A successful model run will be accommodated by a ``Exporting
+Model Run Data'' and ``Model Run End-Press Return to Close''.
+Unsuccessful model runs (i.e., crashes) will result in either the
+NutsFor exe closing on its own or on the former messages never appear in
+the NutsFor.exe box.
+
+Input Files
+
+There are 10 input files for NutsFor (the .nut files). These files are
+csv files which can be opened through excel. A full list of the input
+parameters, separated by the file they appear in, is shown in the tables
+below. Below each table is a more extensive description of each variable
+and its effects on model outputs.
+
+Dry Deposition
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/siahl/Documents/Manual Figures/InputTable1.png}
+\caption{InputTable1}
+\end{figure}
+
+Description of Parameters: Dry Deposition
+
+The dry deposition file is comparable to the Rain Concentration file. It
+simply delegates the deposition of chemical species without the
+deposition of water. The file starts with An and Mois (Year and Month
+Columns), and then lists out chemical species from left to right.
+
+Soil Parameters
+
+Description of Parameters: Soil Parameters
+
+\textbf{\emph{Soil Layers:}}
+
+NutsFor allows any number of soil layers to be set in the model. Extra
+layers are added by typing in the new layer quantity into the
+Soil\_Layer parameter, and adding the new layer to the Soil Parameter
+file by parameterizing the new layer as is done for layers before it.
+When a new layer is added, the spacing between the different tables in
+the soil parameters file is offset, the tables must be cut and pasted
+such that a single row of blank cells lies between the tables, otherwise
+NutsFor will not be able to read the tables. The total number of soil
+layers (Nb\_Layers) must also be updated in the General Data File before
+running the model.
+
+\textbf{\emph{Depth and Thickness:}}
+
+The depth of the soil layer represents the vertical distance of the soil
+layer from the surface of the soil, it is not used in any calculations.
+Soil layer thickness determines how thick each soil layer is, it is
+recommended that soil layers are set to less than or equal to 20cm
+thick. Overly thick soil layers may be liable to over-leaching of
+nutrients from the soil layers.
+
+\textbf{\emph{Bulk Density, Solid Density, and Stoniness:}}
+
+Bulk density is defined as fine earth bulk density (particles less than
+2mm in diameter). Solid density is not part of the calculations of
+NutsFor, and can be ignored. Stoniness is the percent of soil particles
+greater than 2mm in diameter, this parameter affects soil moisture and
+hydrology calculations and is important to calculate.
+
+\textbf{\emph{Root Fraction and Uptake Fraction per Layer:}}
+
+Keeps trace of the root distribution of the stand between the soil
+layers, however it does not determine the uptake of nutrients per layer.
+The Uptake Fraction per layer parameter truly determines how the stand
+extracts nutrients from the soil layers, allowing for greater
+flexibility in determining tree uptake dynamics. Intra-annual uptake
+dynamics are changed through the Tree Parameter file.
+
+\textbf{pKGibb, pKAl\_Precip, pCO2:}
+
+The pKGibb parameter is the -log of the reaction constant of gibbsite
+dissolution to free aluminum, similarly the pKAl\_precip is the -log of
+the reaction constant of Al and its precipitated forms (i.e., the
+solubility product). The range of pKAl\_precip (or Ksp of Al(OH)3(s))
+should be in the range of 32-35 depending on the pH of the soil layer,
+pKGibb ranges from 6-9. These aluminum parameters are important in
+determining pore water pH, as Al is the largest contributor of H+
+compared to other acids in the model. pCO2 is the partial pressure of
+carbon dioxide in the soil solution, it is a constant multiple of
+atmospheric CO2 and is not dynamic with decomposition rates.
+
+\textbf{Mineral Area}
+
+This parameter designates the total weatherable mineral surface area of
+the soil. It is calculated from the equation:
+
+General Equation 1:
+
+\[
+(8*X.Clay)+(2.2*X.Silt)+(0.03*X.Sand)
+\]
+
+Citation:
+
+Note, that clays dominant in high area clays may be misrepresented by
+this equation \emph{(Citation)}
+
+A more detailed equation, which takes into consideration different sand
+and silt size particles;
+
+General Equation 2: \[
+()+()+()
+\] Citation:
+
+The mineral area parameter is historically difficult to obtain
+empirically, clay mineralogy plays a large role in determining this
+parameter, and is seldom measured to its full capacity (SOURCE). The
+fraction of soil particles in each size class (X.Clay, X.Silt, and
+X.Sand) are to be calculated from the whole soil (including coarse
+fragment count), not just the fine particulate fraction. Since this
+parameter is difficult to calculate, it will be likely that simulated
+mineral weathering rates are lower than those observed or calculated for
+a given stand. In this case the mineral weathering rates must be
+calibrated by increasing (or decreasing, if weathering is too high) the
+mineral area parameter. Mineral weathering rates are linked to proton
+concentrations, lower pH stimulates mineral weathering. Mineral
+weathering thus consumes protons and can be included in the calibration
+of pH and alkalinity. Thus, another way of calibrating mineral
+weathering rates can be the calibration of proton concentrations.
+
+Soil Moisture Parameters
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Wilting Point
+
+  The percent soil moisture which corresponds to the wilting point;
+  i.e., the pressure of water in the soil matrix is at -15kPa. Wilting
+  point may have a different reference pressure depending on the texture
+  of the soil.
+\item
+  Field Capacity
+
+  The percent soil moisture which corresponds to how much water the soil
+  can hold after drainage of excess water. Typically this measurement is
+  set to the reference pressure of -33kPa.
+\item
+  Saturation
+
+  The percent of soil moisture corresponding to all pore space in soil
+  being filled with water. It can be set as the effective porosity of
+  the soil.
+\end{enumerate}
+
+CEC Parameters and CEC Initial
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  CEC
+
+  This parameter is the effective cation exchange capacity (ECEC) of
+  each soil layer. This parameter is usually measured for every soil and
+  soil layer for every depth increment, however there are multiple
+  methods through which this can be accomplished (Citation, General
+  technical manual). In general, ECEC can be calculated as:
+
+  General Equation \#X.1 \[
+  ECEC= 2[Ca^{+2}]+ 2[Mg^{+2}]+[K^+]+[Na^+]+3[Al^{+3}]+[NH_{4}^{+}]
+  \]
+\item
+  Gapon Selectivity Coefficients (KH\_Cation)
+
+  These coefficients determine the propensity of each cation to be
+  replaced on the CEC with H+. High selectivity coefficients indicate
+  that a cation has a high affinity for the CEC, and are thus liable to
+  stay on the CEC rather than weather off due to the presence of other
+  cations. Low coefficients will likely lead to high CEC weathering of
+  cations, which may result in high soil solution pH. This is due to
+  both the consumption of protons in the soil solution, which kick off
+  low-affinity cations, as well as the increase in acid neutralizing
+  capacity (ANC) that comes with increased base cation concentrations.
+  This is because ANC is calculated as the sum of base cations minus the
+  sum of acid anions. When ANC is near or above 0, soil solution pH will
+  be difficult to constrain.
+
+  Gapon coefficients are to be calculated as:
+
+  General Equation \#X.2 \[
+  K_{H:Cation^{+n}}= (E_{Cation^{+n}}/[Cation^{+n}])*([H^{+}]/E_{H})^{n}
+  \] Where; \[
+  E_{H}=[H^{+}]_{adsorbed}/ECEC
+  \] and \[
+  E_{Cation^{+n}}=[Cation^{+n}]_{adsorbed}/ECEC
+  \] Note that \[
+  n = Valence
+  \] All concentration units are in mmol/L. It should be noted that
+  these values heavily rely on measured initial cation concentrations,
+  and so they may be manipulated to get a better match between adsorbed
+  and dissolved cations. Note that increasing the selectivity
+  coefficient of one cation will change the relative selectivity of all
+  cations. For instance, increasing Ca selectivity will lead to more Ca
+  adsorption to the CEC, which will in turn kick off other cations,
+  assuming the selectivity of the other cations remains the same.
+\item
+  CEC Initial
+
+  This parameter is not under the ``CEC parameters'' heading in the Soil
+  Parameter file, rather it is located at the bottom of the Soil
+  Parameter File (it it the last table, named CEC Initial). This
+  parameter determines the total adsorbed supply of cations initially on
+  the cation exchange complex.
+
+  \hypertarget{aec-parameters}{%
+  \subsubsection{AEC Parameters}\label{aec-parameters}}
+
+  Anion Exchange Capacity (AEC) is implemented in the model for 3
+  anions; Sulfate, Phosphate, and Chloride. Sulfate adsorption can be
+  modeled using either a Langmuir or Freundlich adsorption isotherm.
+  Chloride is modeled using the Langmuir model, Phosphate the Freundlich
+  model. Sulfate adsoprtion isotherms can be selected in the General
+  Data File (Input Table 4).
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Soil Adsorbed Anions Parameters
+
+    Each anion has two AEC adsorption parameters associated with it,
+    Parameter \#1 and Parameter \#2. These parameters will stand for
+    different variables depending on the adsoprtion isotherm selected.
+
+    Langmuir
+
+    Freundlich
+  \item
+    Soil Adsorbed Anions Initial
+  \end{enumerate}
+\end{enumerate}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\begin{minipage}[b]{0.97\columnwidth}\raggedright
+Input Table 3: OM decomposition\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Parameter Name in File\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Litter Concentration (N, Ca, Mg, K, S, P)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Litter\_C\_Pool\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Layer\_frac (Coarse, Fine, Humus)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Decomp\_rate\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+CO2FACT\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Nutrient\_Factor (DOCFACT, N\_Fact, Ca\_Fact, Mg\_Fact, K\_Fact,
+S\_Fact, P\_Fact).\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Description of Parameters: OM Decomposition
+
+\textbf{Litter Parameters}
+
+Litter parameters can be broken up into 3 sections:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Litter Concentration (N, Ca, Mg, K, S, P)
+\item
+  Litter Pool (Litter\_C\_Pool, Litter\_Fraction)
+\item
+  Litter Nutrient Release Dynamics
+\end{enumerate}
+
+I). Litter Concentration
+
+This table sets the concentration of main nutrient cations in the litter
+layer relative to the amount of carbon in the litter.
+
+II). Soil\_Layer:
+
+1). The coarse litter fragment of the litter layer (fresh litter
+included)
+
+2). The fine litter fragment
+
+3). The humus (``Very fine SOM'') fraction
+
+Decomp\_Rate: The k of decomposition, determining how much carbon
+decomposes from litter pools.
+
+Co2\_Fact: Determines the fraction of decomposed carbon which is evolved
+as carbon dioxide
+
+N\_Fact, Ca\_Fact, Mg\_Fact, K\_Fact, S\_Fact, P\_Fact: Determines
+release rate of corresponding nutrient relative to C release due to
+decomposition. These parameters can be tweaked to globally slow the
+mobilization of nutrients from the litter pool.
+
+DOCFACT:
+
+This factor determines the fraction of the decomposed C pool at each
+time step and for each litter pool which is released as DOC. Increasing
+this factor increases DOC and thus organic acid (R-) concentrations in
+the simulated soil. This tends to lower pH according to the set pKa of
+organic acids (See OA\_pKa in Input table 4).
+
+DOC\_Decomp:
+
+Determines the proportion of DOC evolved from decomposing litter that is
+itself decomposed. This parameter decreases OA (R-), however it does not
+link back to carbon dioxide release as carbon dioxide concentration is a
+fixed parameter (See, Input table 2, pCO2)
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+Input Table 4: General Data File\tabularnewline
+\midrule
+\endhead
+Parameter Name in File\tabularnewline
+Start\_year\tabularnewline
+End\_Year\tabularnewline
+Nb\_Layers\tabularnewline
+Nb\_Minerals\tabularnewline
+Mineral\_names\tabularnewline
+OA\_pka\tabularnewline
+Aluminum\tabularnewline
+Phosphoric\_acid\tabularnewline
+DIC\tabularnewline
+Organic\_acid\_size\tabularnewline
+Nb\_Tree\_Comp\tabularnewline
+\bottomrule
+\end{longtable}
+
+Description of Parameters: General Data File
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+Input Table 5: Mineral Data File\tabularnewline
+\midrule
+\endhead
+Parameter Name in File\tabularnewline
+Mineral\tabularnewline
+pKH, pKH2O, pKCO2, pKr\tabularnewline
+kH, kH20, kCO2,kr\tabularnewline
+nH, nCO, nr\tabularnewline
+WAlH, WBCH, WAlH2O, WBCH2O\tabularnewline
+CAl\emph{10\^{}-6, CR}10\^{}-6 CBC*10\^{}-6\tabularnewline
+Cation Composition of Minerals (Ca, Mg, K, Na, Al, Si,
+PO4)\tabularnewline
+Iso\tabularnewline
+\bottomrule
+\end{longtable}
+
+Description of Parameters: Mineral Data File
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+Input Table 6: Tree Parameter File\tabularnewline
+\midrule
+\endhead
+Parameter Name in File\tabularnewline
+\bottomrule
+\end{longtable}
+
+Description of Parameters: Tree Parameter File
+
+Output File Description
+
+Calibration
+
+Hypothesis Testing
+
+\hypertarget{list-of-equations}{%
+\subsection{List of Equations}\label{list-of-equations}}
+
+\textbf{NutsFor Encoded Equations}
+
+\textbf{General Equations}
+
+\hypertarget{literature-cited}{%
+\subsection{Literature Cited}\label{literature-cited}}
+
+Appendix, maybe include screenshots of input interface?
+
+\end{document}
