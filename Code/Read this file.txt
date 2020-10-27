@@ -1,8 +1,0 @@
-Files within the named sub folder within "Code" store site-specific code; all these codes are the same 
-(as the analysis and calibrative steps require the same meaurements and calculations).
-
-"Mutator.R" files mutate datasets, splicing them together and outputting new csv's to the "Edited Data" folder. 
-
-"Grapher.R" files use ggplot2 package to graph data in edited data. 
-
-"Calibration_SiteType" Codes source all code for a given site, they should be all that is necesary to run the code and gather results to completion. 
