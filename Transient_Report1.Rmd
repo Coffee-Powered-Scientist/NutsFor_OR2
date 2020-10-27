@@ -78,8 +78,29 @@ Description of Parameters: Dry Deposition
 
 The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The file starts with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
 
+<!--Insert units as an image, its way easier-->
+
+```{r, include=FALSE}
+text_tbl <- data.frame(
+Input= c("Ca, Mg, Cl, Al...etc,"),
+Description = c("Determines the amount of each species deposited into ecosystem by Dry Deposition")
+)
 
 
+
+```
+
+
+
+```{r, include=TRUE}
+kbl(text_tbl, booktabs = T, col.names =  c("Input ($\\mu$mol/L)", "Description")) %>%
+kable_styling(full_width = F) %>%
+column_spec(1, bold = T) %>%
+column_spec(2, width = "20em")
+ 
+```
+
+ 
  Soil Parameters
 
 <!--Table 2 Here-->
