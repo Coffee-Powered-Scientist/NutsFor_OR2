@@ -1,9 +1,9 @@
 rm(list = ls())
 library(ggplot2)
 library(multipanelfigure)
-setwd("~/Project_Master/Test_Rep/Output_LN_SED/Soil_Solution")
+setwd("~/Project_Master/Test_Rep/Output_HN_BAS/Soil_Solution")
 
-Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data/Soil_Solution_All.csv", header=TRUE)
+Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output_HN_BAS/Edited Data/Soil_Solution_All.csv", header=TRUE)
 
 #Pass Date through as.Date; some error in code which causes Date to output as character
 Soil_Solution_All$Month<-as.Date(Soil_Solution_All$Date)
@@ -558,8 +558,3 @@ All_Cations_8<-All_Cations_8 %<>%
 pdf("All_Cations_8.pdf", height=10, width=20)
 plot(All_Cations_8)
 dev.off()
-
-
-
-  
-
