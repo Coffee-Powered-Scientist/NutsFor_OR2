@@ -1,6 +1,7 @@
 rm(list = ls())
 library(ggplot2)
 library(scales)
+library(multipanelfigure)
 
 
 
@@ -23,14 +24,186 @@ All_Leaching_Flux<-ggplot(subset(Soil_Solution_All, group_id %in% c("1" , "2", "
 #Soil Solution
 
 Ca_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Ca, group=group_id, color=group_id)))+
-  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y="Ca Leaching Flux Per Soil Layer (kg/ha/yr)")
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Ca~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
 
 Ca_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=Ca, group=group_id, color=group_id)))+
-  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y="Ca Leaching Flux Per Soil Layer (kg/ha/yr)")
-
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Ca~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
 
 Mg_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Mg, group=group_id, color=group_id)))+
-  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y="Mg Leaching Flux Per Soil Layer (kg/ha/yr)")
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Mg~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
 
 Mg_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=Mg, group=group_id, color=group_id)))+
-  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y="Mg Leaching Flux Per Soil Layer (kg/ha/yr)")
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Mg~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+Na_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Na, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Na~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+Na_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=Na, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Na~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+K_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=K, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~K~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+K_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=K, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~K~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+NO3_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=NO3, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~NO3~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+NO3_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=NO3, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~NO3~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+NH4_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=NH4, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~NH4~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+NH4_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=NH4, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~NH4~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+SO4_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=SO4, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~SO4~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+SO4_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=SO4, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~SO4~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+Cl_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Cl, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Cl~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+Cl_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=Cl, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Cl~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+P_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=P, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~P~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+P_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=P, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~P~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+DOC_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=DOC, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~DOC~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+DOC_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=DOC, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~DOC~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+Si_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Si, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Si~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+Si_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=Si, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Si~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+Al_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Al, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Al~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+Al_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=Al, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Al~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+H_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=H, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~H~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+H_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=H, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~H~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+pH_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=pH, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~pH~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+pH_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=pH, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~pH~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+R_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=R, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~R~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+R_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=R, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~R~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+HR_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=HR, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~HR~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+  guides(color=guide_legend("Layers"))
+
+
+HR_L2<-ggplot(subset(Soil_Solution_All, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=Date, y=HR, group=group_id, color=group_id)))+
+  geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~HR~(mu*mol/L)))+
+  scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("purple", "orange", "brown", "magenta", "gold"))+
+  guides(color=guide_legend("Layers"))
+
+
+
+
+
+
