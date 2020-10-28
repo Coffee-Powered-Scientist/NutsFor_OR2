@@ -18,3 +18,15 @@ na.zero(Soil_Soln)
 Yearly_Average<-Soil_Soln %>%
   group_by(group_id, Month) %>%
   summarise_all(list(mean))
+
+Test<-function (x){
+  require(dplyr)
+  x %>% 
+  group_by(group_id, YEAR, Month) %>%
+  filter(YEAR==2005)  
+}
+
+Test_Result<-Test(Soil_Soln)
+
+#Clear Cache so other sites can be cycled in without confusion
+rm(list = ls())

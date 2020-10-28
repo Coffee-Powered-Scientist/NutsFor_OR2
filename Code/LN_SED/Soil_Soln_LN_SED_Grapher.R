@@ -3,8 +3,6 @@ library(ggplot2)
 library(scales)
 library(multipanelfigure)
 
-
-
 setwd("~/Project_Master/Test_Rep/Output_LN_SED/Soil_Solution")
 
 Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)

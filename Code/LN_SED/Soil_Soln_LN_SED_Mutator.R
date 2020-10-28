@@ -1,5 +1,5 @@
 #This Code will take soil solution concentration data from all 8 layers of simulated ecosystem
-#This code will then stich the needed data together into a single .csv, and export to "Edited Data"
+#This code will then stitch the needed data together into a single .csv, and export to "Edited Data"
 #The code will then source to another 2 graphing codes, which tend to be very slow
 
 
@@ -17,6 +17,9 @@ files <- list.files(path = "~/NutsforSEDLN/Output data/Soil solution", pattern =
 Soil_Soln<- sapply(files, read.csv2, simplify=FALSE) %>% 
   bind_rows(.id = "id")
 
+
+#The below codes don't like being thrown into a function (x) type arguement, likely because lapply is a loop 
+#(although, I'm not sure what's wrong with the indexing)
 Soil_Soln[,c(2:19)] <- lapply(Soil_Soln[,c(2:19)], as.numeric)
 
 
@@ -32,3 +35,13 @@ Soil_Soln$group_id <- Soil_Soln %>%
 
 write.csv2(Soil_Soln, "Soil_Solution_All2.csv", row.names=TRUE)
 
+Test2<-function (x){
+  require(dplyr)
+  require(lubridate)
+  require(tidyverse)
+  x<- x %>%
+    mutate(Date=make_date(YEAR, Month))
+
+}
+
+Soil_Soln_Test<-Test2(Soil_Soln)
