@@ -3,7 +3,7 @@
 #The code will then source to another 2 graphing codes, which tend to be very slow
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data")
 library(dplyr)
 library(multipanelfigure)
 Nuts_For_SSL1<-read.csv("~/NutsForSEDLN/Output data/Soil solution/Soil solution chemistry Layer 1.csv", sep=";", header=TRUE)

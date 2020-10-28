@@ -1,11 +1,10 @@
 library(ggplot2)
 library(multipanelfigure)
 
-setwd("~/Project_Master/Test_Rep/Output_LN_BAS/Soil_Solution")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_BAS/Soil_Solution")
 
-Leaching_Layer<-read.csv2("~/Project_Master/Test_Rep/Output_LN_BAS/Edited Data/Leaching.csv", header=TRUE)
-Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_BAS/Edited Data/Soil_Solution_All.csv", header=TRUE)
-Mean_SS<-read.csv2("~/Project_Master/Test_Rep/Output_LN_BAS/Edited Data/Mean_Concentrations_SS.csv", header=TRUE)
+Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_BAS/Edited Data/Soil_Solution_All.csv", header=TRUE)
+Mean_SS<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_BAS/Edited Data/Mean_Concentrations_SS.csv", header=TRUE)
 
 #Pass Date through as.Date; some error in code which causes Date to output as character
 Soil_Solution_All$Month<-as.Date(Soil_Solution_All$Date)
@@ -201,16 +200,13 @@ SSL8K.G<-ggplot(Soil_Solution_All, aes(x=Month, y=K_L8, group=1))+ geom_line()+l
   geom_hline(yintercept=16.08876892, linetype="dotdash", color="green", size=.5)
 
 SSL1SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L1, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
-  geom_hline(yintercept=Mean_SS$Mean_SO41, linetype="dashed", color="red", size=.5)+
-  geom_hline(yintercept=200, linetype="dotdash", color="green", size=.5)
+  geom_hline(yintercept=Mean_SS$Mean_SO41, linetype="dashed", color="red", size=.5)
 
 SSL2SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L2, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
-  geom_hline(yintercept=Mean_SS$Mean_SO42, linetype="dashed", color="red", size=.5)+
-  geom_hline(yintercept=200, linetype="dotdash", color="green", size=.5)
+  geom_hline(yintercept=Mean_SS$Mean_SO42, linetype="dashed", color="red", size=.5)
 
 SSL3SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L3, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
-  geom_hline(yintercept=Mean_SS$Mean_SO43, linetype="dashed", color="red", size=.5)+
-  geom_hline(yintercept=200, linetype="dotdash", color="green", size=.5)
+  geom_hline(yintercept=Mean_SS$Mean_SO43, linetype="dashed", color="red", size=.5)
 
 SSL4SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L4, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
   geom_hline(yintercept=Mean_SS$Mean_SO44, linetype="dashed", color="red", size=.5)+
@@ -218,20 +214,16 @@ SSL4SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L4, group=1))+ geom_line
 
 
 SSL5SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L5, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
-  geom_hline(yintercept=Mean_SS$Mean_SO45, linetype="dashed", color="red", size=.5)+
-  geom_hline(yintercept=258, linetype="dotdash", color="green", size=.5)
+  geom_hline(yintercept=Mean_SS$Mean_SO45, linetype="dashed", color="red", size=.5)
 
 SSL6SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L6, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
-  geom_hline(yintercept=Mean_SS$Mean_SO46, linetype="dashed", color="red", size=.5)+
-  geom_hline(yintercept=258, linetype="dotdash", color="green", size=.5)
+  geom_hline(yintercept=Mean_SS$Mean_SO46, linetype="dashed", color="red", size=.5)
 
 SSL7SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L7, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
-geom_hline(yintercept=Mean_SS$Mean_SO47, linetype="dashed", color="red", size=.5)+
-  geom_hline(yintercept=250, linetype="dotdash", color="green", size=.5)
+geom_hline(yintercept=Mean_SS$Mean_SO47, linetype="dashed", color="red", size=.5)
 
 SSL8SO4.G<-ggplot(Soil_Solution_All, aes(x=Month, y=SO4_L8, group=1))+ geom_line()+labs(y="Soil Solution  SO4 (umol/L)")+theme(text = element_text(size = 5))+
-  geom_hline(yintercept=Mean_SS$Mean_SO48, linetype="dashed", color="red", size=.5)+
-  geom_hline(yintercept=250, linetype="dotdash", color="green", size=.5)
+  geom_hline(yintercept=Mean_SS$Mean_SO48, linetype="dashed", color="red", size=.5)
 
 SSL1Na.G<-ggplot(Soil_Solution_All, aes(x=Month, y=Na_L1, group=1))+ geom_line()+labs(y="Soil Solution  Na (umol/L)")+theme(text = element_text(size = 5))+
   geom_hline(yintercept=Mean_SS$Mean_Na1, linetype="dashed", color="red", size=.5)+
