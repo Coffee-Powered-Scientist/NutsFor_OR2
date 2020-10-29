@@ -21,6 +21,14 @@ All_Leaching_Flux<-ggplot(subset(Soil_Solution_All, group_id %in% c("1" , "2", "
 
 #Soil Solution
 
+#This Function Fucking WORKS
+Ca_Graph_L1<-function(x){
+  ggplot(subset(x, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Ca, group=group_id, color=group_id)))+
+    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Ca~(mu*mol/L)))+
+    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+    guides(color=guide_legend("Layers"))
+}
+
 Ca_L1<-ggplot(subset(Soil_Solution_All, group_id %in% c("10", "11", "12")), (aes(x=Date, y=Ca, group=group_id, color=group_id)))+
   geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Soil~Solution~Ca~(mu*mol/L)))+
   scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
