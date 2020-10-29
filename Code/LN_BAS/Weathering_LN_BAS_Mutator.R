@@ -3,7 +3,7 @@
 #The code will then source to another 2 graphing codes, which tend to be very slow
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output_LN_BAS/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_BAS/Edited Data")
 library(dplyr)
 Nuts_For_Weathering1<-read.csv2("~/NutsForBASLN/Output data/Weathering/Weathering Layer 1.csv", header=FALSE)
 

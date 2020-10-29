@@ -1,10 +1,10 @@
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output_LN_SED/Weathering")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Weathering")
 
 library(ggplot2)
 
-Weathering_All<-read.csv2("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data/Weathering_All.csv", header=TRUE)
+Weathering_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Weathering_All.csv", header=TRUE)
 
 Weathering_All$Month<-as.Date(Weathering_All$Date)
 

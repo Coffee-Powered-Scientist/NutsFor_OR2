@@ -1,6 +1,6 @@
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output_LN_BAS/Weathering")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_BAS/Weathering")
 
 library(ggplot2)
 
