@@ -1,19 +1,23 @@
 rm(list = ls())
 library(ggplot2)
 library(multipanelfigure)
+
 setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Soil_Solution")
 
 Soil_Solution_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
 
-#Pass Date through as.Date; some error in code which causes Date to output as character
-Soil_Solution_All$Date<-as.Date(as.character(Soil_Solution_All$Date))
+#Pass Date through as.Date; some error in code which causes Date to output as character, switch group_id to character
+Soil_Solution_All$group_id<-as.character(Soil_Solution_All$group_id)
+Soil_Solution_All$Date<-as.Date(Soil_Solution_All$Date)
 
+
+#Source Functions
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
 #This part of the code is very slow; lots of objects being moved around. 
 
 
 L1<-Ca_SS_L1(Soil_Solution_All)
-Ca_SS_L2(Soil_Solution_All)
+L2<-Ca_SS_L2(Soil_Solution_All)
 
 All_Cations_All_Layers_L1<- multi_panel_figure(columns = 3, rows = 2, panel_label_type = "none")
 All_Cations_All_Layers_L1<-All_Cations_All_Layers_L1 %<>%

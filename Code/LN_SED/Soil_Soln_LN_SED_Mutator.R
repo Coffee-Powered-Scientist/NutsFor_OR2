@@ -34,18 +34,3 @@ Soil_Soln$group_id <- Soil_Soln %>%
 
 
 write.csv2(Soil_Soln, "Soil_Solution_All2.csv", row.names=TRUE)
-
-Test2<-function (x){
-  require(dplyr)
-  require(lubridate)
-  require(tidyverse)
-  x<- x %>%
-    mutate(Date=make_date(YEAR, Month))
-  
-}
-
-Soil_Soln_Test<-Test2(Soil_Soln)
-
-
-
-
