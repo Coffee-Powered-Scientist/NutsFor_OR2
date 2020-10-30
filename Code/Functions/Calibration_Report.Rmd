@@ -1,0 +1,138 @@
+---
+title: "Cal_Report_LN_SED"
+author: "Kaveh G. Siah"
+date: "10/29/2020"
+output: html_document
+fig_caption: yes
+keep_tex: true
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(captioner)
+```
+
+This is some throwaway text, beep boop it's 10:42pm and I'm ready to die. 
+
+```{r, message=FALSE, echo=FALSE}
+Cal_Pretable<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable$group_id<-as.character(Cal_Pretable$group_id)
+Cal_Pretable$Date<-as.Date(as.character(Cal_Pretable$Date))
+
+#Change names of columns here
+#Write function for pH
+source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
+
+SS_Yr_Avg<-Tab_Func_SS(Cal_Pretable)
+
+
+SS_Yr_Avg %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
+  kbl(caption = "Table 1: Average Annual Soil Solution Concentration", col.names=c("Soil Layer", "Year","Month", "Ca", "Mg", "K", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%t(.)%>% kable_styling() 
+ 
+```
+
+```{r, echo=FALSE, fig.cap="Figure 1: Monthly Calcium Concentrations by Soil Layer", figures-side, fig.show="hold", out.width="50%", message=FALSE}
+
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+Ca_L1<-Ca_SS_L1(Cal_Pretable)
+Ca_L1
+
+Ca_L2<-Ca_SS_L2(Cal_Pretable)
+Ca_L2
+
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 2: Monthly Magnesium Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+Mg_L1<-Mg_SS_L1(Cal_Pretable)
+Mg_L1
+
+Mg_L2<-Mg_SS_L2(Cal_Pretable)
+Mg_L2
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 3: Monthly Potassium Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+K_L1<-K_SS_L1(Cal_Pretable)
+K_L1
+
+K_L2<-K_SS_L2(Cal_Pretable)
+K_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 4: Monthly Sodium Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+Na_L1<-Na_SS_L1(Cal_Pretable)
+Na_L1
+
+Na_L2<-Na_SS_L2(Cal_Pretable)
+Na_L2
+
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 5: Monthly Aluminum Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+Al_L1<-Al_SS_L1(Cal_Pretable)
+Al_L1
+
+Al_L2<-Al_SS_L2(Cal_Pretable)
+Al_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 6: Monthly SiO2 Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+Si_L1<-Si_SS_L1(Cal_Pretable)
+Si_L1
+
+Si_L2<-Si_SS_L2(Cal_Pretable)
+Si_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 7: Monthly Organic Acid Base (R-) Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+R_L1<-R_SS_L1(Cal_Pretable)
+R_L1
+
+R_L2<-R_SS_L2(Cal_Pretable)
+R_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 8: Monthly pH by Soil Layer", fig.show="holf", out.width="50%"}
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+
+pH_L1<-pH_SS_L1(Cal_Pretable)
+pH_L1
+
+pH_L2<-pH_SS_L2(Cal_Pretable)
+pH_L2
+
+```

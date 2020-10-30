@@ -1,5 +1,6 @@
 #Writes a graphing function for every species per Layer-group, can be used for leaching, soil solution, and weathering
 library(ggplot2)
+library(scales)
 
 
                                           ####Soil Solution Graphs####
