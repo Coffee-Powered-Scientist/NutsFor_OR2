@@ -1,0 +1,39 @@
+---
+title: "Cal_Report_LN_SED"
+author: "Kaveh G. Siah"
+date: "10/29/2020"
+output: html_document
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+```
+
+This is some throwaway text, beep boop it's 10:42pm and I'm ready to die. 
+
+```{r, message=FALSE, echo=FALSE}
+Cal_Pretable<-read.csv2("~/Project_Master/Test_Rep/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable$group_id<-as.character(Cal_Pretable$group_id)
+
+#Change names of columns here
+#Write function for pH
+source("~/Project_Master/Test_Rep/Code/LN_SED/Tabulator.R")
+
+SS_Yr_Avg<-Tab_Func_SS(Cal_Pretable)
+
+
+SS_Yr_Avg %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
+  kbl() %>%t(.)%>% kable_styling()
+ 
+```
+
+```{r, message=FALSE, echo=FALSE}
+
+```
+
+
+```{r}
+```
+
