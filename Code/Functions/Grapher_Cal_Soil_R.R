@@ -157,5 +157,5 @@ pH_SS_L2<-function(x){
 
 
 
-#Make sure end of Site_Grapher clears global enviroment. 
+#Make sure to clear global enviroment before running report codes
 
