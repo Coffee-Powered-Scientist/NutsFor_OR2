@@ -74,7 +74,7 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
 ### Soil Solution Results
 <br>
 
-```{r, message=FALSE, echo=FALSE}
+```{r, message=FALSE, echo=FALSE, results="hide"}
                                               ##Table 1##
 
 SS_Yr_Avg<-Tab_Func_SS_Yr(Cal_Pretable_SS)
@@ -128,7 +128,7 @@ Mg_L2
 
 <br><br><br>
 
-```{r, echo=FALSE, fig.cap="Figure 3: Monthly Potassium Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 3: Monthly Potassium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
 
 
 K_L1<-K_SS_L1(Cal_Pretable_SS)
@@ -217,15 +217,87 @@ Year_W_Sum %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
     t(.)%>% kable_styling("striped") %>%
     kable_classic(full_width = F, html_font = "Times")
 ```
+#### Figures
+<br>
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 9: Calcium Weathering by Layer"}
+Weathering_Ca1<-Ca_W_L1(Cal_Pretable_W)
+Weathering_Ca1
+
+Weathering_Ca2<-Ca_W_L2(Cal_Pretable_W)
+Weathering_Ca2
+
+
+
+```
+<br>
+```{r, echo=FALSE, fig.show="holf", out.width="50%", fig.cap="Figure 10: Magnesium Weathering by Layer"}
+Weathering_Mg1<-Mg_W_L1(Cal_Pretable_W)
+Weathering_Mg1
+
+Weathering_Mg2<-Mg_W_L2(Cal_Pretable_W)
+Weathering_Mg2
+
+```
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 11: Potassium Weathering by Layer"}
+
+#K Weathering
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 12: Aluminum Weathering by Layer"}
+Weathering_Al1<-Al_W_L1(Cal_Pretable_W)
+Weathering_Al1
+
+Weathering_Al2<-Al_W_L2(Cal_Pretable_W)
+Weathering_Al2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 13: Phosphate Weathering by Layer"}
+Weathering_P1<-P_W_L1(Cal_Pretable_W)
+Weathering_P1
+
+Weathering_P2<-P_W_L2(Cal_Pretable_W)
+Weathering_P2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 14: Silica Weathering by Layer"}
+Weathering_Si1<-Si_W_L1(Cal_Pretable_W)
+Weathering_Si1
+
+Weathering_Si2<-Si_W_L2(Cal_Pretable_W)
+Weathering_Si2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 15: Sodium Weathering by Layer"}
+Weathering_Na1<-Na_W_L1(Cal_Pretable_W)
+Weathering_Na1
+
+Weathering_Na2<-Na_W_L2(Cal_Pretable_W)
+Weathering_Na2
+
+```
+
 
 <br><br><br>
 
 ### Soil Organic Matter (SOM) Results
 <br>
 
-```{r, echo=FALSE, fig.cap="Figure 8: SOM Carbon Per Month ", fig.show="holf", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 16: SOM Carbon Per Month ", fig.show="holf", out.width="50%"}
 
-C_SOM_L1()
 
 
 ```
@@ -252,7 +324,7 @@ Litter_Pretable2 %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>% rena
 
 #### Figures
 
-```{r, echo=FALSE, fig.cap="Figure 9: Litter Pool Carbon Content Over Simulation Period", fig.show="holf", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 17: Litter Pool Carbon Content Over Simulation Period", fig.show="holf", out.width="50%"}
 
 ##Should add specfic fraction over time as well. 
 
@@ -263,7 +335,7 @@ Litter_C+labs(y="C (kg/ha)")
 
 
 
-```{r, echo=FALSE, fig.cap="Figure 10: Litter Pool Ca Content Over Simulation Period", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 18: Litter Pool Ca Content Over Simulation Period", fig.show="hold", out.width="50%"}
 
 Litter_Ca<-Litter_Graph(Litter_Pretable$Ca)
 Litter_Ca+labs(y="Ca (kg/ha)")
@@ -272,7 +344,7 @@ Litter_Ca+labs(y="Ca (kg/ha)")
 
 
 
-```{r,echo=FALSE, fig.cap="Figure 11: Litter Pool Mg Content Over Simulation Period", fig.show="hold", out.width="50%"}
+```{r,echo=FALSE, fig.cap="Figure 19: Litter Pool Mg Content Over Simulation Period", fig.show="hold", out.width="50%"}
 
 Litter_Mg<-Litter_Graph(Litter_Pretable$Mg)
 Litter_Mg+labs(y="Mg (kg/ha)")
@@ -280,7 +352,7 @@ Litter_Mg+labs(y="Mg (kg/ha)")
 ```
 
 
-```{r, echo=FALSE, fig.cap="Figure 12: Litter Pool K Content Over Simulation Period", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 20: Litter Pool K Content Over Simulation Period", fig.show="hold", out.width="50%"}
 
 Litter_K<-Litter_Graph(Litter_Pretable$K)
 Litter_K+labs(y="K (kg/ha)")
@@ -290,7 +362,7 @@ Litter_K+labs(y="K (kg/ha)")
 
 
 
-```{r, echo=FALSE, fig.cap="Figure 13: Litter Pool P Content Over Simulation Period", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 21: Litter Pool P Content Over Simulation Period", fig.show="hold", out.width="50%"}
 
 Litter_P<-Litter_Graph(Litter_Pretable$P)
 Litter_P+labs(y="P (kg/ha)")
@@ -300,7 +372,7 @@ Litter_P+labs(y="P (kg/ha)")
 
 
 
-```{r, echo=FALSE, fig.cap="Figure 14: Litter Pool S Content Over Simulation Period", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 22: Litter Pool S Content Over Simulation Period", fig.show="hold", out.width="50%"}
 
 Litter_S<-Litter_Graph(Litter_Pretable$S)
 Litter_S+labs(y="S (kg/ha)")
@@ -311,13 +383,59 @@ Litter_S+labs(y="S (kg/ha)")
 
 #### Figures
 
-```{r, echo=FALSE, fig.cap="Figure 15: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Figure 23: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%"}
 Fol_Nut<-Tree_kg_ha_(Tree_Foliage)
 Fol_Nut+labs(fill="Nutrient", y="Total Foliar Nutrient Content (kg/ha)")
 
-Fol_N<-Tree_kg_ha_N(Tree_Foliage)
-Fol_N+labs(y="Foliar Nitrogen Content (kg/ha)")
+Fol_Bi<-Tree_kg_ha_N_Bio(Tree_Foliage)
+Fol_Bi+labs(y=expression(Foliar~Biomass~(g/m^2)))
 
+FolN<-Tree_kg_ha_N_(Tree_Foliage)
+FolN+labs(y="Foliar N (kg/ha)")
+
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 24: Tree Nutrient Content (kg/ha) in the Bole. Exlcudes Bark", out.width="50%"}
+Bol_Nut<-Tree_kg_ha_(Tree_Wood)
+Bol_Nut+labs(fill="Nutrient", y="Total Bole (minus bark) Nutrient Content (kg/ha)")
+
+Bol_Bi<-Tree_kg_ha_N_Bio(Tree_Wood)
+Bol_Bi+labs(y=expression(Wood~Bole~Biomass~(g/m^2)))
+
+BolN<-Tree_kg_ha_N_(Tree_Wood)
+BolN+labs(y="Wood Bole N (kg/ha)")
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 25: Tree Nutrient Content (kg/ha) in the Bark", out.width="50%"}
+Bark_Nut<-Tree_kg_ha_(Tree_Bark)
+Bark_Nut+labs(fill="Nutrient", y="Total Bark Nutrient Content (kg/ha)")
+
+Bark_Bi<-Tree_kg_ha_N_Bio(Tree_Wood)
+Bark_Bi+labs(y=expression(Bark~Biomass~(g/m^2)))
+
+BarkN<-Tree_kg_ha_N_(Tree_Bark)
+BarkN+labs(y="Bark N (kg/ha)")
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 26: Tree Nutrient Content (kg/ha) in all Ligneous Material", out.width="50%"}
+Tree_Ligneous$Dry.weight<-Tree_Ligneous$`Dry weight`
+Lig_Nut<-Tree_kg_ha_(Tree_Ligneous)
+Lig_Nut+labs(fill="Nutrient", y="Total Ligneous Nutrient Content (kg/ha)")
+
+Lig_Bi<-Tree_kg_ha_N_Bio(Tree_Ligneous)
+Lig_Bi+labs(y=expression(Total~Ligneous~(g/m^2)))
+
+LigN<-Tree_kg_ha_N_(Tree_Ligneous)
+LigN+labs(y="Total Ligneous N (kg/ha)")
 
 ```
 
