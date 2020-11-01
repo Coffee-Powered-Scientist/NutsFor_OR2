@@ -8,39 +8,66 @@ output:
     theme: null
 fig_caption: yes
 ---
+<br>
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
 library(kableExtra)
 library(ggplot2)
 library(dplyr)
 library(captioner)
 library(car)
+library(janitor)
+library(scales)
 ```
 
 
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Weathering_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Soil_Soln_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Litter_Pool_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/TreeNut_LN_SED_Mutator.R")
+
+
+
                                     ##Load Data, edit data as needed##
 Cal_Pretable_SS<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
 Cal_Pretable_SS$group_id<-as.character(Cal_Pretable_SS$group_id)
 Cal_Pretable_SS$Date<-as.Date(as.character(Cal_Pretable_SS$Date))
+Cal_Pretable_SS$Month<-as.character(Cal_Pretable_SS$Month)
 
 Cal_Pretable_W<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Weathering_All.csv", header=TRUE)
 Cal_Pretable_W$group_id<-as.character(Cal_Pretable_W$group_id)
 Cal_Pretable_W$Date<-as.Date(as.character(Cal_Pretable_W$Date))
 
-Cal_Pretable_SOM<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/SOM.csv", header=TRUE)
-Cal_Pretable_SOM$group_id<-as.character(Cal_Pretable_W$group_id)
-Cal_Pretable_SOM$Date<-as.Date(as.character(Cal_Pretable_W$Date))
+Litter_Pretable<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Litter_Pool.csv", header=TRUE)
+Litter_Pretable$Date<-as.Date(as.character(Litter_Pretable$Date))
+
+Tree_Bark<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Bark.csv", header=TRUE)
+Tree_Bark$Date<-as.Date(Tree_Bark$Date)
+
+Tree_Wood<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Wood.csv", header=TRUE)
+Tree_Wood$Date<-as.Date(Tree_Wood$Date)
+
+Tree_Branch<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Branch.csv")
+Tree_Branch$Date<-as.Date(Tree_Branch$Date)
+
+Tree_Foliage<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_FOliage.csv")
+Tree_Foliage$Date<-as.Date(Tree_Foliage$Date)
 
 
-
-                                            ##Load Functions##
+                                            ##Load Functions for Analysis##
 
 source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Weathering.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_SOM.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Litter.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
 
 ```
 
@@ -55,7 +82,7 @@ SS_Yr_Avg<-Tab_Func_SS_Yr(Cal_Pretable_SS)
 SS_Yr_Avg<-mutate(SS_Yr_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'"))
 
 SS_Yr_Avg %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
-  kbl(caption = "Table 1: Average Annual Soil Solution Concentration", col.names=c("Soil Layer", "Year","Month", "Ca", "Mg", "K", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%t(.)%>%       kable_styling("striped") %>%
+  kbl(caption = "Table 1: Average Annual Soil Solution Concentration", col.names=c("Soil Layer", "Year", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%t(.)%>%       kable_styling("striped") %>%
     kable_classic(full_width = F, html_font = "Times")
 ```
 
@@ -66,12 +93,12 @@ SS_Yr_Avg %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
                                                ##Table 2##
 SS_Reliable_Avg<-Tab_Func_SS_Reliable(Cal_Pretable_SS)
 
-SS_Reliable_Avg<-mutate(SS_Reliable_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'"))
+SS_Reliable_Avg<-mutate(SS_Reliable_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'")) %>% select(-X)
 
-SS_Reliable_Avg %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
-  kbl(caption = "Table 2: Average Monthly Soil Solution Concentration (2005-2006)", col.names=c("Soil Layer", "Year","Month", "Ca", "Mg", "K", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%
+SS_Reliable_Avg %>% mutate_if(is.character, format, digits=3,nsmall = 0) %>%
+  kbl(caption = "Table 2: Average Monthly Soil Solution Concentration (2005-2006)", col.names=c("Soil Layer","Month", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%
   t(.)%>% kable_styling("striped") %>% 
-    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=3,  "$\\\\u$mol/L"=15))
+    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=2,  "$\\\\u$mol/L"=16))
 ```
 
 <br><br><br>
@@ -198,20 +225,99 @@ Year_W_Sum %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
 
 ```{r, echo=FALSE, fig.cap="Figure 8: SOM Carbon Per Month ", fig.show="holf", out.width="50%"}
 
-source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
-source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
-source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Weathering.R")
-source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_SOM.R")
+C_SOM_L1()
 
-SOM_Prep<-Tab_Func_SOM_Yr(Cal_Pretable_SOM)
 
-C_SOM_L1.G<-C_SOM_L1(SOM_Prep)
-C_SOM_L1.G
+```
 
-C_SOM_L2.G<-C_SOM_L2(SOM_Prep)
-C_SOM_L2.G
+<br><br><br>
+
+### Litter Pool
+<br>
+
+```{r, echo=FALSE}
+
+Litter_Pretable2<-Litter_Pretable %>% select(-Date)
+
+Litter_Pretable2 %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>% rename(Year = YEAR)%>%
+  kbl(caption ="<b>Table 4: Litter Pool Content<b>", booktabs = TRUE)%>%
+    add_header_above(c(" "=2, "(kg/ha)" = 8)) %>%
+    t(.)%>% kable_styling("striped") %>%
+    kable_classic(full_width = F, html_font = "Times") %>% footnote("These values show the total amount of each species contain in the whole litter (Residue, Coarse Litter, Fine Litter, and Humus")
+
+
+```
+
+<br><br><br>
+
+#### Figures
+
+```{r, echo=FALSE, fig.cap="Figure 9: Litter Pool Carbon Content Over Simulation Period", fig.show="holf", out.width="50%"}
+
+##Should add specfic fraction over time as well. 
+
+Litter_C<-Litter_Graph(Litter_Pretable$C)
+Litter_C+labs(y="C (kg/ha)")
 
 ```
 
 
+
+```{r, echo=FALSE, fig.cap="Figure 10: Litter Pool Ca Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_Ca<-Litter_Graph(Litter_Pretable$Ca)
+Litter_Ca+labs(y="Ca (kg/ha)")
+
+```
+
+
+
+```{r,echo=FALSE, fig.cap="Figure 11: Litter Pool Mg Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_Mg<-Litter_Graph(Litter_Pretable$Mg)
+Litter_Mg+labs(y="Mg (kg/ha)")
+
+```
+
+
+```{r, echo=FALSE, fig.cap="Figure 12: Litter Pool K Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_K<-Litter_Graph(Litter_Pretable$K)
+Litter_K+labs(y="K (kg/ha)")
+
+
+```
+
+
+
+```{r, echo=FALSE, fig.cap="Figure 13: Litter Pool P Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_P<-Litter_Graph(Litter_Pretable$P)
+Litter_P+labs(y="P (kg/ha)")
+
+
+```
+
+
+
+```{r, echo=FALSE, fig.cap="Figure 14: Litter Pool S Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_S<-Litter_Graph(Litter_Pretable$S)
+Litter_S+labs(y="S (kg/ha)")
+
+
+```
+
+
+#### Figures
+
+```{r, echo=FALSE, fig.cap="Figure 15: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%"}
+Fol_Nut<-Tree_kg_ha_(Tree_Foliage)
+Fol_Nut+labs(fill="Nutrient", y="Total Foliar Nutrient Content (kg/ha)")
+
+Fol_N<-Tree_kg_ha_N(Tree_Foliage)
+Fol_N+labs(y="Foliar Nitrogen Content (kg/ha)")
+
+
+```
 

@@ -24,11 +24,15 @@ SOM$group_id <- SOM %>%
   group_by(id)%>%
   group_indices(id) 
 
-SOM<- SOM %>%
+SOM_Mut<- SOM %>%
   mutate(group_id=recode(group_id, "'1'='Layer 1' ; '2'='Layer 2' ; 
                                               '3'='Layer 3' ; '4'='Layer 4'; '5'='Layer 5'; '6'='Layer 6'; 
-                                              '7'='Layer 7'; '8'='Layer 8'"))
+                                              '7'='Layer 7'; '8'='Layer 8'"))%>% group_by(YEAR, group_id, Month) %>%
+  rename(C= 'C.mol.m²') %>% rename(N='N.mol.m²') %>%rename(Ca= 'Ca.mol.m²') %>% rename(Mg= 'Mg.mol.m²') %>%
+  rename(K= 'K.mol.m²') %>% rename(S= 'S.mol.m²') %>%
+  rename(P= 'P.mol.m²') %>% rename(Year=YEAR) %>%
+  select(C, N, Ca, Mg, K, S, Date)
 
 
-write.csv2(SOM, "SOM.csv", row.names=TRUE)
+write.csv2(SOM_Mut, "SOM.csv", row.names=TRUE)
 
