@@ -1,0 +1,441 @@
+---
+title: "Calibration Report: Low N Sedimentary Site"
+author: "Kaveh Gholamhossein Siah"
+date: "10/29/2020"
+output:
+  html_document:
+    toc: true
+    theme: null
+fig_caption: yes
+---
+<br>
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(captioner)
+library(car)
+library(janitor)
+library(scales)
+```
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Weathering_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Soil_Soln_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Litter_Pool_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/TreeNut_LN_SED_Mutator.R")
+
+
+
+                                    ##Load Data, edit data as needed##
+Cal_Pretable_SS<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable_SS$group_id<-as.character(Cal_Pretable_SS$group_id)
+Cal_Pretable_SS$Date<-as.Date(as.character(Cal_Pretable_SS$Date))
+Cal_Pretable_SS$Month<-as.character(Cal_Pretable_SS$Month)
+
+Cal_Pretable_W<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Weathering_All.csv", header=TRUE)
+Cal_Pretable_W$group_id<-as.character(Cal_Pretable_W$group_id)
+Cal_Pretable_W$Date<-as.Date(as.character(Cal_Pretable_W$Date))
+
+Litter_Pretable<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Litter_Pool.csv", header=TRUE)
+Litter_Pretable$Date<-as.Date(as.character(Litter_Pretable$Date))
+
+Tree_Bark<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Bark.csv", header=TRUE)
+Tree_Bark$Date<-as.Date(Tree_Bark$Date)
+
+Tree_Wood<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Wood.csv", header=TRUE)
+Tree_Wood$Date<-as.Date(Tree_Wood$Date)
+
+Tree_Branch<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Branch.csv")
+Tree_Branch$Date<-as.Date(Tree_Branch$Date)
+
+Tree_Foliage<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_FOliage.csv")
+Tree_Foliage$Date<-as.Date(Tree_Foliage$Date)
+
+
+                                            ##Load Functions for Analysis##
+
+source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Weathering.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_SOM.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Litter.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
+
+```
+
+### Soil Solution Results
+<br>
+
+```{r, message=FALSE, echo=FALSE, results="hide"}
+                                              ##Table 1##
+
+SS_Yr_Avg<-Tab_Func_SS_Yr(Cal_Pretable_SS)
+
+SS_Yr_Avg<-mutate(SS_Yr_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'"))
+
+SS_Yr_Avg %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
+  kbl(caption = "Table 1: Average Annual Soil Solution Concentration", col.names=c("Soil Layer", "Year", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%t(.)%>%       kable_styling("striped") %>%
+    kable_classic(full_width = F, html_font = "Times")
+```
+
+<br><br><br>
+
+```{r, message=FALSE, echo=FALSE}
+
+                                               ##Table 2##
+SS_Reliable_Avg<-Tab_Func_SS_Reliable(Cal_Pretable_SS)
+
+SS_Reliable_Avg<-mutate(SS_Reliable_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'")) %>% select(-X)
+
+SS_Reliable_Avg %>% mutate_if(is.character, format, digits=3,nsmall = 0) %>%
+  kbl(caption = "Table 2: Average Monthly Soil Solution Concentration (2005-2006)", col.names=c("Soil Layer","Month", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%
+  t(.)%>% kable_styling("striped") %>% 
+    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=2,  "$\\\\u$mol/L"=16))
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 1: Monthly Calcium Concentrations by Soil Layer", figures-side, fig.show="hold", out.width="50%", message=FALSE}
+
+Ca_L1<-Ca_SS_L1(Cal_Pretable_SS)
+Ca_L1
+
+Ca_L2<-Ca_SS_L2(Cal_Pretable_SS)
+Ca_L2
+
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 2: Monthly Magnesium Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+
+
+Mg_L1<-Mg_SS_L1(Cal_Pretable_SS)
+Mg_L1
+
+Mg_L2<-Mg_SS_L2(Cal_Pretable_SS)
+Mg_L2
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 3: Monthly Potassium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+K_L1<-K_SS_L1(Cal_Pretable_SS)
+K_L1
+
+K_L2<-K_SS_L2(Cal_Pretable_SS)
+K_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 4: Monthly Sodium Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+
+
+Na_L1<-Na_SS_L1(Cal_Pretable_SS)
+Na_L1
+
+Na_L2<-Na_SS_L2(Cal_Pretable_SS)
+Na_L2
+
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 5: Monthly Aluminum Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+
+
+Al_L1<-Al_SS_L1(Cal_Pretable_SS)
+Al_L1
+
+Al_L2<-Al_SS_L2(Cal_Pretable_SS)
+Al_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 6: Monthly SiO2 Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+
+Si_L1<-Si_SS_L1(Cal_Pretable_SS)
+Si_L1
+
+Si_L2<-Si_SS_L2(Cal_Pretable_SS)
+Si_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 7: Monthly Organic Acid Base (R-) Concentrations by Soil Layer", fig.show="holf", out.width="50%"}
+
+
+R_L1<-R_SS_L1(Cal_Pretable_SS)
+R_L1
+
+R_L2<-R_SS_L2(Cal_Pretable_SS)
+R_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 8: Monthly pH by Soil Layer", fig.show="holf", out.width="50%"}
+
+
+pH_L1<-pH_SS_L1(Cal_Pretable_SS)
+pH_L1
+
+pH_L2<-pH_SS_L2(Cal_Pretable_SS)
+pH_L2
+
+```
+
+### Weathering Results
+<br>
+```{r, echo=FALSE, message=FALSE, }
+                                               ##Table 3##
+Year_W_Sum<-Tab_Func_W_Yr(Cal_Pretable_W)
+
+
+Year_W_Sum %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
+  kbl(caption ="<b>Table 3: Total Annual Weathering: All Layers<b>", booktabs = TRUE)%>%
+    add_header_above(c(" "=1, "(kg/ha)" = 7)) %>%
+    t(.)%>% kable_styling("striped") %>%
+    kable_classic(full_width = F, html_font = "Times")
+```
+#### Figures
+<br>
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 9: Calcium Weathering by Layer"}
+Weathering_Ca1<-Ca_W_L1(Cal_Pretable_W)
+Weathering_Ca1
+
+Weathering_Ca2<-Ca_W_L2(Cal_Pretable_W)
+Weathering_Ca2
+
+
+
+```
+<br>
+```{r, echo=FALSE, fig.show="holf", out.width="50%", fig.cap="Figure 10: Magnesium Weathering by Layer"}
+Weathering_Mg1<-Mg_W_L1(Cal_Pretable_W)
+Weathering_Mg1
+
+Weathering_Mg2<-Mg_W_L2(Cal_Pretable_W)
+Weathering_Mg2
+
+```
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 11: Potassium Weathering by Layer"}
+
+#K Weathering
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 12: Aluminum Weathering by Layer"}
+Weathering_Al1<-Al_W_L1(Cal_Pretable_W)
+Weathering_Al1
+
+Weathering_Al2<-Al_W_L2(Cal_Pretable_W)
+Weathering_Al2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 13: Phosphate Weathering by Layer"}
+Weathering_P1<-P_W_L1(Cal_Pretable_W)
+Weathering_P1
+
+Weathering_P2<-P_W_L2(Cal_Pretable_W)
+Weathering_P2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 14: Silica Weathering by Layer"}
+Weathering_Si1<-Si_W_L1(Cal_Pretable_W)
+Weathering_Si1
+
+Weathering_Si2<-Si_W_L2(Cal_Pretable_W)
+Weathering_Si2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 15: Sodium Weathering by Layer"}
+Weathering_Na1<-Na_W_L1(Cal_Pretable_W)
+Weathering_Na1
+
+Weathering_Na2<-Na_W_L2(Cal_Pretable_W)
+Weathering_Na2
+
+```
+
+
+<br><br><br>
+
+### Soil Organic Matter (SOM) Results
+<br>
+
+```{r, echo=FALSE, fig.cap="Figure 16: SOM Carbon Per Month ", fig.show="holf", out.width="50%"}
+
+
+
+```
+
+<br><br><br>
+
+### Litter Pool
+<br>
+
+```{r, echo=FALSE}
+
+Litter_Pretable2<-Litter_Pretable %>% select(-Date)
+
+Litter_Pretable2 %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>% rename(Year = YEAR)%>%
+  kbl(caption ="<b>Table 4: Litter Pool Content<b>", booktabs = TRUE)%>%
+    add_header_above(c(" "=2, "(kg/ha)" = 8)) %>%
+    t(.)%>% kable_styling("striped") %>%
+    kable_classic(full_width = F, html_font = "Times") %>% footnote("These values show the total amount of each species contain in the whole litter (Residue, Coarse Litter, Fine Litter, and Humus")
+
+
+```
+
+<br><br><br>
+
+#### Figures
+
+```{r, echo=FALSE, fig.cap="Figure 17: Litter Pool Carbon Content Over Simulation Period", fig.show="holf", out.width="50%"}
+
+##Should add specfic fraction over time as well. 
+
+Litter_C<-Litter_Graph(Litter_Pretable$C)
+Litter_C+labs(y="C (kg/ha)")
+
+```
+
+
+
+```{r, echo=FALSE, fig.cap="Figure 18: Litter Pool Ca Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_Ca<-Litter_Graph(Litter_Pretable$Ca)
+Litter_Ca+labs(y="Ca (kg/ha)")
+
+```
+
+
+
+```{r,echo=FALSE, fig.cap="Figure 19: Litter Pool Mg Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_Mg<-Litter_Graph(Litter_Pretable$Mg)
+Litter_Mg+labs(y="Mg (kg/ha)")
+
+```
+
+
+```{r, echo=FALSE, fig.cap="Figure 20: Litter Pool K Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_K<-Litter_Graph(Litter_Pretable$K)
+Litter_K+labs(y="K (kg/ha)")
+
+
+```
+
+
+
+```{r, echo=FALSE, fig.cap="Figure 21: Litter Pool P Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_P<-Litter_Graph(Litter_Pretable$P)
+Litter_P+labs(y="P (kg/ha)")
+
+
+```
+
+
+
+```{r, echo=FALSE, fig.cap="Figure 22: Litter Pool S Content Over Simulation Period", fig.show="hold", out.width="50%"}
+
+Litter_S<-Litter_Graph(Litter_Pretable$S)
+Litter_S+labs(y="S (kg/ha)")
+
+
+```
+
+
+#### Figures
+
+```{r, echo=FALSE, fig.cap="Figure 23: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%"}
+Fol_Nut<-Tree_kg_ha_(Tree_Foliage)
+Fol_Nut+labs(fill="Nutrient", y="Total Foliar Nutrient Content (kg/ha)")
+
+Fol_Bi<-Tree_kg_ha_N_Bio(Tree_Foliage)
+Fol_Bi+labs(y=expression(Foliar~Biomass~(g/m^2)))
+
+FolN<-Tree_kg_ha_N_(Tree_Foliage)
+FolN+labs(y="Foliar N (kg/ha)")
+
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 24: Tree Nutrient Content (kg/ha) in the Bole. Exlcudes Bark", out.width="50%"}
+Bol_Nut<-Tree_kg_ha_(Tree_Wood)
+Bol_Nut+labs(fill="Nutrient", y="Total Bole (minus bark) Nutrient Content (kg/ha)")
+
+Bol_Bi<-Tree_kg_ha_N_Bio(Tree_Wood)
+Bol_Bi+labs(y=expression(Wood~Bole~Biomass~(g/m^2)))
+
+BolN<-Tree_kg_ha_N_(Tree_Wood)
+BolN+labs(y="Wood Bole N (kg/ha)")
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 25: Tree Nutrient Content (kg/ha) in the Bark", out.width="50%"}
+Bark_Nut<-Tree_kg_ha_(Tree_Bark)
+Bark_Nut+labs(fill="Nutrient", y="Total Bark Nutrient Content (kg/ha)")
+
+Bark_Bi<-Tree_kg_ha_N_Bio(Tree_Wood)
+Bark_Bi+labs(y=expression(Bark~Biomass~(g/m^2)))
+
+BarkN<-Tree_kg_ha_N_(Tree_Bark)
+BarkN+labs(y="Bark N (kg/ha)")
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Figure 26: Tree Nutrient Content (kg/ha) in all Ligneous Material", out.width="50%"}
+Tree_Ligneous$Dry.weight<-Tree_Ligneous$`Dry weight`
+Lig_Nut<-Tree_kg_ha_(Tree_Ligneous)
+Lig_Nut+labs(fill="Nutrient", y="Total Ligneous Nutrient Content (kg/ha)")
+
+Lig_Bi<-Tree_kg_ha_N_Bio(Tree_Ligneous)
+Lig_Bi+labs(y=expression(Total~Ligneous~(g/m^2)))
+
+LigN<-Tree_kg_ha_N_(Tree_Ligneous)
+LigN+labs(y="Total Ligneous N (kg/ha)")
+
+```
+
