@@ -14,7 +14,7 @@ Tab_Func_SS_Reliable<-function(x){
   x %>% group_by(group_id, Month) %>% 
       filter(YEAR<2007) %>%
         filter(group_id %in% c(10, 11, 12, 13, 14, 15, 16, 17)) %>%
-            filter(Month %in% c(1, 2, 3, 4, 5, 11, 12)) %>%
+            filter(Month %in% c(1, 2, 3, 4, 11, 12)) %>%
             summarise(across(where(is.numeric), ~mean(.x, na.rm=TRUE))) %>%select(-YEAR)
   
 }
