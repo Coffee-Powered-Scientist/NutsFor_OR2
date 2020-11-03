@@ -26,5 +26,11 @@ Tab_Func_W_Yr<-function(x){
   
 }
 
+#For Leaching Layers
+Tab_Func_LL_Yr<-function(x){
+  x %>% group_by(YEAR, group_id) %>% summarise(across(Ca:HR, ~ sum(.x, na.rm = TRUE)))
+  
+  
+}
 
     

@@ -6,6 +6,7 @@ output:
   pdf_document:
     toc: yes
     toc_depth: 3
+    extra_dependencies: "subfig"
     
 geometry: margin=2 cm
 fig_caption: yes
@@ -43,13 +44,14 @@ source("~/Project_Master/Test_Rep/Code/LN_SED/TreeNut_LN_SED_Mutator.R")
 
                                     ##Load Data, edit data as needed##
 #umol/L
-Cal_Pretable_SS<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
-Cal_Pretable_SS<-Cal_Pretable_SS %>% filter(group_id %in% c("10", "11", "12", "13", "14", "15", "16", "17"))
+Cal_Pretable_Parent<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable_SS<-Cal_Pretable_Parent %>% filter(group_id %in% c("10", "11", "12", "13", "14", "15", "16", "17"))
 Cal_Pretable_SS$group_id<-as.character(Cal_Pretable_SS$group_id)
 
 
 #Kg/ha
-Cal_Pretable_LL<-Cal_Pretable_SS %>% filter(group_id %in% c("1", "2", "3", "4", "5", "6", "7", "8"))
+Cal_Pretable_LL<-Cal_Pretable_Parent %>% filter(group_id %in% c("1", "2", "3", "4", "5", "6", "7", "8"))
+Cal_Pretable_LL$group_id<-as.character(Cal_Pretable_LL$group_id)
 
 
 Cal_Pretable_SS_Yr<-Cal_Pretable_SS %>% group_by(group_id, YEAR) %>% summarise(across(Ca:HR, ~mean(.x, na.rm=TRUE)))
@@ -80,6 +82,8 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Weathering.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_SOM.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Litter.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
+source("~/Project_Master/Test_Rep/Code/Functions/LL_1M_Func.R")
+
 
 ```
 
@@ -400,7 +404,7 @@ Litter_S+labs(y="S (kg/ha)")
 ## Tree Nutrient Content
 <br>
 
-```{r, echo=FALSE, fig.cap="Figure 23: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%", fig.show="hold"}
+```{r, echo=FALSE, fig.cap="Figure 23: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%", fig.show="hold", fig.align='center', fig.ncol = 2}
 Fol_Nut<-Tree_kg_ha_(Tree_Foliage)
 Fol_Nut+labs(fill="Nutrient", y="Total Foliar Nutrient Content (kg/ha)")
 
@@ -415,7 +419,7 @@ FolN+labs(y="Foliar N (kg/ha)")
 
 <br><br><br>
 
-```{r, echo=FALSE, fig.cap="Figure 24: Tree Nutrient Content (kg/ha) in the Bole. Exlcudes Bark", out.width="50%", fig.show="hold"}
+```{r, echo=FALSE, fig.cap="Figure 24: Tree Nutrient Content (kg/ha) in the Bole. Exlcudes Bark", out.width="50%",fig.align='center', fig.show="hold", fig.ncol = 2}
 Bol_Nut<-Tree_kg_ha_(Tree_Wood)
 Bol_Nut+labs(fill="Nutrient", y="Total Bole (minus bark) Nutrient Content (kg/ha)")
 
@@ -429,7 +433,7 @@ BolN+labs(y="Wood Bole N (kg/ha)")
 
 <br><br><br>
 
-```{r, echo=FALSE, fig.cap="Figure 25: Tree Nutrient Content (kg/ha) in the Bark", out.width="50%", fig.show="hold"}
+```{r, echo=FALSE, fig.cap="Figure 25: Tree Nutrient Content (kg/ha) in the Bark", out.width="50%", fig.show="hold", fig.align='center', fig.ncol = 2}
 Bark_Nut<-Tree_kg_ha_(Tree_Bark)
 Bark_Nut+labs(fill="Nutrient", y="Total Bark Nutrient Content (kg/ha)")
 
@@ -443,7 +447,7 @@ BarkN+labs(y="Bark N (kg/ha)")
 
 <br><br><br>
 
-```{r, echo=FALSE, fig.cap="Figure 26: Tree Nutrient Content (kg/ha) in all Ligneous Material", out.width="50%", fig.show="hold"}
+```{r, echo=FALSE, fig.cap="Figure 26: Tree Nutrient Content and Biomass (kg/ha) in all Ligneous Material", fig.align='center', out.width="50%", fig.show="hold", fig.ncol = 2}
 Tree_Ligneous$Dry.weight<-Tree_Ligneous$`Dry weight`
 Lig_Nut<-Tree_kg_ha_(Tree_Ligneous)
 Lig_Nut+labs(fill="Nutrient", y="Total Ligneous Nutrient Content (kg/ha)")
@@ -465,6 +469,51 @@ Not yet complete
 Not yet complete
 
 ### Leaching Losses
+```{r, message=FALSE, echo=FALSE}
+Leaching_Table_Graphable<-Tab_Func_LL_Yr(Cal_Pretable_LL)
+Leaching_Table_1m<-Leaching_Table_Graphable %>% filter(group_id %in% c(8))
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Annual Leaching Losses of Divalent Base Cations", fig.align = "center", out.width = "50%", fig.subcap=c('Ca Leaching Losses', 'Mg Leaching Losses')}
+Ca_LL<-LL_1m(Leaching_Table_1m$Ca)
+Ca_LL+labs(x="Year", y="Ca (kg/ha)")
+
+Mg_LL<-LL_1m(Leaching_Table_1m$Mg)
+Mg_LL+labs(x="Year", y="Mg (kg/ha)")
+
+
+```
+<br>
+
+```{r, echo=FALSE, fig.cap="Annual Leaching Losses of Monovalent Base Cations", fig.align = "center", out.width = "50%", fig.subcap=c('K Leaching Losses', 'Na Leaching Losses')}
+K_LL<-LL_1m(Leaching_Table_1m$K)
+K_LL+labs(x="Year", y="K (kg/ha)")
+
+Na_LL<-LL_1m(Leaching_Table_1m$Na)
+Na_LL+labs(x="Year", y="Na (kg/ha)")
+```
+
+<br>
+
+```{r, echo=FALSE, fig.cap="Annual Leaching Losses of N, P, and S", fig.align = "center", out.width = "50%", fig.subcap=c('N Leaching Losses', 'S Leaching Losses', 'P Leaching Losses'), fig.ncol=2, fig.align="center"}
+
+#kg/ha -S/-N or as SO4/No3/Nh4?
+Leaching_Table_1m$Ntot<-Leaching_Table_1m$NH4+Leaching_Table_1m$NO3
+N_LL<-LL_1m(Leaching_Table_1m$Ntot)
+N_LL+labs(x="Year", y="N Losses (kg/ha)")
+
+S_LL<-LL_1m(Leaching_Table_1m$SO4)
+S_LL+labs(x="Year", y="S Losses (kg/ha)")
+
+P_LL<-LL_1m(Leaching_Table_1m$P)
+P_LL+labs(x="Year", y="P Losses (kg/ha)")
+
+```
+
+
 
 Not yet complete
 
