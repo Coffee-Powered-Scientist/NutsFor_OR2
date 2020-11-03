@@ -11,112 +11,101 @@ library(scales)
 #Calcium
 
 Ca_W_L1<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 1", "Layer 2", "Layer 3")), (aes(x=Date, y=Ca, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Ca~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
-    guides(color=guide_legend("Soil Layers"))
+  ggplot(x, aes(x=YEAR, y=Ca, group=1))+
+    geom_line()+labs(y=expression(Weathered~Ca~(kg/ha)))
 }
 
 Ca_W_L2<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8")), (aes(x=Date, y=Ca, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Ca~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
-    guides(color=guide_legend("Soil Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Ca, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Ca~(kg/ha)))
+    
 }
 
 #Magnesium
 
 Mg_W_L1<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 1", "Layer 2", "Layer 3")), (aes(x=Date, y=Mg, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Mg~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x, (aes(x=YEAR, y=Mg, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Mg~(kg/ha)))
+    
 }
 
 Mg_W_L2<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8")), (aes(x=Date, y=Mg, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Mg~(ka/ha)))+
-    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Mg, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Mg~(ka/ha)))
+    
 }
 
 
 #Potassium
 
 K_W_L1<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 1", "Layer 2", "Layer 3")), (aes(x=Date, y=K, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~K~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=K, group=1)))+
+    geom_line()+labs(y=expression(Weathered~K~(kg/ha)))
+    
 }
 
 K_W_L2<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8")), (aes(x=Date, y=K, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~K~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=K, group=1)))+
+    geom_line()+labs(y=expression(Weathered~K~(kg/ha)))
+    
 }
 
 #Sodium
 
 Na_W_L1<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 1", "Layer 2", "Layer 3")), (aes(x=Date, y=Na, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Na~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Na, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Na~(kg/ha)))
 }
 
 Na_W_L2<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8")), (aes(x=Date, y=Na, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Na~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Na, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Na~(kg/ha)))
 }
 
 
 #Aluminum
 
 Al_W_L1<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 1", "Layer 2", "Layer 3")), (aes(x=Date, y=Al, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Al~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Al, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Al~(kg/ha)))
+    
+    
 }
 
 Al_W_L2<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8")), (aes(x=Date, y=Al, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Al~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Al, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Al~(kg/ha)))
+    
+    
 }
 
 #Si
 
 Si_W_L1<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 1", "Layer 2", "Layer 3")), (aes(x=Date, y=Si, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Si~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Si, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Si~(kg/ha)))
+    
+    
 }
 
 Si_W_L2<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8")), (aes(x=Date, y=Si, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~Si~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=Si, group=1)))+
+    geom_line()+labs(y=expression(Weathered~Si~(kg/ha)))
+    
+    
 }
 
 #Phosphorous
 P_W_L1<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 1", "Layer 2", "Layer 3")), (aes(x=Date, y=P, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~P~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=P, group=1)))+
+    geom_line()+labs(y=expression(Weathered~P~(kg/ha)))
+    
+    
 }
 
 P_W_L2<-function(x){
-  ggplot(subset(x, group_id %in% c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8")), (aes(x=Date, y=P, group=group_id, color=group_id)))+
-    geom_line()+scale_x_date(labels = date_format("%m-%Y"))+labs(y=expression(Weathered~P~(kg/ha)))+
-    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
-    guides(color=guide_legend("Layers"))
+  ggplot(x,  (aes(x=YEAR, y=P, group=1)))+
+    geom_line()+labs(y=expression(Weathered~P~(kg/ha)))
+    
+    
 }

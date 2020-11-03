@@ -39,12 +39,12 @@ Weathering_All$P<-Weathering_All$V9
 
 Weathering_All<-Weathering_All[-c(2:10)]
 
-Weathering_All<- Weathering_All %>%
-  mutate(Date = make_date(YEAR, Month))
+
 
 Weathering_All$group_id <- Weathering_All %>% 
   group_by(id)%>%
     group_indices(id)
+
 
 Weathering_All$group_id<- as.character(Weathering_All$group_id)
   
@@ -52,6 +52,8 @@ Weathering_All<- Weathering_All %>%
       mutate(group_id=recode(group_id, "'1'='Layer 1' ; '2'='Layer 2' ; 
                                               '3'='Layer 3' ; '4'='Layer 4'; '5'='Layer 5'; '6'='Layer 6'; 
                                               '7'='Layer 7'; '8'='Layer 8'"))
+
+Weathering_All<-Weathering_All %>% group_by(YEAR) %>% summarise(across(Ca:P, ~sum(.x, na.rm=TRUE)))
 
 
 #write csv

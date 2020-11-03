@@ -25,12 +25,10 @@ Soil_Soln[,c(2:19)] <- lapply(Soil_Soln[,c(2:19)], as.numeric)
 
 Soil_Soln<-filter(Soil_Soln,  !is.na(YEAR))
 
-Soil_Soln<- Soil_Soln %>%
-  mutate(Date = make_date(YEAR, Month))
 
 Soil_Soln$group_id <- Soil_Soln %>% 
   group_by(id)%>%
-  group_indices(id) 
+  group_indices(id)
 
 
 write.csv2(Soil_Soln, "Soil_Solution_All2.csv", row.names=TRUE)
