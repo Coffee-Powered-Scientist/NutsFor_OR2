@@ -25,3 +25,8 @@ Tree_kg_ha_N_<-function(x){
   
 }
 
+Tree_LF<-function(x){
+  ggplot(x, aes(x=Date, y=Dry.weight))+geom_line()
+  
+  
+}

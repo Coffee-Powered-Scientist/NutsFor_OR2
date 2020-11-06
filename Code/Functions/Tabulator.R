@@ -33,4 +33,10 @@ Tab_Func_LL_Yr<-function(x){
   
 }
 
-    
+#Litterfall
+Tab_Func_LF_Yr<-function(x){
+  x %>% group_by(Date) %>% summarise(across(Dry.weight:P, ~ sum(.x, na.rm = TRUE)))
+  
+  
+}
+

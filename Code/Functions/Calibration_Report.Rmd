@@ -1,7 +1,7 @@
 ---
 title: 'Calibration Report: Low N Sedimentary Site'
 author: "Kaveh Gholamhossein Siah"
-date: "10/29/2020"
+date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
   pdf_document:
     toc: yes
@@ -70,8 +70,10 @@ Tree_Wood$Date<-as.Date(Tree_Wood$Date)
 Tree_Branch<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Branch.csv")
 Tree_Branch$Date<-as.Date(Tree_Branch$Date)
 
-Tree_Foliage<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_FOliage.csv")
+Tree_Foliage<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Foliage.csv")
 Tree_Foliage$Date<-as.Date(Tree_Foliage$Date)
+
+Litter_Fall<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Litter_Fall.csv", header=TRUE)
 
 
                                             ##Load Functions for Analysis##
@@ -460,6 +462,19 @@ LigN+labs(y="Total Ligneous N (kg/ha)")
 
 ```
 
+```{r, echo=FALSE, fig.cap="Litterfall quantity", fig.align='center', out.width="50%", fig.show="hold"}
+
+LF_Yr<-Tab_Func_LF_Yr(Litter_Fall)
+#Uses same function as tree biomass compartments
+
+LF_Quant<-Tree_LF(LF_Yr)
+
+LF_Quant+labs(x="Year", y=expression(Total~Annual~Litterfall~(g/m^2)))
+
+
+```
+
+
 ### Cation Exchange Capacity
 
 Not yet complete
@@ -521,7 +536,7 @@ Not yet complete
 
 Nutrient depletion as a condition is being analyzed using the following metric:
 
-(Uptake Rate (neg SOM Mineralization)+ Leaching Loss Rate + Net Uptake) = Ecosystem Output Rate
+(Uptake Rate +(neg SOM Mineralization)+ Leaching Loss Rate + Net Uptake) = Ecosystem Output Rate
 
 Atmospheric Deposition Rate + Mineral Weathering Rate + Foliar Leaching (K only) = Input Rate
 
@@ -534,7 +549,18 @@ Input-Output = Net nutrient gain Rate (- is loss, + is gain) vs. Biomass Acquisi
 
 Percent biomass reduction from 1st harvest (Biomass at Current Harvest/Biomass achieved 1st harvest)*100= % Reduction/month
 
-Biomass of  
+
+
+### Analysis 3
+
+Nutrient buildup in layers over time (Ca should buildup in top layers)
+
+
+### Analysis 4
+
+Fraction of whole ecosystem nutrients lost with harvest
+
+(Frac Stand Harvest*(Fract. Bole+Fract.Branch+Frac.Foliar+Frac.Bark)/(Soil CEC+Litter+SOM pool+Mineral Pool?+Tree)
 
 
 
