@@ -1,16 +1,22 @@
 ---
-title: "Test_Report1"
-author: "Kaveh G. Siah"
-date: "10/27/2020"
-output: pdf_document
+title: "Nutrient Cycling in Forest Ecosystems: User Manual v.()"
+author:
+   Kaveh Gholamhossein Siah &
+   Gregory van Der Heijden
+date:  "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+   pdf_document:
+    toc: yes
+    toc_depth: 3
+    extra_dependencies: "subfig"
+geometry: margin=2 cm
+fig_caption: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+```{r global_options, include=FALSE, message=FALSE}
+#This global option holds figures in the correct place (stops floating in pdf)
+knitr::opts_chunk$set(fig.pos = 'H')
 
-```{r, include=FALSE}
-options(tinytex.verbose = TRUE)
 ```
 
 ```{r, include=FALSE}
@@ -18,19 +24,8 @@ library(kableExtra)
 
 ```
 
-# Nutrient Cycling in Forest Ecosystems
-
-## (NutsFor)
-
-Programmer:
-
-Manual Author: 
-
-## User Manual for Version ()
 
 <!--Title Page Below, possible background theme/image-->
-
-<!--Insert table of contents (headers automatically added to it)-->
 
 <!--Insert List of Abbreviations-->
 
@@ -60,7 +55,7 @@ the Output folder is still present in the NutsFor.exe directory. A successful mo
 
 
 
-Input Files
+### Input Files
 
 There are 10 input files for NutsFor (the .nut files). These
 files are csv files which can be opened through excel. A full list of the input
@@ -70,19 +65,14 @@ effects on model outputs.
 
 
 
-Dry Deposition
-
-![InputTable1](C:\Users\siahl\Documents\Manual Figures\InputTable1.png)
-
-Description of Parameters: Dry Deposition
-
-The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The file starts with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
+#### Deposition Files
 
 <!--Insert units as an image, its way easier-->
 
 ```{r, include=FALSE}
 text_tbl <- data.frame(
-Input= c("Ca, Mg, Cl, Al...etc,"),
+Input= c("Ca, Mg, K, Na, NO3, NH4, SO4, Cl, PO4, DOC, H, Al, Si"),
+Units=c("$\\mu$mol/L"),
 Description = c("Determines the amount of each species deposited into ecosystem by Dry Deposition")
 )
 
@@ -90,20 +80,54 @@ Description = c("Determines the amount of each species deposited into ecosystem 
 
 ```
 
-
-
-```{r, include=TRUE}
-kbl(text_tbl, booktabs = T, col.names =  c("Input ($\\mu$mol/L)", "Description")) %>%
-kable_styling(full_width = F) %>%
+```{r, echo=FALSE}
+kbl(text_tbl, booktabs = T, caption="Dry & Wet Deposition Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
+kable_styling(full_width = F, latex_options = "scale_down") %>%
 column_spec(1, bold = T) %>%
-column_spec(2, width = "20em")
+column_spec(2, width = "10cm")
  
 ```
+```{r, echo=FALSE}
+#Rainfall Concentrations File
+```
+
+```{r, echo=FALSE}
+#Weather Data File
+```
+
+
+
+
+*Description of Parameters: Deposition Files
+
+The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The files start with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
+
+
+
+
+<br>
 
  
- Soil Parameters
+#### Soil Files
 
-<!--Table 2 Here-->
+```{r, echo=FALSE}
+
+
+Parameter<-c("Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial")
+
+Units<-c("N/A", "N/A", "cm", "cm", "$kg/m^3$", "$kg/m^3$", "Percent", "Fraction", "N/A", "N/A", "Unknown", "$m^2/m^3$", "Percent", "Percent", "Percent", "$c{mol}_c/kg$", "N/A", "Percent", "Fraction (max 1)", "ks: $\\mu$mol/L, knit: Fraction", "Multiple of Microbial Pool", "g Nutrient/kg soil)", "$\\mu$mol/L", "$\\mu$mol/kg", "c${mol}_c$/kg")
+
+Short_Description <-c("Desingates number of layers.", "Assigns layer number to each layer", "Tracks vertical depth of soil layer", "Designates the individual thickness of each soil layer", "N/A", "N/A", "Determines the percent of soil particles greater than 2mm in diameter", "Determines fraction of total tree root biomass in eah layer","Gibbsite formation constant","Al precipitation constant (unused in current version)", "Partial Pressure of CO2","Weatherable mineral area","Soil moisture at which stand cannot extract water", "Soil moisture after excessive water is leached", "Soil moisture at which all pore space is filled with water", "Total cation exchange capacity", "Gapon coefficients for each cation", "Porportion of total mineral area that each individually defined mineral occupies" , "Determines fraction of needed nutrient which stand uptakes from each", "Nitrification constants that determines NO3 production", "Determines fraction of SOM which turns over", "Iniital Amount of Nutrient Mineralized in the SOM pool.", "Concentration of all chemical species at beginning of simulation", "Adsorbed Concentration of anions at the beginning of the simulation", "Sorbed Concentration of Cations to the CEC at the beginning of the simulation")
+
+text_tbl_2 <- data.frame(
+Parameter, Units, Short_Description
+)
+
+kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+
+```
+
+<br>
 
 Description of Parameters: Soil Parameters
 
@@ -247,27 +271,39 @@ CEC Parameters and CEC Initial
 
       Each anion has two AEC adsorption parameters associated with it, Parameter #1 and Parameter #2. These parameters will stand for different variables depending on the adsoprtion isotherm selected. 
 
-      Langmuir
+      1= Langmuir
 
-      Freundlich
+      2 = Freundlich
 
    2. Soil Adsorbed Anions Initial
 
-   
+<br>
+```{r, echo=FALSE}
+
+#Soil Temperature File
+
+```
 
    
 
-<!--Insert Pictures instead of encoded tables-->
+```{r, echo=FALSE}
+Parameter_T3<-c("Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact")
 
-| Input Table<br> 3: OM decomposition                          |
-| ------------------------------------------------------------ |
-| Parameter Name in File                                       |
-| Litter Concentration (N, Ca, Mg, K, S, P)                    |
-| Litter_C_Pool                                                |
-| Layer_frac (Coarse, Fine, Humus)                             |
-| Decomp_rate                                                  |
-| CO2FACT                                                      |
-| Nutrient_Factor (DOCFACT, N_Fact, Ca_Fact, Mg_Fact, K_Fact, S_Fact,<br> P_Fact). |
+Units_T3<-c("mmol Nutrient/mol C", "$mmol C/m^2$", "N/A", "$mmol/(m^2*mo)$", "N/A", "mmol Nutrient/mol C")
+
+Description_T3<-c("Determines concentration of nutrient elements in the litter fraction of OM.", "Sets the litter carbon pool, and thus the amount of nutrients per unit area.", "Designates the OM distribution between coarse litter (first column), fine litter (second column), and humus (third column)", "Calibration decomposition factor shows up multiple times in the file for the 3 OM fractions (1-3) and for the mineral soil layers (1-n).", "Calibration factor that determines the proportion of decomposed carbon that effluxes as carbon dioxide.", "Calibration factors for both the 3 OM fractions (1-3) and the mineral soil fractions (1-n). Can be used to calibrate soil solution and liter flow ion fluxes, range from 0 to 1.")
+
+text_tbl_3 <- data.frame(
+Parameter_T3, Units_T3, Description_T3
+)
+
+kbl(text_tbl_3, caption="OM Decomposition File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+
+
+
+```
+
+<br>
 
 Description of Parameters: OM Decomposition
 
@@ -305,50 +341,74 @@ DOC_Decomp:
 
 Determines the proportion of DOC evolved from decomposing litter that is itself decomposed. This parameter decreases OA (R-), however it does not link back to carbon dioxide release as carbon dioxide concentration is a fixed parameter (See, Input table 2, pCO2)
 
+<br>
+
+```{r, echo=FALSE}
+Parameter_T4<-c("Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms")
+
+Units_T4<-c("Year", "Year", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A","N/A", "Carbon/Charge", "N/A", "N/A")
+
+Description_T4<-c("Determines simulation start year.", "Determines simulation end year.", "Designates number of layers to be read", "Designates the number of minerals", "Lists out the minerals to be simulated", "Designates the pka of organic acid stages of dissolution", "Designates Al pka", "Desingates phosphoric acid pka", "Designates DIC pka", "Determines how many C molecules are present for every negative charge on organic acids.", "Determines the stand's species composition", "Determines adsroption isotherm used for anions (1=langmuir, 2=Freundlich)")
+
+text_tbl_4 <- data.frame(
+Parameter_T4, Units_T4, Description_T4
+)
+
+kbl(text_tbl_4, caption="General Data File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
 
 
-| Input Table 4: General<br> Data File |
-| ------------------------------------ |
-| Parameter Name in<br> File           |
-| Start_year                           |
-| End_Year                             |
-| Nb_Layers                            |
-| Nb_Minerals                          |
-| Mineral_names                        |
-| OA_pka                               |
-| Aluminum                             |
-| Phosphoric_acid                      |
-| DIC                                  |
-| Organic_acid_size                    |
-| Nb_Tree_Comp                         |
+```
+<br>
 
 Description of Parameters: General Data File
 
-| Input Table 5: Mineral Data File                            |
-| ----------------------------------------------------------- |
-| Parameter Name in File                                      |
-| Mineral                                                     |
-| pKH, pKH2O, pKCO2, pKr                                      |
-| kH, kH20, kCO2,kr                                           |
-| nH, nCO, nr                                                 |
-| WAlH, WBCH, WAlH2O, WBCH2O                                  |
-| CAl*10^-6, CR*10^-6 CBC*10^-6                               |
-| Cation Composition of Minerals (Ca, Mg, K, Na, Al, Si, PO4) |
-| Iso                                                         |
+***Simulation Length***
+
+Simulation length (the number of years which is simulated) is determined by the Start_Year and End_Year parameters. For example, a starting year of 2015 and an ending year of 2020 is 6 total years of simulation (starting in Jan of 2015 and ending in December of 2020). Note that deposition files and the soil temperature file must be extended by however long the simulation is run for (the program does NOT loop over these files). 
+
+***Acid pka***
+Numerous acids have their pKas (-log of their dissolution constant) set here. These parameters can be taken from online chemical databases, assuming an average room temperature (25 degrees celsius).
+
+***Organic Acid Size***
+This parameters determines the number of carbons for every charged site on an organic acid; it is used to calculate the charge density of organic acids. Note that this is a global parameter, changing this number changes R- concentrations in all layers. Lowering this parameter leads to a higher charge density (and thus more acidic) soil solution, which tends to cause cations from the CEC to dissolve into solution. 
+
+A potential side effect of high cation concentrations due low charge density is suppressed weathering release of cations, as per equation X.X in Equations. 
+
+<br>
+
+```{r, echo=FALSE}
+
+#Mineral Data File
+
+```
 
 Description of Parameters: Mineral Data File
 
-| Input Table 6: Tree Parameter File |
-| ---------------------------------- |
-| Parameter Name in File             |
+
+<br>
+
+```{r, echo=FALSE}
+#Tree Parameter File
+
+```
 
 Description of Parameters: Tree Parameter File
 
-<!--Stand Harvesting File-->
+```{r, echo=FALSE}
+#Stand Harvesting File
+
+```
+
+
+```{r, echo=FALSE}
+#Tree growth file
+
+```
+
 
 Output File Description
 
-<!--Just the core, relevant data files. Some files just convert between units and shouldn't get an extensive description-->
+There are 60 output files that NutsFor.exe generates. All files are structured in a readable manner, with units designated. All output files are .csv files separated by ";", all can be read using R. Unlike for input parameter files, output files are largely self-explainatory, however 
 
 Calibration
 
