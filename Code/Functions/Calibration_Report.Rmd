@@ -75,6 +75,9 @@ Tree_Foliage$Date<-as.Date(Tree_Foliage$Date)
 
 Litter_Fall<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Litter_Fall.csv", header=TRUE)
 
+Analysis_1<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Analysis_1.csv", header=TRUE)
+
+
 
                                             ##Load Functions for Analysis##
 
@@ -85,6 +88,7 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_SOM.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Litter.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
 source("~/Project_Master/Test_Rep/Code/Functions/LL_1M_Func.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Analysis_I.R")
 
 
 ```
@@ -403,7 +407,7 @@ Litter_S+labs(y="S (kg/ha)")
 ```
 <br><br><br>
 
-## Tree Nutrient Content
+### Tree Nutrient Content
 <br>
 
 ```{r, echo=FALSE, fig.cap="Figure 23: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%", fig.show="hold", fig.align='center', fig.ncol = 2}
@@ -533,6 +537,67 @@ P_LL+labs(x="Year", y="P Losses (kg/ha)")
 Not yet complete
 
 ### Analysis 1
+
+```{r, echo=FALSE, message=FALSE}
+#Final Mutation for Analysis 1, must be done AFTER leaching_table_1m is assigned. 
+
+Analysis_Bound<- cbind(Leaching_Table_1m, Analysis_1)
+
+Analysis_1_Ready<-Analysis_Bound %>% group_by(V1) %>% 
+    mutate(Ca_Net=Ca_Wet+Ca_WTH+Ca_L_Min+Ca_SOM_Min-Ca_TU-Ca) %>%
+    mutate(Mg_Net=Mg_Wet+Mg_WTH+Mg_L_Min+Mg_SOM_Min-Mg_TU-Mg) %>% 
+    mutate(K_Net=K_Wet+K_WTH+K_L_Min+K_SOM_Min-K_TU-K+K_Folx) %>%
+    mutate(SO4_Net=SO4_Wet+ S_L_Min+S_SOM_Min-S_TU-SO4) %>%
+    mutate(N_Net=Ntot_Wet+ N_L_Min+N_SOM_Min-N_TU-SO4) %>%
+    mutate(P_Net=P_WTH+ P_L_Min+P_SOM_Min-P_TU-P)
+
+```
+
+
+```{r, echo=FALSE, fig.subcap=c('Net ecosystem calcium retention graphed with bole biomass', 'Net ecosystem calcium retention graphed with foliar biomass index', 'Net ecosystem calcium retention with Bark Biomass index', 'Net ecosystem calcium retention with Branch Biomass index'), fig.cap="Fuck all!", fig.align='center', out.width="50%", fig.ncol=2}
+
+#Must add biomass of compartments to these graphs!
+Ca_Net_Gain<-Analysis_I_Grapher(Analysis_1_Ready$Ca_Net)
+Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Bole Biomass Index (kg/ha)")+ geom_line(Tree_Wood, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Foliar Biomass Index (kg/ha)")+ geom_line(Tree_Foliage, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Bark Biomass Index (kg/ha)")+ geom_line(Tree_Bark, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Branch Biomass Index (kg/ha)")+ geom_line(Tree_Branch, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+```
+<br>
+```{r, echo=FALSE, fig.subcap=c('Net ecosystem magnesium retention graphed with bole biomass', 'Net ecosystem magnesium retention graphed with foliar biomass index', 'Net ecosystem magnesium retention with Bark Biomass index', 'Net ecosystem magnesium retention with Branch Biomass index'), fig.cap="Net ecosystem Magnesium retention plotted against biomass indeces (kg/ha biomass/10,000)", fig.align='center', out.width="50%", fig.ncol=2}
+
+#Must add biomass of compartments to these graphs!
+Mg_Net_Gain<-Analysis_I_Grapher(Analysis_1_Ready$Mg_Net)
+Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Bole Biomass Index (kg/ha)")+ geom_line(Tree_Wood, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Foliar Biomass Index (kg/ha)")+ geom_line(Tree_Foliage, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Bark Biomass Index (kg/ha)")+ geom_line(Tree_Bark, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Branch Biomass Index (kg/ha)")+ geom_line(Tree_Branch, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+```
+<br>
+
+```{r, echo=FALSE, fig.subcap=c('Net ecosystem potassium retention graphed with bole biomass', 'Net ecosystem potassium retention graphed with foliar biomass index', 'Net ecosystem potassium retention with Bark Biomass index', 'Net ecosystem potassium retention with Branch Biomass index'), fig.cap="Net ecosystem potassium retention plotted against biomass indeces (kg/ha biomass/10,000)", fig.align='center', out.width="50%", fig.ncol=2}
+
+#Must add biomass of compartments to these graphs!
+K_Net_Gain<-Analysis_I_Grapher(Analysis_1_Ready$K_Net)
+K_Net_Gain+labs(x="Date", y="Net K Gain and Bole Biomass Index (kg/ha)")+ geom_line(Tree_Wood, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+K_Net_Gain+labs(x="Date", y="Net K Gain and Foliar Biomass Index (kg/ha)")+ geom_line(Tree_Foliage, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+K_Net_Gain+labs(x="Date", y="Net K Gain and Bark Biomass Index (kg/ha)")+ geom_line(Tree_Bark, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+K_Net_Gain+labs(x="Date", y="Net K Gain and Branch Biomass Index (kg/ha)")+ geom_line(Tree_Branch, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+
+```
+
+
 
 Nutrient depletion as a condition is being analyzed using the following metric:
 
