@@ -5,10 +5,10 @@ library(dplyr)
 library(lubridate)
 
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data")
 
-Litter_Pool<-read.csv2("~/NutsForSEDLN/Base/Output data/Litter/Litter pool kg_ha data.csv")
-Litter_Amount<-read.csv2("~/NutsForSEDLN/Base/Output data/Litter/Litterfall.csv",header=FALSE)
+Litter_Pool<-read.csv2("~/NutsForSEDLN/40_WTH/Output data/Litter/Litter pool kg_ha data.csv")
+Litter_Amount<-read.csv2("~/NutsForSEDLN/40_WTH/Output data/Litter/Litterfall.csv",header=FALSE)
 
 Litter_Pool<- Litter_Pool %>% select(c(1:9)) %>% row_to_names(row_number = 1) %>%  
   mutate(Date = make_date(YEAR, Month)) %>% rename(Ca=`Ca kg/ha`) %>% rename(Mg=`Mg kg/ha`) %>%

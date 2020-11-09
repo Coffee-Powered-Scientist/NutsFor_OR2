@@ -6,7 +6,7 @@
 #Need to note units for different files, they are in different goddamn units
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data")
 
 library(dplyr)
 library(tidyverse)
@@ -14,7 +14,7 @@ library(lubridate)
 library(car)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/NutsforSEDLN/Output data/Weathering", pattern = "Layer", full.names = TRUE)
+files <- list.files(path = "~/NutsforSEDLN/80_BO/Output data/Weathering", pattern = "Layer", full.names = TRUE)
 
 Weathering_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")

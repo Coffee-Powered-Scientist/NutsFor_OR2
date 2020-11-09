@@ -14,7 +14,7 @@ library(lubridate)
 library(car)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/NutsforSEDLN/Output data/Weathering", pattern = "Layer", full.names = TRUE)
+files <- list.files(path = "~/NutsforSEDLN/Base/Output data/Weathering", pattern = "Layer", full.names = TRUE)
 
 Weathering_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
