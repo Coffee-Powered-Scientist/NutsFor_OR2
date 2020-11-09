@@ -19,7 +19,7 @@ Above_Flux<-Above_Flux  %>% rename(Ca_Wet=V2, Mg_Wet=V3, K_Wet=V4, NO3_Wet=V5, N
 
 All_Flux<-cbind(Above_Flux, Bio_Flux)
 
-All_Flux[2:103]<-lapply(All_Flux[2:103], as.numeric)
+All_Flux[2:104]<-lapply(All_Flux[2:104], as.numeric)
 
 All_Flux<-All_Flux %>% drop_na(Ca_Wet)
 
