@@ -7,7 +7,7 @@ library(tidyverse)
 library(lubridate)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/NutsforSEDLN/Output data/SOM", pattern = "*.csv", full.names = TRUE)
+files <- list.files(path = "~/NutsforSEDLN/Base/Output data/SOM", pattern = "*.csv", full.names = TRUE)
 SOM<- sapply(files, read.csv2, simplify=FALSE) %>% 
   bind_rows(.id = "id")
 
