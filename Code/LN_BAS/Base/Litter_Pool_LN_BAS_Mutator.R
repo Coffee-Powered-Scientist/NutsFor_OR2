@@ -4,7 +4,7 @@ library(dplyr)
 library(lubridate)
 
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/Base/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_BAS/Base/Edited Data")
 
 Litter_Pool<-read.csv2("~/NutsForBASLN/Base/Output data/Litter/Litter pool kg_ha data.csv")
 Litter_Amount<-read.csv2("~/NutsForBASLN/Base/Output data/Litter/Litterfall.csv",header=FALSE)

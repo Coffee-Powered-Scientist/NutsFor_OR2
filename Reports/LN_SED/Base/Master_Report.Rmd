@@ -1,0 +1,25 @@
+---
+title: 'Combined Report: LN SED'
+author: "Kaveh G. Siah"
+date: "11/11/2020"
+output:
+  pdf_document:
+    toc_depth: 3
+    extra_dependencies: "subfig"
+    
+geometry: margin=2 cm
+fig_caption: yes
+---
+
+# Chapter 1
+
+```{r, child="Calibration_Report_LN_SED.Rmd"}
+
+```
+
+# Chapter 2
+
+```{r, child="Calibration_Report_80_WTH.rmd"}
+
+```
+

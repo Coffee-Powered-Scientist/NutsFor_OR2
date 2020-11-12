@@ -1,13 +1,13 @@
 rm(list = ls())
 #Set wd to edited data in mutator files; that way writecsv always deposits it in one place
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data")
 
 library(dplyr)
 library(janitor)
 library(lubridate)
 
 #Maybe have a function script-maybe have a script library of individual scripts
-Tree_Nut<-read.csv2("~/NutsForBASLN/80_BO/Output data/Biomass/Tree data.csv", header=FALSE)
+Tree_Nut<-read.csv2("~/NutsForBASHN/80_BO/Output data/Biomass/Tree data.csv", header=FALSE)
 
 Tree_Nut_2<-Tree_Nut %>% group_by(V1, V2) %>%
   select(V3, V10:V15, V16, V23:V29, V36:V42, V50:V61)

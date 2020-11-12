@@ -1,6 +1,6 @@
 rm(list = ls())
 #Set wd to edited data in mutator files; that way writecsv always deposits it in one place
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/Base/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Base/Edited Data")
 
 library(dplyr)
 library(janitor)

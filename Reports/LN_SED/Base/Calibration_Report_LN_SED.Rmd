@@ -4,7 +4,6 @@ author: "Kaveh Gholamhossein Siah"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
   pdf_document:
-    toc: yes
     toc_depth: 3
     extra_dependencies: "subfig"
     
@@ -12,6 +11,12 @@ geometry: margin=2 cm
 fig_caption: yes
 ---
 <br><br><br>
+
+\newpage 
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
 
 ```{r global_options, include=FALSE, message=FALSE}
 #This global option holds figures in the correct place (stops floating in pdf)
@@ -28,17 +33,22 @@ library(captioner)
 library(car)
 library(janitor)
 library(scales)
+library(reshape2)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/Weathering_LN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Weathering_LN_SED_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/Soil_Soln_LN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Soil_Soln_LN_SED_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/Litter_Pool_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Litter_Pool_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/TreeNut_LN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/TreeNut_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/CEC_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/AEC_Mutator.R")
 
 
 
@@ -61,27 +71,17 @@ Cal_Pretable_W<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_L
 Litter_Pretable<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Litter_Pool.csv", header=TRUE)
 Litter_Pretable$Date<-as.Date(as.character(Litter_Pretable$Date))
 
-Tree_Bark<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Bark.csv", header=TRUE)
-Tree_Bark$Date<-as.Date(Tree_Bark$Date)
+Tree_Nut_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Nut_All.csv", header=TRUE)
 
-Tree_Wood<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Wood.csv", header=TRUE)
-Tree_Wood$Date<-as.Date(Tree_Wood$Date)
-
-Tree_Branch<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Branch.csv")
-Tree_Branch$Date<-as.Date(Tree_Branch$Date)
-
-Tree_Foliage<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Foliage.csv")
-Tree_Foliage$Date<-as.Date(Tree_Foliage$Date)
-
-Tree_Ligneous<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Tree_Ligneous.csv")
-Tree_Ligneous$Date<-as.Date(Tree_Ligneous$Date)
 
 Litter_Fall<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Litter_Fall.csv", header=TRUE)
 
 Analysis_1<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Analysis_1.csv", header=TRUE)
 
+CEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/CEC_All.csv", header=TRUE)
+CEC_All$group_id<-as.factor(CEC_All$group_id)
 
-
+AEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/AEC_All.csv", header=TRUE)
                                             ##Load Functions for Analysis##
 
 source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
@@ -92,6 +92,7 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Litter.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
 source("~/Project_Master/Test_Rep/Code/Functions/LL_1M_Func.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Analysis_I.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_CEC_AEC.R")
 
 
 ```
@@ -100,28 +101,14 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Analysis_I.R")
 <br>
 
 ```{r, message=FALSE, echo=FALSE, results="hide", include=FALSE}
-                                              ##Table 1##
 
-SS_Yr_Avg<-Tab_Func_SS_Yr(Cal_Pretable_SS)
-
-SS_Yr_Avg<-mutate(SS_Yr_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'"))
-
-SS_Yr_Avg %>% mutate_if(is.numeric, format, digits=2,nsmall = 0) %>%
-  kbl(caption = "Table 1: Average Annual Soil Solution Concentration", col.names=c("Soil Layer", "Year", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR")) %>%t(.)%>%       kable_styling("striped") %>%
-    kable_classic(full_width = F, html_font = "Times")
-```
-
-<br><br><br>
-
-```{r, message=FALSE, echo=FALSE, results="hide", include=FALSE}
-
-                                               ##Table 2##
+                                               ##Table 1##
 SS_Reliable_Avg<-Tab_Func_SS_Reliable(Cal_Pretable_SS)
 
 SS_Reliable_Avg<-mutate(SS_Reliable_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'")) %>% select(-X)
 
 SS_Reliable_Avg %>% mutate_if(is.character, format, digits=3,nsmall = 0) %>%
-  kbl(caption = "Table 2: Average Monthly Soil Solution Concentration (2005-2006)", col.names=c("Soil Layer","Month", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR"), "latex") %>%
+  kbl(caption = "Average Monthly Soil Solution Concentration (2005-2006)", col.names=c("Soil Layer","Month", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR"), "latex", escape = FALSE) %>%
   t(.)%>% kable_styling(latex_options = c("striped", "scale_down", "hold_position")) %>% 
     kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=2,  "$\\\\u$mol/L"=16))
 ```
@@ -324,17 +311,6 @@ Weathering_Na2
 
 <br><br><br>
 
-### Soil Organic Matter (SOM) Results
-<br>
-
-```{r, echo=FALSE, fig.cap="Figure 16: SOM Carbon Per Month ", fig.show="hold", out.width="50%"}
-
-
-
-```
-
-<br><br><br>
-
 ### Litter Pool Results
 <br>
 
@@ -413,136 +389,103 @@ Litter_S+labs(y="S (kg/ha)")
 ### Tree Nutrient Content
 <br>
 
-```{r, echo=FALSE, fig.cap="Figure 23: Tree Nutrient Content (kg/ha) in the Foliage", out.width="50%", fig.show="hold", fig.align='center', fig.ncol = 2}
-Fol_Nut<-Tree_kg_ha_(Tree_Foliage)
-Fol_Nut+labs(fill="Nutrient", y="Total Foliar Nutrient Content (kg/ha)")
+```{r, echo=FALSE, message=FALSE, fig.cap="Base Cation Nutrient Content in Simulated Forest", fig.align='center', out.width="50%", fig.show="hold", fig.ncol=2, fig.subcap=c('Calcium content in each biomass compartment', 'Magnesium content in each biomass compartment', 'Potassium content in each biomass compartment')}
 
-Fol_Bi<-Tree_kg_ha_N_Bio(Tree_Foliage)
-Fol_Bi+labs(y=expression(Foliar~Biomass~(kg/ha)))
+#By doing selection here, we allow for 1 file to be read from rather than multiple. 
 
-FolN<-Tree_kg_ha_N_(Tree_Foliage)
-FolN+labs(y="Foliar N (kg/ha)")
+#Ca
+
+Tree_Nut_Ca<-Tree_Nut_All %>% select(Ca_F, Ca_Bol, Ca_Brh, Ca_Brk, YEAR, Month)
+
+Tree_Nut_Ca<-Tree_Nut_Ca %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_Ca_Melt<-Tree_Nut_Ca_Melt<-melt(Tree_Nut_Ca, id.vars= c("Date"))
+
+Ca_Nut<-ggplot(Tree_Nut_Ca_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="Ca Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+Ca_Nut
+
+#Mg
+Tree_Nut_Mg<-Tree_Nut_All %>% select(Mg_F, Mg_Bol, Mg_Brh, Mg_Brk, YEAR, Month)
+
+Tree_Nut_Mg<-Tree_Nut_Mg %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_Mg_Melt<-Tree_Nut_Mg_Melt<-melt(Tree_Nut_Mg, id.vars= c("Date"))
+
+Mg_Nut<-ggplot(Tree_Nut_Mg_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="Mg Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+Mg_Nut
 
 
-```
+#K
 
-<br><br><br>
+Tree_Nut_K<-Tree_Nut_All %>% select(K_F, K_Bol, K_Brh, K_Brk, YEAR, Month)
 
-```{r, echo=FALSE, fig.cap="Figure 24: Tree Nutrient Content (kg/ha) in the Bole. Exlcudes Bark", out.width="50%",fig.align='center', fig.show="hold", fig.ncol = 2}
-Bol_Nut<-Tree_kg_ha_(Tree_Wood)
-Bol_Nut+labs(fill="Nutrient", y="Total Bole (minus bark) Nutrient Content (kg/ha)")
+Tree_Nut_K<-Tree_Nut_K %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
 
-Bol_Bi<-Tree_kg_ha_N_Bio(Tree_Wood)
-Bol_Bi+labs(y=expression(Wood~Bole~Biomass~(kg/ha)))
+Tree_Nut_K_Melt<-Tree_Nut_K_Melt<-melt(Tree_Nut_K, id.vars= c("Date"))
 
-BolN<-Tree_kg_ha_N_(Tree_Wood)
-BolN+labs(y="Wood Bole N (kg/ha)")
-
-```
-
-<br><br><br>
-
-```{r, echo=FALSE, fig.cap="Figure 25: Tree Nutrient Content (kg/ha) in the Bark", out.width="50%", fig.show="hold", fig.align='center', fig.ncol = 2}
-Bark_Nut<-Tree_kg_ha_(Tree_Bark)
-Bark_Nut+labs(fill="Nutrient", y="Total Bark Nutrient Content (kg/ha)")
-
-Bark_Bi<-Tree_kg_ha_N_Bio(Tree_Wood)
-Bark_Bi+labs(y=expression(Bark~Biomass~(ka/ha)))
-
-BarkN<-Tree_kg_ha_N_(Tree_Bark)
-BarkN+labs(y="Bark N (kg/ha)")
+K_Nut<-ggplot(Tree_Nut_K_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="K Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+K_Nut
 
 ```
+<br>
+```{r, echo=FALSE, message=FALSE, fig.cap="N, S, and P Nutrient Contents and biomass per compartment", fig.align='center', out.width="50%", fig.show="hold", fig.ncol=2, fig.subcap=c('Nitrogen content in each biomass compartment', 'Sulfur content in each biomass compartment', 'Phosphorous content in each biomass compartment', 'Biomass of each compartment')}
 
-<br><br><br>
+#N
 
-```{r, echo=FALSE, fig.cap="Figure 26: Tree Nutrient Content and Biomass (kg/ha) in all Ligneous Material", fig.align='center', out.width="50%", fig.show="hold", fig.ncol = 2}
-Tree_Ligneous$Dry.weight<-Tree_Ligneous$`Dry weight`
-Lig_Nut<-Tree_kg_ha_(Tree_Ligneous)
-Lig_Nut+labs(fill="Nutrient", y="Total Ligneous Nutrient Content (kg/ha)")
+Tree_Nut_N<-Tree_Nut_All %>% select(N_F, N_Bol, N_Brk, YEAR, Month)
 
-Lig_Bi<-Tree_kg_ha_N_Bio(Tree_Ligneous)
-Lig_Bi+labs(y=expression(Total~Ligneous~(kg/ha)))
+Tree_Nut_N<-Tree_Nut_N %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
 
-LigN<-Tree_kg_ha_N_(Tree_Ligneous)
-LigN+labs(y="Total Ligneous N (kg/ha)")
+Tree_Nut_N_Melt<-Tree_Nut_N_Melt<-melt(Tree_Nut_N, id.vars= c("Date"))
 
+N_Nut<-ggplot(Tree_Nut_N_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="N Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+N_Nut
+
+#S
+Tree_Nut_S<-Tree_Nut_All %>% select(S_F, S_Bol, S_Brh, S_Brk, YEAR, Month)
+
+Tree_Nut_S<-Tree_Nut_S %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_S_Melt<-Tree_Nut_S_Melt<-melt(Tree_Nut_S, id.vars= c("Date"))
+
+S_Nut<-ggplot(Tree_Nut_S_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="S Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+S_Nut
+
+#P
+Tree_Nut_P<-Tree_Nut_All %>% select(P_F, P_Bol, P_Brh, P_Brk, YEAR, Month)
+
+Tree_Nut_P<-Tree_Nut_P %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_P_Melt<-Tree_Nut_P_Melt<-melt(Tree_Nut_P, id.vars= c("Date"))
+
+P_Nut<-ggplot(Tree_Nut_P_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="P Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+P_Nut
+
+#Dry Weight/Biomass
+
+Tree_Nut_DW<-Tree_Nut_All %>% select(DW_F, DW_Bol, DW_Brh, DW_Brk, YEAR, Month)
+
+Tree_Nut_DW<-Tree_Nut_DW %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_DW_Melt<-Tree_Nut_DW_Melt<-melt(Tree_Nut_DW, id.vars= c("Date"))
+
+DW_Nut<-ggplot(Tree_Nut_DW_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="Dry Weight of Biomass Compartments: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+DW_Nut
 ```
 
-```{r, echo=FALSE, fig.cap="Litterfall quantity", fig.align='center', out.width="50%", fig.show="hold"}
 
-LF_Yr<-Tab_Func_LF_Yr(Litter_Fall)
-#Uses same function as tree biomass compartments
-
-LF_Quant<-Tree_LF(LF_Yr)
-
-LF_Quant+labs(x="Year", y=expression(Total~Annual~Litterfall~(g/m^2)))
-
-
-```
-
-
-### Cation Exchange Capacity
-
-Not yet complete
-
-### Anion Exchange Capacity 
-
-Not yet complete
-
-### Leaching Losses
 ```{r, message=FALSE, echo=FALSE}
-Leaching_Table_Graphable<-Tab_Func_LL_Yr(Cal_Pretable_LL)
-Leaching_Table_1m<-Leaching_Table_Graphable %>% filter(group_id %in% c(8))
-
-```
-
-<br><br><br>
-
-```{r, echo=FALSE, fig.cap="Annual Leaching Losses of Divalent Base Cations", fig.align = "center", out.width = "50%", fig.subcap=c('Ca Leaching Losses', 'Mg Leaching Losses')}
-Ca_LL<-LL_1m(Leaching_Table_1m$Ca)
-Ca_LL+labs(x="Year", y="Ca (kg/ha)")
-
-Mg_LL<-LL_1m(Leaching_Table_1m$Mg)
-Mg_LL+labs(x="Year", y="Mg (kg/ha)")
 
 
 ```
-<br>
 
-```{r, echo=FALSE, fig.cap="Annual Leaching Losses of Monovalent Base Cations", fig.align = "center", out.width = "50%", fig.subcap=c('K Leaching Losses', 'Na Leaching Losses')}
-K_LL<-LL_1m(Leaching_Table_1m$K)
-K_LL+labs(x="Year", y="K (kg/ha)")
-
-Na_LL<-LL_1m(Leaching_Table_1m$Na)
-Na_LL+labs(x="Year", y="Na (kg/ha)")
-```
-
-<br>
-
-```{r, echo=FALSE, fig.cap="Annual Leaching Losses of N, P, and S", fig.align = "center", out.width = "50%", fig.subcap=c('N Leaching Losses', 'S Leaching Losses', 'P Leaching Losses'), fig.ncol=2, fig.align="center"}
-
-#kg/ha -S/-N or as SO4/No3/Nh4?
-Leaching_Table_1m$Ntot<-Leaching_Table_1m$NH4+Leaching_Table_1m$NO3
-N_LL<-LL_1m(Leaching_Table_1m$Ntot)
-N_LL+labs(x="Year", y="N Losses (kg/ha)")
-
-S_LL<-LL_1m(Leaching_Table_1m$SO4)
-S_LL+labs(x="Year", y="S Losses (kg/ha)")
-
-P_LL<-LL_1m(Leaching_Table_1m$P)
-P_LL+labs(x="Year", y="P Losses (kg/ha)")
-
-```
-
-
-
-Not yet complete
-
-### Analysis 1
+### Analysis 1: Stack Flux Data
 
 ```{r, echo=FALSE, message=FALSE}
 #Final Mutation for Analysis 1, must be done AFTER leaching_table_1m is assigned. 
+
+Leaching_Table_Graphable<-Tab_Func_LL_Yr(Cal_Pretable_LL)
+Leaching_Table_1m<-Leaching_Table_Graphable %>% filter(group_id %in% c(8))
 
 Analysis_Bound<- cbind(Leaching_Table_1m, Analysis_1)
 
@@ -557,79 +500,48 @@ Analysis_1_Ready<-Analysis_Bound %>% group_by(V1) %>%
 ```
 
 
-```{r, echo=FALSE, fig.subcap=c('Net ecosystem calcium retention graphed with bole biomass', 'Net ecosystem calcium retention graphed with foliar biomass index', 'Net ecosystem calcium retention with Bark Biomass index', 'Net ecosystem calcium retention with Branch Biomass index'), fig.cap="Fuck all!", fig.align='center', out.width="50%", fig.ncol=2}
-
-#Must add biomass of compartments to these graphs!
-Ca_Net_Gain<-Analysis_I_Grapher(Analysis_1_Ready$Ca_Net)
-Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Bole Biomass Index (kg/ha)")+ geom_line(Tree_Wood, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Foliar Biomass Index (kg/ha)")+ geom_line(Tree_Foliage, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Bark Biomass Index (kg/ha)")+ geom_line(Tree_Bark, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-Ca_Net_Gain+labs(x="Date", y="Net Ca Gain and Branch Biomass Index (kg/ha)")+ geom_line(Tree_Branch, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-```
-<br>
-```{r, echo=FALSE, fig.subcap=c('Net ecosystem magnesium retention graphed with bole biomass', 'Net ecosystem magnesium retention graphed with foliar biomass index', 'Net ecosystem magnesium retention with Bark Biomass index', 'Net ecosystem magnesium retention with Branch Biomass index'), fig.cap="Net ecosystem Magnesium retention plotted against biomass indeces (kg/ha biomass/10,000)", fig.align='center', out.width="50%", fig.ncol=2}
-
-#Must add biomass of compartments to these graphs!
-Mg_Net_Gain<-Analysis_I_Grapher(Analysis_1_Ready$Mg_Net)
-Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Bole Biomass Index (kg/ha)")+ geom_line(Tree_Wood, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Foliar Biomass Index (kg/ha)")+ geom_line(Tree_Foliage, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Bark Biomass Index (kg/ha)")+ geom_line(Tree_Bark, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-Mg_Net_Gain+labs(x="Date", y="Net Mg Gain and Branch Biomass Index (kg/ha)")+ geom_line(Tree_Branch, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
-
-```
 <br>
 
-```{r, echo=FALSE, fig.subcap=c('Net ecosystem potassium retention graphed with bole biomass', 'Net ecosystem potassium retention graphed with foliar biomass index', 'Net ecosystem potassium retention with Bark Biomass index', 'Net ecosystem potassium retention with Branch Biomass index'), fig.cap="Net ecosystem potassium retention plotted against biomass indeces (kg/ha biomass/10,000)", fig.align='center', out.width="50%", fig.ncol=2}
+```{r, echo=FALSE, fig.align='center', out.width="50%", fig.ncol=2 }
 
-#Must add biomass of compartments to these graphs!
-K_Net_Gain<-Analysis_I_Grapher(Analysis_1_Ready$K_Net)
-K_Net_Gain+labs(x="Date", y="Net K Gain and Bole Biomass Index (kg/ha)")+ geom_line(Tree_Wood, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+#Requires Leaching_Table_1m to be defined
+Analysis_Bound<-Analysis_Bound %>% ungroup(YEAR) %>% select(-YEAR)
 
-K_Net_Gain+labs(x="Date", y="Net K Gain and Foliar Biomass Index (kg/ha)")+ geom_line(Tree_Foliage, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+Ca_Flux<-Analysis_Bound %>% select (Ca, Ca_Wet, Ca_WTH, Ca_TU, Year, Ca_LF, Ca_L_Min)
+Ca_Flux$Ca_LF<-Ca_Flux$Ca_LF*10
 
-K_Net_Gain+labs(x="Date", y="Net K Gain and Bark Biomass Index (kg/ha)")+ geom_line(Tree_Bark, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+Ca_Melt<-melt(Ca_Flux, id.vars = c("Year") )
 
-K_Net_Gain+labs(x="Date", y="Net K Gain and Branch Biomass Index (kg/ha)")+ geom_line(Tree_Branch, mapping= aes(y=Dry.weight/10000, x=Year, group=1))
+Ca_Stacked<-ggplot(Ca_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Ca Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+Ca_Stacked
+
+Mg_Flux<-Analysis_Bound %>% select (Mg, Mg_Wet, Mg_WTH, Mg_TU, Year, Mg_LF, Mg_L_Min)
+Mg_Flux$Mg_LF<-Mg_Flux$Mg_LF*10
+
+Mg_Melt<-melt(Mg_Flux, id.vars = c("Year") )
+
+Mg_Stacked<-ggplot(Mg_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Mg Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+Mg_Stacked
+
 
 ```
 
 
 
-Nutrient depletion as a condition is being analyzed using the following metric:
+### Cation Exchange Capacity
+```{r, echo=FALSE, fig.align='center', out.width="50%", fig.ncol=2}
 
-(Uptake Rate +(neg SOM Mineralization)+ Leaching Loss Rate + Net Uptake) = Ecosystem Output Rate
+CEC_Ca<-CEC_Grapher(CEC_All$Ca)
+CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)")
 
-Atmospheric Deposition Rate + Mineral Weathering Rate + Foliar Leaching (K only) = Input Rate
-
-Graph rate of 
-
-Input-Output = Net nutrient gain Rate (- is loss, + is gain) vs. Biomass Acquisition of each compartment
+```
 
 
-### Analysis 2
+### Anion Exchange Capacity 
 
-Percent biomass reduction from 1st harvest (Biomass at Current Harvest/Biomass achieved 1st harvest)*100= % Reduction/month
-
-
-
-### Analysis 3
-
-Nutrient buildup in layers over time (Ca should buildup in top layers)
-
-
-### Analysis 4
-
-Fraction of whole ecosystem nutrients lost with harvest
-
-(Frac Stand Harvest*(Fract. Bole+Fract.Branch+Frac.Foliar+Frac.Bark)/(Soil CEC+Litter+SOM pool+Mineral Pool?+Tree)
-
+Not yet complete
 
 
 
