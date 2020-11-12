@@ -497,6 +497,18 @@ Bar_Ca<-ggplot(Ca_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case
   labs(x="Site", y=expression(Ca~kg~'*'~(ha~'*'~yr)^-1))
 
 Bar_Ca
+
+SO4_Flux<-Analysis_Bound %>% select (SO4, SO4_Wet, S_TU, Year, S_LF, S_L_Min)
+SO4_Flux$S_LF<-SO4_Flux$S_LF*10
+
+SO4_Melt<-melt(SO4_Flux, id.vars = c("Year") )
+
+SO4_Stacked<-ggplot(SO4_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="SO4 Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+SO4_Stacked
+
+
+
 ```
 
 
@@ -513,6 +525,21 @@ CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)")
 ### Anion Exchange Capacity 
 
 
+```{r}
+AEC_All$group_id<-as.factor(AEC_All$group_id)
+AEC_All$Date<-as.Date(AEC_All$Date)
+
+SO4_AEC<-AEC_Grapher(AEC_All$SO4)
+SO4_AEC+labs(y="Soil adsorbed Sulfate (SO4-S, kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+
+PO4_AEC<-AEC_Grapher(AEC_All$PO4)
+PO4_AEC+labs(y="Soil adsorbed PO4-P (kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+
+
+
+```
 
 
 
