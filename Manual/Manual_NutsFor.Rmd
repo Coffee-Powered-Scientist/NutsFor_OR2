@@ -1,7 +1,7 @@
 ---
 title: "Nutrient Cycling in Forest Ecosystems: User Manual v.()"
 author:
-   Kaveh Gholamhossein Siah &
+   Kaveh Gholamhossein Siah and
    Gregory van Der Heijden
 date:  "`r format(Sys.time(), '%d %B %Y')`"
 output: 
@@ -28,6 +28,7 @@ library(kableExtra)
 <!--Title Page Below, possible background theme/image-->
 
 <!--Insert List of Abbreviations-->
+<br>
 
 ### Introduction
 
@@ -43,7 +44,7 @@ an active project of Gregory van der Heijden, model capabilities are open to cha
 
 This user manual is intended to give relevant information about the model's capabilities, useful tips regarding its usage, and insight into the equations and theory which link model parameters. A list of equations used to parameterize NutsFor are also included, along with some description of how these equations are used. 
 
-
+<br>
 
 ### Model Start Up
 
@@ -53,7 +54,7 @@ The model is simple to run, simply double-click or other wise enact the NutsFor.
 to its corresponding .csv files automatically. If the output files are moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as
 the Output folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a “Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) will result in either the NutsFor exe closing on its own or on the former messages never appear in the NutsFor.exe box.
 
-
+<br>
 
 ### Input Files
 
@@ -63,7 +64,7 @@ parameters, separated by the file they appear in, is shown in the tables below.
 Below each table is a more extensive description of each variable and its
 effects on model outputs.
 
-
+<br>
 
 #### Deposition Files
 
@@ -81,12 +82,11 @@ Description = c("Determines the amount of each species deposited into ecosystem 
 ```
 
 ```{r, echo=FALSE}
-kbl(text_tbl, booktabs = T, caption="Dry & Wet Deposition Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
-kable_styling(full_width = F, latex_options = "scale_down") %>%
-column_spec(1, bold = T) %>%
-column_spec(2, width = "10cm")
+kbl(text_tbl, booktabs = T, caption="Dry and Wet Deposition Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
+kable_styling(full_width = F, latex_options = "scale_down", "hold_position", font_size=12) 
  
 ```
+
 ```{r, echo=FALSE}
 #Rainfall Concentrations File
 ```
@@ -123,7 +123,7 @@ text_tbl_2 <- data.frame(
 Parameter, Units, Short_Description
 )
 
-kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"), font_size=12)
 
 ```
 
@@ -145,6 +145,8 @@ cells lies between the tables, otherwise NutsFor will not be able to read the
 tables. The total number of soil layers (Nb_Layers) must also be updated in the
 General Data File before running the model.
 
+<br>
+
 ***Depth and Thickness:***
 
 The depth of the soil layer represents the vertical distance
@@ -152,6 +154,8 @@ of the soil layer from the surface of the soil, it is not used in any
 calculations. Soil layer thickness determines how thick each soil layer is, it
 is recommended that soil layers are set to less than or equal to 20cm thick. Overly thick
 soil layers may be liable to over-leaching of nutrients from the soil layers.
+
+<br>
 
 ***Bulk Density, Solid Density, and Stoniness:***
 
@@ -161,6 +165,8 @@ calculations of NutsFor, and can be ignored. Stoniness is the percent of soil
 particles greater than 2mm in diameter, this parameter affects soil moisture
 and hydrology calculations and is important to calculate.
 
+<br>
+
 ***Root Fraction and Uptake Fraction per Layer:***
 
 Keeps trace of the root distribution of the stand between
@@ -169,6 +175,8 @@ layer. The Uptake Fraction per layer parameter truly determines how the stand
 extracts nutrients from the soil layers, allowing for greater flexibility in
 determining tree uptake dynamics. Intra-annual uptake dynamics are changed
 through the Tree Parameter file.
+
+<br>
 
 **pKGibb, pKAl_Precip, pCO2:**
 
@@ -181,6 +189,8 @@ aluminum parameters are important in determining pore water pH, as Al is the
 largest contributor of H+ compared to other acids in the model. pCO2 is the
 partial pressure of carbon dioxide in the soil solution, it is a constant
 multiple of atmospheric CO2 and is <u>not dynamic with decomposition rates.</u>
+
+<br>
 
 **Mineral Area**
 
@@ -271,13 +281,10 @@ CEC Parameters and CEC Initial
 
       Each anion has two AEC adsorption parameters associated with it, Parameter #1 and Parameter #2. These parameters will stand for different variables depending on the adsoprtion isotherm selected. 
 
-      1= Langmuir
-
-      2 = Freundlich
 
    2. Soil Adsorbed Anions Initial
 
-<br>
+\newpage
 ```{r, echo=FALSE}
 
 #Soil Temperature File
@@ -287,17 +294,17 @@ CEC Parameters and CEC Initial
    
 
 ```{r, echo=FALSE}
-Parameter_T3<-c("Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact")
+Parameter_T3<-c("Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact", "NULL")
 
-Units_T3<-c("mmol Nutrient/mol C", "$mmol C/m^2$", "N/A", "$mmol/(m^2*mo)$", "N/A", "mmol Nutrient/mol C")
+Units_T3<-c("mmol Nutrient/mol C", "$mmol C/m^2$", "N/A", "$mmol/(m^2*mo)$", "N/A", "mmol Nutrient/mol C", "Null")
 
-Description_T3<-c("Determines concentration of nutrient elements in the litter fraction of OM.", "Sets the litter carbon pool, and thus the amount of nutrients per unit area.", "Designates the OM distribution between coarse litter (first column), fine litter (second column), and humus (third column)", "Calibration decomposition factor shows up multiple times in the file for the 3 OM fractions (1-3) and for the mineral soil layers (1-n).", "Calibration factor that determines the proportion of decomposed carbon that effluxes as carbon dioxide.", "Calibration factors for both the 3 OM fractions (1-3) and the mineral soil fractions (1-n). Can be used to calibrate soil solution and liter flow ion fluxes, range from 0 to 1.")
+Description_T3<-c("Determines concentration of nutrient elements in the litter fraction of OM.", "Sets the litter carbon pool, and thus the amount of nutrients per unit area.", "Designates the OM distribution between coarse litter (first column), fine litter (second column), and humus (third column)", "Calibration decomposition factor shows up multiple times in the file for the 3 OM fractions (1-3) and for the mineral soil layers (1-n).", "Calibration factor that determines the proportion of decomposed carbon that effluxes as carbon dioxide.", "Calibration factors for both the 3 OM fractions (1-3) and the mineral soil fractions (1-n). Can be used to calibrate soil solution and liter flow ion fluxes, range from 0 to 1.", "NULL")
 
 text_tbl_3 <- data.frame(
 Parameter_T3, Units_T3, Description_T3
 )
 
-kbl(text_tbl_3, caption="OM Decomposition File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+kbl(text_tbl_3, caption="OM Decomposition File", booktabs=TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"), font_size=12)
 
 
 
@@ -341,7 +348,7 @@ DOC_Decomp:
 
 Determines the proportion of DOC evolved from decomposing litter that is itself decomposed. This parameter decreases OA (R-), however it does not link back to carbon dioxide release as carbon dioxide concentration is a fixed parameter (See, Input table 2, pCO2)
 
-<br>
+\newpage
 
 ```{r, echo=FALSE}
 Parameter_T4<-c("Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms")
@@ -380,6 +387,21 @@ A potential side effect of high cation concentrations due low charge density is 
 
 #Mineral Data File
 
+Parameter_T5<-c("Mineral", "pKH", "pKH2O","pKCO2", "pKr","kH", "kH2O", "kCO2", "kr", "nH", "WAlH",	"WBCH",	"WAlH2O",	"WBCH2O", "nCO2",	"nr",	"$CAl*10^-6$",	"$CR*10^-6$",	"$CBC*10^-6$",	"Ca, Mg, K, Na, Al, Si,	PO4", "Ca.Iso, Mg.Iso, K.Iso	Na.Iso, Al.Iso, Si.Iso, PO4.Iso")
+
+Units_T5<-c("N/A",  "N/A", "N/A","N/A", "N/A","N/A", "N/A", "N/A", "N/A", "N/A", "N/A",	"N/A",	"N/A",	"N/A", "N/A",	"N/A",	"$[Al]*10^-6$",	"$[R]*10^-6$",	"$[BC]*10^-6$",	"Stoichiometric", "N/A" )
+
+Description_T5<-c("Name of mineral.", "Reaction constant of mineral with H+", "Reaction constant of mineral with water.","Reaction constant of mineral with $C{O}_2$", "Reaction constant of mineral with organic acid (R)","Temperature dependence of mineral-H+ reaction.", "Temperature dependence of mineral water reaction.", "Temperature dependence of mineral $C{O}_2$ Reaction", "Temperature dependence of mineral Organic Acid reaction.", "Mineral dissolution H+ reaction order.", "Brake reaction order for Al (${f}_H+$)",	"Brake reaction order for BC (${f}_{H+}$)",	"Brake reaction order for Al (${f}_{H2O}$)",	"Brake reaction order for BC (${f}_{H2O}$)", "Brake reaction order for $C{O}_2$ (${f}_{C{O}_2}$)",	"Brake reaction order for R $({f}_R$)",	"Limiting Al concentration",	"Limiting BC concentration",	"Limiting R- concentration",	"Sets the stoichiometry of each mineral.", "Unknown")
+
+
+text_tbl_5 <- data.frame(
+Parameter_T5, Units_T5, Description_T5
+)
+
+kbl(text_tbl_5, caption="Mineral Data File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+
+
+
 ```
 
 Description of Parameters: Mineral Data File
@@ -388,7 +410,20 @@ Description of Parameters: Mineral Data File
 <br>
 
 ```{r, echo=FALSE}
-#Tree Parameter File
+#Tree Parameter File: Current conversion issue somewhere here!
+Parameter_T6<-c("Foliage.start", "Foliage.End","PET.winter.factor","PET.summer.factor","interception" ,"AET.Reduc","Leaching.alpha","Absorption.alpha","Foliar.target.conc","Percent.variation, foliar","Translocation.Percent","Foliar.Exudation","Foliar.Leaching","Foliar.absorption","Wood.target.conc","Wood.initial.conc","Percent.variation, Wood","Bark.target.conc","Bark.initial.conc","Percent.variation, Bark","Branch.target.conc","Branch.initial.conc","Percent.variation, Branch")
+
+Units_T6<-c("$g/m^2$", "$g/m^2$","Multiple","Multiple","cm" ,"Multiple","N/A","N/A","$\\mu$mol/g","Fraction","Fraction","N/A","N/A","N/A","$\\mu$mol/g","Percent.variation","$\\mu$mol/g","$\\mu$mol/g","Percent.variation","","$\\mu$mol/g","$\\mu$mol/g","Fraction")
+
+Description_T6<-c("Starting biomass of foliage.", "Biomass of foliage at the end of simulation.","Multiplies by winter PET values to enhance or reduce PET.","Multiplies by summer PET values to enhance or reduce PET","Sets the volume of water which canopy can maximally intercept." ,"Multiplies by calculated AET to reduce or enhance AET.","Reaction order for foliar leaching reaction.","Reaction order for foliar adsoprtion reaction.","Determines foliar concentration of nutrients.","Fraction of target concentration which foliage can reach before limitation.","Fraction of foliar nutrients that are translocated to stem during litterfall events.","NULL","NULL","NULL","Wood.target.conc","Wood.initial.conc","Percent.variation, Wood","Bark.target.conc","Bark.initial.conc","Percent.variation, Bark","Branch.target.conc","Branch.initial.conc","Percent.variation, Branch")
+
+
+text_tbl_6 <- data.frame(
+Parameter_T6, Units_T6, Description_T6)
+
+kbl(text_tbl_6, caption="Tree Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"))
+
+
 
 ```
 
