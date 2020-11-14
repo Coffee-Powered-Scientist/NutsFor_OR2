@@ -1,0 +1,32 @@
+---
+title: "Parameter Table"
+author: "Kaveh G. Siah"
+date: "11/12/2020"
+output: 
+  pdf_document:
+  geometry: margin=2 cm
+  fig_caption: yes
+---
+
+
+```{r}
+library(kableExtra)
+
+```
+
+```{r, echo=FALSE, fig.cap="Original: From original parameterization in Burgundy, France. <br> Calibrative: Changed as needed for heuristic modeling"}
+
+
+Parameter<-c("Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial")
+
+
+Source<-c("Calibrative", "Calibrative", "Calibrative", "Calibrative; ERS Lysimeter", "Hynicka et al., 2016", "N/A", "Hynicka et al., 2016", "Harrington et al., 2017","Calibrative; Anderson et al., 2002","Al precipitation constant (unused in current version)", "Original","Calibrative; Sverdrup and Warfvinge 1993","NCSS: Enter Site Details?", "NCSS", "Assumed", "Hynicka et al., 2016", "Calculated using ERS Lysimeter and Hynicka et al., 2016: Partial Calibration", "Calibrative: Anderson et al., 2002, NCSS, Franklin and Williams 1971" , "Null", "Perakis and Sinkhorn, 2011; Calibrative", "Original", "Perakis and Sinkhorn, 2011", "ERS Lysimeter", "Needs to be checked; Harward et al., 1962 for Adsorption Dynamics; Chappell and Miller, 1988; Johnson and Lindburg 1992", "Hynicka et al., 2016")
+
+
+text_tbl_2 <- data.frame(
+Parameter, Source
+)
+
+kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Source"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+
+```
