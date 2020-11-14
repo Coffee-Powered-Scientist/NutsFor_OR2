@@ -6,6 +6,7 @@ output:
   pdf_document:
   geometry: margin=2 cm
   fig_caption: yes
+  bibliography: Manuscript.bib
 ---
 
 

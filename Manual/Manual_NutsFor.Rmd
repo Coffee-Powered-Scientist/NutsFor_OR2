@@ -11,6 +11,8 @@ output:
     extra_dependencies: "subfig"
 geometry: margin=2 cm
 fig_caption: yes
+citation_package: natbib
+bibliography: Manuscript.bib
 ---
 
 ```{r global_options, include=FALSE, message=FALSE}
@@ -30,9 +32,9 @@ library(kableExtra)
 <!--Insert List of Abbreviations-->
 <br>
 
-### Introduction
+## Introduction
 
-<!--Meant to be a User guide, maybe a breif history can be mentioned at the end, but the intro should be short and descriptive-->
+<!--Meant to be a User guide, maybe a brief history can be mentioned at the end, but the intro should be short and descriptive-->
 
 The Nutrient Cycling in Forested Ecosystems (NutsFor) model is
 a stand-level biogeochemical model which simulates the forest nutrient dynamics of 16 chemical species <!--List species-->
@@ -42,23 +44,23 @@ changes made to the original model described in van der Heijden et al, 2017. All
 changes from the original model are noted with an asterisk (“*”). As NutsFor is
 an active project of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
 
-This user manual is intended to give relevant information about the model's capabilities, useful tips regarding its usage, and insight into the equations and theory which link model parameters. A list of equations used to parameterize NutsFor are also included, along with some description of how these equations are used. 
+This user manual is intended to give relevant information about the model's capabilities, useful tips regarding its usage, insight into the equations and theory which link model parameters, and information on how to effectively use NutsFor in an R-Studio based environment.
+
+
 
 <br>
 
-### Model Start Up
+## Model Start Up
 
 Prior to running or implementing change to model parameters, the user should go through the input and output files for NutsFor using excel. NutsFor does not currently have a built-in method to visualize results, it is recommended that the user use excel macro commands or R to automatically read generated files (which will always output with the same structure) to visualize results. This is highly important in the calibration phase of model implementation.
 
-The model is simple to run, simply double-click or other wise enact the NutsFor.exe file. The model will run and output results
-to its corresponding .csv files automatically. If the output files are moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as
-the Output folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a “Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) will result in either the NutsFor exe closing on its own or on the former messages never appear in the NutsFor.exe box.
+The model is simple to run, simply double-click or other wise enact the NutsFor.exe file. The model will run and output results to its corresponding .csv files automatically. If the output files are moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as the Output folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a “Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) will result in either the NutsFor.exe closing on its own or on the former messages never appear in the NutsFor.exe terminal.
 
 <br>
 
-### Input Files
+## Input Files
 
-There are 10 input files for NutsFor (the .nut files). These
+There are 11 input files for NutsFor (.nut files). These
 files are csv files which can be opened through excel. A full list of the input
 parameters, separated by the file they appear in, is shown in the tables below.
 Below each table is a more extensive description of each variable and its
@@ -66,7 +68,7 @@ effects on model outputs.
 
 <br>
 
-#### Deposition Files
+### Deposition Files
 
 <!--Insert units as an image, its way easier-->
 
@@ -80,6 +82,11 @@ Description = c("Determines the amount of each species deposited into ecosystem 
 
 
 ```
+<br>
+
+**Description of Parameters: Deposition Files**
+
+The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The files start with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
 
 ```{r, echo=FALSE}
 kbl(text_tbl, booktabs = T, caption="Dry and Wet Deposition Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
@@ -98,9 +105,7 @@ kable_styling(full_width = F, latex_options = "scale_down", "hold_position", fon
 
 
 
-*Description of Parameters: Deposition Files
 
-The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The files start with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
 
 
 
@@ -108,7 +113,7 @@ The dry deposition file is comparable to the Rain Concentration file. It simply 
 <br>
 
  
-#### Soil Files
+### Soil Files
 
 ```{r, echo=FALSE}
 
@@ -129,7 +134,7 @@ kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("I
 
 <br>
 
-Description of Parameters: Soil Parameters
+**Description of Parameters: Soil Parameters**
 
 <!--Keep concise but informative-->
 
@@ -178,7 +183,7 @@ through the Tree Parameter file.
 
 <br>
 
-**pKGibb, pKAl_Precip, pCO2:**
+***pKGibb, pKAl_Precip, pCO2:***
 
 The pKGibb parameter is the -log of the reaction constant of
 gibbsite dissolution to free aluminum, similarly the pKAl_precip is the -log of
@@ -192,7 +197,7 @@ multiple of atmospheric CO2 and is <u>not dynamic with decomposition rates.</u>
 
 <br>
 
-**Mineral Area**
+***Mineral Area***
 
 This parameter designates the total weatherable mineral surface area of the soil. It is calculated from the equation:
 
@@ -202,7 +207,7 @@ $$
 (8*X.Clay)+(2.2*X.Silt)+(0.03*X.Sand)
 $$
 
-Citation: 
+Citation: @sverdrupCalculatingFieldWeathering1993
 
 Note, that clays dominant in high area clays may be misrepresented by this equation *(Citation)*
 
@@ -271,7 +276,7 @@ CEC Parameters and CEC Initial
 
    
 
-   ### AEC Parameters
+4). AEC Parameters
 
    Anion Exchange Capacity (AEC) is implemented in the model for 3 anions; Sulfate, Phosphate, and Chloride. Sulfate adsorption can be modeled using either  a Langmuir or Freundlich adsorption isotherm. Chloride is modeled using the Langmuir model, Phosphate the Freundlich model. Sulfate adsoprtion isotherms can be selected in the General Data File (Input Table 4). 
 
@@ -279,18 +284,33 @@ CEC Parameters and CEC Initial
 
    1. Soil Adsorbed Anions Parameters
 
-      Each anion has two AEC adsorption parameters associated with it, Parameter #1 and Parameter #2. These parameters will stand for different variables depending on the adsoprtion isotherm selected. 
+      Each anion has two AEC adsorption parameters associated with it, Parameter #1 and Parameter #2. These parameters will stand for different variables depending on the adsorption isotherm selected. 
 
 
    2. Soil Adsorbed Anions Initial
 
 \newpage
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 
 #Soil Temperature File
 
+Parameters_T9<-c("Year", "Month", "Layers (1-n)")
+
+Units_T9<-c("Year", "Month", "Degrees Celsius")
+
+Description_T9<-c("Desginates the year corresponding to layer and temperature data.", "Sepecifies the month.","Specifies the average monthly temperature at each time point.")
+
+text_tbl_9 <- data.frame(
+Parameters_T9, Units_T9, Description_T9
+)
+
+kbl(text_tbl_9, caption="Soil Temperature File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"), font_size=12)
+
 ```
 
+**Description of Parameters: Soil Temperature File**
+
+The structure of this file is fairly straight forward, for each layer, month, and year of simulation, an average soil temperature is entered. The soil temperature value is used to calculate decomposition and chemical reaction kinetics. Numerous soil-temperature monitoring stations are active around the world [Cite Here.]
    
 
 ```{r, echo=FALSE}
@@ -312,7 +332,7 @@ kbl(text_tbl_3, caption="OM Decomposition File", booktabs=TRUE, col.names= c("In
 
 <br>
 
-Description of Parameters: OM Decomposition
+***Description of Parameters: OM Decomposition***
 
 **Litter Parameters**
 
@@ -348,7 +368,9 @@ DOC_Decomp:
 
 Determines the proportion of DOC evolved from decomposing litter that is itself decomposed. This parameter decreases OA (R-), however it does not link back to carbon dioxide release as carbon dioxide concentration is a fixed parameter (See, Input table 2, pCO2)
 
-\newpage
+<br>
+
+### General Files
 
 ```{r, echo=FALSE}
 Parameter_T4<-c("Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms")
@@ -367,7 +389,7 @@ kbl(text_tbl_4, caption="General Data File", booktabs = TRUE, col.names= c("Inpu
 ```
 <br>
 
-Description of Parameters: General Data File
+**Description of Parameters: General Data File**
 
 ***Simulation Length***
 
@@ -404,10 +426,12 @@ kbl(text_tbl_5, caption="Mineral Data File", booktabs = TRUE, col.names= c("Inpu
 
 ```
 
-Description of Parameters: Mineral Data File
+**Description of Parameters: Mineral Data File**
 
 
 <br>
+
+### Tree and Stand Files
 
 ```{r, echo=FALSE}
 #Tree Parameter File: Current conversion issue somewhere here!
@@ -427,40 +451,174 @@ kbl(text_tbl_6, caption="Tree Parameters File", booktabs = TRUE, col.names= c("I
 
 ```
 
-Description of Parameters: Tree Parameter File
+**Description of Parameters: Tree Parameter File**
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 #Stand Harvesting File
+Parameter_T7<-c("Year", "Month",	"Stand.Frac", "Wood.Exp.frac", "Bark.Exp.frac", "Branch.Exp.frac", "Foliage.Exp.frac")
+
+Units_T7<-c("Year", "Month", "Fraction", "Fraction", "Fraction", "Fraction", "Fraction")
+
+Description_T7<-c("Designates the year of harvest event.", "Designates the month of harvest event.", "Multiplies by stand biomass, determines what proportion of stand is removed.", "Determines fraction of wood (bole) removed.", "Determines fraction of bark removed", "Determines fraction of branch removed.", "Determines the fraction of foliage removed.")
+
+
+text_tbl_7 <- data.frame(
+Parameter_T7, Units_T7, Description_T7)
+
+kbl(text_tbl_7, caption="Stand Harvesting File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"))
+
 
 ```
+***Description of Parameters: Stand Harvesting File***
 
 
-```{r, echo=FALSE}
+
+```{r, echo=FALSE, message=FALSE}
 #Tree growth file
 
+Parameter_T8<-c("Wood: Biomass.Start and Increment ", "Bark: Biomass.Start and Increment", "Branch: Biomass.Start and Increment", "Fol.DW.min: Increment", "Fol.DW.max: Increment")
+
+Units_T8<-c("$g/m^2$","$g/m^2$", "$g/m^2$", "$g/m^2$", "$g/m^2$")
+
+Description_T8<-c("Designates the starting bole biomass at start of simulation and yearly growth increment.", "Designates the starting bark biomass at start of simulation and yearly growth increment.", "Designates the starting branch biomass at start of simulation and yearly growth increment.", "Designates the minimum foliar biomass every year.", "Designates the meximum foliar biomass at every time step.") 
+
+
+
+text_tbl_8 <- data.frame(
+Parameter_T8, Units_T8, Description_T8)
+
+kbl(text_tbl_8, caption="Tree Growth File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"))
+
+```
+<br>
+
+***Description of Parameters: Tree Growth File***
+
+
+
+
+
+
+## Output Files
+
+There are 60 output files that NutsFor.exe generates, separated into 9 folders. All files are structured in a readable manner, with units *most* designated. All output files are .csv files separated by ";", all can be read using R. Unlike for input parameter files, output files are largely self-explanatory, however some units are not noted, and some file structures are difficult to immediately read into programs such as R. This section will briefly describe file structures and folder contents, without the extensive descriptions offered for input files. It will also offer basic R studio-based approaches to reading and organizing the data for further analysis. 
+
+**Output Folders**
+
+***AEC***
+
+The first folder in the Output data directory is the AEC folder. AEC contains anion adsorption data (SO4, PO4, Cl) for each layer, and so the number of .csv files contained in this folder depends on the user-specified number of soil layers. Each file has a year and month column, and AEC data in units of $\\mu$mol/kg and kg/ha. 
+
+***Biomass***
+
+The biomass folder contains the "Plant pool" and "Tree data" files. Plant pool contains (I don't know). The Tree data file contains compartment nutrient content and biomass data for the stand. Nutrient contents are given in units of $\\mu$mol/g and kg/ha. Biomass or "dry weight" is given in kg/ha. 
+
+***Budgets***
+
+The Budgets folder reports the "Above ground fluxes" and "Biological cycle" files. These files contain simplified yearly summary data on nutrient inputs and outputs, and can be used to calculate ecosystem nutrient budgets. The Above ground fluxes files contains deposition fluxes, throughfall flux, net foliar exchanges, litterflow flux, leaching flux, and weathering flux of each nutrient every annual time point. The Biological cycle file contains uptake, litterfall, and organic matter mineralization fluxes. All fluxes are in units of kg/ha/yr. NO3, NH4, SO4, and PO4 are in units of N, S and P (NH4-N, NO3-N, SO4-S, and PO4-P). 
+
+***CEC***
+
+The CEC folder is identical to the AEC folder in basic structure, it holds a csv file for every soil layer specified. Each file contains cation adsorption data in both $\\\\mu$mol/kg and kg/ha. 
+
+***Hydrology***
+
+The hydrology folder has two datafiles, the "Hydrology Daily Output" and the "Hydrology Monthly Output" files. The monthly output file is smaller and more practical for use, although they contain the same data distributed over different time steps. The file begins by reporting the Year and month of each meaurement, then reports the rainfall (RF), potential evapotranspiration (PET), the actual evapotranspiration (AET), the throughfall 
+
+***Litter***
+
+***Soil Solution***
+
+***SOM***
+
+***Weathering***
+
+***Using R with NutsFor***
+
+This section assumes that the user has basic R studio skills, for more information on general R studio usage see the "Helpful Resources" section of this manual.
+
+For layer-based output folders, such as AEC, CEC, weathering, and soil solution, it is most efficient to read all files from a single output directory into one R dataframe, and use an indexing function to define the individual layers. For instance, a code for reading CEC might look like: 
+
+```{r, eval=FALSE, echo=TRUE}
+
+#Requires this package for code to make sense (pipe operators)
+library(dplyr)
+
+#Generates a pattern within "files", locates folder
+files <- list.files(path = "~/YourFilePath/Output data/CEC", pattern = "CEC", full.names = TRUE)
+
+#Uses the defined "files", applies the read.csv2 function
+#and generates an "id" column unique to each file.
+CEC_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
+  bind_rows(.id = "id")
+
+#Designates an index value (1-n) that corresponds to each "id" value, named "group_id" 
+CEC_All$group_id <- CEC_All %>% 
+  group_by(id)%>%
+  group_indices(id)
+
+```
+
+The above code essentially applies an identifying number for each soil layer in a large, aggregated dataset of all the soil layers, which makes it easier to apply graphing functions to the data as well as keep track of data in a single file. Graphing becomes particularly easy, for example the above CEC_All file generated above can be graphed using: 
+
+```{r, eval=FALSE,echo=TRUE}
+
+#Loads the ggplot2 package
+library(ggplot2)
+
+#Defines a graph for Ca, defines lines by group_id
+CEC_Graph_Ca<-ggplot(CEC_All, aes(x=Date, y=Ca, group=group_id))
+
+#Plots graph
+CEC_Graph_Ca
+
+```
+
+<br>
+
+It is likely that dataframes read into R will be in character format rather than numeric. This is because many of the NutsFor output files have 2 rows of character-containing values. Often, this leads to R not being able to read a descriptive header or graph the data correctly. Even if the character values are removed, the data will still be in character format and will not behave as a number in graphical or numerical analysis. To fix this, a simple code can be used:
+
+```{r, eval=FALSE, echo=TRUE}
+
+#Specifies that only columns 2-16 are to be made numeric
+CEC_All[c(2:16)]<-lapply(CEC_All[c(2:16)], as.numeric)
+
 ```
 
 
-Output File Description
+While R studio is a powerful for analyzing large datasets, it can also be used to generate manuscript-quality tables [Citation] and write dynamic reports or manuscripts [Citation].  
 
-There are 60 output files that NutsFor.exe generates. All files are structured in a readable manner, with units designated. All output files are .csv files separated by ";", all can be read using R. Unlike for input parameter files, output files are largely self-explainatory, however 
 
-Calibration
+## Calibration
 
-<!--Disclaimer abouut site specific differences-->
+<!--Disclaimer about site specific differences-->
 
 <!--Describe general calibration steps, pH, weathering, ANC, ion concentrations-->
 
-Hypothesis Testing
+## Hypothesis Testing
 
 ## List of Equations
 
-**NutsFor Encoded Equations**
+### NutsFor Encoded Equations
 
 <!--~~List Gregory's equation table here, with updated sulfate ads.~-->
 
-**General Equations**
+### General Equations
+
+## Helpful Resources
+
+### Learning R
+#### Basic R Resources
+#### Advanced R for Building Projects
+
+### Github
+
+### Modeling
 
 ## Literature Cited
+
+<div id="refs"></div>
+
+## Appendix
 
 Appendix, maybe include screenshots of input interface? 
