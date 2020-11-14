@@ -12,7 +12,7 @@ output:
 geometry: margin=2 cm
 fig_caption: yes
 citation_package: natbib
-bibliography: Manuscript.bib
+bibliography: Manuscript_Test.bib
 ---
 
 ```{r global_options, include=FALSE, message=FALSE}
@@ -207,7 +207,7 @@ $$
 (8*X.Clay)+(2.2*X.Silt)+(0.03*X.Sand)
 $$
 
-Citation: @sverdrupCalculatingFieldWeathering1993
+Citation: [@sverdrupCalculatingFieldWeathering1993]
 
 Note, that clays dominant in high area clays may be misrepresented by this equation *(Citation)*
 
