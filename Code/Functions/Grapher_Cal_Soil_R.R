@@ -155,6 +155,49 @@ pH_SS_L2<-function(x){
     guides(color=guide_legend("Layers"))
 }
 
+SO4_SS_L1<-function(x){
+  ggplot(subset(x, group_id %in% c("10", "11", "12")), (aes(x=YEAR, y=SO4, group=group_id, color=group_id)))+
+    geom_line()+labs(y=expression(Soil~Solution~SO4~(mu*mol/L)))+
+    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+    guides(color=guide_legend("Layers"))
+}
+
+SO4_SS_L2<-function(x){
+  ggplot(subset(x, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=YEAR, y=SO4, group=group_id, color=group_id)))+
+    geom_line()+labs(y=expression(Soil~Solution~SO4~(mu*mol/L)))+
+    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
+    guides(color=guide_legend("Layers"))
+}
+
+NO3_SS_L1<-function(x){
+  ggplot(subset(x, group_id %in% c("10", "11", "12")), (aes(x=YEAR, y=NO3, group=group_id, color=group_id)))+
+    geom_line()+labs(y=expression(Soil~Solution~NO3~(mu*mol/L)))+
+    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+    guides(color=guide_legend("Layers"))
+}
+
+NO3_SS_L2<-function(x){
+  ggplot(subset(x, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=YEAR, y=NO3, group=group_id, color=group_id)))+
+    geom_line()+labs(y=expression(Soil~Solution~NO3~(mu*mol/L)))+
+    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
+    guides(color=guide_legend("Layers"))
+}
+
+#Magnesium
+
+NH4_SS_L1<-function(x){
+  ggplot(subset(x, group_id %in% c("10", "11", "12")), (aes(x=YEAR, y=NH4, group=group_id, color=group_id)))+
+    geom_line()+labs(y=expression(Soil~Solution~NH4~(mu*mol/L)))+
+    scale_color_manual(labels = c("Layer 1", "Layer 2", "Layer 3"), values = c("red", "green", "blue"))+
+    guides(color=guide_legend("Layers"))
+}
+
+NH4_SS_L2<-function(x){
+  ggplot(subset(x, group_id %in% c("13", "14", "15", "16", "17")), (aes(x=YEAR, y=NH4, group=group_id, color=group_id)))+
+    geom_line()+labs(y=expression(Soil~Solution~NH4~(mu*mol/L)))+
+    scale_color_manual(labels = c("Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8"), values = c("orange", "green", "blue", "purple", "red"))+
+    guides(color=guide_legend("Layers"))
+}
 
 
 #Make sure to clear global enviroment before running report codes

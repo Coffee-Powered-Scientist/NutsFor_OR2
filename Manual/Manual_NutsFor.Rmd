@@ -41,8 +41,7 @@ a stand-level biogeochemical model which simulates the forest nutrient dynamics 
 These processes include hydrology, soil exchange site chemistry, mineral
 weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, separate pools of soil water, and other small
 changes made to the original model described in van der Heijden et al, 2017. All
-changes from the original model are noted with an asterisk (“*”). As NutsFor is
-an active project of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
+changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
 
 This user manual is intended to give relevant information about the model's capabilities, useful tips regarding its usage, insight into the equations and theory which link model parameters, and information on how to effectively use NutsFor in an R-Studio based environment.
 
@@ -427,6 +426,33 @@ kbl(text_tbl_5, caption="Mineral Data File", booktabs = TRUE, col.names= c("Inpu
 ```
 
 **Description of Parameters: Mineral Data File**
+<br>
+
+***Dissolution Reaction Parameters***
+The parameters which determine mineral dissolution dynamics are the equilibrium constants (pK values), the thermal dependencies (k values) and the reaction orders (n values). These are then combined in the following equation:
+
+$$r_j=(k_{H^+}*{[H^+ ]}^{n_{H^{+}}}/f_{H^+}) +(k_{H_{2}O}/f_{H_{2}O}) +(k_{CO_2}*P_{CO_2}^{n_{CO_2}}/f_{CO_2}) +(k_R*[R^- ]^{n_{R^-}}/f_{R^-})$$ 
+where
+
+$$ r_j=$$ Weathering Rate
+
+The equation calculates the summation of all chemical species (H+, H2O, CO2, and Organic Acid) has on mineral weathering rate. Each calculation has a restricting coefficient ($$f_{species}$$), which is a product inhibition coefficient discussed in the next sub-section. 
+
+
+<br>
+***Inhibition Reaction Parameters***
+The inhibition coefficients are calculated dynamically based on the concentration of cations in soil solution layers. The theoretical reasoning of this parameter is straight forward: the higher the solution concentration of base cations, the lower favorability of the weathering reaction. 
+
+
+
+These equations mean that as the base cation concentration of the soil solution increases, the weathering rate will become increasingly limited. The magnitude at which this occurs depends on the identity of the mineral and its defined parameters. An instance where this may become relevant is during calibration of free aluminum concentrations. Free aluminum will react with water in the model to release protons, which generally leads to enhanced mineral weathering as per Equation X. However, if aluminum concentrations are very high, the model will simulate a reduction in mineral weathering, cutting off the positive feedback between aluminum hydrolytic proton release and mineral weathering enhancement. 
+
+Note that the saturation constant (also known as the saturation concentration) sets the maximum solution concentration of each cation in water. The closer the simulated solution concentration is to the saturation constant, the higher the inhibition coefficient becomes and thus the slower the weathering.
+
+New minerals can be added to the NutsFor mineral data file, a more extensive list of minerals is given in [@BGDReviewsSyntheses]. However, note that the exact parameters which control mineral weathering will depend on several real-world dependencies 
+
+
+***Stoichiometry and Isometric Substitution***
 
 
 <br>

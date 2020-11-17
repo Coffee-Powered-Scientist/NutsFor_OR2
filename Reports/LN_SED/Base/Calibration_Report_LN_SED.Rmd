@@ -169,6 +169,15 @@ Na_L2
 
 
 ```
+```{r, echo=FALSE, fig.cap="Monthly Sulfate Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+SO4_L1<-SO4_SS_L1(Cal_Pretable_SS_Yr)
+SO4_L1
+
+SO4_L2<-SO4_SS_L2(Cal_Pretable_SS_Yr)
+SO4_L2
+
+```
+
 
 <br><br><br>
 
@@ -220,12 +229,39 @@ pH_L2<-pH_SS_L2(Cal_Pretable_SS_Yr)
 pH_L2
 
 ```
+
 <br><br><br>
+
+```{r, echo=FALSE, fig.cap="Yearly Ammonium concentration by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+NH4_L1<-NH4_SS_L1(Cal_Pretable_SS_Yr)
+NH4_L1
+
+NH4_L2<-NH4_SS_L2(Cal_Pretable_SS_Yr)
+NH4_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Yearly Nitrate concentration by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+NO3_L1<-NO3_SS_L1(Cal_Pretable_SS_Yr)
+NO3_L1
+
+NO3_L2<-NO3_SS_L2(Cal_Pretable_SS_Yr)
+NO3_L2
+
+```
+
+
 
 
 ### Weathering Results
 
-```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 9: Calcium Weathering by Layer"}
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Calcium Weathering (All Layer)"}
 Weathering_Ca1<-Ca_W_L1(Cal_Pretable_W)
 Weathering_Ca1
 
@@ -236,7 +272,7 @@ Weathering_Ca2
 
 ```
 <br>
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 10: Magnesium Weathering by Layer"}
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Magnesium Weathering (All Layer)"}
 Weathering_Mg1<-Mg_W_L1(Cal_Pretable_W)
 Weathering_Mg1
 
@@ -246,7 +282,7 @@ Weathering_Mg2
 ```
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 11: Potassium Weathering by Layer"}
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Potassium Weathering (All Layer)"}
 
 #K Weathering
 
@@ -254,7 +290,7 @@ Weathering_Mg2
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 12: Aluminum Weathering by Layer"}
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Aluminum Weathering (All Layer)"}
 Weathering_Al1<-Al_W_L1(Cal_Pretable_W)
 Weathering_Al1
 
@@ -265,7 +301,7 @@ Weathering_Al2
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 13: Phosphate Weathering by Layer"}
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Phosphate Weathering (All Layer)"}
 Weathering_P1<-P_W_L1(Cal_Pretable_W)
 Weathering_P1
 
@@ -276,7 +312,7 @@ Weathering_P2
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 14: Silica Weathering by Layer"}
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Silica Weathering (All Layer)"}
 Weathering_Si1<-Si_W_L1(Cal_Pretable_W)
 Weathering_Si1
 
@@ -287,7 +323,7 @@ Weathering_Si2
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Figure 15: Sodium Weathering by Layer"}
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Sodium Weathering (All Layer)"}
 Weathering_Na1<-Na_W_L1(Cal_Pretable_W)
 Weathering_Na1
 
@@ -461,10 +497,10 @@ Analysis_1_Ready<-Analysis_Bound %>% group_by(V1) %>%
 
 <br>
 
-```{r, echo=FALSE, fig.align='center', out.width="50%", fig.ncol=2 }
 
-#Requires Leaching_Table_1m to be defined
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium input and output comparison graphs", fig.subcap=c("Ca input and output fluxes over time", "Total Average Ca input and output fluxes")}
 
+#Make sure to define leaching table 1m before
 Analysis_Bound<-Analysis_Bound %>% ungroup(YEAR) %>% select(-YEAR)
 
 Ca_Flux<-Analysis_Bound %>% select (Ca, Ca_Wet, Ca_WTH, Ca_TU, Year, Ca_LF, Ca_L_Min)
@@ -476,14 +512,6 @@ Ca_Stacked<-ggplot(Ca_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+lab
    scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
 Ca_Stacked
 
-Mg_Flux<-Analysis_Bound %>% select (Mg, Mg_Wet, Mg_WTH, Mg_TU, Year, Mg_LF, Mg_L_Min)
-Mg_Flux$Mg_LF<-Mg_Flux$Mg_LF*10
-
-Mg_Melt<-melt(Mg_Flux, id.vars = c("Year") )
-
-Mg_Stacked<-ggplot(Mg_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Mg Flux From Ecosystem Pools: kg/ha/yr")+
-   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
-Mg_Stacked
 
 Ca_Forged<-dcast(Ca_Melt, Year~variable)
 
@@ -498,48 +526,218 @@ Bar_Ca<-ggplot(Ca_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case
 
 Bar_Ca
 
+
+
+```
+
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Magnesium input and output comparison graphs", fig.subcap=c("Mg input and output fluxes over time", "Total Average Mg input and output fluxes")}
+
+Mg_Flux<-Analysis_Bound %>% select (Mg, Mg_Wet, Mg_WTH, Mg_TU, Year, Mg_LF, Mg_L_Min)
+Mg_Flux$Mg_LF<-Mg_Flux$Mg_LF*10
+
+Mg_Melt<-melt(Mg_Flux, id.vars = c("Year") )
+
+Mg_Stacked<-ggplot(Mg_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Mg Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+Mg_Stacked
+
+Mg_Forged<-dcast(Mg_Melt, Year~variable)
+
+Mg_Forged_Mean<-Mg_Forged %>% summarise(across(Mg:Mg_L_Min, ~mean(.x, na.rm=TRUE)))
+
+Mg_ReForged_Mean<-melt(Mg_Forged_Mean)
+
+Bar_Mg<-ggplot(Mg_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average Mg Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+  labs(x="Site", y=expression(Mg~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_Mg
+
+
+
+
+```
+
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Potassium input and output comparison graphs", fig.subcap=c("K input and output fluxes over time", "Total Average K input and output fluxes")}
+
+K_Flux<-Analysis_Bound %>% select (K, K_Wet, K_WTH, K_TU, Year, K_LF, K_L_Min)
+K_Flux$K_LF<-K_Flux$K_LF*10
+
+K_Melt<-melt(K_Flux, id.vars = c("Year") )
+
+K_Stacked<-ggplot(K_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="K Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+K_Stacked
+
+K_Forged<-dcast(K_Melt, Year~variable)
+
+K_Forged_Mean<-K_Forged %>% summarise(across(K:K_L_Min, ~mean(.x, na.rm=TRUE)))
+
+K_ReForged_Mean<-melt(K_Forged_Mean)
+
+Bar_K<-ggplot(K_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average K Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+  labs(x="Site", y=expression(K~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_K
+```
+
+<br>
+
+```{r, fig.show="hold", echo=FALSE, out.width="50%", echo=FALSE, message=FALSE, fig.cap="Sulfur input and output comparison graphs", fig.subcap=c("S input and output fluxes over time", "Total Average S input and output fluxes")}
+
 SO4_Flux<-Analysis_Bound %>% select (SO4, SO4_Wet, S_TU, Year, S_LF, S_L_Min)
 SO4_Flux$S_LF<-SO4_Flux$S_LF*10
 
 SO4_Melt<-melt(SO4_Flux, id.vars = c("Year") )
 
 SO4_Stacked<-ggplot(SO4_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="SO4 Flux From Ecosystem Pools: kg/ha/yr")+
-   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
 SO4_Stacked
 
+SO4_Forged<-dcast(SO4_Melt, Year~variable)
+
+SO4_Forged_Mean<-SO4_Forged %>% summarise(across(SO4:S_L_Min, ~mean(.x, na.rm=TRUE)))
+
+SO4_ReForged_Mean<-melt(SO4_Forged_Mean)
+
+Bar_SO4<-ggplot(SO4_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average SO4 Fluxes", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+  labs(x="Site", y=expression(SO4~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_SO4
 
 
 ```
 
+There is clearly some issue with SO4 dynamics. There is both a). too much adsorbed sulfate on the AEC (by my own calculations) and b). too much leaching out every year. After looking at sulfate deposition dynamics, I think I recognize what is occurring. The depositional files are reported in SO4-S kg/ha/yr, but I believe we were analyzing it as SO4 kg/ha/yr. These values are directly transmutable by a factor of 3, so the SO4 kg/ha/yr is 3 times less reported values above. 
 
+<br>
+
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, fig.cap="Nitrogen input and output comparison graphs", fig.subcap=c("N input and output fluxes over time", "Total Average N input and output fluxes")}
+
+
+N_Flux<-Analysis_Bound %>% select (NO3, NH4, Ntot_Wet, N_TU, Year, N_LF, N_L_Min, N_SOM_Min)
+N_Flux$LL<-N_Flux$NO3+N_Flux$NH4
+N_Flux$N_LF<-N_Flux$N_LF*10
+
+N_Flux<-N_Flux %>% select(-NO3, -NH4)
+
+N_Melt<-melt(N_Flux, id.vars = c("Year"))
+
+N_Stacked<-ggplot(N_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="N Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))
+N_Stacked
+
+N_Forged<-dcast(N_Melt, Year~variable)
+
+N_Forged_Mean<-N_Forged %>% summarise(across(Ntot_Wet:LL, ~mean(.x, na.rm=TRUE)))
+
+N_ReForged_Mean<-melt(N_Forged_Mean)
+
+Bar_N<-ggplot(N_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average N Fluxes", labels = c("Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))+
+  labs(x="Site", y=expression(N~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_N
+```
+
+Notice how SOM mineralization starts off highly negative (-358 kg/ha/yr N); implying a large net N uptake in the microbial pool. The mineralization then balances out and steadily returns N to the soil over time, behaving normally. I do need the microbial pool to help calibrate the N cycle, but I may need to reduce the CEC stabilized N and decrease the N-uptake in the microbial pool. These results likely imply too much N is going through the system and that the microbial pool is too large of an N pool. 
 
 ### Cation Exchange Capacity
-```{r, echo=FALSE, fig.align='center', out.width="50%", fig.ncol=2}
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium and Magnesium CEC adsorption over time", fig.subcup=c("Ca adsorption (kg/ha)", "Mg adsorption (kg/ha)")}
+
+CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)")
+CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+CEC_Mg<-CEC_Grapher(CEC_All$Mg)
+CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
 
 ```
 
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE,fig.cap="Potassium and Sodium CEC adsorption over time", fig.subcup=c("K adsorption (kg/ha)", "Na adsorption (kg/ha)")}
+
+CEC_K<-CEC_Grapher(CEC_All$K)
+CEC_K+labs(y="K on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+CEC_Na<-CEC_Grapher(CEC_All$Na)
+CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+```
+
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Ammonium and Aluminum CEC adsorption over time", fig.subcup=c("NH4 adsorption (kg/ha)", "Al adsorption (kg/ha)")}
+
+
+CEC_NH4<-CEC_Grapher(CEC_All$NH4)
+CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+CEC_Al<-CEC_Grapher(CEC_All$Al)
+CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+```
+
+<br><br><br>
 
 ### Anion Exchange Capacity 
 
 
-```{r}
+```{r, echo=FALSE, message=FALSE, message=FALSE}
+
+
 AEC_All$group_id<-as.factor(AEC_All$group_id)
 AEC_All$Date<-as.Date(AEC_All$Date)
 
 SO4_AEC<-AEC_Grapher(AEC_All$SO4)
-SO4_AEC+labs(y="Soil adsorbed Sulfate (SO4-S, kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+SO4_AEC+labs(y="Soil adsorbed Sulfate (SO4-S kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
 
 
 PO4_AEC<-AEC_Grapher(AEC_All$PO4)
 PO4_AEC+labs(y="Soil adsorbed PO4-P (kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
 
+Cl_AEC<-AEC_Grapher(AEC_All$Cl)
 
-
+Cl_AEC+labs(y="Soil adsorbed Chloride kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
 
 ```
+
+<br>
+
+Phosphate seems stable, generally. It should be noted that P uptake is not being modeled in the foliage (it should remain constant so far) and that phosphate adsorption parameters are completely borrowed from the Burgundy site. As for sulfate, the pool of sulfate is much too large, the uptake doesn't occur to a degree which would offset SO4 adsorption this much, and pH doesn't affect sulfate adsorption in the model. I think the deposition of sulfate is too low proportional to what is-must revisit. Going forward, I will pull some sources on 1m depth S and P soil content and use them to constrain how much S and P are net sustained on the CEC.
+
+
+<br>
+
+### Other 
+
+```{r, echo=FALSE, message=FALSE}
+
+Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight*10
+
+Litter_Fall[c(11:16)]<-lapply(Litter_Fall[c(11:16)], as.numeric)
+
+Litter_Fall<-Litter_Fall %>% group_by(Date) %>%
+  summarise(across(Dry.weight:Dry.weight_kgha, ~sum(.x, na.rm=TRUE)))
+
+LF<-ggplot(Litter_Fall, aes(x=Date, y=Dry.weight_kgha))+geom_line()+labs(y="Litter Fall Dry Weight (kg/ha)")
+LF
+
+```
+
 
 
 
