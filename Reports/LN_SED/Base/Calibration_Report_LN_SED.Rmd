@@ -19,6 +19,7 @@ fig_caption: yes
 \listoftables
 \newpage
 
+
 ```{r global_options, include=FALSE, message=FALSE}
 #This global option holds figures in the correct place (stops floating in pdf)
 knitr::opts_chunk$set(fig.pos = 'H')
@@ -285,6 +286,11 @@ Weathering_Mg2
 ```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Potassium Weathering (All Layer)"}
 
 #K Weathering
+Weathering_K1<-K_W_L1(Cal_Pretable_W)
+Weathering_K1
+
+Weathering_K2<-K_W_L2(Cal_Pretable_W)
+Weathering_K2
 
 ```
 
@@ -340,15 +346,33 @@ Weathering_Na2
 
 <br>
 
-```{r, echo=FALSE, fig.cap="Litter Pool Carbon Content Over Simulation Period", fig.show="hold", out.width="50%", fig.align="center"}
+```{r, echo=FALSE, fig.cap="Forest Floor (O-Layer) Carbon Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Total forest floor carbon content (kg/ha)", "Carbon content of coarse litter (kg/ha)"), fig.ncol=2}
 
-##Should add specfic fraction over time as well. 
+##Should add specific fraction over time as well. 
 
-Litter_C<-Litter_Graph(Litter_Pretable$C)
-Litter_C+labs(y="C (kg/ha)")
+Litter_C_All<-Litter_Graph(Litter_Pretable$C)
+Litter_C_All+labs(y="C (kg/ha)")
 
+Litter_CR<-Litter_Graph(Litter_Pretable$C_CL)
+Litter_CR+labs(y="C (kg/ha)")
+```
+<br>
+
+
+```{r, echo=FALSE, fig.cap="Forest Floor (O-Layer) Carbon Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Carbon content of fine litter (kg/ha)", "Carbon content of humic litter (kg/ha)"), fig.ncol=2}
+
+##Should add specific fraction over time as well. 
+
+Litter_C_F<-Litter_Graph(Litter_Pretable$C_F)
+Litter_C_F+labs(y="C (kg/ha)")
+
+Litter_H<-Litter_Graph(Litter_Pretable$C_H)
+Litter_H+labs(y="C (kg/ha)")
 ```
 
+<br>
+
+Note that the fine litter pool (the stage between humus and fresh/coarse litter) is growing in this model. This might deviate from observed behavior. 
 
 
 ```{r, echo=FALSE, fig.cap="Litter Pool Nutrient Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Litter Calcium Content", "Litter Magnesium Content"), fig.ncol=2}
@@ -361,6 +385,15 @@ Litter_Ca+labs(y="Ca (kg/ha)")
 Litter_Mg<-Litter_Graph(Litter_Pretable$Mg)
 Litter_Mg+labs(y="Mg (kg/ha)")
 ```
+
+<br>
+
+Obtaining stable and or increasing litter pool nutrient content was achieved by lowering the release factor from 1 to .25. This means that instead of decomposition occurring proportional to the litter concentration, it occurs at 25% of the litter concentration. The decomposition rate values were also calibrated from approximate values, until the model showed net C gain in the forest floor/organic horizon rather than net loss. 
+
+As of now, forest floor carbon content and carbon sequestration over time is in line with published literature (if we use certain sites as a kind of rough chronosequence; I will describe more of this in a later update). Furthermore, fine and coarse litter pools seem to be approaching steady state, which is expected of old growth forests, assuming that litterfall quantity stabilizes over the whole stand over time. 
+
+The next step was to see how greater litter retention affected S and P dynamics specifically, which have ecosystem retention issues. 
+
 
 <br>
 
@@ -597,8 +630,9 @@ SO4_Flux$S_LF<-SO4_Flux$S_LF*10
 
 SO4_Melt<-melt(SO4_Flux, id.vars = c("Year") )
 
-SO4_Stacked<-ggplot(SO4_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="SO4 Flux From Ecosystem Pools: kg/ha/yr")+
-   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+
+SO4_Stacked<-ggplot(SO4_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="SO4-S Flux From Ecosystem Pools:kg/ha/yr")+
+  scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
 SO4_Stacked
 
 SO4_Forged<-dcast(SO4_Melt, Year~variable)
@@ -609,7 +643,7 @@ SO4_ReForged_Mean<-melt(SO4_Forged_Mean)
 
 Bar_SO4<-ggplot(SO4_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
     geom_bar(position="stack", stat="identity")+
-   scale_fill_discrete(name = "Average SO4 Fluxes", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+   scale_fill_discrete(name = "Average SO4-S Fluxes", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
   labs(x="Site", y=expression(SO4~kg~'*'~(ha~'*'~yr)^-1))
 
 Bar_SO4
@@ -617,7 +651,7 @@ Bar_SO4
 
 ```
 
-There is clearly some issue with SO4 dynamics. There is both a). too much adsorbed sulfate on the AEC (by my own calculations) and b). too much leaching out every year. After looking at sulfate deposition dynamics, I think I recognize what is occurring. The depositional files are reported in SO4-S kg/ha/yr, but I believe we were analyzing it as SO4 kg/ha/yr. These values are directly transmutable by a factor of 3, so the SO4 kg/ha/yr is 3 times less reported values above. 
+I tested sulfate by getting rid of absorbed sulfate altogether and only allowing for atmospheric input and uptake dominate SO4 dynamics. This seemed to allow for easy calibration of SO4 concentrations. 
 
 <br>
 
@@ -717,8 +751,9 @@ Cl_AEC+labs(y="Soil adsorbed Chloride kg/ha)")+scale_x_discrete(guide = guide_ax
 
 <br>
 
-Phosphate seems stable, generally. It should be noted that P uptake is not being modeled in the foliage (it should remain constant so far) and that phosphate adsorption parameters are completely borrowed from the Burgundy site. As for sulfate, the pool of sulfate is much too large, the uptake doesn't occur to a degree which would offset SO4 adsorption this much, and pH doesn't affect sulfate adsorption in the model. I think the deposition of sulfate is too low proportional to what is-must revisit. Going forward, I will pull some sources on 1m depth S and P soil content and use them to constrain how much S and P are net sustained on the CEC.
+Phosphate seems stable, generally. It should be noted that P uptake is not being modeled in the foliage (it should remain constant so far) and that phosphate adsorption parameters are completely borrowed from the Burgundy site. As for sulfate, I purged the model of the AEC sulfate pool and relegated all soil S to the SOM organic pool. 
 
+I further note that the ALSEA rain chemistry seems to be lacking in Na and Cl, when I completely take away Cl adsorption, I don't get anywhere near the concentration of Cl measured in the lysimeters, like I do for sulfate. 
 
 <br>
 
@@ -737,6 +772,8 @@ LF<-ggplot(Litter_Fall, aes(x=Date, y=Dry.weight_kgha))+geom_line()+labs(y="Litt
 LF
 
 ```
+
+
 
 
 
