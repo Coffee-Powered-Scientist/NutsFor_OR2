@@ -1,0 +1,780 @@
+---
+title: 'Calibration Report: Low N Sedimentary Site Base Case'
+author: "Kaveh Gholamhossein Siah"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    toc_depth: 3
+    extra_dependencies: "subfig"
+    
+    
+geometry: margin=2 cm
+fig_caption: yes
+---
+<br><br><br>
+
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+
+
+```{r global_options, include=FALSE, message=FALSE}
+#This global option holds figures in the correct place (stops floating in pdf)
+knitr::opts_chunk$set(fig.pos = 'H')
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(captioner)
+library(car)
+library(janitor)
+library(scales)
+library(reshape2)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/Base/Weathering_HN_BAS_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/Base/Soil_Soln_HN_BAS_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/Base/Litter_Pool_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/Base/TreeNut_HN_BAS_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/Base/CEC_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/Base/AEC_Mutator.R")
+
+
+
+                                    ##Load Data, edit data as needed##
+#umol/L
+Cal_Pretable_Parent<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable_SS<-Cal_Pretable_Parent %>% filter(group_id %in% c("10", "11", "12", "13", "14", "15", "16", "17"))
+Cal_Pretable_SS$group_id<-as.character(Cal_Pretable_SS$group_id)
+
+
+#Kg/ha
+Cal_Pretable_LL<-Cal_Pretable_Parent %>% filter(group_id %in% c("1", "2", "3", "4", "5", "6", "7", "8"))
+Cal_Pretable_LL$group_id<-as.character(Cal_Pretable_LL$group_id)
+
+
+Cal_Pretable_SS_Yr<-Cal_Pretable_SS %>% group_by(group_id, YEAR) %>% summarise(across(Ca:HR, ~mean(.x, na.rm=TRUE)))
+
+Cal_Pretable_W<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/Weathering_All.csv", header=TRUE)
+
+Litter_Pretable<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/Litter_Pool.csv", header=TRUE)
+Litter_Pretable$Date<-as.Date(as.character(Litter_Pretable$Date))
+
+Tree_Nut_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/Tree_Nut_All.csv", header=TRUE)
+
+
+Litter_Fall<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/Litter_Fall.csv", header=TRUE)
+
+Analysis_1<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/Analysis_1.csv", header=TRUE)
+
+CEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/CEC_All.csv", header=TRUE)
+CEC_All$group_id<-as.factor(CEC_All$group_id)
+
+AEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data/AEC_All.csv", header=TRUE)
+                                            ##Load Functions for Analysis##
+
+source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Soil_R.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_Weathering.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Cal_SOM.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Litter.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
+source("~/Project_Master/Test_Rep/Code/Functions/LL_1M_Func.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Analysis_I.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Grapher_CEC_AEC.R")
+
+
+```
+
+### Soil Solution Results
+<br>
+
+```{r, message=FALSE, echo=FALSE, results="hide", include=FALSE}
+
+                                               ##Table 1##
+SS_Reliable_Avg<-Tab_Func_SS_Reliable(Cal_Pretable_SS)
+
+SS_Reliable_Avg<-mutate(SS_Reliable_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'")) %>% select(-X)
+
+SS_Reliable_Avg %>% mutate_if(is.character, format, digits=3,nsmall = 0) %>%
+  kbl(caption = "Average Monthly Soil Solution Concentration (2005-2006)", col.names=c("Soil Layer","Month", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR"), "latex", escape = FALSE) %>%
+  t(.)%>% kable_styling(latex_options = c("striped", "scale_down", "hold_position")) %>% 
+    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=2,  "$\\\\u$mol/L"=16))
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Average 2005-2006 per layer
+
+Reliable_Table<-SS_Reliable_Avg %>% ungroup(Month) %>% group_by(group_id) %>% summarise(across(Ca:HR, ~ mean(.x, na.rm = TRUE)))
+
+#Change pH average (else it won't make sense!)
+Reliable_Table$pH = -log(Reliable_Table$H*10^-6, 10)
+
+Reliable_Table %>% mutate_if(is.numeric, format, digits=3,nsmall = 0) %>%
+  kbl(caption = "Average Soil Solution Concentrations of Reliable Months (2005-2006)", col.names=c("Soil Layer", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR"), align = "l", format="latex", booktabs = TRUE, escape = FALSE) %>%t(.)%>% kable_styling(latex_options = c("striped", "scale_down", "hold_position")) %>%
+    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=1,  "$\\\\mu$mol/L"=16))
+```
+
+
+<br><br><br>
+
+
+```{r, echo=FALSE, fig.cap="Monthly Calcium Concentrations by Soil Layer", figures-side, fig.show="hold", out.width="50%", message=FALSE, fig.ncol=2}
+
+Ca_L1<-Ca_SS_L1(Cal_Pretable_SS_Yr)
+Ca_L1
+
+Ca_L2<-Ca_SS_L2(Cal_Pretable_SS_Yr)
+Ca_L2
+
+
+```
+```{r, echo=FALSE, fig.cap="Monthly Magnesium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+Mg_L1<-Mg_SS_L1(Cal_Pretable_SS_Yr)
+Mg_L1
+
+Mg_L2<-Mg_SS_L2(Cal_Pretable_SS_Yr)
+Mg_L2
+```
+```{r, echo=FALSE, fig.cap="Monthly Potassium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+K_L1<-K_SS_L1(Cal_Pretable_SS_Yr)
+K_L1
+
+K_L2<-K_SS_L2(Cal_Pretable_SS_Yr)
+K_L2
+
+```
+```{r, echo=FALSE, fig.cap="Monthly Sodium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+Na_L1<-Na_SS_L1(Cal_Pretable_SS_Yr)
+Na_L1
+
+Na_L2<-Na_SS_L2(Cal_Pretable_SS_Yr)
+Na_L2
+
+
+```
+```{r, echo=FALSE, fig.cap="Monthly Sulfate Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+SO4_L1<-SO4_SS_L1(Cal_Pretable_SS_Yr)
+SO4_L1
+
+SO4_L2<-SO4_SS_L2(Cal_Pretable_SS_Yr)
+SO4_L2
+
+```
+
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Monthly Aluminum Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+Al_L1<-Al_SS_L1(Cal_Pretable_SS_Yr)
+Al_L1
+
+Al_L2<-Al_SS_L2(Cal_Pretable_SS_Yr)
+Al_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Monthly SiO2 Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+
+Si_L1<-Si_SS_L1(Cal_Pretable_SS_Yr)
+Si_L1
+
+Si_L2<-Si_SS_L2(Cal_Pretable_SS_Yr)
+Si_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Monthly Organic Acid Base (R-) Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+R_L1<-R_SS_L1(Cal_Pretable_SS_Yr)
+R_L1
+
+R_L2<-R_SS_L2(Cal_Pretable_SS_Yr)
+R_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Monthly pH by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+pH_L1<-pH_SS_L1(Cal_Pretable_SS_Yr)
+pH_L1
+
+pH_L2<-pH_SS_L2(Cal_Pretable_SS_Yr)
+pH_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Yearly Ammonium concentration by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+NH4_L1<-NH4_SS_L1(Cal_Pretable_SS_Yr)
+NH4_L1
+
+NH4_L2<-NH4_SS_L2(Cal_Pretable_SS_Yr)
+NH4_L2
+
+```
+
+<br><br><br>
+
+```{r, echo=FALSE, fig.cap="Yearly Nitrate concentration by Soil Layer", fig.show="hold", out.width="50%"}
+
+
+NO3_L1<-NO3_SS_L1(Cal_Pretable_SS_Yr)
+NO3_L1
+
+NO3_L2<-NO3_SS_L2(Cal_Pretable_SS_Yr)
+NO3_L2
+
+```
+
+
+
+
+### Weathering Results
+
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Calcium Weathering (All Layer)"}
+Weathering_Ca1<-Ca_W_L1(Cal_Pretable_W)
+Weathering_Ca1
+
+Weathering_Ca2<-Ca_W_L2(Cal_Pretable_W)
+Weathering_Ca2
+
+
+
+```
+<br>
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Magnesium Weathering (All Layer)"}
+Weathering_Mg1<-Mg_W_L1(Cal_Pretable_W)
+Weathering_Mg1
+
+Weathering_Mg2<-Mg_W_L2(Cal_Pretable_W)
+Weathering_Mg2
+
+```
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Potassium Weathering (All Layer)"}
+
+#K Weathering
+Weathering_K1<-K_W_L1(Cal_Pretable_W)
+Weathering_K1
+
+Weathering_K2<-K_W_L2(Cal_Pretable_W)
+Weathering_K2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Aluminum Weathering (All Layer)"}
+Weathering_Al1<-Al_W_L1(Cal_Pretable_W)
+Weathering_Al1
+
+Weathering_Al2<-Al_W_L2(Cal_Pretable_W)
+Weathering_Al2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Phosphate Weathering (All Layer)"}
+Weathering_P1<-P_W_L1(Cal_Pretable_W)
+Weathering_P1
+
+Weathering_P2<-P_W_L2(Cal_Pretable_W)
+Weathering_P2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Silica Weathering (All Layer)"}
+Weathering_Si1<-Si_W_L1(Cal_Pretable_W)
+Weathering_Si1
+
+Weathering_Si2<-Si_W_L2(Cal_Pretable_W)
+Weathering_Si2
+
+```
+
+<br>
+
+```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Sodium Weathering (All Layer)"}
+Weathering_Na1<-Na_W_L1(Cal_Pretable_W)
+Weathering_Na1
+
+Weathering_Na2<-Na_W_L2(Cal_Pretable_W)
+Weathering_Na2
+
+```
+
+
+<br><br><br>
+
+### Litter Pool Results
+
+
+<br>
+
+```{r, echo=FALSE, fig.cap="Forest Floor (O-Layer) Carbon Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Total forest floor carbon content (kg/ha)", "Carbon content of coarse litter (kg/ha)"), fig.ncol=2}
+
+##Should add specific fraction over time as well. 
+
+Litter_C_All<-Litter_Graph(Litter_Pretable$C)
+Litter_C_All+labs(y="C (kg/ha)")
+
+Litter_CR<-Litter_Graph(Litter_Pretable$C_CL)
+Litter_CR+labs(y="C (kg/ha)")
+```
+<br>
+
+
+```{r, echo=FALSE, fig.cap="Forest Floor (O-Layer) Carbon Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Carbon content of fine litter (kg/ha)", "Carbon content of humic litter (kg/ha)"), fig.ncol=2}
+
+##Should add specific fraction over time as well. 
+
+Litter_C_F<-Litter_Graph(Litter_Pretable$C_F)
+Litter_C_F+labs(y="C (kg/ha)")
+
+Litter_H<-Litter_Graph(Litter_Pretable$C_H)
+Litter_H+labs(y="C (kg/ha)")
+```
+
+<br>
+
+Note that the fine litter pool (the stage between humus and fresh/coarse litter) is growing in this model. This might deviate from observed behavior. 
+
+
+```{r, echo=FALSE, fig.cap="Litter Pool Nutrient Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Litter Calcium Content", "Litter Magnesium Content"), fig.ncol=2}
+
+
+Litter_Ca<-Litter_Graph(Litter_Pretable$Ca)
+Litter_Ca+labs(y="Ca (kg/ha)")
+
+
+Litter_Mg<-Litter_Graph(Litter_Pretable$Mg)
+Litter_Mg+labs(y="Mg (kg/ha)")
+```
+
+<br>
+
+Obtaining stable and or increasing litter pool nutrient content was achieved by lowering the release factor from 1 to .25. This means that instead of decomposition occurring proportional to the litter concentration, it occurs at 25% of the litter concentration. The decomposition rate values were also calibrated from approximate values, until the model showed net C gain in the forest floor/organic horizon rather than net loss. 
+
+As of now, forest floor carbon content and carbon sequestration over time is in line with published literature (if we use certain sites as a kind of rough chronosequence; I will describe more of this in a later update). Furthermore, fine and coarse litter pools seem to be approaching steady state, which is expected of old growth forests, assuming that litterfall quantity stabilizes over the whole stand over time. 
+
+The next step was to see how greater litter retention affected S and P dynamics specifically, which have ecosystem retention issues. 
+
+
+<br>
+
+```{r, echo=FALSE, fig.subcap=c("Litter Sulfur Content", "Litter Nitrogen Content"), fig.ncol=2}
+Litter_S<-Litter_Graph(Litter_Pretable$S)
+Litter_S+labs(y="S (kg/ha)")
+
+Litter_N<-Litter_Graph(Litter_Pretable$N)
+Litter_N+labs(y="N (kg/ha)")
+```
+
+<br>
+
+```{r, echo=FALSE, fig.subcap=c("Litter Potassium Content", "Litter Phosphorous Content")}
+Litter_K<-Litter_Graph(Litter_Pretable$K)
+Litter_K+labs(y="K (kg/ha)")
+
+Litter_P<-Litter_Graph(Litter_Pretable$P)
+Litter_P+labs(y="P (kg/ha)")
+
+```
+
+
+
+### Tree Nutrient Content
+<br>
+
+```{r, echo=FALSE, message=FALSE, fig.cap="Base Cation Nutrient Content in Simulated Forest", fig.align='center', out.width="50%", fig.show="hold", fig.ncol=2, fig.subcap=c('Calcium content in each biomass compartment', 'Magnesium content in each biomass compartment', 'Potassium content in each biomass compartment')}
+
+#By doing selection here, we allow for 1 file to be read from rather than multiple. 
+
+#Ca
+
+Tree_Nut_Ca<-Tree_Nut_All %>% select(Ca_F, Ca_Bol, Ca_Brh, Ca_Brk, YEAR, Month)
+
+Tree_Nut_Ca<-Tree_Nut_Ca %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_Ca_Melt<-Tree_Nut_Ca_Melt<-melt(Tree_Nut_Ca, id.vars= c("Date"))
+
+Ca_Nut<-ggplot(Tree_Nut_Ca_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="Ca Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+Ca_Nut
+
+#Mg
+Tree_Nut_Mg<-Tree_Nut_All %>% select(Mg_F, Mg_Bol, Mg_Brh, Mg_Brk, YEAR, Month)
+
+Tree_Nut_Mg<-Tree_Nut_Mg %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_Mg_Melt<-Tree_Nut_Mg_Melt<-melt(Tree_Nut_Mg, id.vars= c("Date"))
+
+Mg_Nut<-ggplot(Tree_Nut_Mg_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="Mg Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+Mg_Nut
+
+
+#K
+
+Tree_Nut_K<-Tree_Nut_All %>% select(K_F, K_Bol, K_Brh, K_Brk, YEAR, Month)
+
+Tree_Nut_K<-Tree_Nut_K %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_K_Melt<-Tree_Nut_K_Melt<-melt(Tree_Nut_K, id.vars= c("Date"))
+
+K_Nut<-ggplot(Tree_Nut_K_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="K Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+K_Nut
+
+```
+<br>
+```{r, echo=FALSE, message=FALSE, fig.cap="N, S, and P Nutrient Contents and biomass per compartment", fig.align='center', out.width="50%", fig.show="hold", fig.ncol=2, fig.subcap=c('Nitrogen content in each biomass compartment', 'Sulfur content in each biomass compartment', 'Phosphorous content in each biomass compartment', 'Biomass of each compartment')}
+
+#N
+
+Tree_Nut_N<-Tree_Nut_All %>% select(N_F, N_Bol, N_Brk, YEAR, Month)
+
+Tree_Nut_N<-Tree_Nut_N %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_N_Melt<-Tree_Nut_N_Melt<-melt(Tree_Nut_N, id.vars= c("Date"))
+
+N_Nut<-ggplot(Tree_Nut_N_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="N Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+N_Nut
+
+#S
+Tree_Nut_S<-Tree_Nut_All %>% select(S_F, S_Bol, S_Brh, S_Brk, YEAR, Month)
+
+Tree_Nut_S<-Tree_Nut_S %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_S_Melt<-Tree_Nut_S_Melt<-melt(Tree_Nut_S, id.vars= c("Date"))
+
+S_Nut<-ggplot(Tree_Nut_S_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="S Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+S_Nut
+
+#P
+Tree_Nut_P<-Tree_Nut_All %>% select(P_F, P_Bol, P_Brh, P_Brk, YEAR, Month)
+
+Tree_Nut_P<-Tree_Nut_P %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_P_Melt<-Tree_Nut_P_Melt<-melt(Tree_Nut_P, id.vars= c("Date"))
+
+P_Nut<-ggplot(Tree_Nut_P_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="P Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+P_Nut
+
+#Dry Weight/Biomass
+
+Tree_Nut_DW<-Tree_Nut_All %>% select(DW_F, DW_Bol, DW_Brh, DW_Brk, YEAR, Month)
+
+Tree_Nut_DW<-Tree_Nut_DW %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
+
+Tree_Nut_DW_Melt<-Tree_Nut_DW_Melt<-melt(Tree_Nut_DW, id.vars= c("Date"))
+
+DW_Nut<-ggplot(Tree_Nut_DW_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="Dry Weight of Biomass Compartments: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
+DW_Nut
+```
+
+<br>
+
+### Analysis 1: Stack Flux Data
+
+```{r, echo=FALSE, message=FALSE}
+#Final Mutation for Analysis 1, must be done AFTER leaching_table_1m is assigned. 
+
+Leaching_Table_Graphable<-Tab_Func_LL_Yr(Cal_Pretable_LL)
+Leaching_Table_1m<-Leaching_Table_Graphable %>% filter(group_id %in% c(8))
+
+Analysis_Bound<- cbind(Leaching_Table_1m, Analysis_1)
+
+Analysis_1_Ready<-Analysis_Bound %>% group_by(V1) %>% 
+    mutate(Ca_Net=Ca_Wet+Ca_WTH+Ca_L_Min+Ca_SOM_Min-Ca_TU-Ca) %>%
+    mutate(Mg_Net=Mg_Wet+Mg_WTH+Mg_L_Min+Mg_SOM_Min-Mg_TU-Mg) %>% 
+    mutate(K_Net=K_Wet+K_WTH+K_L_Min+K_SOM_Min-K_TU-K+K_Folx) %>%
+    mutate(SO4_Net=SO4_Wet+ S_L_Min+S_SOM_Min-S_TU-SO4) %>%
+    mutate(N_Net=Ntot_Wet+ N_L_Min+N_SOM_Min-N_TU-SO4) %>%
+    mutate(P_Net=P_WTH+ P_L_Min+P_SOM_Min-P_TU-P)
+
+```
+
+
+<br>
+
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium input and output comparison graphs", fig.subcap=c("Ca input and output fluxes over time", "Total Average Ca input and output fluxes")}
+
+#Make sure to define leaching table 1m before
+Analysis_Bound<-Analysis_Bound %>% ungroup(YEAR) %>% select(-YEAR)
+
+Ca_Flux<-Analysis_Bound %>% select (Ca, Ca_Wet, Ca_WTH, Ca_TU, Year, Ca_LF, Ca_L_Min)
+Ca_Flux$Ca_LF<-Ca_Flux$Ca_LF*10
+
+Ca_Melt<-melt(Ca_Flux, id.vars = c("Year") )
+
+Ca_Stacked<-ggplot(Ca_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Ca Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+Ca_Stacked
+
+
+Ca_Forged<-dcast(Ca_Melt, Year~variable)
+
+Ca_Forged_Mean<-Ca_Forged %>% summarise(across(Ca:Ca_L_Min, ~mean(.x, na.rm=TRUE)))
+
+Ca_ReForged_Mean<-melt(Ca_Forged_Mean)
+
+Bar_Ca<-ggplot(Ca_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average Ca Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+  labs(x="Site", y=expression(Ca~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_Ca
+
+
+
+```
+
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Magnesium input and output comparison graphs", fig.subcap=c("Mg input and output fluxes over time", "Total Average Mg input and output fluxes")}
+
+Mg_Flux<-Analysis_Bound %>% select (Mg, Mg_Wet, Mg_WTH, Mg_TU, Year, Mg_LF, Mg_L_Min)
+Mg_Flux$Mg_LF<-Mg_Flux$Mg_LF*10
+
+Mg_Melt<-melt(Mg_Flux, id.vars = c("Year") )
+
+Mg_Stacked<-ggplot(Mg_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Mg Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+Mg_Stacked
+
+Mg_Forged<-dcast(Mg_Melt, Year~variable)
+
+Mg_Forged_Mean<-Mg_Forged %>% summarise(across(Mg:Mg_L_Min, ~mean(.x, na.rm=TRUE)))
+
+Mg_ReForged_Mean<-melt(Mg_Forged_Mean)
+
+Bar_Mg<-ggplot(Mg_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average Mg Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+  labs(x="Site", y=expression(Mg~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_Mg
+
+
+
+
+```
+
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Potassium input and output comparison graphs", fig.subcap=c("K input and output fluxes over time", "Total Average K input and output fluxes")}
+
+K_Flux<-Analysis_Bound %>% select (K, K_Wet, K_WTH, K_TU, Year, K_LF, K_L_Min)
+K_Flux$K_LF<-K_Flux$K_LF*10
+
+K_Melt<-melt(K_Flux, id.vars = c("Year") )
+
+K_Stacked<-ggplot(K_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="K Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+K_Stacked
+
+K_Forged<-dcast(K_Melt, Year~variable)
+
+K_Forged_Mean<-K_Forged %>% summarise(across(K:K_L_Min, ~mean(.x, na.rm=TRUE)))
+
+K_ReForged_Mean<-melt(K_Forged_Mean)
+
+Bar_K<-ggplot(K_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average K Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+  labs(x="Site", y=expression(K~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_K
+```
+
+<br>
+
+```{r, fig.show="hold", echo=FALSE, out.width="50%", echo=FALSE, message=FALSE, fig.cap="Sulfur input and output comparison graphs", fig.subcap=c("S input and output fluxes over time", "Total Average S input and output fluxes")}
+
+SO4_Flux<-Analysis_Bound %>% select (SO4, SO4_Wet, S_TU, Year, S_LF, S_L_Min)
+SO4_Flux$S_LF<-SO4_Flux$S_LF*10
+
+SO4_Melt<-melt(SO4_Flux, id.vars = c("Year") )
+
+
+SO4_Stacked<-ggplot(SO4_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="SO4-S Flux From Ecosystem Pools:kg/ha/yr")+
+  scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+SO4_Stacked
+
+SO4_Forged<-dcast(SO4_Melt, Year~variable)
+
+SO4_Forged_Mean<-SO4_Forged %>% summarise(across(SO4:S_L_Min, ~mean(.x, na.rm=TRUE)))
+
+SO4_ReForged_Mean<-melt(SO4_Forged_Mean)
+
+Bar_SO4<-ggplot(SO4_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average SO4-S Fluxes", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+  labs(x="Site", y=expression(SO4~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_SO4
+
+
+```
+
+I tested sulfate by getting rid of absorbed sulfate altogether and only allowing for atmospheric input and uptake dominate SO4 dynamics. This seemed to allow for easy calibration of SO4 concentrations. 
+
+<br>
+
+```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, fig.cap="Nitrogen input and output comparison graphs", fig.subcap=c("N input and output fluxes over time", "Total Average N input and output fluxes")}
+
+
+N_Flux<-Analysis_Bound %>% select (NO3, NH4, Ntot_Wet, N_TU, Year, N_LF, N_L_Min, N_SOM_Min)
+N_Flux$LL<-N_Flux$NO3+N_Flux$NH4
+N_Flux$N_LF<-N_Flux$N_LF*10
+
+N_Flux<-N_Flux %>% select(-NO3, -NH4)
+
+N_Melt<-melt(N_Flux, id.vars = c("Year"))
+
+N_Stacked<-ggplot(N_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="N Flux From Ecosystem Pools: kg/ha/yr")+
+   scale_fill_discrete(name = "Legend", labels = c("Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))
+N_Stacked
+
+N_Forged<-dcast(N_Melt, Year~variable)
+
+N_Forged_Mean<-N_Forged %>% summarise(across(Ntot_Wet:LL, ~mean(.x, na.rm=TRUE)))
+
+N_ReForged_Mean<-melt(N_Forged_Mean)
+
+Bar_N<-ggplot(N_ReForged_Mean, aes(fill=variable, y=value, x="LN SED Base Case")) + 
+    geom_bar(position="stack", stat="identity")+
+   scale_fill_discrete(name = "Average N Fluxes", labels = c("Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))+
+  labs(x="Site", y=expression(N~kg~'*'~(ha~'*'~yr)^-1))
+
+Bar_N
+```
+
+Notice how SOM mineralization starts off highly negative (-358 kg/ha/yr N); implying a large net N uptake in the microbial pool. The mineralization then balances out and steadily returns N to the soil over time, behaving normally. I do need the microbial pool to help calibrate the N cycle, but I may need to reduce the CEC stabilized N and decrease the N-uptake in the microbial pool. These results likely imply too much N is going through the system and that the microbial pool is too large of an N pool. 
+
+### Cation Exchange Capacity
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium and Magnesium CEC adsorption over time", fig.subcup=c("Ca adsorption (kg/ha)", "Mg adsorption (kg/ha)")}
+
+CEC_All$Date<-as.Date(CEC_All$Date)
+
+CEC_Ca<-CEC_Grapher(CEC_All$Ca)
+CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+CEC_Mg<-CEC_Grapher(CEC_All$Mg)
+CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+
+```
+
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE,fig.cap="Potassium and Sodium CEC adsorption over time", fig.subcup=c("K adsorption (kg/ha)", "Na adsorption (kg/ha)")}
+
+CEC_K<-CEC_Grapher(CEC_All$K)
+CEC_K+labs(y="K on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+CEC_Na<-CEC_Grapher(CEC_All$Na)
+CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+```
+
+<br>
+
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Ammonium and Aluminum CEC adsorption over time", fig.subcup=c("NH4 adsorption (kg/ha)", "Al adsorption (kg/ha)")}
+
+
+CEC_NH4<-CEC_Grapher(CEC_All$NH4)
+CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+CEC_Al<-CEC_Grapher(CEC_All$Al)
+CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+```
+
+<br><br><br>
+
+### Anion Exchange Capacity 
+
+
+```{r, echo=FALSE, message=FALSE, message=FALSE}
+
+
+AEC_All$group_id<-as.factor(AEC_All$group_id)
+AEC_All$Date<-as.Date(AEC_All$Date)
+
+SO4_AEC<-AEC_Grapher(AEC_All$SO4)
+SO4_AEC+labs(y="Soil adsorbed Sulfate (SO4-S kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+
+PO4_AEC<-AEC_Grapher(AEC_All$PO4)
+PO4_AEC+labs(y="Soil adsorbed PO4-P (kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+Cl_AEC<-AEC_Grapher(AEC_All$Cl)
+
+Cl_AEC+labs(y="Soil adsorbed Chloride kg/ha)")+scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
+
+```
+
+<br>
+
+Phosphate seems stable, generally. It should be noted that P uptake is not being modeled in the foliage (it should remain constant so far) and that phosphate adsorption parameters are completely borrowed from the Burgundy site. As for sulfate, I purged the model of the AEC sulfate pool and relegated all soil S to the SOM organic pool. 
+
+I further note that the ALSEA rain chemistry seems to be lacking in Na and Cl, when I completely take away Cl adsorption, I don't get anywhere near the concentration of Cl measured in the lysimeters, like I do for sulfate. 
+
+<br>
+
+### Other 
+
+```{r, echo=FALSE, message=FALSE}
+
+Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight*10
+
+Litter_Fall[c(11:16)]<-lapply(Litter_Fall[c(11:16)], as.numeric)
+
+Litter_Fall<-Litter_Fall %>% group_by(Date) %>%
+  summarise(across(Dry.weight:Dry.weight_kgha, ~sum(.x, na.rm=TRUE)))
+
+LF<-ggplot(Litter_Fall, aes(x=Date, y=Dry.weight_kgha))+geom_line()+labs(y="Litter Fall Dry Weight (kg/ha)")
+LF
+
+```
+
+
+
+
+
+
