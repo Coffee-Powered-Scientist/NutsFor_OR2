@@ -52,6 +52,8 @@ source("~/Project_Master/Test_Rep/Code/LN_SED/Base/CEC_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/LN_SED/Base/AEC_Mutator.R")
 
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Analysis_1_Mutator.R")
+
 
 
                                     ##Load Data, edit data as needed##
@@ -464,7 +466,7 @@ K_Nut
 
 #N
 
-Tree_Nut_N<-Tree_Nut_All %>% select(N_F, N_Bol, N_Brk, YEAR, Month)
+Tree_Nut_N<-Tree_Nut_All %>% select(N_F, N_Bol, N_Brk, YEAR, Month, N_Brh)
 
 Tree_Nut_N<-Tree_Nut_N %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
 
@@ -489,6 +491,8 @@ Tree_Nut_P<-Tree_Nut_All %>% select(P_F, P_Bol, P_Brh, P_Brk, YEAR, Month)
 Tree_Nut_P<-Tree_Nut_P %>% mutate(Date= make_date(YEAR, Month)) %>% select (-YEAR, -Month) %>% group_by(Date)
 
 Tree_Nut_P_Melt<-Tree_Nut_P_Melt<-melt(Tree_Nut_P, id.vars= c("Date"))
+
+Tree_Nut_P_Melt$value<-as.numeric(Tree_Nut_P_Melt$value)
 
 P_Nut<-ggplot(Tree_Nut_P_Melt, aes(x=Date, y=value, fill=variable))+geom_area()+labs(y="P Content in Biomass: kg/ha")+ scale_fill_discrete(name="Biomass Compartment", labels=c("Foliage", "Bole", "Branch", "Bark"))
 P_Nut

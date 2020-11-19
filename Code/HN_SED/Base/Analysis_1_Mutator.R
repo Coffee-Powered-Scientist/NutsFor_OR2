@@ -1,12 +1,13 @@
 rm(list = ls())
 
-library(dpylr)
+library(dplyr)
+library(tidyr)
 
 setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data")
 
 
-Above_Flux<-read.csv2("~/NutsForSEDHN/Output data/Budgets/Above ground fluxes.csv", header=FALSE)
-Bio_Flux<-read.csv2("~/NutsForSEDHN/Output data/Budgets/Biological cycle.csv",header=FALSE)
+Above_Flux<-read.csv2("~/NutsForSEDHN/Base/Output data/Budgets/Above ground fluxes.csv", header=FALSE)
+Bio_Flux<-read.csv2("~/NutsForSEDHN/Base/Output data/Budgets/Biological cycle.csv",header=FALSE)
 
 Bio_Flux<-Bio_Flux %>% rename(Year=V1, N_TU=V2, Ca_TU=V3, Mg_TU=V4, K_TU=V5, S_TU=V6, P_TU=V7, 
                    N_LF=V8, Ca_LF=V9, Mg_LF=V10, K_LF=V11, S_LF=V12, P_LF=V13,
@@ -19,10 +20,12 @@ Above_Flux<-Above_Flux  %>% rename(Ca_Wet=V2, Mg_Wet=V3, K_Wet=V4, NO3_Wet=V5, N
 
 All_Flux<-cbind(Above_Flux, Bio_Flux)
 
-All_Flux[2:104]<-lapply(All_Flux[2:104], as.numeric)
+All_Flux[1:104]<-lapply(All_Flux[1:104], as.numeric)
 
-All_Flux<-All_Flux %>% drop_na(Ca_Wet)
 
-All_Flux<-All_Flux %>% select(-c(11:43,51:71 ))
+
+All_Flux<-All_Flux %>% select(-c(11:43,51:71))
+All_Flux<-All_Flux %>% select(-c(51)) %>% filter(!is.na(Ca_Wet))
+
 
 write.csv2(All_Flux, "Analysis_1.csv")
