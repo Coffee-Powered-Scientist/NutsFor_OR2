@@ -79,6 +79,7 @@ Tree_Nut_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_
 
 
 Litter_Fall<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Litter_Fall.csv", header=TRUE)
+Litter_Fall$Date<-as.Date(Litter_Fall$Date)
 
 Analysis_1<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Analysis_1.csv", header=TRUE)
 
@@ -376,49 +377,126 @@ Litter_H+labs(y="C (kg/ha)")
 
 Note that the fine litter pool (the stage between humus and fresh/coarse litter) is growing in this model. This might deviate from observed behavior. 
 
+<br>
 
-```{r, echo=FALSE, fig.cap="Litter Pool Nutrient Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Litter Calcium Content", "Litter Magnesium Content"), fig.ncol=2}
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Forest Floor/O-horizon Ca content over time (a). and net annual Ca return in litterfall (b).", fig.subcap=c("Ca Content in each litter decomposition stage (kg/ha)", "Ca net annual return in litterfall (kg/ha)")}
+
+Ca_OH_All<-ggplot(Litter_Pretable, aes(x=Date))+geom_line(mapping=aes(y=Ca_CL, color="Coarse Litter"))+geom_line(mapping=aes(y=Ca_F, color="Fine Litter"))+geom_line(mapping=aes(y=Ca_H, color="Humic Litter"))+
+  geom_line(mapping= aes(y=Ca, color="Total Litter"))+
+  labs(y="Ca (kg/ha)", color="Litter Type")
+
+Ca_OH_All
+
+#Mutate Litter_Fall so it's on a yearly time step; can't use the flux data because it is unfortunately specified far below this code 
+
+Litter_Fall_Year<-Litter_Fall %>% group_by(Year) %>% summarise(across(N:P, ~sum(.x, na.rm= TRUE)))
+
+Ca_LF.G<-ggplot(Litter_Fall_Year, aes(x=Year, y=Ca, color="Ca Litterfall Return"))+geom_line()
+Ca_LF.G+theme(legend.title = element_blank())
+
+```
+<br>
+Discuss
+<br>
 
 
-Litter_Ca<-Litter_Graph(Litter_Pretable$Ca)
-Litter_Ca+labs(y="Ca (kg/ha)")
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Forest Floor/O-horizon Mg content over time (a). and net annual Mg return in litterfall (b).", fig.subcap=c("Mg Content in each litter decomposition stage (kg/ha)", "Mg net annual return in litterfall (kg/ha)")}
 
+Mg_OH_All<-ggplot(Litter_Pretable, aes(x=Date))+geom_line(mapping=aes(y=Mg_CL, color="Coarse Litter"))+geom_line(mapping=aes(y=Mg_F, color="Fine Litter"))+geom_line(mapping=aes(y=Mg_H, color="Humic Litter"))+
+  geom_line(mapping= aes(y=Mg, color="Total Litter"))+
+  labs(y="Mg (kg/ha)", color="Litter Type")
 
-Litter_Mg<-Litter_Graph(Litter_Pretable$Mg)
-Litter_Mg+labs(y="Mg (kg/ha)")
+Mg_OH_All
+
+#Mutate Litter_Fall so it's on a yearly time step; can't use the flux data because it is unfortunately specified far below this code 
+
+Litter_Fall_Year<-Litter_Fall %>% group_by(Year) %>% summarise(across(N:P, ~sum(.x, na.rm= TRUE)))
+
+Mg_LF.G<-ggplot(Litter_Fall_Year, aes(x=Year, y=Mg, color="Mg Litterfall Return"))+geom_line()
+Mg_LF.G+theme(legend.title = element_blank())
+
 ```
 
 <br>
 
-Obtaining stable and or increasing litter pool nutrient content was achieved by lowering the release factor from 1 to .25. This means that instead of decomposition occurring proportional to the litter concentration, it occurs at 25% of the litter concentration. The decomposition rate values were also calibrated from approximate values, until the model showed net C gain in the forest floor/organic horizon rather than net loss. 
 
-As of now, forest floor carbon content and carbon sequestration over time is in line with published literature (if we use certain sites as a kind of rough chronosequence; I will describe more of this in a later update). Furthermore, fine and coarse litter pools seem to be approaching steady state, which is expected of old growth forests, assuming that litterfall quantity stabilizes over the whole stand over time. 
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Forest Floor/O-horizon K content over time (a). and net annual K return in litterfall (b).", fig.subcap=c("K Content in each litter decomposition stage (kg/ha)", "K net annual return in litterfall (kg/ha)")}
 
-The next step was to see how greater litter retention affected S and P dynamics specifically, which have ecosystem retention issues. 
+K_OH_All<-ggplot(Litter_Pretable, aes(x=Date))+geom_line(mapping=aes(y=K_CL, color="Coarse Litter"))+geom_line(mapping=aes(y=K_F, color="Fine Litter"))+geom_line(mapping=aes(y=K_H, color="Humic Litter"))+
+  geom_line(mapping= aes(y=K, color="Total Litter"))+
+  labs(y="K (kg/ha)", color="Litter Type")
 
+K_OH_All
+
+#Mutate Litter_Fall so it's on a yearly time step; can't use the flux data because it is unfortunately specified far below this code 
+
+Litter_Fall_Year<-Litter_Fall %>% group_by(Year) %>% summarise(across(N:P, ~sum(.x, na.rm= TRUE)))
+
+K_LF.G<-ggplot(Litter_Fall_Year, aes(x=Year, y=K, color="K Litterfall Return"))+geom_line()
+K_LF.G+theme(legend.title = element_blank())
+
+```
 
 <br>
 
-```{r, echo=FALSE, fig.subcap=c("Litter Sulfur Content", "Litter Nitrogen Content"), fig.ncol=2}
-Litter_S<-Litter_Graph(Litter_Pretable$S)
-Litter_S+labs(y="S (kg/ha)")
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Forest Floor/O-horizon S content over time (a). and net annual S return in litterfall (b).", fig.subcap=c("S Content in each litter decomposition stage (kg/ha)", "S net annual return in litterfall (kg/ha)")}
 
-Litter_N<-Litter_Graph(Litter_Pretable$N)
-Litter_N+labs(y="N (kg/ha)")
+S_OH_All<-ggplot(Litter_Pretable, aes(x=Date))+geom_line(mapping=aes(y=S_CL, color="Coarse Litter"))+geom_line(mapping=aes(y=S_F, color="Fine Litter"))+geom_line(mapping=aes(y=S_H, color="Humic Litter"))+
+  geom_line(mapping= aes(y=S, color="Total Litter"))+
+  labs(y="S (kg/ha)", color="Litter Type")
+
+S_OH_All
+
+#Mutate Litter_Fall so it's on a yearly time step; can't use the flux data because it is unfortunately specified far below this code 
+
+Litter_Fall_Year<-Litter_Fall %>% group_by(Year) %>% summarise(across(N:P, ~sum(.x, na.rm= TRUE)))
+
+S_LF.G<-ggplot(Litter_Fall_Year, aes(x=Year, y=S, color="S Litterfall Return"))+geom_line()
+S_LF.G+theme(legend.title = element_blank())
+
 ```
 
 <br>
 
-```{r, echo=FALSE, fig.subcap=c("Litter Potassium Content", "Litter Phosphorous Content")}
-Litter_K<-Litter_Graph(Litter_Pretable$K)
-Litter_K+labs(y="K (kg/ha)")
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Forest Floor/O-horizon P content over time (a). and net annual P return in litterfall (b).", fig.subcap=c("P Content in each litter decomposition stage (kg/ha)", "P net annual return in litterfall (kg/ha)")}
 
-Litter_P<-Litter_Graph(Litter_Pretable$P)
-Litter_P+labs(y="P (kg/ha)")
+P_OH_All<-ggplot(Litter_Pretable, aes(x=Date))+geom_line(mapping=aes(y=P_CL, color="Coarse Litter"))+geom_line(mapping=aes(y=P_F, color="Fine Litter"))+geom_line(mapping=aes(y=P_H, color="Humic Litter"))+
+  geom_line(mapping= aes(y=P, color="Total Litter"))+
+  labs(y="P (kg/ha)", color="Litter Type")
+
+P_OH_All
+
+#Mutate Litter_Fall so it's on a yearly time step; can't use the flux data because it is unfortunately specified far below this code 
+
+Litter_Fall_Year<-Litter_Fall %>% group_by(Year) %>% summarise(across(N:P, ~sum(.x, na.rm= TRUE)))
+
+P_LF.G<-ggplot(Litter_Fall_Year, aes(x=Year, y=P, color="P Litterfall Return"))+geom_line()
+P_LF.G+theme(legend.title = element_blank())
 
 ```
 
+<br>
 
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Forest Floor/O-horizon N content over time (a). and net annual N return in litterfall (b).", fig.subcap=c("N Content in each litter decomposition stage (kg/ha)", "N net annual return in litterfall (kg/ha)")}
+
+N_OH_All<-ggplot(Litter_Pretable, aes(x=Date))+geom_line(mapping=aes(y=N_CL, color="Coarse Litter"))+geom_line(mapping=aes(y=N_F, color="Fine Litter"))+geom_line(mapping=aes(y=N_H, color="Humic Litter"))+
+  geom_line(mapping= aes(y=N, color="Total Litter"))+
+  labs(y="N (kg/ha)", color="Litter Type")
+
+N_OH_All
+
+#Mutate Litter_Fall so it's on a yearly time step; can't use the flux data because it is unfortunately specified far below this code 
+
+Litter_Fall_Year<-Litter_Fall %>% group_by(Year) %>% summarise(across(N:N, ~sum(.x, na.rm= TRUE)))
+
+N_LF.G<-ggplot(Litter_Fall_Year, aes(x=Year, y=N, color="N Litterfall Return"))+geom_line()
+N_LF.G+theme(legend.title = element_blank())
+
+```
+
+<br>
+
+I plotted the litterfall return rate and the O-horizons next to each other to show that the inability of the O-horizon to build up certain nutrients is not an issue with nutrient release (these values can be set to be very low, such as 0.05 for Ca and Mg, and losses are still observed), but likely due to a gradual depletion of the soil for specific nutrients. The site builds up with N in the O-horizon, and this likely implies that the system is not limited by N, but that base cations are becoming increasingly limited over time, with the exception of K. 
 
 ### Tree Nutrient Content
 <br>
