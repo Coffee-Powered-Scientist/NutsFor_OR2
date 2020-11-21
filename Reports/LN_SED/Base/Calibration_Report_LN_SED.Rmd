@@ -733,8 +733,7 @@ Bar_SO4
 
 ```
 
-I tested sulfate by getting rid of absorbed sulfate altogether and only allowing for atmospheric input and uptake dominate SO4 dynamics. This seemed to allow for easy calibration of SO4 concentrations. 
-
+I added back a reasonably large sulfate pool, this caused enhanced S losses which were unrealistic. This likely implies that the system had too much S going through it. 
 <br>
 
 ```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, fig.cap="Nitrogen input and output comparison graphs", fig.subcap=c("N input and output fluxes over time", "Total Average N input and output fluxes")}
@@ -847,10 +846,10 @@ Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight*10
 
 Litter_Fall[c(11:16)]<-lapply(Litter_Fall[c(11:16)], as.numeric)
 
-Litter_Fall<-Litter_Fall %>% group_by(Date) %>%
+Litter_Fall<-Litter_Fall %>% group_by(Year) %>% select(-Date) %>%
   summarise(across(Dry.weight:Dry.weight_kgha, ~sum(.x, na.rm=TRUE)))
 
-LF<-ggplot(Litter_Fall, aes(x=Date, y=Dry.weight_kgha))+geom_line()+labs(y="Litter Fall Dry Weight (kg/ha)")
+LF<-ggplot(Litter_Fall, aes(x=Year, y=Dry.weight_kgha))+geom_line()+labs(y="Litter Fall Dry Weight (kg/ha)")
 LF
 
 ```
