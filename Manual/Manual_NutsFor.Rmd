@@ -104,11 +104,6 @@ kable_styling(full_width = F, latex_options = "scale_down", "hold_position", fon
 
 
 
-
-
-
-
-
 <br>
 
  
