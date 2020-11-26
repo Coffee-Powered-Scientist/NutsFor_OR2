@@ -1,0 +1,44 @@
+---
+title: "Hydrology Report: Sedimentary Sites"
+author: "Kaveh Gholamhossein Siah"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    toc_depth: 3
+    extra_dependencies: "subfig"
+    
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Hydro_Mutator.R")
+
+
+Other_Sites<-read.csv2("~/Evap_OCR_Validation.csv")
+
+Other_Sites<-Other_Sites %>% select(-c(5:24))
+
+Other_Sites[c(3:4)]<-lapply(Other_Sites[c(3:4)], as.numeric)
+
+Newport<-Other_Sites %>% filter(Site %in% c("Newport"))
+
+Cloverdale<-Other_Sites %>% filter(Site %in% "Cloverdale")
+
+
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+Example<-ggplot(Hydro_X, aes(x=Date, y=AET))+geom_line()
+Example
+
+
+```
+
+

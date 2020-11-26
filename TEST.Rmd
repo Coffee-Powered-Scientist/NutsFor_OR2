@@ -1,0 +1,24 @@
+---
+title: "Test"
+author: "Kaveh G. Siah"
+date: "11/12/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+library(kableExtra)
+Parameter_T3<-c("Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact")
+
+Units_T3<-c("mmol Nutrient/mol C", "$mmol C/m^2$", "N/A", "$mmol/(m^2*mo)$", "N/A", "mmol Nutrient/mol C")
+
+Description_T3<-c("Determines concentration of nutrient elements in the litter fraction of OM.", "Sets the litter carbon pool, and thus the amount of nutrients per unit area.", "Designates the OM distribution between coarse litter (first column), fine litter (second column), and humus (third column)", "Calibration decomposition factor shows up multiple times in the file for the 3 OM fractions (1-3) and for the mineral soil layers (1-n).", "Calibration factor that determines the proportion of decomposed carbon that effluxes as carbon dioxide.", "Calibration factors for both the 3 OM fractions (1-3) and the mineral soil fractions (1-n). Can be used to calibrate soil solution and liter flow ion fluxes, range from 0 to 1.")
+
+text_tbl_3 <- data.frame(
+Parameter_T3, Units_T3, Description_T3
+)
+
+kbl(text_tbl_3, caption="OM Decomposition File", booktabs=TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"), font_size=12)

@@ -1,16 +1,24 @@
 ---
-title: "Test_Report1"
-author: "Kaveh G. Siah"
-date: "10/27/2020"
-output: pdf_document
+title: "Nutrient Cycling in Forest Ecosystems: User Manual v.()"
+author:
+   Kaveh Gholamhossein Siah and
+   Gregory van Der Heijden
+date:  "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+   pdf_document:
+    toc: yes
+    toc_depth: 3
+    extra_dependencies: "subfig"
+geometry: margin=2 cm
+fig_caption: yes
+citation_package: natbib
+bibliography: Manuscript_Test.bib
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+```{r global_options, include=FALSE, message=FALSE}
+#This global option holds figures in the correct place (stops floating in pdf)
+knitr::opts_chunk$set(fig.pos = 'H')
 
-```{r, include=FALSE}
-options(tinytex.verbose = TRUE)
 ```
 
 ```{r, include=FALSE}
@@ -18,94 +26,109 @@ library(kableExtra)
 
 ```
 
-# Nutrient Cycling in Forest Ecosystems
-
-## (NutsFor)
-
-Programmer:
-
-Manual Author: 
-
-## User Manual for Version ()
 
 <!--Title Page Below, possible background theme/image-->
 
-<!--Insert table of contents (headers automatically added to it)-->
-
 <!--Insert List of Abbreviations-->
+<br>
 
-### Introduction
+## Introduction
 
-<!--Meant to be a User guide, maybe a breif history can be mentioned at the end, but the intro should be short and descriptive-->
+<!--Meant to be a User guide, maybe a brief history can be mentioned at the end, but the intro should be short and descriptive-->
 
 The Nutrient Cycling in Forested Ecosystems (NutsFor) model is
 a stand-level biogeochemical model which simulates the forest nutrient dynamics of 16 chemical species <!--List species-->
 These processes include hydrology, soil exchange site chemistry, mineral
 weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, separate pools of soil water, and other small
 changes made to the original model described in van der Heijden et al, 2017. All
-changes from the original model are noted with an asterisk (“*”). As NutsFor is
-an active project of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
+changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
 
-This user manual is intended to give relevant information about the model's capabilities, useful tips regarding its usage, and insight into the equations and theory which link model parameters. A list of equations used to parameterize NutsFor are also included, along with some description of how these equations are used. 
-
+This user manual is intended to give relevant information about the model's capabilities, useful tips regarding its usage, insight into the equations and theory which link model parameters, and information on how to effectively use NutsFor in an R-Studio based environment.
 
 
-### Model Start Up
+
+<br>
+
+## Model Start Up
 
 Prior to running or implementing change to model parameters, the user should go through the input and output files for NutsFor using excel. NutsFor does not currently have a built-in method to visualize results, it is recommended that the user use excel macro commands or R to automatically read generated files (which will always output with the same structure) to visualize results. This is highly important in the calibration phase of model implementation.
 
-The model is simple to run, simply double-click or other wise enact the NutsFor.exe file. The model will run and output results
-to its corresponding .csv files automatically. If the output files are moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as
-the Output folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a “Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) will result in either the NutsFor exe closing on its own or on the former messages never appear in the NutsFor.exe box.
+The model is simple to run, simply double-click or other wise enact the NutsFor.exe file. The model will run and output results to its corresponding .csv files automatically. If the output files are moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as the Output folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a “Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) will result in either the NutsFor.exe closing on its own or on the former messages never appear in the NutsFor.exe terminal.
 
+<br>
 
+## Input Files
 
-Input Files
-
-There are 10 input files for NutsFor (the .nut files). These
+There are 11 input files for NutsFor (.nut files). These
 files are csv files which can be opened through excel. A full list of the input
 parameters, separated by the file they appear in, is shown in the tables below.
 Below each table is a more extensive description of each variable and its
 effects on model outputs.
 
+<br>
 
-
-Dry Deposition
-
-![InputTable1](C:\Users\siahl\Documents\Manual Figures\InputTable1.png)
-
-Description of Parameters: Dry Deposition
-
-The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The file starts with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
+### Deposition Files
 
 <!--Insert units as an image, its way easier-->
 
 ```{r, include=FALSE}
 text_tbl <- data.frame(
-Input= c("Ca, Mg, Cl, Al...etc,"),
+Input= c("Ca, Mg, K, Na, NO3, NH4, SO4, Cl, PO4, DOC, H, Al, Si"),
+Units=c("$\\mu$mol/L"),
 Description = c("Determines the amount of each species deposited into ecosystem by Dry Deposition")
 )
 
 
 
 ```
+<br>
 
+**Description of Parameters: Deposition Files**
 
+The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The files start with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
 
-```{r, include=TRUE}
-kbl(text_tbl, booktabs = T, col.names =  c("Input ($\\mu$mol/L)", "Description")) %>%
-kable_styling(full_width = F) %>%
-column_spec(1, bold = T) %>%
-column_spec(2, width = "20em")
+```{r, echo=FALSE}
+kbl(text_tbl, booktabs = T, caption="Dry and Wet Deposition Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
+kable_styling(full_width = F, latex_options = "scale_down", "hold_position", font_size=12) 
  
 ```
 
+```{r, echo=FALSE}
+#Rainfall Concentrations File
+```
+
+```{r, echo=FALSE}
+#Weather Data File
+```
+
+
+
+
+<br>
+
  
- Soil Parameters
+### Soil Files
 
-<!--Table 2 Here-->
+```{r, echo=FALSE}
 
-Description of Parameters: Soil Parameters
+
+Parameter<-c("Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial")
+
+Units<-c("N/A", "N/A", "cm", "cm", "$kg/m^3$", "$kg/m^3$", "Percent", "Fraction", "N/A", "N/A", "Unknown", "$m^2/m^3$", "Percent", "Percent", "Percent", "$c{mol}_c/kg$", "N/A", "Percent", "Fraction (max 1)", "ks: $\\mu$mol/L, knit: Fraction", "Multiple of Microbial Pool", "g Nutrient/kg soil)", "$\\mu$mol/L", "$\\mu$mol/kg", "c${mol}_c$/kg")
+
+Short_Description <-c("Desingates number of layers.", "Assigns layer number to each layer", "Tracks vertical depth of soil layer", "Designates the individual thickness of each soil layer", "N/A", "N/A", "Determines the percent of soil particles greater than 2mm in diameter", "Determines fraction of total tree root biomass in eah layer","Gibbsite formation constant","Al precipitation constant (unused in current version)", "Partial Pressure of CO2","Weatherable mineral area","Soil moisture at which stand cannot extract water", "Soil moisture after excessive water is leached", "Soil moisture at which all pore space is filled with water", "Total cation exchange capacity", "Gapon coefficients for each cation", "Porportion of total mineral area that each individually defined mineral occupies" , "Determines fraction of needed nutrient which stand uptakes from each", "Nitrification constants that determines NO3 production", "Determines fraction of SOM which turns over", "Iniital Amount of Nutrient Mineralized in the SOM pool.", "Concentration of all chemical species at beginning of simulation", "Adsorbed Concentration of anions at the beginning of the simulation", "Sorbed Concentration of Cations to the CEC at the beginning of the simulation")
+
+text_tbl_2 <- data.frame(
+Parameter, Units, Short_Description
+)
+
+kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"), font_size=12)
+
+```
+
+<br>
+
+**Description of Parameters: Soil Parameters**
 
 <!--Keep concise but informative-->
 
@@ -121,6 +144,8 @@ cells lies between the tables, otherwise NutsFor will not be able to read the
 tables. The total number of soil layers (Nb_Layers) must also be updated in the
 General Data File before running the model.
 
+<br>
+
 ***Depth and Thickness:***
 
 The depth of the soil layer represents the vertical distance
@@ -129,6 +154,8 @@ calculations. Soil layer thickness determines how thick each soil layer is, it
 is recommended that soil layers are set to less than or equal to 20cm thick. Overly thick
 soil layers may be liable to over-leaching of nutrients from the soil layers.
 
+<br>
+
 ***Bulk Density, Solid Density, and Stoniness:***
 
 Bulk density is defined as fine earth bulk density
@@ -136,6 +163,8 @@ Bulk density is defined as fine earth bulk density
 calculations of NutsFor, and can be ignored. Stoniness is the percent of soil
 particles greater than 2mm in diameter, this parameter affects soil moisture
 and hydrology calculations and is important to calculate.
+
+<br>
 
 ***Root Fraction and Uptake Fraction per Layer:***
 
@@ -146,7 +175,9 @@ extracts nutrients from the soil layers, allowing for greater flexibility in
 determining tree uptake dynamics. Intra-annual uptake dynamics are changed
 through the Tree Parameter file.
 
-**pKGibb, pKAl_Precip, pCO2:**
+<br>
+
+***pKGibb, pKAl_Precip, pCO2:***
 
 The pKGibb parameter is the -log of the reaction constant of
 gibbsite dissolution to free aluminum, similarly the pKAl_precip is the -log of
@@ -158,7 +189,9 @@ largest contributor of H+ compared to other acids in the model. pCO2 is the
 partial pressure of carbon dioxide in the soil solution, it is a constant
 multiple of atmospheric CO2 and is <u>not dynamic with decomposition rates.</u>
 
-**Mineral Area**
+<br>
+
+***Mineral Area***
 
 This parameter designates the total weatherable mineral surface area of the soil. It is calculated from the equation:
 
@@ -168,7 +201,7 @@ $$
 (8*X.Clay)+(2.2*X.Silt)+(0.03*X.Sand)
 $$
 
-Citation: 
+Citation: [@sverdrupCalculatingFieldWeathering1993]
 
 Note, that clays dominant in high area clays may be misrepresented by this equation *(Citation)*
 
@@ -237,7 +270,7 @@ CEC Parameters and CEC Initial
 
    
 
-   ### AEC Parameters
+4). AEC Parameters
 
    Anion Exchange Capacity (AEC) is implemented in the model for 3 anions; Sulfate, Phosphate, and Chloride. Sulfate adsorption can be modeled using either  a Langmuir or Freundlich adsorption isotherm. Chloride is modeled using the Langmuir model, Phosphate the Freundlich model. Sulfate adsoprtion isotherms can be selected in the General Data File (Input Table 4). 
 
@@ -245,31 +278,55 @@ CEC Parameters and CEC Initial
 
    1. Soil Adsorbed Anions Parameters
 
-      Each anion has two AEC adsorption parameters associated with it, Parameter #1 and Parameter #2. These parameters will stand for different variables depending on the adsoprtion isotherm selected. 
+      Each anion has two AEC adsorption parameters associated with it, Parameter #1 and Parameter #2. These parameters will stand for different variables depending on the adsorption isotherm selected. 
 
-      Langmuir
-
-      Freundlich
 
    2. Soil Adsorbed Anions Initial
 
+\newpage
+```{r, echo=FALSE, message=FALSE}
+
+#Soil Temperature File
+
+Parameters_T9<-c("Year", "Month", "Layers (1-n)")
+
+Units_T9<-c("Year", "Month", "Degrees Celsius")
+
+Description_T9<-c("Desginates the year corresponding to layer and temperature data.", "Sepecifies the month.","Specifies the average monthly temperature at each time point.")
+
+text_tbl_9 <- data.frame(
+Parameters_T9, Units_T9, Description_T9
+)
+
+kbl(text_tbl_9, caption="Soil Temperature File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"), font_size=12)
+
+```
+
+**Description of Parameters: Soil Temperature File**
+
+The structure of this file is fairly straight forward, for each layer, month, and year of simulation, an average soil temperature is entered. The soil temperature value is used to calculate decomposition and chemical reaction kinetics. Numerous soil-temperature monitoring stations are active around the world [Cite Here.]
    
 
-   
+```{r, echo=FALSE}
+Parameter_T3<-c("Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact", "NULL")
 
-<!--Insert Pictures instead of encoded tables-->
+Units_T3<-c("mmol Nutrient/mol C", "$mmol C/m^2$", "N/A", "$mmol/(m^2*mo)$", "N/A", "mmol Nutrient/mol C", "Null")
 
-| Input Table<br> 3: OM decomposition                          |
-| ------------------------------------------------------------ |
-| Parameter Name in File                                       |
-| Litter Concentration (N, Ca, Mg, K, S, P)                    |
-| Litter_C_Pool                                                |
-| Layer_frac (Coarse, Fine, Humus)                             |
-| Decomp_rate                                                  |
-| CO2FACT                                                      |
-| Nutrient_Factor (DOCFACT, N_Fact, Ca_Fact, Mg_Fact, K_Fact, S_Fact,<br> P_Fact). |
+Description_T3<-c("Determines concentration of nutrient elements in the litter fraction of OM.", "Sets the litter carbon pool, and thus the amount of nutrients per unit area.", "Designates the OM distribution between coarse litter (first column), fine litter (second column), and humus (third column)", "Calibration decomposition factor shows up multiple times in the file for the 3 OM fractions (1-3) and for the mineral soil layers (1-n).", "Calibration factor that determines the proportion of decomposed carbon that effluxes as carbon dioxide.", "Calibration factors for both the 3 OM fractions (1-3) and the mineral soil fractions (1-n). Can be used to calibrate soil solution and liter flow ion fluxes, range from 0 to 1.", "NULL")
 
-Description of Parameters: OM Decomposition
+text_tbl_3 <- data.frame(
+Parameter_T3, Units_T3, Description_T3
+)
+
+kbl(text_tbl_3, caption="OM Decomposition File", booktabs=TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"), font_size=12)
+
+
+
+```
+
+<br>
+
+***Description of Parameters: OM Decomposition***
 
 **Litter Parameters**
 
@@ -305,67 +362,284 @@ DOC_Decomp:
 
 Determines the proportion of DOC evolved from decomposing litter that is itself decomposed. This parameter decreases OA (R-), however it does not link back to carbon dioxide release as carbon dioxide concentration is a fixed parameter (See, Input table 2, pCO2)
 
+<br>
+
+### General Files
+
+```{r, echo=FALSE}
+Parameter_T4<-c("Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms")
+
+Units_T4<-c("Year", "Year", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A","N/A", "Carbon/Charge", "N/A", "N/A")
+
+Description_T4<-c("Determines simulation start year.", "Determines simulation end year.", "Designates number of layers to be read", "Designates the number of minerals", "Lists out the minerals to be simulated", "Designates the pka of organic acid stages of dissolution", "Designates Al pka", "Desingates phosphoric acid pka", "Designates DIC pka", "Determines how many C molecules are present for every negative charge on organic acids.", "Determines the stand's species composition", "Determines adsroption isotherm used for anions (1=langmuir, 2=Freundlich)")
+
+text_tbl_4 <- data.frame(
+Parameter_T4, Units_T4, Description_T4
+)
+
+kbl(text_tbl_4, caption="General Data File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
 
 
-| Input Table 4: General<br> Data File |
-| ------------------------------------ |
-| Parameter Name in<br> File           |
-| Start_year                           |
-| End_Year                             |
-| Nb_Layers                            |
-| Nb_Minerals                          |
-| Mineral_names                        |
-| OA_pka                               |
-| Aluminum                             |
-| Phosphoric_acid                      |
-| DIC                                  |
-| Organic_acid_size                    |
-| Nb_Tree_Comp                         |
+```
+<br>
 
-Description of Parameters: General Data File
+**Description of Parameters: General Data File**
 
-| Input Table 5: Mineral Data File                            |
-| ----------------------------------------------------------- |
-| Parameter Name in File                                      |
-| Mineral                                                     |
-| pKH, pKH2O, pKCO2, pKr                                      |
-| kH, kH20, kCO2,kr                                           |
-| nH, nCO, nr                                                 |
-| WAlH, WBCH, WAlH2O, WBCH2O                                  |
-| CAl*10^-6, CR*10^-6 CBC*10^-6                               |
-| Cation Composition of Minerals (Ca, Mg, K, Na, Al, Si, PO4) |
-| Iso                                                         |
+***Simulation Length***
 
-Description of Parameters: Mineral Data File
+Simulation length (the number of years which is simulated) is determined by the Start_Year and End_Year parameters. For example, a starting year of 2015 and an ending year of 2020 is 6 total years of simulation (starting in Jan of 2015 and ending in December of 2020). Note that deposition files and the soil temperature file must be extended by however long the simulation is run for (the program does NOT loop over these files). 
 
-| Input Table 6: Tree Parameter File |
-| ---------------------------------- |
-| Parameter Name in File             |
+***Acid pka***
+Numerous acids have their pKas (-log of their dissolution constant) set here. These parameters can be taken from online chemical databases, assuming an average room temperature (25 degrees celsius).
 
-Description of Parameters: Tree Parameter File
+***Organic Acid Size***
+This parameters determines the number of carbons for every charged site on an organic acid; it is used to calculate the charge density of organic acids. Note that this is a global parameter, changing this number changes R- concentrations in all layers. Lowering this parameter leads to a higher charge density (and thus more acidic) soil solution, which tends to cause cations from the CEC to dissolve into solution. 
 
-<!--Stand Harvesting File-->
+A potential side effect of high cation concentrations due low charge density is suppressed weathering release of cations, as per equation X.X in Equations. 
 
-Output File Description
+<br>
 
-<!--Just the core, relevant data files. Some files just convert between units and shouldn't get an extensive description-->
+```{r, echo=FALSE}
 
-Calibration
+#Mineral Data File
 
-<!--Disclaimer abouut site specific differences-->
+Parameter_T5<-c("Mineral", "pKH", "pKH2O","pKCO2", "pKr","kH", "kH2O", "kCO2", "kr", "nH", "WAlH",	"WBCH",	"WAlH2O",	"WBCH2O", "nCO2",	"nr",	"$CAl*10^-6$",	"$CR*10^-6$",	"$CBC*10^-6$",	"Ca, Mg, K, Na, Al, Si,	PO4", "Ca.Iso, Mg.Iso, K.Iso	Na.Iso, Al.Iso, Si.Iso, PO4.Iso")
+
+Units_T5<-c("N/A",  "N/A", "N/A","N/A", "N/A","N/A", "N/A", "N/A", "N/A", "N/A", "N/A",	"N/A",	"N/A",	"N/A", "N/A",	"N/A",	"$[Al]*10^-6$",	"$[R]*10^-6$",	"$[BC]*10^-6$",	"Stoichiometric", "N/A" )
+
+Description_T5<-c("Name of mineral.", "Reaction constant of mineral with H+", "Reaction constant of mineral with water.","Reaction constant of mineral with $C{O}_2$", "Reaction constant of mineral with organic acid (R)","Temperature dependence of mineral-H+ reaction.", "Temperature dependence of mineral water reaction.", "Temperature dependence of mineral $C{O}_2$ Reaction", "Temperature dependence of mineral Organic Acid reaction.", "Mineral dissolution H+ reaction order.", "Brake reaction order for Al (${f}_H+$)",	"Brake reaction order for BC (${f}_{H+}$)",	"Brake reaction order for Al (${f}_{H2O}$)",	"Brake reaction order for BC (${f}_{H2O}$)", "Brake reaction order for $C{O}_2$ (${f}_{C{O}_2}$)",	"Brake reaction order for R $({f}_R$)",	"Limiting Al concentration",	"Limiting BC concentration",	"Limiting R- concentration",	"Sets the stoichiometry of each mineral.", "Unknown")
+
+
+text_tbl_5 <- data.frame(
+Parameter_T5, Units_T5, Description_T5
+)
+
+kbl(text_tbl_5, caption="Mineral Data File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+
+
+
+```
+
+**Description of Parameters: Mineral Data File**
+<br>
+
+***Dissolution Reaction Parameters***
+The parameters which determine mineral dissolution dynamics are the equilibrium constants (pK values), the thermal dependencies (k values) and the reaction orders (n values). These are then combined in the following equation:
+
+$$r_j=(k_{H^+}*{[H^+ ]}^{n_{H^{+}}}/f_{H^+}) +(k_{H_{2}O}/f_{H_{2}O}) +(k_{CO_2}*P_{CO_2}^{n_{CO_2}}/f_{CO_2}) +(k_R*[R^- ]^{n_{R^-}}/f_{R^-})$$ 
+where
+
+$$ r_j=$$ Weathering Rate
+
+The equation calculates the summation of all chemical species (H+, H2O, CO2, and Organic Acid) has on mineral weathering rate. Each calculation has a restricting coefficient ($$f_{species}$$), which is a product inhibition coefficient discussed in the next sub-section. 
+
+
+<br>
+***Inhibition Reaction Parameters***
+The inhibition coefficients are calculated dynamically based on the concentration of cations in soil solution layers. The theoretical reasoning of this parameter is straight forward: the higher the solution concentration of base cations, the lower favorability of the weathering reaction. 
+
+
+
+These equations mean that as the base cation concentration of the soil solution increases, the weathering rate will become increasingly limited. The magnitude at which this occurs depends on the identity of the mineral and its defined parameters. An instance where this may become relevant is during calibration of free aluminum concentrations. Free aluminum will react with water in the model to release protons, which generally leads to enhanced mineral weathering as per Equation X. However, if aluminum concentrations are very high, the model will simulate a reduction in mineral weathering, cutting off the positive feedback between aluminum hydrolytic proton release and mineral weathering enhancement. 
+
+Note that the saturation constant (also known as the saturation concentration) sets the maximum solution concentration of each cation in water. The closer the simulated solution concentration is to the saturation constant, the higher the inhibition coefficient becomes and thus the slower the weathering.
+
+New minerals can be added to the NutsFor mineral data file, a more extensive list of minerals is given in [@BGDReviewsSyntheses]. However, note that the exact parameters which control mineral weathering will depend on several real-world dependencies 
+
+
+***Stoichiometry and Isometric Substitution***
+
+
+<br>
+
+### Tree and Stand Files
+
+```{r, echo=FALSE}
+#Tree Parameter File: Current conversion issue somewhere here!
+Parameter_T6<-c("Foliage.start", "Foliage.End","PET.winter.factor","PET.summer.factor","interception" ,"AET.Reduc","Leaching.alpha","Absorption.alpha","Foliar.target.conc","Percent.variation, foliar","Translocation.Percent","Foliar.Exudation","Foliar.Leaching","Foliar.absorption","Wood.target.conc","Wood.initial.conc","Percent.variation, Wood","Bark.target.conc","Bark.initial.conc","Percent.variation, Bark","Branch.target.conc","Branch.initial.conc","Percent.variation, Branch")
+
+Units_T6<-c("$g/m^2$", "$g/m^2$","Multiple","Multiple","cm" ,"Multiple","N/A","N/A","$\\mu$mol/g","Fraction","Fraction","N/A","N/A","N/A","$\\mu$mol/g","Percent.variation","$\\mu$mol/g","$\\mu$mol/g","Percent.variation","","$\\mu$mol/g","$\\mu$mol/g","Fraction")
+
+Description_T6<-c("Starting biomass of foliage.", "Biomass of foliage at the end of simulation.","Multiplies by winter PET values to enhance or reduce PET.","Multiplies by summer PET values to enhance or reduce PET","Sets the volume of water which canopy can maximally intercept." ,"Multiplies by calculated AET to reduce or enhance AET.","Reaction order for foliar leaching reaction.","Reaction order for foliar adsoprtion reaction.","Determines foliar concentration of nutrients.","Fraction of target concentration which foliage can reach before limitation.","Fraction of foliar nutrients that are translocated to stem during litterfall events.","NULL","NULL","NULL","Wood.target.conc","Wood.initial.conc","Percent.variation, Wood","Bark.target.conc","Bark.initial.conc","Percent.variation, Bark","Branch.target.conc","Branch.initial.conc","Percent.variation, Branch")
+
+
+text_tbl_6 <- data.frame(
+Parameter_T6, Units_T6, Description_T6)
+
+kbl(text_tbl_6, caption="Tree Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"))
+
+
+
+```
+
+**Description of Parameters: Tree Parameter File**
+
+```{r, echo=FALSE, message=FALSE}
+#Stand Harvesting File
+Parameter_T7<-c("Year", "Month",	"Stand.Frac", "Wood.Exp.frac", "Bark.Exp.frac", "Branch.Exp.frac", "Foliage.Exp.frac")
+
+Units_T7<-c("Year", "Month", "Fraction", "Fraction", "Fraction", "Fraction", "Fraction")
+
+Description_T7<-c("Designates the year of harvest event.", "Designates the month of harvest event.", "Multiplies by stand biomass, determines what proportion of stand is removed.", "Determines fraction of wood (bole) removed.", "Determines fraction of bark removed", "Determines fraction of branch removed.", "Determines the fraction of foliage removed.")
+
+
+text_tbl_7 <- data.frame(
+Parameter_T7, Units_T7, Description_T7)
+
+kbl(text_tbl_7, caption="Stand Harvesting File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"))
+
+
+```
+***Description of Parameters: Stand Harvesting File***
+
+
+
+```{r, echo=FALSE, message=FALSE}
+#Tree growth file
+
+Parameter_T8<-c("Wood: Biomass.Start and Increment ", "Bark: Biomass.Start and Increment", "Branch: Biomass.Start and Increment", "Fol.DW.min: Increment", "Fol.DW.max: Increment")
+
+Units_T8<-c("$g/m^2$","$g/m^2$", "$g/m^2$", "$g/m^2$", "$g/m^2$")
+
+Description_T8<-c("Designates the starting bole biomass at start of simulation and yearly growth increment.", "Designates the starting bark biomass at start of simulation and yearly growth increment.", "Designates the starting branch biomass at start of simulation and yearly growth increment.", "Designates the minimum foliar biomass every year.", "Designates the meximum foliar biomass at every time step.") 
+
+
+
+text_tbl_8 <- data.frame(
+Parameter_T8, Units_T8, Description_T8)
+
+kbl(text_tbl_8, caption="Tree Growth File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"))
+
+```
+<br>
+
+***Description of Parameters: Tree Growth File***
+
+
+
+
+
+
+## Output Files
+
+There are 60 output files that NutsFor.exe generates, separated into 9 folders. All files are structured in a readable manner, with units *most* designated. All output files are .csv files separated by ";", all can be read using R. Unlike for input parameter files, output files are largely self-explanatory, however some units are not noted, and some file structures are difficult to immediately read into programs such as R. This section will briefly describe file structures and folder contents, without the extensive descriptions offered for input files. It will also offer basic R studio-based approaches to reading and organizing the data for further analysis. 
+
+**Output Folders**
+
+***AEC***
+
+The first folder in the Output data directory is the AEC folder. AEC contains anion adsorption data (SO4, PO4, Cl) for each layer, and so the number of .csv files contained in this folder depends on the user-specified number of soil layers. Each file has a year and month column, and AEC data in units of $\\mu$mol/kg and kg/ha. 
+
+***Biomass***
+
+The biomass folder contains the "Plant pool" and "Tree data" files. Plant pool contains (I don't know). The Tree data file contains compartment nutrient content and biomass data for the stand. Nutrient contents are given in units of $\\mu$mol/g and kg/ha. Biomass or "dry weight" is given in kg/ha. 
+
+***Budgets***
+
+The Budgets folder reports the "Above ground fluxes" and "Biological cycle" files. These files contain simplified yearly summary data on nutrient inputs and outputs, and can be used to calculate ecosystem nutrient budgets. The Above ground fluxes files contains deposition fluxes, throughfall flux, net foliar exchanges, litterflow flux, leaching flux, and weathering flux of each nutrient every annual time point. The Biological cycle file contains uptake, litterfall, and organic matter mineralization fluxes. All fluxes are in units of kg/ha/yr. NO3, NH4, SO4, and PO4 are in units of N, S and P (NH4-N, NO3-N, SO4-S, and PO4-P). 
+
+***CEC***
+
+The CEC folder is identical to the AEC folder in basic structure, it holds a csv file for every soil layer specified. Each file contains cation adsorption data in both $\\\\mu$mol/kg and kg/ha. 
+
+***Hydrology***
+
+The hydrology folder has two datafiles, the "Hydrology Daily Output" and the "Hydrology Monthly Output" files. The monthly output file is smaller and more practical for use, although they contain the same data distributed over different time steps. The file begins by reporting the Year and month of each meaurement, then reports the rainfall (RF), potential evapotranspiration (PET), the actual evapotranspiration (AET), the throughfall 
+
+***Litter***
+
+***Soil Solution***
+
+***SOM***
+
+***Weathering***
+
+***Using R with NutsFor***
+
+This section assumes that the user has basic R studio skills, for more information on general R studio usage see the "Helpful Resources" section of this manual.
+
+For layer-based output folders, such as AEC, CEC, weathering, and soil solution, it is most efficient to read all files from a single output directory into one R dataframe, and use an indexing function to define the individual layers. For instance, a code for reading CEC might look like: 
+
+```{r, eval=FALSE, echo=TRUE}
+
+#Requires this package for code to make sense (pipe operators)
+library(dplyr)
+
+#Generates a pattern within "files", locates folder
+files <- list.files(path = "~/YourFilePath/Output data/CEC", pattern = "CEC", full.names = TRUE)
+
+#Uses the defined "files", applies the read.csv2 function
+#and generates an "id" column unique to each file.
+CEC_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
+  bind_rows(.id = "id")
+
+#Designates an index value (1-n) that corresponds to each "id" value, named "group_id" 
+CEC_All$group_id <- CEC_All %>% 
+  group_by(id)%>%
+  group_indices(id)
+
+```
+
+The above code essentially applies an identifying number for each soil layer in a large, aggregated dataset of all the soil layers, which makes it easier to apply graphing functions to the data as well as keep track of data in a single file. Graphing becomes particularly easy, for example the above CEC_All file generated above can be graphed using: 
+
+```{r, eval=FALSE,echo=TRUE}
+
+#Loads the ggplot2 package
+library(ggplot2)
+
+#Defines a graph for Ca, defines lines by group_id
+CEC_Graph_Ca<-ggplot(CEC_All, aes(x=Date, y=Ca, group=group_id))
+
+#Plots graph
+CEC_Graph_Ca
+
+```
+
+<br>
+
+It is likely that dataframes read into R will be in character format rather than numeric. This is because many of the NutsFor output files have 2 rows of character-containing values. Often, this leads to R not being able to read a descriptive header or graph the data correctly. Even if the character values are removed, the data will still be in character format and will not behave as a number in graphical or numerical analysis. To fix this, a simple code can be used:
+
+```{r, eval=FALSE, echo=TRUE}
+
+#Specifies that only columns 2-16 are to be made numeric
+CEC_All[c(2:16)]<-lapply(CEC_All[c(2:16)], as.numeric)
+
+```
+
+
+While R studio is a powerful for analyzing large datasets, it can also be used to generate manuscript-quality tables [Citation] and write dynamic reports or manuscripts [Citation].  
+
+
+## Calibration
+
+<!--Disclaimer about site specific differences-->
 
 <!--Describe general calibration steps, pH, weathering, ANC, ion concentrations-->
 
-Hypothesis Testing
+## Hypothesis Testing
 
 ## List of Equations
 
-**NutsFor Encoded Equations**
+### NutsFor Encoded Equations
 
 <!--~~List Gregory's equation table here, with updated sulfate ads.~-->
 
-**General Equations**
+### General Equations
+
+## Helpful Resources
+
+### Learning R
+#### Basic R Resources
+#### Advanced R for Building Projects
+
+### Github
+
+### Modeling
 
 ## Literature Cited
+
+<div id="refs"></div>
+
+## Appendix
 
 Appendix, maybe include screenshots of input interface? 
