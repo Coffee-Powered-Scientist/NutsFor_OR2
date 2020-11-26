@@ -54,6 +54,12 @@ source("~/Project_Master/Test_Rep/Code/LN_SED/Base/AEC_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Analysis_1_Mutator.R")
 
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Hydro_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/SOM_Mutator.R")
+
+
+
 
 
                                     ##Load Data, edit data as needed##
@@ -89,6 +95,13 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 AEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/AEC_All.csv", header=TRUE)
 
 Lys_Table<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDLN/LN_SED_Lys_Table.csv")
+
+Hydro_Table<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Hydrology.csv", header=TRUE)
+Hydro_Table$Date<-as.Date(Hydro_Table$Date)
+
+SOM<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/SOM.csv")
+SOM$Date<-as.Date(SOM$Date)
+
                                             ##Load Functions for Analysis##
 
 source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
@@ -103,6 +116,22 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_CEC_AEC.R")
 
 
 ```
+
+### Hydrology
+
+```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", message=FALSE, fig.ncol=2}
+
+Hydro_Plot<-ggplot(Hydro_Table, aes(x=Date, y=AET))+geom_line()
+
+Hydro_Plot
+
+RF_Mut<-Hydro_Table %>% group_by (Year) %>% summarise(across(RF:In, ~sum(.x, na.rm = TRUE)))
+RF_Plot<-ggplot(RF_Mut, aes(x=Year, y=RF))+geom_line()
+RF_Plot
+```
+
+
+
 
 ### Soil Solution Results
 <br>
@@ -201,6 +230,15 @@ SO4_L2<-SO4_SS_L2(Cal_Pretable_SS_Yr)
 SO4_L2
 
 ```
+```{r, echo=FALSE, fig.cap="Monthly Chloride Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+Cl_L1<-Cl_SS_L1(Cal_Pretable_SS_Yr)
+Cl_L1
+
+Cl_L2<-Cl_SS_L2(Cal_Pretable_SS_Yr)
+Cl_L2
+
+```
+
 
 
 <br><br><br>
@@ -282,8 +320,21 @@ NO3_L2
 
 #### Lysimeter Leaching Layers
 
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+Sim_Lysimeter_Flux<-Cal_Pretable_LL %>% filter(group_id %in% c("2", "8")) %>% group_by(group_id, YEAR) %>% summarise(across(Ca:HR, ~sum(.x, na.rm=TRUE))) %>% select(-H, -pH, -R, -HR) %>% filter (YEAR %in% c("2005", "2006")) %>% rename(Depth="group_id")
 
 
+Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
+  kbl(caption = "Simulated Lysimeter Fluxes by Depth (2005-2006)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
+
+
+```
+
+<br>
 
 ### Weathering Results
 
@@ -291,20 +342,12 @@ NO3_L2
 Weathering_Ca1<-Ca_W_L1(Cal_Pretable_W)
 Weathering_Ca1
 
-Weathering_Ca2<-Ca_W_L2(Cal_Pretable_W)
-Weathering_Ca2
-
-
-
 ```
+
 <br>
 ```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Magnesium Weathering (All Layer)"}
 Weathering_Mg1<-Mg_W_L1(Cal_Pretable_W)
 Weathering_Mg1
-
-Weathering_Mg2<-Mg_W_L2(Cal_Pretable_W)
-Weathering_Mg2
-
 ```
 <br>
 
@@ -313,10 +356,6 @@ Weathering_Mg2
 #K Weathering
 Weathering_K1<-K_W_L1(Cal_Pretable_W)
 Weathering_K1
-
-Weathering_K2<-K_W_L2(Cal_Pretable_W)
-Weathering_K2
-
 ```
 
 <br>
@@ -324,10 +363,6 @@ Weathering_K2
 ```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Aluminum Weathering (All Layer)"}
 Weathering_Al1<-Al_W_L1(Cal_Pretable_W)
 Weathering_Al1
-
-Weathering_Al2<-Al_W_L2(Cal_Pretable_W)
-Weathering_Al2
-
 ```
 
 <br>
@@ -335,10 +370,6 @@ Weathering_Al2
 ```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Phosphate Weathering (All Layer)"}
 Weathering_P1<-P_W_L1(Cal_Pretable_W)
 Weathering_P1
-
-Weathering_P2<-P_W_L2(Cal_Pretable_W)
-Weathering_P2
-
 ```
 
 <br>
@@ -346,10 +377,6 @@ Weathering_P2
 ```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Silica Weathering (All Layer)"}
 Weathering_Si1<-Si_W_L1(Cal_Pretable_W)
 Weathering_Si1
-
-Weathering_Si2<-Si_W_L2(Cal_Pretable_W)
-Weathering_Si2
-
 ```
 
 <br>
@@ -358,16 +385,12 @@ Weathering_Si2
 Weathering_Na1<-Na_W_L1(Cal_Pretable_W)
 Weathering_Na1
 
-Weathering_Na2<-Na_W_L2(Cal_Pretable_W)
-Weathering_Na2
-
 ```
 
 
 <br><br><br>
 
 ### Litter Pool Results
-
 
 <br>
 
@@ -418,7 +441,17 @@ Ca_LF.G+theme(legend.title = element_blank())
 
 ```
 <br>
-Discuss
+
+### Soil Organic Matter Results
+
+```{r, echo=FALSE, message=FALSE, fig.show="hold"}
+SOM<-SOM %>%group_by(Year, group_id)%>% summarize(across(C:S, ~mean(.x, na.rm = TRUE)))
+
+SOM_C<-ggplot(SOM, aes(x=Year, y=C,color=group_id))+geom_line()
+SOM_C
+
+```
+
 <br>
 
 
