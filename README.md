@@ -1,4 +1,4 @@
-This is the first master repository. 
+This is the master repository. 
 
 Here is the list of folders with concise description of function:
 
@@ -15,3 +15,17 @@ Manual: Contains the code which generates the NutsFor user manual
 Data: Holds final dataset of model runs for reproducibility purposes, it is not well updated and is meant to be fully implemented at the end of the project.
 
 Code: Holds all the code used to analyze and visualize data, except for report and manuscript Rmd files. 
+
+
+
+List of Used R Packages (if you want to run the codes):
+
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+library(captioner)
+library(car)
+library(janitor)
+library(scales)
+library(reshape2)
+

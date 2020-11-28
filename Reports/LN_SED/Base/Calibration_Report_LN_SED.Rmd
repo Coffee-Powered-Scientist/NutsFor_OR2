@@ -102,6 +102,8 @@ Hydro_Table$Date<-as.Date(Hydro_Table$Date)
 SOM<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/SOM.csv")
 SOM$Date<-as.Date(SOM$Date)
 
+Lys_Leaching<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDLN/LN_SED_Leaching_Lys.csv")
+
                                             ##Load Functions for Analysis##
 
 source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
@@ -318,7 +320,7 @@ NO3_L2
 
 ```
 
-#### Lysimeter Leaching Layers
+### Lysimeter Comparisons
 
 <br>
 
@@ -333,6 +335,18 @@ Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
 
 
 ```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+Lys_Leaching %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
+  kbl(caption="Actual Average Lysimeter Fluxes (2005)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>%
+kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
+
+```
+
 
 <br>
 
