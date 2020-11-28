@@ -5,7 +5,18 @@ library(dplyr)
 library(lubridate)
 
 
+
+rm(list = ls())
+###Total Litter Pool Script
+library(dplyr)
+library(lubridate)
+
+
 setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data")
+
+#Can't use above ground flux file, wrong time-step!
+source("~/Project_Master/Test_Rep/Code/Functions/Conversion_Func.R")
+
 
 Litter_Pool<-read.csv2("~/NutsForSEDHN/Base/Output data/Litter/Litter pool kg_ha data.csv")
 Litter_Amount<-read.csv2("~/NutsForSEDHN/Base/Output data/Litter/Litterfall.csv",header=FALSE)
@@ -37,14 +48,22 @@ Litter_Pool[c(1:30)]<-lapply(Litter_Pool[c(1:30)], as.numeric)
 Litter_Amount[c(1:9)]<-lapply(Litter_Amount[c(1:9)], as.numeric)
 
 
-Litter_Amount<-Litter_Amount %>% rename(Dry.weight=V3) %>% rename(Ca=V4) %>% rename(Mg=V5) %>%
-  rename(K=V6) %>% rename(N=V7) %>% rename(P= V8) %>%
-  rename(S= V9)%>% rename(Date=V1)
+Litter_Amount<-Litter_Amount %>% rename(Dry.weight=V3) %>% rename(N=V4) %>% rename(Ca=V5) %>%
+  rename(Mg=V6) %>% rename(K=V7) %>% rename(S= V8) %>%
+  rename(P= V9)%>% rename(Year=V1, Month=V2) 
 
 
-Litter_Amount<- Litter_Amount%>% filter(!is.na(Date))
+Litter_Amount<- Litter_Amount %>% filter(!is.na(Year)) 
 
+Litter_Amount<-Litter_Amount %>% mutate(Date=make_date(Year,Month))
 
+#Conversion
+Litter_Amount$N<-LF_Lit_N(Litter_Amount$N, Litter_Amount$Dry.weight)
+Litter_Amount$Ca<-LF_Lit_Ca(Litter_Amount$Ca, Litter_Amount$Dry.weight)
+Litter_Amount$Mg<-LF_Lit_Mg(Litter_Amount$Mg, Litter_Amount$Dry.weight)
+Litter_Amount$K<-LF_Lit_K(Litter_Amount$K, Litter_Amount$Dry.weight)
+Litter_Amount$S<-LF_Lit_S(Litter_Amount$S, Litter_Amount$Dry.weight)
+Litter_Amount$P<-LF_Lit_P(Litter_Amount$P, Litter_Amount$Dry.weight)
 
 write.csv2(Litter_Pool, "Litter_Pool.csv")
 write.csv2(Litter_Amount, "Litter_Fall.csv")
