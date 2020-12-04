@@ -123,7 +123,9 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_CEC_AEC.R")
 
 ```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", message=FALSE, fig.ncol=2}
 
-Hydro_Plot<-ggplot(Hydro_Table, aes(x=Date, y=AET))+geom_line()
+Hydro_Table2<-Hydro_Table%>% filter(Year %in% 2005)
+
+Hydro_Plot<-ggplot(Hydro_Table2, aes(x=Date, y=AET))+geom_line()
 
 Hydro_Plot
 
@@ -181,12 +183,37 @@ Lys_Table %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
 
 ```
 
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+Sim_Lysimeter_Flux<-Cal_Pretable_LL %>% filter(group_id %in% c("2", "8")) %>% group_by(group_id, YEAR) %>% summarise(across(Ca:HR, ~sum(.x, na.rm=TRUE))) %>% select(-H, -pH, -R, -HR) %>% filter (YEAR %in% c("2005", "2006")) %>% rename(Depth="group_id")
+
+
+Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
+  kbl(caption = "Simulated Lysimeter Fluxes by Depth (2005-2006)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
+
+
+```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+Lys_Leaching %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
+  kbl(caption="Actual Average Lysimeter Fluxes (2005)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>%
+kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% landscape() %>%
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
+
+```
+
 
 
 <br><br><br>
 
 
-```{r, echo=FALSE, fig.cap="Monthly Calcium Concentrations by Soil Layer", figures-side, fig.show="hold", out.width="50%", message=FALSE, fig.ncol=2}
+```{r, echo=FALSE, fig.cap="Average Annual Calcium Concentrations by Soil Layer", figures-side, fig.show="hold", out.width="50%", message=FALSE, fig.ncol=2}
 
 Ca_L1<-Ca_SS_L1(Cal_Pretable_SS_Yr)
 Ca_L1
@@ -196,14 +223,14 @@ Ca_L2
 
 
 ```
-```{r, echo=FALSE, fig.cap="Monthly Magnesium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Average Annual Magnesium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
 Mg_L1<-Mg_SS_L1(Cal_Pretable_SS_Yr)
 Mg_L1
 
 Mg_L2<-Mg_SS_L2(Cal_Pretable_SS_Yr)
 Mg_L2
 ```
-```{r, echo=FALSE, fig.cap="Monthly Potassium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Average Annual Potassium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
 
 
 K_L1<-K_SS_L1(Cal_Pretable_SS_Yr)
@@ -213,7 +240,7 @@ K_L2<-K_SS_L2(Cal_Pretable_SS_Yr)
 K_L2
 
 ```
-```{r, echo=FALSE, fig.cap="Monthly Sodium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Average Annual Sodium Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
 
 
 Na_L1<-Na_SS_L1(Cal_Pretable_SS_Yr)
@@ -224,7 +251,7 @@ Na_L2
 
 
 ```
-```{r, echo=FALSE, fig.cap="Monthly Sulfate Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Average Annual Sulfate Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
 SO4_L1<-SO4_SS_L1(Cal_Pretable_SS_Yr)
 SO4_L1
 
@@ -232,7 +259,7 @@ SO4_L2<-SO4_SS_L2(Cal_Pretable_SS_Yr)
 SO4_L2
 
 ```
-```{r, echo=FALSE, fig.cap="Monthly Chloride Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
+```{r, echo=FALSE, fig.cap="Average Annual Chloride Concentrations by Soil Layer", fig.show="hold", out.width="50%"}
 Cl_L1<-Cl_SS_L1(Cal_Pretable_SS_Yr)
 Cl_L1
 
@@ -320,35 +347,10 @@ NO3_L2
 
 ```
 
-### Lysimeter Comparisons
-
-<br>
-
-```{r, echo=FALSE, message=FALSE}
-
-Sim_Lysimeter_Flux<-Cal_Pretable_LL %>% filter(group_id %in% c("2", "8")) %>% group_by(group_id, YEAR) %>% summarise(across(Ca:HR, ~sum(.x, na.rm=TRUE))) %>% select(-H, -pH, -R, -HR) %>% filter (YEAR %in% c("2005", "2006")) %>% rename(Depth="group_id")
-
-
-Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
-  kbl(caption = "Simulated Lysimeter Fluxes by Depth (2005-2006)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
-         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
-
-
-```
-
-<br>
-
-```{r, echo=FALSE, message=FALSE}
-
-Lys_Leaching %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
-  kbl(caption="Actual Average Lysimeter Fluxes (2005)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>%
-kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
-         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
-
-```
 
 
 <br>
+
 
 ### Weathering Results
 

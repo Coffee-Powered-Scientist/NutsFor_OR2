@@ -398,6 +398,10 @@ Weathering_Na1
 
 ```
 
+<br>
+
+These weathering results need to be calibrated, I just finished high N calibration so weathering is the next step. 
+
 
 <br><br><br>
 
@@ -562,7 +566,7 @@ N_LF.G+theme(legend.title = element_blank())
 
 <br>
 
-I plotted the litterfall return rate and the O-horizons next to each other to show that the inability of the O-horizon to build up certain nutrients is not an issue with nutrient release (these values can be set to be very low, such as 0.05 for Ca and Mg, and losses are still observed), but likely due to a gradual depletion of the soil for specific nutrients. The site builds up with N in the O-horizon, and this likely implies that the system is not limited by N, but that base cations are becoming increasingly limited over time, with the exception of K. 
+
 
 ### Tree Nutrient Content
 <br>
@@ -799,7 +803,8 @@ Bar_SO4
 
 ```
 
-I added back a reasonably large sulfate pool, this caused enhanced S losses which were unrealistic. This likely implies that the system had too much S going through it. 
+The sulfate adsorbed pool depletes itself, the organic sulfur pool becomes increasingly dominant. This behavior is not unreasonable, however I would expect higher sulfate adsorption.
+
 <br>
 
 ```{r, fig.show="hold", out.width="50%", echo=FALSE, message=FALSE, fig.cap="Nitrogen input and output comparison graphs", fig.subcap=c("N input and output fluxes over time", "Total Average N input and output fluxes")}
@@ -831,7 +836,7 @@ Bar_N<-ggplot(N_ReForged_Mean, aes(fill=variable, y=value, x="HN SED Base Case")
 Bar_N
 ```
 
-Notice how SOM mineralization starts off highly negative (-358 kg/ha/yr N); implying a large net N uptake in the microbial pool. The mineralization then balances out and steadily returns N to the soil over time, behaving normally. I do need the microbial pool to help calibrate the N cycle, but I may need to reduce the CEC stabilized N and decrease the N-uptake in the microbial pool. These results likely imply too much N is going through the system and that the microbial pool is too large of an N pool. 
+Notice how SOM mineralization starts off highly negative (-500+ kg/ha/yr N). This is strange as the SOM pool is set such that it starts with the same concentration of N (roughly a C:N of 18) as is entered for the microbial target concentration. It does not make sense that so much N would be initially uptaken into the SOM pool, this could be a coding error in NutsFor or an issue with initial parameter entry. 
 
 ### Cation Exchange Capacity
 ```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium and Magnesium CEC adsorption over time", fig.subcup=c("Ca adsorption (kg/ha)", "Mg adsorption (kg/ha)")}
@@ -898,9 +903,10 @@ Cl_AEC+labs(y="Soil adsorbed Chloride kg/ha)")+scale_x_discrete(guide = guide_ax
 
 <br>
 
-Phosphate seems stable, generally. It should be noted that P uptake is not being modeled in the foliage (it should remain constant so far) and that phosphate adsorption parameters are completely borrowed from the Burgundy site. As for sulfate, I purged the model of the AEC sulfate pool and relegated all soil S to the SOM organic pool. 
+The phosphate adsorption is set from the original parameterization I received from Gregory. It tends to build up, which implies a high soil solution concentration (adsorption is determined by concentration).
 
-I further note that the ALSEA rain chemistry seems to be lacking in Na and Cl, when I completely take away Cl adsorption, I don't get anywhere near the concentration of Cl measured in the lysimeters, like I do for sulfate. 
+Sulfate adsorption is weak and drains easily, I set a low adsorbed sulfate pool following IFS data from the Thompson site (glacial outwash, inceptisol). According to the book *Atmospheric Sulfur Deposition: Environmental and Health Impacts*, sulfur is mostly locked in organic compartments rather than on the adsorption surfaces. We might expect that sulfate, like phosphate, would increase on the AEC, however the input of sulfate relative to the adsorption and uptake of sulfate is likely too low to facilitate adsorption. This is well supported by IFS data that show low sulfate adsorption on potentially high capacity adsorbing soils. The higher sulfate concentrations observed at the high N site could well be due to a higher inherent sulfur pool, possibly a condition of higher sulfate-mineral weathering, or due to a competitive response with phosphate.  
+
 
 <br>
 
