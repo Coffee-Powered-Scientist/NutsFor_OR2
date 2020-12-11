@@ -463,8 +463,10 @@ Ca_LF.G+theme(legend.title = element_blank())
 ```{r, echo=FALSE, message=FALSE, fig.show="hold"}
 SOM<-SOM %>%group_by(Year, group_id)%>% summarize(across(C:S, ~mean(.x, na.rm = TRUE)))
 
+SOM$C<-SOM$C*12*10
+
 SOM_C<-ggplot(SOM, aes(x=Year, y=C,color=group_id))+geom_line()
-SOM_C
+SOM_C+labs(y= "C Content of Mineral Soil (kg/ha)")
 
 ```
 

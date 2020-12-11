@@ -58,6 +58,10 @@ source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Hydro_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_SED/Base/SOM_Mutator.R")
 
+source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Plant_Pool_Mutator.R")
+
+
+
 
 
                                     ##Load Data, edit data as needed##
@@ -100,6 +104,8 @@ SOM<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edite
 SOM$Date<-as.Date(SOM$Date)
 
 Lys_Leaching<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDHN/HN_SED_Leaching_Lys.csv")
+
+Plant_Pool<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data/Plant_Pool.csv")
                                             ##Load Functions for Analysis##
 
 source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
@@ -111,6 +117,8 @@ source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Bio_Compart.R")
 source("~/Project_Master/Test_Rep/Code/Functions/LL_1M_Func.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_Analysis_I.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_CEC_AEC.R")
+source("~/Project_master/Test_Rep/Code/Functions/Grapher_PP.R")
+
 
 
 ```
@@ -173,7 +181,7 @@ Lys_Table %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
   kbl(caption = "Lysimeter Measured Soil Solution Concentrations of Reliable Months (2005)", col.names=Better_Names,         format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down",     "hold_position")) %>% 
          kable_styling(font_size = 12) %>% 
               kable_classic(full_width = F, html_font = "Times") %>% landscape() %>%
-                        footnote(alphabet=c("Average based on TP annual average", "Does not distinguish between organic-Al and free Al", "Model does   not simulate Si uptake", "From Hynicka et al., 2017 (10-50cm) extrapolated to 1m"))
+                        footnote(alphabet=c("Average based on TP annual average", "Does not distinguish between organic-Al and free Al", "Model does   not simulate Si uptake", "From Hynicka et al., 2017 (10-50cm) extrapolated to 1m")) %>% add_header_above(c(" "=1,  "$\\\\mu$mol/L"=25))
 
 
 ```
@@ -318,6 +326,22 @@ NO3_L2
 ```
 
 ### Lysimeter Comparisons
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+LL_Year<-Cal_Pretable_LL %>% group_by(YEAR, group_id) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=FALSE)))
+
+Test_LL<-ggplot(LL_Year, aes(x=YEAR, y=Ca, color=group_id))+geom_line()+labs(x="Year", y="Calcium Leaching by Layer (kg/ha)")
+Test_LL
+
+Test_LL<-ggplot(LL_Year, aes(x=YEAR, y=Mg, color=group_id))+geom_line()+labs(x="Year", y="Magnesium Leaching by Layer (kg/ha)")
+Test_LL
+
+
+
+```
+
 
 <br>
 
@@ -328,7 +352,7 @@ Sim_Lysimeter_Flux<-Cal_Pretable_LL %>% filter(group_id %in% c("2", "8")) %>% gr
 
 Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
   kbl(caption = "Simulated Lysimeter Fluxes by Depth (2005-2006)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
-         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=2,  "kg/ha"=12))
 
 
 ```
@@ -340,7 +364,8 @@ Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
 Lys_Leaching %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
   kbl(caption="Actual Average Lysimeter Fluxes (2005)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>%
 kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
-         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times")
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times") %>% landscape() %>% add_header_above(c(" "=1,  "kg/ha"=24))
+
 
 ```
 
@@ -349,20 +374,20 @@ kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>%
 
 ### Weathering Results
 
-```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Calcium Weathering (All Layer)"}
+```{r, echo=FALSE, message=FALSE, fig.show="hold", fig.cap="Calcium Weathering (All Layer)", fig.align="center", out.width="75%"}
 Weathering_Ca1<-Ca_W_L1(Cal_Pretable_W)
 Weathering_Ca1
 
 ```
 
 <br>
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Magnesium Weathering (All Layer)"}
+```{r, echo=FALSE, fig.show="hold", fig.cap="Magnesium Weathering (All Layer)", fig.align="center", out.width="75%"}
 Weathering_Mg1<-Mg_W_L1(Cal_Pretable_W)
 Weathering_Mg1
 ```
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Potassium Weathering (All Layer)"}
+```{r, echo=FALSE, fig.show="hold", fig.cap="Potassium Weathering (All Layer)", fig.align="center", out.width="75%"}
 
 #K Weathering
 Weathering_K1<-K_W_L1(Cal_Pretable_W)
@@ -371,36 +396,33 @@ Weathering_K1
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Aluminum Weathering (All Layer)"}
+```{r, echo=FALSE, fig.show="hold", fig.cap="Aluminum Weathering (All Layer)", fig.align="center", out.width="75%"}
 Weathering_Al1<-Al_W_L1(Cal_Pretable_W)
 Weathering_Al1
 ```
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Phosphate Weathering (All Layer)"}
+```{r, echo=FALSE, fig.show="hold", fig.cap="Phosphate Weathering (All Layer)", fig.align="center", out.width="75%"}
 Weathering_P1<-P_W_L1(Cal_Pretable_W)
 Weathering_P1
 ```
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Silica Weathering (All Layer)"}
+```{r, echo=FALSE, fig.show="hold", fig.cap="Silica Weathering (All Layer)", fig.align="center", out.width="75%"}
 Weathering_Si1<-Si_W_L1(Cal_Pretable_W)
 Weathering_Si1
 ```
 
 <br>
 
-```{r, echo=FALSE, fig.show="hold", out.width="50%", fig.cap="Sodium Weathering (All Layer)"}
+```{r, echo=FALSE, fig.show="hold", fig.cap="Sodium Weathering (All Layer)", fig.align="center", out.width="75%"}
 Weathering_Na1<-Na_W_L1(Cal_Pretable_W)
 Weathering_Na1
 
 ```
 
-<br>
-
-These weathering results need to be calibrated, I just finished high N calibration so weathering is the next step. 
 
 
 <br><br><br>
@@ -420,6 +442,9 @@ Litter_CR<-Litter_Graph(Litter_Pretable$C_CL)
 Litter_CR+labs(y="C (kg/ha)")
 ```
 <br>
+
+Looking at a range of soil carbon studies in Douglas-fir forests of the Pacific Northwest, forest floor (defined as non-mineral OM) C content goes from a lower bound of 3,700 kg C/ha in a 9-yr old stand (Cromack et al., 1999) to 8200 kg C/ha in an average 38 year old stand (Edmonds and Chappell, 1993). These stands were notably N rich compared to the site simulated for the low N site, the soil C should be lower in the simulations as there is about half as much soil N in the low N simulated site as in the sites described in Edmonds and Chappel, 1993. The high N site has about 21,000 kg N/ha at 1m depth, so it should be modeled to be at the higher end of organic and litter C buildup.  
+
 
 
 ```{r, echo=FALSE, fig.cap="Forest Floor (O-Layer) Carbon Content Over Simulation Period", fig.show="hold", out.width="50%", fig.subcap=c("Carbon content of fine litter (kg/ha)", "Carbon content of humic litter (kg/ha)"), fig.ncol=2}
@@ -468,6 +493,8 @@ SOM_C
 ```
 
 <br>
+
+Mineral soil SOM C content is very high compared to other pools of carbon in the ecosystem, soil carbon should buildup over time assuming available surfaces exist for soil carbon "stabilization". In NutsFor, the SOM pool is represented by an active microbial pool, so there are issues with building up SOM in the soil as one might expect from a real stand. Microbial growth is limited by soil moisture and nutrient availability like the tree pool, so it is not a wholly adequate representation of C stabilization. Instead of calibrating this output to show buildup, I calibrated it such that it was "level", thus, soil carbon additions to the mineral soil are dictated by DOC percolation with water flow.  
 
 
 ```{r, echo=FALSE, message=FALSE, fig.show="hold", out.width="50%", fig.cap="Forest Floor/O-horizon Mg content over time (a). and net annual Mg return in litterfall (b).", fig.subcap=c("Mg Content in each litter decomposition stage (kg/ha)", "Mg net annual return in litterfall (kg/ha)")}
@@ -839,7 +866,7 @@ Bar_N
 Notice how SOM mineralization starts off highly negative (-500+ kg/ha/yr N). This is strange as the SOM pool is set such that it starts with the same concentration of N (roughly a C:N of 18) as is entered for the microbial target concentration. It does not make sense that so much N would be initially uptaken into the SOM pool, this could be a coding error in NutsFor or an issue with initial parameter entry. 
 
 ### Cation Exchange Capacity
-```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium and Magnesium CEC adsorption over time", fig.subcup=c("Ca adsorption (kg/ha)", "Mg adsorption (kg/ha)")}
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium and Magnesium on exchangerover time", fig.subcup=c("Ca adsorption (kg/ha)", "Mg adsorption (kg/ha)")}
 
 CEC_All$Date<-as.Date(CEC_All$Date)
 
@@ -854,7 +881,7 @@ CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide 
 
 <br>
 
-```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE,fig.cap="Potassium and Sodium CEC adsorption over time", fig.subcup=c("K adsorption (kg/ha)", "Na adsorption (kg/ha)")}
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE,fig.cap="Potassium and Sodium on exchangerover time", fig.subcup=c("K adsorption (kg/ha)", "Na adsorption (kg/ha)")}
 
 CEC_K<-CEC_Grapher(CEC_All$K)
 CEC_K+labs(y="K on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+scale_fill_discrete(name="Layer Number")
@@ -866,7 +893,7 @@ CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)")+ scale_x_discrete(guide 
 
 <br>
 
-```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Ammonium and Aluminum CEC adsorption over time", fig.subcup=c("NH4 adsorption (kg/ha)", "Al adsorption (kg/ha)")}
+```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Ammonium and Aluminum on exchangerover time", fig.subcup=c("NH4 adsorption (kg/ha)", "Al adsorption (kg/ha)")}
 
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
@@ -912,6 +939,8 @@ Sulfate adsorption is weak and drains easily, I set a low adsorbed sulfate pool 
 
 ### Other 
 
+<br>
+
 ```{r, echo=FALSE, message=FALSE}
 
 Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight*10
@@ -925,3 +954,14 @@ LF<-ggplot(Litter_Fall, aes(x=Year, y=Dry.weight_kgha))+geom_line()+labs(y="Litt
 LF
 
 ```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+
+
+```
+

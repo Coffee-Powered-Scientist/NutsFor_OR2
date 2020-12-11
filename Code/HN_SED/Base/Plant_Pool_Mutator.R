@@ -34,5 +34,3 @@ Plant_Pool$S_Diff<-Uptake_Diff(Plant_Pool$S_PU, Plant_Pool$S_AU)
 Plant_Pool$P_Diff<-Uptake_Diff(Plant_Pool$P_PU, Plant_Pool$P_AU)
 
 write.csv2(Plant_Pool, "Plant_Pool.csv")
-
-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$N_Diff)
