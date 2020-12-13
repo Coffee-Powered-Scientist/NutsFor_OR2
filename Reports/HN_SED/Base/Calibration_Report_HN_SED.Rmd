@@ -7,7 +7,6 @@ output:
     toc_depth: 3
     extra_dependencies: "subfig"
     
-    
 geometry: margin=2 cm
 fig_caption: yes
 ---
@@ -957,11 +956,41 @@ LF
 
 <br>
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="N and P Potential Uptake to Actual Uptake Difference", fig.subcup=c("N Uptake Difference", "P Uptake Difference")}
 
 
+N_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$N_Diff)
+N_PP+labs(x="Year", y=expression(N~Diff.~(mol/m^2)))
 
+P_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$P_Diff)
+P_PP+labs(x="Year", y=expression(P~Diff.~(mol/m^2)))
 
 
 ```
+<br>
 
+```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Ca and Mg Potential Uptake to Actual Uptake Difference", fig.subcup=c("Ca Uptake Difference", "Mg Uptake Difference")}
+
+
+Ca_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Ca_Diff)
+Ca_PP+labs(x="Year", y=expression(Ca~Diff.~(mol/m^2)))
+
+Mg_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Mg_Diff)
+Mg_PP+labs(x="Year", y=expression(Mg~Diff.~(mol/m^2)))
+
+
+```
+<br>
+
+```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="K and S Potential Uptake to Actual Uptake Difference", fig.subcup=c("K Uptake Difference", "S Uptake Difference")}
+
+
+K_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$K_Diff)
+K_PP+labs(x="Year", y=expression(K~Diff.~(mol/m^2)))
+
+S_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$S_Diff)
+S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
+
+
+```
+<br>
