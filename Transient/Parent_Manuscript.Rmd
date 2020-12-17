@@ -2,7 +2,8 @@
 title: "Parent"
 author: "Kaveh Gholamhossein Siah"
 date: "12/5/2020"
-output: pdf_document
+output: word_document
+reference_docx: word-styles-reference-01.docx
 ---
 
 ```{r setup, include=FALSE}

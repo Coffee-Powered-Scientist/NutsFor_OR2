@@ -994,3 +994,5 @@ S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
 
 ```
 <br>
+
+For the high N sedimentary site, the current calibration clearly shows Ca and P limitation. P limitation is effectively the same as in the low N sedimentary site as I used the exact same adsorbed P pool initially, although the SOM contains more organically bound P than in the low N scenario. The additional organic P is the reason why a strong phosphate adsorption response is seen in this site, as the decomposition rate and P release rates are enough to stimulate high enough phosphate concentrations to stimulate adsorption. 

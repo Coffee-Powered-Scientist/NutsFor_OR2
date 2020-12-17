@@ -6,8 +6,8 @@ output:
   pdf_document:
     toc_depth: 3
     extra_dependencies: "subfig"
-     citation_package: natbib
-      bibliography: Manuscript.bib
+citation_package: natbib
+bibliography: Manuscript.bib
     
     
 geometry: margin=2 cm
@@ -445,7 +445,7 @@ Litter_CR+labs(y="C (kg/ha)")
 ```
 <br>
 
-Looking at a range of soil carbon studies in Douglas-fir forests of the Pacific Northwest, forest floor (defined as non-mineral OM) C content goes from a lower bound of 3,700 kg C/ha in a 9-yr old stand (Cromack et al., 1999) to 8200 kg C/ha in an average 38 year old stand (Edmonds and Chappell, 1993). These stands were notably N rich compared to the site simulated for the low N site, the soil C should be lower in the simulations as there is about half as much soil N in the low N simulated site as in the sites described in Edmonds and Chappel, 1993. The high N site has about 21,000 kg N/ha at 1m depth, so it should be modeled to be at the higher end of organic and litter C buildup.  
+Looking at a range of soil carbon studies in Douglas-fir forests of the Pacific Northwest, forest floor (defined as non-mineral OM) C content goes from a lower bound of 3,700 kg C/ha in a 9-yr old stand[@cromackSoilCarbonNutrients1999] to 8200 kg C/ha in an average 38 year old stand [edmondsRelationshipsSoilOrganic1994]. These stands were notably N rich compared to the site simulated for the low N site, the soil C should be lower in the simulations as there is about half as much soil N in the low N simulated site as in the sites described in [edmondsRelationshipsSoilOrganic1994]. The high N site has about 21,000 kg N/ha at 1m depth, so it should be modeled to be at the higher end of organic and litter C buildup.  
 
 
 
@@ -865,7 +865,7 @@ Bar_N<-ggplot(N_ReForged_Mean, aes(fill=variable, y=value, x="HN SED Base Case")
 Bar_N
 ```
 
-Notice how SOM mineralization starts off highly negative (-500+ kg/ha/yr N). This is strange as the SOM pool is set such that it starts with the same concentration of N (roughly a C:N of 18) as is entered for the microbial target concentration. It does not make sense that so much N would be initially uptaken into the SOM pool, this could be a coding error in NutsFor or an issue with initial parameter entry. 
+There looks to be a SOM reporting bug which causes a large negative spike in N mineralization, it does not seem to affect the simulation in terms of N flux or nutrient uptake, which tells me it is likely a reporting error. 
 
 ### Cation Exchange Capacity
 ```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium and Magnesium on exchangerover time", fig.subcup=c("Ca adsorption (kg/ha)", "Mg adsorption (kg/ha)")}
@@ -997,7 +997,7 @@ S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
 
 ```
 
-
+What I get from this calculation is that for all nutrients except N and P, the stand is able to extract near exactly the required amount of each nutrient for growth. For K, foliar leaching causes excessive total uptake, however the mineral pool is rich enough in K to facilitate this excess uptake. These graphs do not take into consideration that uptake can vary by 20% before growth limitation is induced. 
 
 
 
