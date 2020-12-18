@@ -12,7 +12,7 @@ output:
 geometry: margin=2 cm
 fig_caption: yes
 citation_package: natbib
-bibliography: Manuscript_Test.bib
+bibliography: Manuscript.bib
 ---
 
 ```{r global_options, include=FALSE, message=FALSE}
@@ -607,14 +607,43 @@ CEC_All[c(2:16)]<-lapply(CEC_All[c(2:16)], as.numeric)
 ```
 
 
-While R studio is a powerful for analyzing large datasets, it can also be used to generate manuscript-quality tables [Citation] and write dynamic reports or manuscripts [Citation].  
-
+While R studio is a powerful for analyzing large datasets, it can also be used to generate manuscript-quality tables [Citation] and write dynamic reports or manuscripts [Citation]. Creating such reports can make the following stage of NutsFor usage, calibration, much easier. 
 
 ## Calibration
 
-<!--Disclaimer about site specific differences-->
+After starting parameters have been measured for the site or approximated from the literature, the calibration phase can begin. Calibration entails changing initial parameters within some acceptable range until model outputs match observed measurements. What determines the acceptable range of parameter variation depends on what is known about the site, as well as what is known about the standard error of the parameter itself. 
 
-<!--Describe general calibration steps, pH, weathering, ANC, ion concentrations-->
+I recommend planning out the process of calibration using workflows. By identifying which parameters are most likely to vary (and thus can be used to calibrate), a calibration workflow can be generated for every sub-module within the greater NutsFor module. The order which each sub-module is calibrated is very important, the sub-modules with the highest level of control over the outputs of the model should be calibrated first, those that are more precise and downstream of multi sub-modules last. Generally, the order I recommend is the same as described in [@munsonNuCMCodeVersion1992], listed below. However, some proccesses can be calibrated before others, depending on their relative importance in determining model outputs on a site specific basis. 
+
+
+1). Hydrology
+
+The calibration of the hydrological sub-module of NutsFor should always occur first, hydrology will affect seasonal decomposition patterns, soil solution concentrations, leaching fluxes, and weathering fluxes. It therefore has control over all other model outputs. To calibrate this system, the user should have some evaporation data for the region to confirm model output. Once the seasonality and magnitude of evaporation (in the model, the Actual Evapotranspiration output or AET) are confirmed against regional data, the hydrology calibration is complete. The user may also view soil moisture parameters over time, these values should be confirmed with collected data or known seasonal patterns. For instance, a soil with a drought season should have soil moisture parameters drop to near wilting point during such events. 
+
+Hydrological outputs are calculated from parameters entered in the Weather Data file, the Soil parameters file, and the Tree data file. The Weather Data file contains information on daily potential evapotranspiration and average air temperature, using the (which equation?) to calculate AET. The soil parameter file will contain soil moisture parameters specific to the site, these parameters will generally be held constant and shouldn't be used to calibrate hydrology. 
+
+To calibrate hydrology AET outputs, the user should either adjust the PET entered in the Weather Data file manually, or use the AET and PET factors in the Tree parameters file to generally calibrate winter and summer PET values. These parameters multiply by the Weather Data file PET or the calculated AET, a value of 1 indicates that the PET and AET is to be the same as entered and calculated, and so forth. 
+
+I found that spring time PET was often over estimated by the reference crop PET calculator that I used, so during my calibrations I chose to manually change PET values for each site I used. If possible, it is always more efficient to directly measured PET and AET for a specific site. 
+
+2). Throughfall & Deposition
+
+Calibration of these inputs is rather simple, the user must observe whether or not depositional fluxes of key nutrient cations are correct given the inputs from the Rainfall concentrations, Tree parameters file, and Dry deposition file. The rainfall concentrations file will combine with the Weather data file to determine wet deposition flux, the dry deposition will determine nutrient flux from dry deposition, and the Tree parameters file have various parameters (described above) which dictate foliar leaching and adsorption parameters. All of these files will ultimately be used calculate net depostion of nutrients in the soil at every time step. 
+
+Generally, throughfall fluxes of K+ are significant, a source of data or direct measurement of throughfall should be used to calibrate K+ leaching fluxes as this process is important in determining K+ distribution in soil. Other nutrients, such as Ca and Mg, may experience little leaching or adsorption depending on the forest of interest [@]. 
+
+Once throughfall concentrations and depositions fluxes match those observed or estimated, the calibration can be said to be complete. 
+
+3). Soil Organic Matter
+
+4). Anion Calibration
+
+5). Cation Calibration
+
+6). Final Calibration
+
+
+I also recommend using no more than 2 parameters to calibrate every 1 observed output. This is because the use of 3 or more parameters to calibrate a single output has an infinite amount of ways which the parameters can be ordered or chosen [@sverdrupGeochemistryKeyUnderstanding1996]. Thus, it is important to choose which parameters are allowed to vary for the site in question, and use *only* these parameters for calibration. 
 
 ## Hypothesis Testing
 

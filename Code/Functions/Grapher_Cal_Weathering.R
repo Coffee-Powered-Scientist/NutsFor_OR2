@@ -11,12 +11,12 @@ library(scales)
 #Calcium
 
 Ca_W_L1<-function(x){
-  ggplot(x, aes(x=YEAR, y=Ca, group=1))+
+  ggplot(x, aes(x=Date, y=Ca, color=group_id))+
     geom_line()+labs(y=expression(Weathered~Ca~(kg/ha)))
 }
 
 Ca_W_L2<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Ca, group=1)))+
+  ggplot(x,  (aes(x=Date, y=Ca, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Ca~(kg/ha)))
     
 }
@@ -24,13 +24,13 @@ Ca_W_L2<-function(x){
 #Magnesium
 
 Mg_W_L1<-function(x){
-  ggplot(x, (aes(x=YEAR, y=Mg, group=1)))+
+  ggplot(x, (aes(x=Date, y=Mg, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Mg~(kg/ha)))
     
 }
 
 Mg_W_L2<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Mg, group=1)))+
+  ggplot(x,  (aes(x=Date, y=Mg, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Mg~(ka/ha)))
     
 }
@@ -39,13 +39,13 @@ Mg_W_L2<-function(x){
 #Potassium
 
 K_W_L1<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=K, group=1)))+
+  ggplot(x,  (aes(x=Date, y=K, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~K~(kg/ha)))
     
 }
 
 K_W_L2<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=K, group=1)))+
+  ggplot(x,  (aes(x=Date, y=K, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~K~(kg/ha)))
     
 }
@@ -53,12 +53,12 @@ K_W_L2<-function(x){
 #Sodium
 
 Na_W_L1<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Na, group=1)))+
+  ggplot(x,  (aes(x=Date, y=Na, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Na~(kg/ha)))
 }
 
 Na_W_L2<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Na, group=1)))+
+  ggplot(x,  (aes(x=Date, y=Na, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Na~(kg/ha)))
 }
 
@@ -66,14 +66,14 @@ Na_W_L2<-function(x){
 #Aluminum
 
 Al_W_L1<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Al, group=1)))+
-    geom_line()+labs(y=expression(Weathered~Al~(kg/ha)))
+  ggplot(x,  (aes(x=Date, y=Al, color=group_id)))+
+    geom_point()+labs(y=expression(Weathered~Al~(kg/ha)))
     
     
 }
 
 Al_W_L2<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Al, group=1)))+
+  ggplot(x,  (aes(x=Date, y=Al, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Al~(kg/ha)))
     
     
@@ -82,14 +82,14 @@ Al_W_L2<-function(x){
 #Si
 
 Si_W_L1<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Si, group=1)))+
+  ggplot(x,  (aes(x=Date, y=Si, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Si~(kg/ha)))
     
     
 }
 
 Si_W_L2<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=Si, group=1)))+
+  ggplot(x,  (aes(x=Date, y=Si, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~Si~(kg/ha)))
     
     
@@ -97,14 +97,14 @@ Si_W_L2<-function(x){
 
 #Phosphorous
 P_W_L1<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=P, group=1)))+
+  ggplot(x,  (aes(x=Date, y=P, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~P~(kg/ha)))
     
     
 }
 
 P_W_L2<-function(x){
-  ggplot(x,  (aes(x=YEAR, y=P, group=1)))+
+  ggplot(x,  (aes(x=Date, y=P, color=group_id)))+
     geom_line()+labs(y=expression(Weathered~P~(kg/ha)))
     
     
