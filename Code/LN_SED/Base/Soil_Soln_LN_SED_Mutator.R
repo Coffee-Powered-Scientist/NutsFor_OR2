@@ -11,7 +11,7 @@ setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data")
 library(dplyr)
 library(tidyverse)
 library(lubridate)
-
+library(janitor)
 
 #Reads all files in folder at once, then 
 files <- list.files(path = "~/NutsforSEDLN/Base/Output data/Soil solution", pattern = "*.csv", full.names = TRUE)
@@ -31,7 +31,7 @@ Soil_Soln$group_id <- Soil_Soln %>%
   group_by(id)%>%
   group_indices(id)
 
-Soil_Soln<-Soil_Soln %>% mutate(Date=make_date(YEAR, Month))
+Soil_Soln<- Soil_Soln %>% mutate(Date=make_date(YEAR, Month))
 
 
 write.csv2(Soil_Soln, "Soil_Solution_All2.csv", row.names=TRUE)

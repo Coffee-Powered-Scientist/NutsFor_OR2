@@ -615,6 +615,8 @@ After starting parameters have been measured for the site or approximated from t
 
 I recommend planning out the process of calibration using workflows. By identifying which parameters are most likely to vary (and thus can be used to calibrate), a calibration workflow can be generated for every sub-module within the greater NutsFor module. The order which each sub-module is calibrated is very important, the sub-modules with the highest level of control over the outputs of the model should be calibrated first, those that are more precise and downstream of multi sub-modules last. Generally, the order I recommend is the same as described in [@munsonNuCMCodeVersion1992], listed below. However, some proccesses can be calibrated before others, depending on their relative importance in determining model outputs on a site specific basis. 
 
+I also recommend using no more than 2 parameters to calibrate every 1 observed output. This is because the use of 3 or more parameters to calibrate a single output has an infinite amount of ways which the parameters can be ordered or chosen [@sverdrupGeochemistryKeyUnderstanding1996]. Thus, it is important to choose which parameters are allowed to vary for the site in question, and use *only* these parameters for calibration. 
+
 
 1). Hydrology
 
@@ -636,14 +638,24 @@ Once throughfall concentrations and depositions fluxes match those observed or e
 
 3). Soil Organic Matter
 
+Soil Organic matter should be calibrated using the OM decomposition file, there are numerous parameters which control SOM C stabilization. In general, unless data is available, SOM in mineral soil should not build up or decrease over the course of the simulation. The calibration of SOM is dictated by Decomp_rate, C_Assim, DOC_Decomp, and DOC_Assim. The key to SOM calibration is to control DOC leaching and R- concentrations while keeping the SOM C content stable. Decomp_rate is the most sensitive parameter which determines SOM C dynamics, C_Assim and DOC_Assim dictate how much decomposed solid and dissolved carbon are assimilated into the SOM pool, and can be used to enhance or reduce SOM C buildup. DOC_Decomp can be used to reduce DOC leaching. 
+
 4). Anion Calibration
+
+Calibration of in-organic anions requires first that an adsorption isotherm is chosen for every anion (Sulfate, Chloride, and Phosphate) in the General Data file, and that a starting adsorption pool of each anion is entered in the Soil Parameters file (under the "Soil Adsorbed anions initial" header). The initial adsorbed pool of anions should either be directly measured of estimated from data in the literature. The parameters which can be used to calibrate anion concentrations are the half saturation constant (parameter 2, Langmuir isotherm) or the isotherm power "n" (parameter 2, Freundlich isotherm). Generally, increasing parameter 2 for the Langmuir isotherm leads to more dynamic anion adsorption, often leading to high initial anion concentrations that equilibrate over time, whereas a smaller value leads to stronger adsorption and lower, although more stable, concentrations. 
+
+If S or P concentrations are too low in the observed layers, trending towards depletion of the dissolved and adsorbed pools, release rates of S and P in the OM decomposition file can be changed to increase S and P mineralization. If this calibration leads to unrealistic gain of S and P in the organic layer, the issue may have its roots in tree uptake per layer, with disproportionate tree uptake depleting the layer over others. In this case, the "Uptake Fraction per Layer" header within the Soil Parameters file can be edited. 
+
+Depending on the role of organic acids at the site, an initial calibration of the soil solution may yield an unrealistically high pH and high acid neutralizing capacity. Organic acids can make up a majority of soil anions in forest ecosystems [@johnsonAnionMobilitySoils1980], however these R- anions are distributed between constantly changing solid and dissolved phases. As NutsFor does not represent solid organic acids, dissolved organic acid can be used to calibrate ANC. The point of this calibration would be to ensure a rough charge balance in the soil solution, avoiding unrealistic chemical behavior derived from a high ANC. R- concentrations can be changed using  the DOCFACT and DOC_Decomp in each organic and soil layer in the OM decomposition file. Increasing the DOC_Fact will increase R- release, whereas increasing DOC_Decomp will decrease R- concentrations. As these parameters are layer specific, calibrating R- in each layer may be tedious. In such a case, I recommend using the organic acid charge density parameter in the General Data file, called "Organic_acid_size", to control R- concentrations. This option will *globally* (for all layers) change R- concentrations in the model, a benefit of using this parameter over the layer specific  DOC_Fact and DOC_Decomp factors is that changing the charge density won't cause a change in DOC mobility in the model, which can help constrain DOC leaching. Lowering Organic_acid_size decreases the number of carbon per negative charge (increasing the charge density and thus also increasing R-), and increasing the parameter decreases the charge density, lowering R- concentrations. 
+
+It is important to calibrate these anions before moving on to cation calibration, all anions will have some control over CEC adsorption and thus cation concentrations. 
 
 5). Cation Calibration
 
 6). Final Calibration
 
 
-I also recommend using no more than 2 parameters to calibrate every 1 observed output. This is because the use of 3 or more parameters to calibrate a single output has an infinite amount of ways which the parameters can be ordered or chosen [@sverdrupGeochemistryKeyUnderstanding1996]. Thus, it is important to choose which parameters are allowed to vary for the site in question, and use *only* these parameters for calibration. 
+
 
 ## Hypothesis Testing
 
@@ -661,9 +673,7 @@ I also recommend using no more than 2 parameters to calibrate every 1 observed o
 #### Basic R Resources
 #### Advanced R for Building Projects
 
-### Github
-
-### Modeling
+### Github Shoutout
 
 ## Literature Cited
 

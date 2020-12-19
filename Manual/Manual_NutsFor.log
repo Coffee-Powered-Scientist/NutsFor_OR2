@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  18 DEC 2020 12:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  18 DEC 2020 17:12
 entering extended mode
 **./Manual_NutsFor.tex
 (Manual_NutsFor.tex
@@ -740,44 +740,44 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 875.
-[11] [12] [13] (Manual_NutsFor.aux) ) 
+[11] [12] [13] [14] (Manual_NutsFor.aux) ) 
 Here is how much of TeX's memory you used:
- 16406 strings out of 479697
- 249677 string characters out of 2867132
- 594688 words of memory out of 3000000
- 33018 multiletter control sequences out of 15000+200000
- 462503 words of font info for 119 fonts, out of 3000000 for 9000
+ 16410 strings out of 479697
+ 249766 string characters out of 2867132
+ 594664 words of memory out of 3000000
+ 33016 multiletter control sequences out of 15000+200000
+ 462799 words of font info for 122 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,13n,85p,521b,407s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/siahl/AppData/Local/Programs/MiK
-TeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/AppData/Local/Programs/MiKTeX/
-fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/AppData/Local/Programs/MiKTeX/
-fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppData/Local/Programs/MiKTeX/font
-s/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppData/Local/Programs/MiKTeX/font
-s/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/font
-s/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/font
-s/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/font
-s/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/lm/lmtti10.pfb>
-Output written on Manual_NutsFor.pdf (13 pages, 432868 bytes).
+ 79i,13n,85p,521b,409s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/siahl/AppData/Local/Program
+s/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/AppData/Local/Programs/Mi
+KTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/AppData/Local/Programs/Mi
+KTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppData/Local/Programs/MiKTeX
+/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/font
+s/type1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmtti10.pfb>
+Output written on Manual_NutsFor.pdf (14 pages, 437279 bytes).
 PDF statistics:
  318 PDF objects out of 1000 (max. 8388607)
  82 named destinations out of 1000 (max. 500000)
- 12441 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 12433 words of extra memory for PDF output out of 14400 (max. 10000000)
 
