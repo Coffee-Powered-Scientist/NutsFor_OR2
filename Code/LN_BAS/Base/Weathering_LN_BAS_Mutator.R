@@ -53,7 +53,8 @@ Weathering_All<- Weathering_All %>%
                                               '3'='Layer 3' ; '4'='Layer 4'; '5'='Layer 5'; '6'='Layer 6'; 
                                               '7'='Layer 7'; '8'='Layer 8'"))
 
-Weathering_All<-Weathering_All %>% group_by(YEAR) %>% summarise(across(Ca:P, ~sum(.x, na.rm=TRUE)))
+
+Weathering_All<-Weathering_All %>% mutate(Date=make_date(YEAR,Month))
 
 
 #write csv

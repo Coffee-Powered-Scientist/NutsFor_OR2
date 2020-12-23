@@ -444,7 +444,7 @@ These equations mean that as the base cation concentration of the soil solution 
 
 Note that the saturation constant (also known as the saturation concentration) sets the maximum solution concentration of each cation in water. The closer the simulated solution concentration is to the saturation constant, the higher the inhibition coefficient becomes and thus the slower the weathering.
 
-New minerals can be added to the NutsFor mineral data file, a more extensive list of minerals is given in [@BGDReviewsSyntheses]. However, note that the exact parameters which control mineral weathering will depend on several real-world dependencies 
+New minerals can be added to the NutsFor mineral data file, a more extensive list of minerals is given in [@BGDReviewsSyntheses]. However, note that the exact parameters which control mineral weathering will depend on several real-world dependencies.  
 
 
 ***Stoichiometry and Isometric Substitution***
@@ -611,9 +611,9 @@ While R studio is a powerful for analyzing large datasets, it can also be used t
 
 ## Calibration
 
-After starting parameters have been measured for the site or approximated from the literature, the calibration phase can begin. Calibration entails changing initial parameters within some acceptable range until model outputs match observed measurements. What determines the acceptable range of parameter variation depends on what is known about the site, as well as what is known about the standard error of the parameter itself. 
+After starting parameters have been measured for the site or approximated from the literature, and once a reliable method of monitoring NutsFor outputs is constructed, the calibration phase can begin. Calibration entails changing initial parameters within some acceptable range until model outputs match observed measurements. What determines the acceptable range of parameter variation depends on what is known about the site, as well as what is known about the standard error of the parameter itself. 
 
-I recommend planning out the process of calibration using workflows. By identifying which parameters are most likely to vary (and thus can be used to calibrate), a calibration workflow can be generated for every sub-module within the greater NutsFor module. The order which each sub-module is calibrated is very important, the sub-modules with the highest level of control over the outputs of the model should be calibrated first, those that are more precise and downstream of multi sub-modules last. Generally, the order I recommend is the same as described in [@munsonNuCMCodeVersion1992], listed below. However, some proccesses can be calibrated before others, depending on their relative importance in determining model outputs on a site specific basis. 
+I recommend planning out the process of calibration using workflows. By identifying which parameters are most likely to vary (and thus can be used to calibrate), a calibration workflow can be generated for every sub-module within the greater NutsFor module. The order which each sub-module is calibrated is very important, the sub-modules with the highest level of control over the outputs of the model should be calibrated first, those that are more precise and downstream of multi sub-modules last. Generally, the order I recommend is the same as described in [@munsonNuCMCodeVersion1992], listed below. However, some processes can be calibrated before others, depending on their relative importance in determining model outputs on a site specific basis. 
 
 I also recommend using no more than 2 parameters to calibrate every 1 observed output. This is because the use of 3 or more parameters to calibrate a single output has an infinite amount of ways which the parameters can be ordered or chosen [@sverdrupGeochemistryKeyUnderstanding1996]. Thus, it is important to choose which parameters are allowed to vary for the site in question, and use *only* these parameters for calibration. 
 
@@ -630,11 +630,11 @@ I found that spring time PET was often over estimated by the reference crop PET 
 
 2). Throughfall & Deposition
 
-Calibration of these inputs is rather simple, the user must observe whether or not depositional fluxes of key nutrient cations are correct given the inputs from the Rainfall concentrations, Tree parameters file, and Dry deposition file. The rainfall concentrations file will combine with the Weather data file to determine wet deposition flux, the dry deposition will determine nutrient flux from dry deposition, and the Tree parameters file have various parameters (described above) which dictate foliar leaching and adsorption parameters. All of these files will ultimately be used calculate net depostion of nutrients in the soil at every time step. 
+Calibration of these inputs is rather simple, the user must observe whether or not depositional fluxes of key nutrient cations are correct given the inputs from the Rainfall concentrations, Tree parameters file, and Dry deposition file. The rainfall concentrations file will combine with the Weather data file to determine wet deposition flux, the dry deposition will determine nutrient flux from dry deposition, and the Tree parameters file have various parameters (described above) which dictate foliar leaching and adsorption parameters. All of these files will ultimately be used calculate net deposition of nutrients in the soil at every time step. 
 
 Generally, throughfall fluxes of K+ are significant, a source of data or direct measurement of throughfall should be used to calibrate K+ leaching fluxes as this process is important in determining K+ distribution in soil. Other nutrients, such as Ca and Mg, may experience little leaching or adsorption depending on the forest of interest [@]. 
 
-Once throughfall concentrations and depositions fluxes match those observed or estimated, the calibration can be said to be complete. 
+Once throughfall concentrations and depositions fluxes match those observed or estimated, the calibration can be said to be complete. If little is known about a depositional input, an effort should be made to estimate or measure its contribution to the stand as some forests rely extensively on atmospheric deposition to supply nutrients [@] 
 
 3). Soil Organic Matter
 
@@ -652,20 +652,45 @@ It is important to calibrate these anions before moving on to cation calibration
 
 5). Cation Calibration
 
+Cation concentrations should be calibrated last as every other sub-model can affect cation release through mineral weathering or acidification of the exchange complex. This calibration requires knowledge of cation concentrations in the soil solution, such as those measured by lysimeters, in order to complete calibration. The point of this calibration would be to match simulated cation concentrations to those observed. Another point of constraint on cation concentrations would be leaching fluxes, which can also be calculated from lysimeter measurements. 
 
+Generally, the cations on the exchange complex should not rapidly change-although decadal responses in CEC chemistry are not unreasonable [@]. Gapon selectivity coefficients calculated for each cation will generally exert the greatest control on cation mobility and concentrations in the soil solution. However, I do not suggest using these Gapon coefficients for calibration of cation concentrations. Changing the value of the coefficient for, as example, Ca, will change the relative strength of adsorption for all cations. 
+
+If concentrations are generally too low, the issue may be with hydrological calibration, in which hydrological calibration is not leading to enough evaporation. If hydrology calibration is acceptable, the issue may be with the release rate of nutrient cations from litter and SOM pools. Initially, the release factors of Ca, Mg, and K in the OM decomposition file should be set to 1, and reduced if cation concentrations exceed those desired for calibration, assuming hydrology calibration has been accepted. If the cation concentrations are generally too high, the issue may be with an unbalanced anion calibration, too much mineral weathering, or too weak CEC adsorption. Pin-pointing the source of error in this case requires that the user has a way to visualize these changes in the model graphically, as noted in the previous section. 
+
+The user should be able to directly tell if an over-abundance of anions are responsible for high Ca concentrations as anion concentrations will also be too high, pH and ANC may be too low. In this scenario anion concentrations should be re-calibrated. 
+
+
+If the user has lysimeter silica concentrations, an extra check on mineral weathering can be completed. Ideally, an approximation of mineral weathering fluxes should be made, however it can be difficult to achieve such a calculation.In such a case, mineral area can be calibrated until silica concentrations match those observed. The model does not simulate the uptake of silica, only mineral weathering and hydrology enact control on silica concentrations. Silica can thus be used as a kind of tracer on the calibration of both hydrology and weathering release rates of cations.  
 
 6). Final Calibration
 
+After the above calibration steps has been completed along the time frame of calibration (i.e., the years where soil solution or other confirmation data is available), the user should run the model past the period of time in which confirmational data is available. This ensures that the longer term behavior of the site is reasonable with respect to the expected behavior of the site. I suggest running the model for an additional 10 years, and observing how cation exchange, soil solution concentrations, and anion adsorption change over this time. 
 
+Cations and anions on the exchange complex may steadily deplete over this time period, however a steep decline is unrealistic over such a short time frame [@]. Cation concentrations should be stable within this time frame, although if the stand is modeled to grow quickly, the concentrations might gradually reduce over time. 
+
+Once the initial and final calibrations are complete, the user may move on to the hypothesis testing phase of model usage. 
 
 
 ## Hypothesis Testing
+
+After the complete calibration of a base site, hypothesis testing may begin. This process may undertake many forms, the user may test how changes in atmospheric deposition, soil temperature, harvest scenarios, and growth scenarios affect simulation outputs over whatever time frame desired. Since NutsFor has a Stand Harvesting specific file, which allows for harvest residues to be left over, many hypotheses pertaining to harvest intensity may be tested. If the user wishes to simulate long term nutrient cycling behavior(under any set of conditions),the Weather data, soil temperature, rain fall concentration, and tree growth files must be lengthened such that input data is present for every time point to be simulated. Failure to do so will result in model being unable to run. 
+
+The program does not currently include N-fixation or fertilization specific processes. If these processes occur in the stand, they can be broadly simulated by "dosing" the atmospheric deposition file with regular increments of N or fertilizer nutrients as needed by the user. The user may also include fertilizers as minerals in the Mineral Data file, adjusting mineral reaction parameters to replicate the release rate of the fertilizer.
+
+
 
 ## List of Equations
 
 ### NutsFor Encoded Equations
 
-<!--~~List Gregory's equation table here, with updated sulfate ads.~-->
+**Canopy**
+
+**Litter Layer**
+
+**Mineral Weathering**
+
+**Soil Chemistry**
 
 ### General Equations
 

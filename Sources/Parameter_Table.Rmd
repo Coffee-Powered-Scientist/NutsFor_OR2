@@ -31,3 +31,56 @@ Parameter, Source
 kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Source"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
 
 ```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+text_tbl_1 <- data.frame(
+Parameter= c("Nutrient Deposition Fluxes", "Monthly Soil Temperature"),
+Source = c("NADP, ALSEA Site", "FIND LINK")
+)
+
+kbl(text_tbl_1, booktabs = T, caption="Wet Deposition", col.names =  c("Parameter","Source"), escape=FALSE) %>%
+kable_styling(full_width = F, latex_options = "scale_down", "hold_position", font_size=12) 
+
+```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+Parameter_T3<-c("Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact")
+
+
+Source_T3<-c("Perakis and Sinkhorn, 2011", "Perakis and Sinkhorn, 2011", "Grier and Cole 1977; Johnson et al., 1992", "Calibration", "Calibration ", "Calibration")
+
+text_tbl_3 <- data.frame(
+Parameter_T3, Source_T3
+)
+
+kbl(text_tbl_3, caption="OM Decomposition File", booktabs=TRUE, col.names= c("Parameter", "Source"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "HOLD_position"), font_size=12)
+
+
+```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+
+Parameter_T4<-c("Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms")
+
+Units_T4<-c("Year", "Year", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A","N/A", "Carbon/Charge", "N/A", "N/A")
+
+Description_T4<-c("Determines simulation start year.", "Determines simulation end year.", "Designates number of layers to be read", "Designates the number of minerals", "Lists out the minerals to be simulated", "Designates the pka of organic acid stages of dissolution", "Designates Al pka", "Desingates phosphoric acid pka", "Designates DIC pka", "Determines how many C molecules are present for every negative charge on organic acids.", "Determines the stand's species composition", "Determines adsroption isotherm used for anions (1=langmuir, 2=Freundlich)")
+
+text_tbl_4 <- data.frame(
+Parameter_T4, Units_T4, Description_T4
+)
+
+kbl(text_tbl_4, caption="General Data File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_styling(full_width = F, latex_options = c("scale_down", "striped", "hold_position"))
+
+```
+
+
+
