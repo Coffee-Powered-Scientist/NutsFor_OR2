@@ -705,8 +705,9 @@ time step. Both files report in units of $kg*ha^{-1}$.
 
 
 ***Using R with NutsFor***
+<br> 
 
-This section assumes that the user has basic R studio skills, for more information on general R studio usage see the "Helpful Resources" section of this manual.
+The described output files tend to be long, containing years of simulated data among several files. As mentioned previously, the user should come up with some system to read the NutsFor csv files and visualize the outputs along some time scale. 
 
 For layer-based output folders, such as AEC, CEC, weathering, and soil solution, it is most efficient to read all files from a single output directory into one R dataframe, and use an indexing function to define the individual layers. For instance, a code for reading CEC might look like: 
 
@@ -823,7 +824,23 @@ Once the initial and final calibrations are complete, the user may move on to th
 
 7). **Alternative Calibration**
 
-Depending on the site in question, another sub-system of the model may need to be addressed through calibration. For my project, forest soils had extremely high N content 000000
+<br>
+
+Depending on the site in question, another sub-system of the model may need to be addressed through calibration. 
+For example, forest soils with extremely high N content will likely have mineral weathering and nutrient 
+cycling of base cations dominated by nitrogen transformation and cycling [@]. In order to calibrate the 
+model to be representative of a high N site, the N-cycle sub-system of NutsFor must be individually calibrated.
+Since the N-cycle is dependent on multiple other sub-modules and sub-systems within NutsFor, this kind of calibration
+necesitates that a hiearchal order of importance is established among the model's sub-systems. This ensures that 
+"over-calibration" does not occur and that the calibration of sub-systems does not perturb that of others. 
+For the above stated order of calibration, N-cycle calibration could be placed directly after SOM calibration, 
+with anion calibration following. This is because SOM stabilization and release rates will dictate N release,
+and nitrification rates will affect anion concentrations, the N-cycle calibration can therefore be placed inbetween these steps. 
+
+Another kind of alternative calibration, where the user lacks knowledge about a major aspect of model constraint,
+can be to calibrate the model based on higher-level observed ecosystem behaviors. This kind of calibration would typically occur when, for instance, lysimeter data is unavailable but weathering, deposition, and tree data are available. With the known behavior of the site, the user can calibrate the model's parameters until all of the constraining outputs matches observed measurements. 
+
+<br>
 
 
 ## Hypothesis Testing
