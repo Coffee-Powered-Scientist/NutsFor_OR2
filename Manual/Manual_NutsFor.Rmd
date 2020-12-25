@@ -36,15 +36,19 @@ library(kableExtra)
 
 <!--Meant to be a User guide, maybe a brief history can be mentioned at the end, but the intro should be short and descriptive-->
 
-The Nutrient Cycling in Forested Ecosystems (NutsFor) model is
-a stand-level biogeochemical model which simulates the forest nutrient dynamics of 16 chemical species <!--List species-->
-NutsFor integrates several biogeochemical processes, including hydrology, soil exchange site chemistry, mineral
-weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, and the ability to limit plant access to nutrients in the liquid and solid phases. 
+The Nutrient Cycling in Forested Ecosystems (NutsFor) model is a stand-level biogeochemical 
+model which simulates the forest nutrient dynamics of 16 chemical species. NutsFor integrates 
+several biogeochemical processes, including hydrology, soil exchange chemistry, mineral
+weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most 
+recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, 
+and the ability to limit plant access to cation nutrients in the liquid and solid phases. 
 
-changes made to the original model described in van der Heijden et al, 2017. All
-changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
+changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project 
+of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
 
-This user manual is intended to give relevant information about the model's capabilities, useful tips regarding its usage, insight into the equations and theory which link model parameters, and information on how to effectively use NutsFor in parallel to R-Studio. 
+This user manual is intended to give relevant information about the model's capabilities, 
+useful tips regarding its usage, insight into the equations and theory which link model parameters,
+and information on how to effectively use NutsFor in parallel to R-Studio. 
 
 
 
@@ -52,7 +56,7 @@ This user manual is intended to give relevant information about the model's capa
 
 ## Model Start Up
 
-Prior to running or implementing change to model parameters, the user should go through the input and output files for NutsFor using excel. NutsFor does not currently have a built-in method to visualize results, it is recommended that the user use excel macro commands or R to automatically read generated files (which will always output with the same structure) to visualize results. This is highly important in the calibration phase of model implementation.
+Prior to running or implementing change to model parameters, the user should go through the input and output files for NutsFor using excel. NutsFor does not currently have a built-in method to visualize results, it is recommended that the user use excel macro commands or R to automatically read generated files (which will always output with the same structure) to visualize results. This is highly important in the calibration phase of model implementation, and should be done prior to attempting to test model parameters for every file and output.
 
 The model is simple to run, simply double-click or other wise enact the NutsFor.exe file. The model will run and output results to its corresponding .csv files automatically. If the output files are moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as the Output folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a “Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) will result in either the NutsFor.exe closing on its own or on the former messages never appear in the NutsFor.exe terminal.
 
@@ -614,7 +618,7 @@ kbl(text_tbl_8, caption="Tree Growth File", booktabs = TRUE, col.names= c("Input
 
 ***Description of Parameters: Tree Growth File***
 
-The tree growth file contains a growth increment ($g*m^-2*yr^-1$) column for every biomass compartment except for foliage. Foliage instead has a maximum biomass and a minimum biomass column, which allows the user to set the maximum possible foliar biomass and the minimum foliar biomass, such as that achieved in spring and winter. The user should set these parameters using data on tree growth specific to their stand or ecosystem of interest. If relevant, the user can specify the number of trees which composes the stand (in the tree parameters file), however the growth increment of the total stand per year should be a lumped average growth increment of all the trees within the stand.
+The tree growth file contains a growth increment ($g*m^-2*yr^-1$) column for every biomass compartment except for foliage. Foliage instead has a maximum biomass and a minimum biomass column, which allows the user to set the maximum possible foliar biomass and the minimum foliar biomass, such as that achieved in spring and winter. The user should set these parameters using data on tree growth specific to their stand or ecosystem of interest. If relevant, the user can specify the number of trees which compose the stand (in the tree parameters file), however the growth increment of the total stand per year should be a lumped average growth increment of all the trees within the stand.
 
 Note that the initial and ending biomass of the foliage is set in the tree parameters file and not in the tree growth file. 
 
@@ -682,13 +686,23 @@ fluxes in units of ($kg*ha^{-1}$). All data is output on a monthly time step.
 <br>
 
 The SOM output folder contains a SOM data file for each soil layer specified. The file reports nutrient content 
-in the SOM mineral pool in terms of total storage of nutrient every month ($mol*m^{-1}$) and the gain of nutrients every month ($mmol*m^{-2}*month^{-1}$).  
+in the SOM mineral pool in terms of total storage of nutrient every month ($mol*m^{-1}$) and the gain of
+nutrients every month ($mmol*m^{-2}*month^{-1}$). This file should be used to calibrate SOM outputs in the model. 
 
 
 <br>
 
 
 ***Weathering***
+<br>
+
+The weathering output folder reports the weathering of every layer for every chemical species defined in 
+the mineral pool. The "Weathering Annual" file contains average annual weathering data over the total
+length of the simulation, whereas the layer-specific weathering files contain weathering data on a monthly
+time step. Both files report in units of $kg*ha^{-1}$. 
+
+<br>
+
 
 ***Using R with NutsFor***
 
@@ -808,6 +822,8 @@ Cations and anions on the exchange complex may steadily deplete over this time p
 Once the initial and final calibrations are complete, the user may move on to the hypothesis testing phase of model usage. 
 
 7). **Alternative Calibration**
+
+Depending on the site in question, another sub-system of the model may need to be addressed through calibration. For my project, forest soils had extremely high N content 000000
 
 
 ## Hypothesis Testing
