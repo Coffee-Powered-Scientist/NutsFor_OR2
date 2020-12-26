@@ -4,11 +4,12 @@ author:
    Kaveh Gholamhossein Siah and
    Gregory van Der Heijden
 date:  "`r format(Sys.time(), '%d %B %Y')`"
+
 output: 
    pdf_document:
     toc: yes
     toc_depth: 2
-    extra_dependencies: "subfig"
+    extra_dependencies: ["subfig", "float"]
 geometry: margin=2 cm
 fig_caption: yes
 citation_package: natbib
@@ -17,7 +18,7 @@ bibliography: Manuscript.bib
 
 ```{r global_options, include=FALSE, message=FALSE}
 #This global option holds figures in the correct place (stops floating in pdf)
-knitr::opts_chunk$set(fig.pos = 'H')
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
 
 ```
 
@@ -56,11 +57,20 @@ and information on how to effectively use NutsFor in parallel to R-Studio.
 
 ## Model Start Up
 
-Prior to running or implementing change to model parameters, the user should go through the input and output files for NutsFor using excel. NutsFor does not currently have a built-in method to visualize results, it is recommended that the user use excel macro commands or R to automatically read generated files (which will always output with the same structure) to visualize results. This is highly important in the calibration phase of model implementation, and should be done prior to attempting to test model parameters for every file and output.
+Prior to running or implementing change to model parameters, the user should go through the input and output 
+files for NutsFor using excel. NutsFor does not currently have a built-in method to visualize results, 
+it is recommended that the user use excel macro commands or R to automatically read generated files
+(which will always output with the same structure) to visualize results. This is highly important in the
+calibration phase of model implementation, and should be done prior to attempting to test model parameters 
+for every file and output.
 
-The model is simple to run, simply double-click or other wise enact the NutsFor.exe file. The model will run and output results to its corresponding .csv files automatically. If the output files are moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as the Output folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a “Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) will result in either the NutsFor.exe closing on its own or on the former messages never appear in the NutsFor.exe terminal.
-
-<br>
+The model is simple to run, simply double-click or other wise enact the NutsFor.exe file. The model 
+will run and output results to its corresponding .csv files automatically. If the output files are 
+moved from the NutsFor directory or removed, NutsFor will generate new csv files as long as the Output 
+folder is still present in the NutsFor.exe directory. A successful model run will be accommodated by a 
+“Exporting Model Run Data” and “Model Run End-Press Return to Close”. Unsuccessful model runs (i.e., crashes) 
+will result in either the NutsFor.exe closing on its own or on the former messages never appear in the 
+NutsFor.exe terminal.
 
 \newpage
 
@@ -77,19 +87,17 @@ effects on model outputs.
 ### Deposition Files
 
 <br>
-
 ```{r, echo=FALSE}
-
 text_tbl <- data.frame(
 Input= c("Ca, Mg, K, Na, NO3, NH4, SO4, Cl, PO4, DOC, H, Al, Si"),
 Units=c("$\\mu$mol/L"),
 Description = c("Determines the amount of each species deposited into ecosystem by Dry Deposition")
 )
 
-kbl(text_tbl, booktabs = T, caption="Dry and Wet Deposition Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
-kable_styling(full_width = F, latex_options = "scale_down", "HOLD_position", font_size=12) 
- 
+kbl(text_tbl, booktabs = T, caption="Dry Deposition and Rainfall Concentration Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
+kable_styling(full_width = F, latex_options = "scale_down", "HOLD_position") 
 ```
+
 
 <br>
 
@@ -97,25 +105,28 @@ kable_styling(full_width = F, latex_options = "scale_down", "HOLD_position", fon
 
 <br>
 
-The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of chemical species without the deposition of water. The files start with An and Mois (Year and Month Columns), and then lists out chemical species from left to right. 
+The dry deposition file is comparable to the Rain Concentration file. It simply delegates the deposition of
+chemical species without the deposition of water. The files start with An and Mois (Year and Month Columns), 
+and then lists out chemical species from left to right. 
 
 <br>
 
 
-
-```{r, echo=FALSE}
-#Rainfall Concentrations File
-```
 
 ```{r, echo=FALSE}
 #Weather Data File
+
+Weather_Tbl<- data.frame(
+   Input= c("Year", "DOY", "RF", "PET", "Tave"),
+   Units= c("Year", "Day", "mm", "mm", "Degrees Celsius"),
+   Description = c("Designates the year of rainfall event.", "Designates the day of the year rainfall occurs.", "Desginates volume of rainfall.", "Desginates the potential evapotranspiration.", "Designates the average air tempertaure every time step.")
+)
+
+kbl(Weather_Tbl, booktabs = T, caption="Weather Data File", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
+kable_styling(full_width = F, latex_options = "scale_down", "HOLD_position", font_size=12) 
 ```
 
-
-
-
-<br>
-
+\newpage
  
 ### Soil Files
 <br>
@@ -296,7 +307,11 @@ These parameters will stand for different variables depending on the adsorption 
 
 2). ***Soil Adsorbed Anions Initial***
 
-\newpage
+
+
+
+
+
 ```{r, echo=FALSE, message=FALSE}
 
 #Soil Temperature File
@@ -831,14 +846,14 @@ For example, forest soils with extremely high N content will likely have mineral
 cycling of base cations dominated by nitrogen transformation and cycling [@]. In order to calibrate the 
 model to be representative of a high N site, the N-cycle sub-system of NutsFor must be individually calibrated.
 Since the N-cycle is dependent on multiple other sub-modules and sub-systems within NutsFor, this kind of calibration
-necesitates that a hiearchal order of importance is established among the model's sub-systems. This ensures that 
+necessitate that a hiearchal order of importance is established among the model's sub-systems. This ensures that 
 "over-calibration" does not occur and that the calibration of sub-systems does not perturb that of others. 
 For the above stated order of calibration, N-cycle calibration could be placed directly after SOM calibration, 
 with anion calibration following. This is because SOM stabilization and release rates will dictate N release,
-and nitrification rates will affect anion concentrations, the N-cycle calibration can therefore be placed inbetween these steps. 
+and nitrification rates will affect anion concentrations, the N-cycle calibration can therefore be placed in between these steps. 
 
 Another kind of alternative calibration, where the user lacks knowledge about a major aspect of model constraint,
-can be to calibrate the model based on higher-level observed ecosystem behaviors. This kind of calibration would typically occur when, for instance, lysimeter data is unavailable but weathering, deposition, and tree data are available. With the known behavior of the site, the user can calibrate the model's parameters until all of the constraining outputs matches observed measurements. 
+can be to calibrate the model based on higher-level observed ecosystem behaviors. This kind of calibration would typically occur when, for instance, lysimeter data is unavailable but past weathering, deposition, and tree data are. With the known past behavior of the site, the user can calibrate the model's parameters until all of the constraining outputs matches observed measurements. According to this sort of method, the user would have to accept whatever soil solution concentrations and leaching fluxes the model calculates. However, an initial estimate of soil solution concentrations is required to set the Gapon selectivity coefficients for the model. 
 
 <br>
 
@@ -847,9 +862,7 @@ can be to calibrate the model based on higher-level observed ecosystem behaviors
 
 After the final calibration of a base site, hypothesis testing may begin. This process may undertake many forms. For example, the user may test how changes in atmospheric deposition, soil temperature, harvest scenarios, and growth scenarios affect simulation outputs over whatever time frame desired. Since NutsFor has a Stand Harvesting specific file, which allows for harvest residues to be left over, many hypotheses pertaining to harvest intensity may be tested. If the user wishes to simulate long term nutrient cycling behavior(under any set of conditions),the Weather data, soil temperature, rain fall concentration, and tree growth files must be lengthened such that input data is present for every time point to be simulated. Failure to do so will result in model being unable to run. 
 
-The program does not currently include N-fixation or fertilization specific processes. If these processes occur in the stand, they can be broadly simulated by "dosing" the atmospheric deposition file with regular increments of N or fertilizer nutrients as needed by the user. The user may also include fertilizers as minerals in the Mineral Data file, adjusting mineral reaction parameters to replicate the release rate of the fertilizer.
-
-
+The program does not currently include N-fixation or fertilization specific processes. If these processes occur in the stand, they can be broadly simulated by "dosing" the atmospheric deposition file with regular increments of N or fertilizer nutrients as needed by the user. The user may also include fertilizers as minerals in the Mineral Data file, adjusting mineral reaction parameters to replicate the release rate of the fertilizer. An example of this can be found in [@johnsonEffectsLimingSoils1995], where the potential nutrient additions of forest soil liming were observed for the Hubbard Brook forest (WS-6) using the related Nutrient Cyling Model (NuCM). The user would need to estimate the average release rate of the fertilizer prior to dosing the rain concentration file or adding a fertilizer mineral. 
 
 ## List of Equations
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  25 DEC 2020 12:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  25 DEC 2020 22:56
 entering extended mode
 **./Manual_NutsFor.tex
 (Manual_NutsFor.tex
@@ -410,6 +410,13 @@ Package caption Info: hyperref package is loaded.
 \c@lotdepth=\count291
 \sf@top=\skip58
 \sf@bottom=\skip59
+) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count292
+\float@exts=\toks26
+\float@box=\box50
+\@float@everytoks=\toks27
+\@floatcapt=\box51
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen175
@@ -422,12 +429,12 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen182
 \cmidrulekern=\dimen183
 \defaultaddspace=\dimen184
-\@cmidla=\count292
-\@cmidlb=\count293
+\@cmidla=\count293
+\@cmidlb=\count294
 \@aboverulesep=\dimen185
 \@belowrulesep=\dimen186
-\@thisruleclass=\count294
-\@lastruleclass=\count295
+\@thisruleclass=\count295
+\@lastruleclass=\count296
 \@thisrulewidth=\dimen187
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
@@ -435,46 +442,39 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 \LTright=\skip61
 \LTpre=\skip62
 \LTpost=\skip63
-\LTchunksize=\count296
+\LTchunksize=\count297
 \LTcapwidth=\dimen188
-\LT@head=\box50
-\LT@firsthead=\box51
-\LT@foot=\box52
-\LT@lastfoot=\box53
-\LT@cols=\count297
-\LT@rows=\count298
-\c@LT@tables=\count299
-\c@LT@chunks=\count300
-\LT@p@ftn=\toks26
+\LT@head=\box52
+\LT@firsthead=\box53
+\LT@foot=\box54
+\LT@lastfoot=\box55
+\LT@cols=\count298
+\LT@rows=\count299
+\c@LT@tables=\count300
+\c@LT@chunks=\count301
+\LT@p@ftn=\toks28
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \col@sep=\dimen189
-\ar@mcellbox=\box54
+\ar@mcellbox=\box56
 \extrarowheight=\dimen190
-\NC@list=\toks27
+\NC@list=\toks29
 \extratabsurround=\skip64
 \backup@length=\skip65
-\ar@cellbox=\box55
+\ar@cellbox=\box57
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@colwidth=\skip66
-\multirow@cntb=\count301
+\multirow@cntb=\count302
 \multirow@dima=\skip67
 \bigstrutjot=\dimen191
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
 \wrapoverhang=\dimen192
 \WF@size=\dimen193
-\c@WF@wrappedlines=\count302
-\WF@box=\box56
-\WF@everypar=\toks28
+\c@WF@wrappedlines=\count303
+\WF@box=\box58
+\WF@everypar=\toks30
 Package: wrapfig 2003/01/31  v 3.6
-) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count303
-\float@exts=\toks29
-\float@box=\box57
-\@float@everytoks=\toks30
-\@floatcapt=\box58
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 \everycr=\toks31
@@ -729,56 +729,52 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[8] [9] [10] [11] [12] [13]
+[7] [8] [9] [10] [11] [12]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-063.
+083.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1065.
-[14] [15] [16] [17] [18] (Manual_NutsFor.aux) ) 
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1085.
+[13] [14] [15] [16] [17] [18] (Manual_NutsFor.aux) ) 
 Here is how much of TeX's memory you used:
- 16394 strings out of 479697
- 249610 string characters out of 2867132
- 593492 words of memory out of 3000000
- 33003 multiletter control sequences out of 15000+200000
+ 16396 strings out of 479697
+ 249646 string characters out of 2867132
+ 593617 words of memory out of 3000000
+ 33004 multiletter control sequences out of 15000+200000
  463131 words of font info for 126 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,13n,85p,521b,343s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/siahl/AppData/Local/Pr
-ograms/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/AppData/Local/Progra
-ms/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/AppData/Local/Progra
-ms/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppData/Local/Programs/M
-iKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/lm/lmtti10.pfb>
-Output written on Manual_NutsFor.pdf (18 pages, 455361 bytes).
+ 79i,13n,85p,521b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/siahl/AppData/Loc
+al/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/AppData/Local/P
+rograms/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/AppData/Local/P
+rograms/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppData/Local/Progr
+ams/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/lm/lmtti10.pfb>
+Output written on Manual_NutsFor.pdf (18 pages, 456190 bytes).
 PDF statistics:
- 281 PDF objects out of 1000 (max. 8388607)
- 71 named destinations out of 1000 (max. 500000)
+ 282 PDF objects out of 1000 (max. 8388607)
+ 72 named destinations out of 1000 (max. 500000)
  12361 words of extra memory for PDF output out of 14400 (max. 10000000)
 
