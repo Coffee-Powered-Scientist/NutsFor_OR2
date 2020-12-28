@@ -38,8 +38,13 @@ library(kableExtra)
 <!--Meant to be a User guide, maybe a brief history can be mentioned at the end, but the intro should be short and descriptive-->
 
 The Nutrient Cycling in Forested Ecosystems (NutsFor) model is a stand-level biogeochemical 
-model which simulates the forest nutrient dynamics of 16 chemical species. NutsFor integrates 
-several biogeochemical processes, including hydrology, soil exchange chemistry, mineral
+model which simulates the forest nutrient dynamics of 16 chemical species. It was developed to study a broad range
+of forest types at the Breuil-Chenue experimental
+site in Burgundy, France [@vanderheijdenNutsForProcessorientedModel2017]. NutsFor is based on aspects of 
+the Nutrient Cycling Model (NuCM) [@munsonNuCMCodeVersion1992] and the 
+ForSAFE model [@wallmanForSAFEIntegratedProcessoriented2005]. 
+
+NutsFor integrates several biogeochemical processes, including hydrology, soil exchange chemistry, mineral
 weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most 
 recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, 
 and the ability to limit plant access to cation nutrients in the liquid and solid phases. 
@@ -124,7 +129,16 @@ Weather_Tbl<- data.frame(
 
 kbl(Weather_Tbl, booktabs = T, caption="Weather Data File", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
 kable_styling(full_width = F, latex_options = "scale_down", "HOLD_position", font_size=12) 
+
+
 ```
+
+<br>
+
+**Description of Parameters: Weather Data File**
+
+The Weather data file contains rainfall (RF), potential evapotranspiration (PET), and average air temperature (Tave)
+data on a dailey timestep. This data is used to calculate the wet atmospheric deposition flux, the water input flux, and the actual evapotranspiration (AET), along with several other files. 
 
 \newpage
  
@@ -449,28 +463,115 @@ kbl(text_tbl_5, caption="Mineral Data File", booktabs = TRUE, col.names= c("Inpu
 ```
 
 **Description of Parameters: Mineral Data File**
-<br>
+
+The NutsFor weathering sub-module is derived from the PROFILE mineral
+weathering model [@sverdrupCalculatingFieldWeathering1993]. PROFILE is based on transition state theory, 
+which dictates how the mineral weathering reaction equations are formulated. The mineral parameters in the Mineral data file were emprically derived from research in Swedish and European soils, assuming congruent weathering of mineral components [@]. PROFILE uses five weathering reactions:
+
+1). $H^+$ and  Al ,
+2) $H_{2}O$ and Al,
+3). OH- and Al,
+4). $CO_{2}$,
+5). Organic acids
+
+Citation: [@hodsonCriticalEvaluationUse1997]. 
+
+Note that the mineral data file of NutsFor does not contain the OH- reaction parameters. 
+
+In general, NutsFor mineral weathering will be controlled by weatherable mineral area, soil moisture, and the release of weathering agents $H^+$, $R^-$, and $H_{2}O$. This section introduces how the parameters contained in the Mineral data file of NutsFor are used to calculate mineral weathering rates. 
+
 
 ***Dissolution Reaction Parameters***
 The parameters which determine mineral dissolution dynamics are the equilibrium constants (pK values), the thermal dependencies (k values) and the reaction orders (n values). These are then combined in the following equation:
 
-$$r_j=(k_{H^+}*{[H^+ ]}^{n_{H^{+}}}/f_{H^+}) +(k_{H_{2}O}/f_{H_{2}O}) +(k_{CO_2}*P_{CO_2}^{n_{CO_2}}/f_{CO_2}) +(k_R*[R^- ]^{n_{R^-}}/f_{R^-})$$ 
-where
+$$r_j=(k_{H^+}*{[H^+ ]}^{n_{H^{+}}}/f_{H^+}) +(k_{H_{2}O}/f_{H_{2}O}) +(k_{CO_2}*P_{CO_2}^{n_{CO_2}}/f_{CO_2}) +(k_R*[R^- ]^{n_{R^-}}/f_{R^-})$$
 
-$$ r_j=$$ Weathering Rate
 
-The equation calculates the summation of all chemical species (H+, H2O, CO2, and Organic Acid) has on mineral weathering rate. Each calculation has a restricting coefficient ($$f_{species}$$), which is a product inhibition coefficient discussed in the next sub-section. 
+where $r_j$ is the Weathering Rate of mineral $j$, 
+
+$k_{species}$ is the rate coefficient of each species for each mineral,
+
+and $n_{species}$ is the reaction order (or weathering dependence) of each species. 
+
+
+The reaction rate coefficient $k_{species}$ of a specific reaction is calculated by the equation:
+
+$k=10^{-(pK+(E_{A}/R*ln(10))*(1/T)-8.56*10^{-3})}$
+
+Where $pK$ is the rate coefficient of the reaction at the temperature T=280°K, expressed as $-log_{10}(K)$,
+
+$E_{A}$ is the Arrhenius activation energy ($J*kmol^{-1}$), 
+
+$R$ is the universal gas constant ($J*kmol^{-1}*K^{-1}$), and
+
+$T$ is the absolute temperature ($°K$). 
+
+
+The equation calculates the summation of all chemical species (H+, H2O, CO2, and Organic Acid) has on mineral weathering rate $r_j$. Each calculation also has a restricting coefficient ($f_{species}$), which is a product inhibition coefficient discussed in the next section. 
 
 
 <br>
 ***Inhibition Reaction Parameters***
-The inhibition coefficients are calculated dynamically based on the concentration of cations in soil solution layers. The theoretical reasoning of this parameter is straight forward: the higher the solution concentration of base cations, the lower favorability of the weathering reaction. 
+The inhibition coefficients are calculated dynamically based on the concentration of cations in soil solution layers. The higher the solution concentration of base cations, the lower favorability of the weathering reaction due to the generation of less active surface complexes over the course of weathering [@]. The equation which calculates the product inhibition factor $f_{species}$ for each weathering agent is:
 
-These equations mean that as the base cation concentration of the soil solution increases, the weathering rate will become increasingly limited. The magnitude at which this occurs depends on the identity of the mineral and its defined parameters. An instance where this may become relevant is during calibration of free aluminum concentrations. Free aluminum will react with water in the model to release protons, which generally leads to enhanced mineral weathering as per Equation X. However, if aluminum concentrations are very high, the model will simulate a reduction in mineral weathering, cutting off the positive feedback between aluminum hydrolytic proton release and mineral weathering enhancement. 
+
+$$f_{H+}= (1+[Al]/C_{Al})^W_{Al_{H}}*(1+[BC^{+2}]/C_{BC})^W_{BC_{H}}$$
+
+
+
+$$f_{H_{2}O}= (1+[Al]/C_{Al})^W_{Al_{H_{2}O}}*(1+[BC^{+2}]/C_{BC})^W_{BC_{H_{2}O}}$$
+
+
+
+
+$$f_{CO_{2}}=(1+[BC^{+2}]/C_{BC})^W_{BC_{H}}$$
+
+
+$$f_{R-}=(1+[R-]/C_{R})^W_{R}*(1+[BC^{+2}]/C_{BC})^W_{BC_{H_{2}O}}$$
+
+Where the $C_{Al}$, $C_{BC}$, and $C_{R}$ are saturation concentration parameters,
+
+and the $W_{BC_{H}}$, $W_{BC_{H_{2}O}}$, and $W_{Al_{H}}$ are reaction orders.
+
+
+These equations mean that as the base cation concentration of the soil solution increases, the weathering rate will become increasingly limited. The magnitude at which this occurs depends on the identity of the mineral and its defined parameters. An instance where this may become relevant is during calibration of free aluminum concentrations. Free aluminum will react with water in the model to release protons, which generally leads to enhanced mineral weathering. However, if free aluminum concentrations are very high, the model will simulate a reduction in mineral weathering, cutting off the positive feedback between aluminum hydrolytic proton release and mineral weathering enhancement. 
 
 Note that the saturation constant (also known as the saturation concentration) sets the maximum solution concentration of each cation in water. The closer the simulated solution concentration is to the saturation constant, the higher the inhibition coefficient becomes and thus the slower the weathering.
 
-New minerals can be added to the NutsFor mineral data file, a more extensive list of minerals is given in [@BGDReviewsSyntheses]. However, note that the exact parameters which control mineral weathering will depend on several real-world dependencies.  
+New minerals can be added to the NutsFor mineral data file, a more extensive list of minerals is given in [@sverdrupReviewsSynthesesWeathering2019a]. However, the PROFILE model has recently been updated, and now contains saturation concentration and inhibition coefficients for silica and hydroxide. These updates are not currently in the NutsFor model. 
+
+
+**Weathering Flux**
+
+With the calculation of the mineral weathering rate $r_j$ for each mineral $j$ over the simulated timestep,
+the total weathering flux $W_M$ can be calculated as
+
+$$W_M=\sum_{j=1}^{mineral}(r_{j}*A_{W}*X_{j}*\Theta*z)/Norm$$
+Where $r_j$ is the specific mineral weathering rate,
+
+$A_W$ is the user-specified exposed mineral area surfaces ($m^{-2}/m^{-3}$),
+
+$X_j$ is the user-specified fraction exposed mineral area which mineral $j$ occupies, 
+
+$\Theta$ is the soil moisture saturation,
+
+$z$ is the soil layer thickness (m),
+
+and $Norm$ is the number of base cation charges released per mol of weathered mineral $j$ ($mol_{c}*mol^{-1}$).
+
+
+Soil moisture saturation $$\Theta$$ is calculated by
+
+$$\Theta=(\theta*\rho_{solid})/(\rho_{solid}-\rho_{soil}+\theta*\rho_{water})$$
+
+Where $\theta$ is the soil volumetric water content ($m^{3}*m^{-3}$),
+
+$\rho_{solid}$ is the solid density of soil ($kg*m^{-3}$), 
+
+$\rho_{soil}$ is the bulk density of soil ($kg*m^{-3}$), and
+
+$\rho_{water}$ is the density of water ($kg*m^{-3}$). 
+
 
 
 ***Stoichiometry and Isometric Substitution***
@@ -786,7 +887,9 @@ I also recommend using no more than 2 parameters to calibrate every 1 observed o
 
 1). **Hydrology**
 
-The calibration of the hydrological sub-module of NutsFor should always occur first, hydrology will affect seasonal decomposition patterns, soil solution concentrations, leaching fluxes, and weathering fluxes. It therefore has control over all other model outputs. To calibrate this system, the user should have some evaporation data for the region to confirm model output. Once the seasonality and magnitude of evaporation (in the model, the Actual Evapotranspiration output or AET) are confirmed against regional data, the hydrology calibration is complete. The user may also view soil moisture parameters over time, these values should be confirmed with collected data or known seasonal patterns. For instance, a soil with a drought season should have soil moisture parameters drop to near wilting point during such events. 
+The calibration of the hydrological sub-module of NutsFor should always occur first, hydrology will affect seasonal decomposition patterns, soil solution concentrations, leaching fluxes, and weathering fluxes. It therefore has control over all other model outputs. The NutsFor hydrology sub-module is an integration of the WATFor hydrological model, developed for the same site (Breuil, France) as NutsFor [@legoutTreeSpeciesEffects2016]. 
+
+To calibrate this system, the user should have some evaporation data for the region to confirm model output. Once the seasonality and magnitude of evaporation (in the model, the Actual Evapotranspiration output or AET) are confirmed against regional data, the hydrology calibration is complete. The user may also view soil moisture parameters over time, these values should be confirmed with collected data or known seasonal patterns. For instance, a soil with a drought season should have soil moisture parameters drop to near wilting point during such events. 
 
 Hydrological outputs are calculated from parameters entered in the Weather Data file, the Soil parameters file, and the Tree data file. The Weather Data file contains information on daily potential evapotranspiration and average air temperature, using the (which equation?) to calculate AET. The soil parameter file will contain soil moisture parameters specific to the site, these parameters will generally be held constant and shouldn't be used to calibrate hydrology. 
 
@@ -862,7 +965,7 @@ can be to calibrate the model based on higher-level observed ecosystem behaviors
 
 After the final calibration of a base site, hypothesis testing may begin. This process may undertake many forms. For example, the user may test how changes in atmospheric deposition, soil temperature, harvest scenarios, and growth scenarios affect simulation outputs over whatever time frame desired. Since NutsFor has a Stand Harvesting specific file, which allows for harvest residues to be left over, many hypotheses pertaining to harvest intensity may be tested. If the user wishes to simulate long term nutrient cycling behavior(under any set of conditions),the Weather data, soil temperature, rain fall concentration, and tree growth files must be lengthened such that input data is present for every time point to be simulated. Failure to do so will result in model being unable to run. 
 
-The program does not currently include N-fixation or fertilization specific processes. If these processes occur in the stand, they can be broadly simulated by "dosing" the atmospheric deposition file with regular increments of N or fertilizer nutrients as needed by the user. The user may also include fertilizers as minerals in the Mineral Data file, adjusting mineral reaction parameters to replicate the release rate of the fertilizer. An example of this can be found in [@johnsonEffectsLimingSoils1995], where the potential nutrient additions of forest soil liming were observed for the Hubbard Brook forest (WS-6) using the related Nutrient Cyling Model (NuCM). The user would need to estimate the average release rate of the fertilizer prior to dosing the rain concentration file or adding a fertilizer mineral. 
+The program does not currently include N-fixation or fertilization specific processes. If these processes occur in the stand, they can be broadly simulated by "dosing" the atmospheric deposition file with regular increments of N or fertilizer nutrients as needed by the user. The user may also include fertilizers as minerals in the Mineral Data file, adjusting mineral reaction parameters to replicate the release rate of the fertilizer. An example of this can be found in [@johnsonEffectsLimingSoils1995], where the potential nutrient additions of forest soil liming were observed for the Hubbard Brook forest (WS-6) using the related Nutrient Cycling Model (NuCM). The user would need to estimate the average release rate of the fertilizer prior to dosing the rain concentration file or adding a fertilizer mineral. 
 
 ## List of Equations
 
