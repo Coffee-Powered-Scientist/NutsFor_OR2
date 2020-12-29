@@ -42,21 +42,22 @@ model which simulates the forest nutrient dynamics of 16 chemical species. It wa
 of forest types at the Breuil-Chenue experimental
 site in Burgundy, France [@vanderheijdenNutsForProcessorientedModel2017]. NutsFor is based on aspects of 
 the Nutrient Cycling Model (NuCM) [@munsonNuCMCodeVersion1992] and the 
-ForSAFE model [@wallmanForSAFEIntegratedProcessoriented2005]. 
+ForSAFE model [@wallmanForSAFEIntegratedProcessoriented2005]. A comparison of NutsFor to it's
+parent models is given in table 1. 
 
 NutsFor integrates several biogeochemical processes, including hydrology, soil exchange chemistry, mineral
 weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most 
 recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, 
 and the ability to limit plant access to cation nutrients in the liquid and solid phases. 
 
-changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project 
-of Gregory van der Heijden, model capabilities are open to change based on collaboration. 
+![NutsFor Pool and Flux Diagram, red colors indicate ecosystem outpout fluxes, green indicates input fluxes, and text boxes indicate ecosystem pools.](Images/NutsFor_Design.png)
 
+
+changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project 
+of Gregory van der Heijden, model capabilities are open to change based on collaboration.
 This user manual is intended to give relevant information about the model's capabilities, 
 useful tips regarding its usage, insight into the equations and theory which link model parameters,
 and information on how to effectively use NutsFor in parallel to R-Studio. 
-
-
 
 &nbsp;
 
