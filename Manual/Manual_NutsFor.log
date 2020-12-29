@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  27 DEC 2020 22:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  28 DEC 2020 10:55
 entering extended mode
 **./Manual_NutsFor.tex
 (Manual_NutsFor.tex
@@ -734,33 +734,33 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 7
-70.
+80.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 776.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 786.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 776.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 786.
 
 [9] [10] [11] [12] [13] [14]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-265.
+274.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1267.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1276.
 [15] [16] [17] [18] [19] [20] [21] (Manual_NutsFor.aux) ) 
 Here is how much of TeX's memory you used:
- 16440 strings out of 479697
- 250921 string characters out of 2867132
+ 16442 strings out of 479697
+ 250999 string characters out of 2867132
  592619 words of memory out of 3000000
  33033 multiletter control sequences out of 15000+200000
  463626 words of font info for 128 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,13n,85p,521b,347s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 79i,13n,85p,521b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/siahl/AppDat
 a/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/AppData/Lo
 cal/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/siahl/AppData/Lo
@@ -790,9 +790,9 @@ X/fonts/type1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX
 fonts/type1/public/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/lm/lmtti10.pfb>
-Output written on Manual_NutsFor.pdf (21 pages, 486871 bytes).
+Output written on Manual_NutsFor.pdf (21 pages, 489422 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 81 named destinations out of 1000 (max. 500000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
  12361 words of extra memory for PDF output out of 14400 (max. 10000000)
 

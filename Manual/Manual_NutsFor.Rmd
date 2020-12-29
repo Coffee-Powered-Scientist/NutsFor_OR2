@@ -415,7 +415,7 @@ litter CEC base cation stabilization nor litter-layer organic complexation, the 
 require reduction if litter nutrient buildup is net-negative over a short simulated time frame,
 where it should be constant or building. Release rates of all nutrients will depend on the species
 of tree, with broadleaf litter tending to lose nutrients faster than coniferous needle 
-litter [@dijkstraCalciumMineralizationForest2003, @bockheimNutrientDynamicsDecomposing2011]. 
+litter [@dijkstraCalciumMineralizationForest2003; @bockheimNutrientDynamicsDecomposing2011]. 
 The species $Fe^{+3}$ and $Al^{+3}$ will tend to increase
 in litter as they form organo-metallic complexes with negatively charged sites of decomposed
 litter [@rustadElementDynamicsDecay1994]. However, NutsFor does not simulate $Fe^{+3}$ and does
@@ -644,7 +644,7 @@ The tree parameter file holds several parameters which will drive foliar leachin
 Foliar leaching parameters describe the intensity at which nutrient leaching occurs from the foliage.
 Leaching is known to be a significant determinant of base cation cycling in forests and other plant
 communities, but is particularly important for K cycling
-[@tukeyLeachingSubstancesPlants1970, @sollinsInternalElementCycles1980, @johnsonNutrientCyclingForestsa]. 
+[@tukeyLeachingSubstancesPlants1970; @sollinsInternalElementCycles1980; @johnsonNutrientCyclingForestsa]. 
 It is important to include this process even if little is known about throughfall chemistry
 at the site of interest. The magnitude of leaching is known to depend on the pH of the 
 throughfall solution, the concentration of elements in the foliage, and the volume of rainfall
