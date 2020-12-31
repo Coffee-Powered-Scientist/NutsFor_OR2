@@ -1,16 +1,25 @@
 ---
 title: "Summary of Progress"
 author: "Kaveh"
-date: "12/29/2020"
+date: "`r format(Sys.time(), '%d %B %Y')`"
 output: 
-  word_document:
+  pdf_document:
+    extra_dependencies: ["float"]
     toc: yes
     toc_depth: 2
 geometry: margin=2 cm
 fig_caption: yes
 citation_package: natbib
 bibliography: Manuscript.bib
+font-size: 12 
+header-includes: 
+  \usepackage{float}
+  \floatplacement{figure}{H}
 ---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.pos = 'H')
+```
 
 ## Project Progress
 
@@ -19,23 +28,31 @@ sites I'm representing in my work.  I first started by exploring the model, shif
 observing outputs. I did this by writing a R program that reads NutsFor data files and visualizes them after
 each model run. Once I understood how the model's parameters functioned together, I calibrated the model by
 individually calibrating each sub-module within the larger model. The order of calibration was choosen based on the 
-hiearchal relationship between the model's sub-systems proposed for the Nutrient Cycling Model [].
+hiearchal relationship between the model's sub-systems proposed for the Nutrient Cycling Model [@munsonNuCMCodeVersion1992].
 For instance, hydrology will have the most 
 control over model outputs, and should therefore be calibrated first. Deposition and throughfall fluxes will
 determine nutrient fluxes in the organic layers, and is calibrated second. Organic matter decomposition
 and buildup will control cation and anion nutrient release rates, and is calibrated third. 
 Anion concentrations can push cations off of the CEC and into solution, they thus control cation
 concentrations and should be calibrated forth. Cation concentrations are dependent on all previous 4 systems, and
-are calibrated last. I additionally added the N-Cycle calibration proccess at the 
+are calibrated last. I additionally added the N-Cycle calibration proccess. N-Cycling dynamics were placed 
+before anion calibration but after SOM C calibration. 
+
+&nbsp;
 
 1). Hydrology
 
 I used evaporation data for the Oregon Coast region[@safleyPart651Appendix2009], and drainage data from
 [@perakisBiogeochemistryTemperateForest2011] to calibrate evapotranspiration and water leaching fluxes
 in my simulated sites. I assumed the same hydrological outputs between the basalt and sedimentary sites.
-I also assumed that hydrology was constant over time, 
+I also assumed that hydrology was constant over time.
 
-![Workflow showing calibration proccess of hydrological sub-module.](Images/Hydro.png)
+```{r, echo=FALSE, fig.cap=c("Hydrology calibration workflow"), fig.pos = "H"}
+knitr::include_graphics("Images/Hydro.png")
+
+```
+
+
 
 2). Through fall and Deposition
 
@@ -52,7 +69,11 @@ the ALSEA OR02 site [@NationalAtmosphericDeposition2020a]. Rainfall concentratio
 used for the calibration of the model, and repeated over the length of the simulation for predictive simulations.
 This was necessary as NADP monitoring for the ALSEA site stopped in 2007. 
 
-![Workflow showing calibration proccess of throughfall and deposition.](Images/THRU_DEP.png)
+```{r, echo=FALSE, fig.cap=c("Throughfall and Deposition calibration workflow"), fig.pos='H'}
+knitr::include_graphics("Images/THRU_DEP.png")
+```
+
+
 
 3). Soil Organic Matter
 
@@ -67,30 +88,90 @@ SOM C stable over the entire simulation time period (~500 years).
 Once the SOM C and Litter C buildup matched observed trends and roughly aligned with
 the known magnitude of C buildup, parameters were accepted. 
 
-![Workflow showing calibration proccess of prganic layers.](Images/OM_C.png)
+```{r, echo=FALSE, fig.cap=c("Organic Carbon calibration workflow")}
+knitr::include_graphics("Images/OM_C.png")
+```
 
-4). Anion Calibration
+4). N Cycle Calibration
+
+The N-Cycle was calibrated by first setting nitrification rates to those 
+observed in [@perakisBiogeochemistryTemperateForest2011]. 
+N-release rates from the organic matter pools were then changed accordingly until soil solution concentrations
+and nutrient fluxes of $NO_{3}^{-}$ and $NH_{4}^{+}$ matched those observed. 
+
+```{r, echo=FALSE, fig.cap=c("N-Cycle Calibration Workflow")}
+knitr::include_graphics("Images/N_Cycle.png")
+```
+
+
+5). Anion Calibration
 
 Parameters controlling anion concentrations were calibrated until soil solution concentrations
 of anions matched those observed in lysimeter data. This was done for sulfate, phosphate, and chloride,
 organic acids ($R^-$) were not measured, the concentrations of $R^-$ were separately calibrated to balance 
 ANC and pH. As a point of additional constraint, leaching fluxes of anions were observed at the
-20cm and 100cm layers to ensure simulated S-losses did not exceed or go below those observed in nature. 
+20cm and 100cm layers to ensure simulated S-losses did not exceed or go below those observed in nature.
 
-![Workflow showing calibration proccess of anion concentrations. ](Images/Anions.png)
+```{r, echo=FALSE, fig.cap=c("Anion Calibration Workflow")}
+knitr::include_graphics("Images/Anions.png")
+```
 
-5). Cation calibration
 
-Cation Calibration
+6). Cation calibration
 
-![Workflow showing calibration proccess of Cation concentrations.](Images/Cations.png)
+Cation Calibration is similar to anion calibration, the parameters which are changed during calibration are
+the Gapon Coefficients, microbial uptake parameters, or the organic matter release factor. I used lysimeter
+measured concentrations to constrain calibration of parameters, I also used lysimeter measured leaching
+fluxes at 20cm and 100cm depth to constrain nutrient losses. The calibration was deemed complete when 
+simulated two year monthly concentrations fell within the average range of those observed. 
 
-6). Final Calibration (10-year observation)
+```{r, echo=FALSE, fig.cap=c("Cation Calibration Workflow")}
+knitr::include_graphics("Images/Cations.png")
+```
 
-7). Alternative Calibration: Basalt Sites
+
+
+7). Final Calibration
+
+After all sub-modules were calibrated to two years, I ran the simulation for 10 years to catch potential
+unrealistic behavior of the simulation on a longer timescale. I then re-calibrated the model using the same 
+workflows as pictured above until long term simulated outputs were realistic within selected bounds of
+constraint. 
+
+8). Alternative Calibration: Basalt Sites
+
+We have no direct measurements of soil solution concentrations or fluxes for basalt sites as we do
+sedimentary sites. Calibration for these sites was therefore based in the establishment of higher
+level ecosystem responses, such as plant nutrient acquisition, biomass acquisition, mineral weathering fluxes,and 
+exchangeable pool concentrations, as constraints on calibration. 
+
+Initial soil solution concentrations of metallic species was approximated from basalt lysmimeter data
+in [@sollinsInternalElementCycles1980] and [@hedinNutrientLossesFour2003]. I did not use these
+sites to calibrate monthly or long term soil solution concentrations, as the bedrock of the Sollins
+1980 site was magnesium poor and the Hedin et al., 2003 site in a tropical hydrolgical and temperature 
+regime. Instead, this information was used to set selectivity coefficients for the soil. 
+
+The same C, N, P, and S data used for the low N sedimentary site was used to calibrate the low N basalt site,
+and the same for the high N sites. 
+
+The model was then run for 2 years, and outputs were monitored for unrealistic behavior. "Unrealistic" 
+behavior was determined using datasets outside of those used for calculating initial parameters. For instance,
+large short term losses of nutrient cations from the exchangeable pool would be unrealistic, but long
+term losses would be expected if the output flux of nutrients (leaching and uptake) exceed input fluxes
+(mineral weathering and deposition) [@richterSoilChemicalChange1994].
+
 
 
 ## Learning Outcomes Progress
+Due to the COVID-19 pandemic, some learning outcomes will be completed through different means than those suggested 
+in my Learning Outcomes.
+
+FES 525 will be replaced by another class altogether as desired by the graduate school. 
+
+Rather than attending a forest policy seminar to fill the policy learning outcome, I will be taking a policy class
+in the spring. 
+
+
 
 ## References
 
