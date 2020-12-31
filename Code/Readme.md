@@ -9,3 +9,5 @@ In the open code site specific folders are the Calibration_Site R scripts, these
 (Project_Master->Test_Rep->Readme)
 
 The functions folder holds general functions which all site-specific codes call onto to complete analysis/data transmutation. The site specific codes should only contain directory information (sending function-derived results to correct sub-folder), as well as any manual code that could not be made to written in a general function (apply functions and complex pipes). 
+
+Figure_Parent.R is a sourcing code, it calls upon all relevant code in the folders and generates figures/tables for the manuscript. It outputs to an Images folder in the Manuscript directory. 
