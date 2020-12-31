@@ -14,12 +14,13 @@ geometry: margin=2 cm
 fig_caption: yes
 citation_package: natbib
 bibliography: Manuscript.bib
+header-includes: 
+  \usepackage{float}
+  \floatplacement{figure}{H}
 ---
 
-```{r global_options, include=FALSE, message=FALSE}
-#This global option holds figures in the correct place (stops floating in pdf)
-knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
-
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.pos = 'H')
 ```
 
 ```{r, include=FALSE}
@@ -50,7 +51,10 @@ weathering, stand growth and uptake, and atmospheric deposition. This manual des
 recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, 
 and the ability to limit plant access to cation nutrients in the liquid and solid phases. 
 
-![NutsFor Pool and Flux Diagram, red colors indicate ecosystem outpout fluxes, green indicates input fluxes, and text boxes indicate ecosystem pools.](Images/NutsFor_Design.png)
+```{r, echo=FALSE, fig.cap=c("Hydrology calibration workflow"), fig.cap="Pool and Flux Diagram for NutsFor. Blue text represents internal cycling proccesses, green input fluxes, and red output fluxes. Blue boxes show nutrient pools."}
+knitr::include_graphics("Images/NutsFor_Design.png")
+
+```
 
 
 changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project 
@@ -93,7 +97,8 @@ effects on model outputs.
 ### Deposition Files
 
 &nbsp;
-```{r, echo=FALSE}
+
+```{r, echo=FALSE, fig.pos="H"}
 text_tbl <- data.frame(
 Input= c("Ca, Mg, K, Na, NO3, NH4, SO4, Cl, PO4, DOC, H, Al, Si"),
 Units=c("$\\mu$mol/L"),
@@ -101,7 +106,7 @@ Description = c("Determines the amount of each species deposited into ecosystem 
 )
 
 kbl(text_tbl, booktabs = T, caption="Dry Deposition and Rainfall Concentration Files", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
-kable_styling(full_width = F, latex_options = "scale_down", "HOLD_position") 
+kable_styling(full_width = F, latex_options = c("scale_down", "HOLD_position", font_size=12)) 
 ```
 
 
@@ -129,7 +134,7 @@ Weather_Tbl<- data.frame(
 )
 
 kbl(Weather_Tbl, booktabs = T, caption="Weather Data File", col.names =  c("Input","Units","Description"), escape=FALSE) %>%
-kable_styling(full_width = F, latex_options = "scale_down", "HOLD_position", font_size=12) 
+kable_styling(full_width = F, latex_options =c("scale_down", "HOLD_position", font_size=12)) 
 
 
 ```
