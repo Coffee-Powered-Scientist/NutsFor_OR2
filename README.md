@@ -14,9 +14,9 @@ Manual: Contains the code which generates the NutsFor user manual
 
 Data: Holds final dataset of model runs for reproducibility purposes, it is not well updated and is meant to be fully implemented at the end of the project.
 
-Code: Holds all the code used to analyze and visualize data, except for report and manuscript Rmd files. 
+Code: Holds all the R code used to analyze and visualize data, except for report Rmd files. 
 
-
+Manuscript: Contains .tex and .cls formatting files for correct thesis formatting output, also contains the images folder which some code outputs figures too. 
 
 List of Used R Packages (if you want to run the codes):
 

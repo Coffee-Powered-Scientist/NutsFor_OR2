@@ -51,7 +51,7 @@ weathering, stand growth and uptake, and atmospheric deposition. This manual des
 recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, 
 and the ability to limit plant access to cation nutrients in the liquid and solid phases. 
 
-```{r, echo=FALSE, fig.cap=c("Hydrology calibration workflow"), fig.cap="Pool and Flux Diagram for NutsFor. Blue text represents internal cycling proccesses, green input fluxes, and red output fluxes. Blue boxes show nutrient pools."}
+```{r, echo=FALSE, fig.cap="Pool and Flux Diagram for NutsFor. Blue text represents internal cycling proccesses, green input fluxes, and red output fluxes. Blue boxes show nutrient pools."}
 knitr::include_graphics("Images/NutsFor_Design.png")
 
 ```
@@ -913,7 +913,13 @@ CEC_All[c(2:16)]<-lapply(CEC_All[c(2:16)], as.numeric)
 
 While R studio is a powerful for analyzing large datasets, it can also be used to generate manuscript-quality tables [Citation] and write dynamic reports or manuscripts [Citation]. Creating such reports can make the following stage of NutsFor usage, calibration, much easier. 
 
+The work flow of a potential R-studio based system can be found below. 
+
+A working example of an R-studio based system using this workflow 
+can be found at https://github.com/Coffee-Powered-Scientist/NutsFor_OR2. 
+
 ## Calibration
+&nbsp;
 
 After starting parameters have been measured for the site or approximated from the literature, and once a reliable method of monitoring NutsFor outputs is constructed, the calibration phase can begin. Calibration entails changing initial parameters within some acceptable range until model outputs match observed measurements. What determines the acceptable range of parameter variation depends on what is known about the site, as well as what is known about the standard error of the parameter itself. 
 
@@ -937,6 +943,11 @@ To calibrate hydrology AET outputs, the user should either adjust the PET entere
 
 I found that spring time PET was often over estimated by the reference crop PET calculator that I used, so during my calibrations I chose to manually change PET values for each site I used. If possible, it is always more efficient to directly measured PET and AET for a specific site. 
 
+```{r, echo=FALSE, fig.cap="No caption yet!"}
+knitr::include_graphics("Images/Hydrological_Workflow.png")
+
+```
+
 &nbsp;
 
 2). **Throughfall & Deposition**
@@ -952,8 +963,11 @@ Once throughfall concentrations and depositions fluxes match those observed or e
 &nbsp;
 
 3). **Soil Organic Matter**
+&nbsp;
 
 Soil Organic matter should be calibrated using the OM decomposition file, there are numerous parameters which control SOM C stabilization. In general, unless data is available, SOM in mineral soil should not build up or decrease over the course of the simulation. The calibration of SOM is dictated by Decomp_rate, C_Assim, DOC_Decomp, and DOC_Assim. The key to SOM calibration is to control DOC leaching and R- concentrations while keeping the SOM C content stable. Decomp_rate is the most sensitive parameter which determines SOM C dynamics, C_Assim and DOC_Assim dictate how much decomposed solid and dissolved carbon are assimilated into the SOM pool, and can be used to enhance or reduce SOM C buildup. DOC_Decomp can be used to reduce DOC leaching. 
+
+&nbsp;
 
 4). **Anion Calibration**
 
@@ -1056,6 +1070,11 @@ prior to dosing the rain concentration file or adding a fertilizer mineral.
 ### General Equations
 
 ### Github Shoutout
+
+For a working example of the NutsFor analysis system:
+
+https://github.com/Coffee-Powered-Scientist/NutsFor_OR2
+
 
 ## Literature Cited
 
