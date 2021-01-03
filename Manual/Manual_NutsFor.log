@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  1 JAN 2021 13:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  2 JAN 2021 17:24
 entering extended mode
 **./Manual_NutsFor.tex
 (Manual_NutsFor.tex
@@ -752,53 +752,84 @@ LaTeX Warning: Command \textdegree invalid in math mode on input line 794.
 
 [10] [11] [12] [13] [14] [15]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-282.
+293.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1284.
-[16] [17] [18] [19] [20] [21] [22] (Manual_NutsFor.aux) ) 
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1295.
+[16] [17]
+<Images/Hydrological_Workflow.png, id=147, 749.9217pt x 415.5525pt>
+File: Images/Hydrological_Workflow.png Graphic file (type png)
+<use Images/Hydrological_Workflow.png>
+Package pdftex.def Info: Images/Hydrological_Workflow.png  used on input line 1
+437.
+(pdftex.def)             Requested size: 500.4882pt x 277.33444pt.
+[18]
+<Images/THRU_DEP.png, id=152, 803.55206pt x 552.41382pt>
+File: Images/THRU_DEP.png Graphic file (type png)
+<use Images/THRU_DEP.png>
+Package pdftex.def Info: Images/THRU_DEP.png  used on input line 1473.
+(pdftex.def)             Requested size: 500.48997pt x 344.06927pt.
+[19 <./Images/Hydrological_Workflow.png>]
+<Images/OM_C.png, id=160, 1084.05pt x 546.6021pt>
+File: Images/OM_C.png Graphic file (type png)
+<use Images/OM_C.png>
+Package pdftex.def Info: Images/OM_C.png  used on input line 1495.
+(pdftex.def)             Requested size: 500.4886pt x 252.35747pt.
+[20 <./Images/THRU_DEP.png>] [21 <./Images/OM_C.png>]
+<Images/Anions.png, id=173, 1082.6046pt x 728.9634pt>
+File: Images/Anions.png Graphic file (type png)
+<use Images/Anions.png>
+Package pdftex.def Info: Images/Anions.png  used on input line 1559.
+(pdftex.def)             Requested size: 500.48204pt x 336.99568pt.
+[22 <./Images/Anions.png>]
+<Images/Cations.png, id=180, 794.97pt x 488.3043pt>
+File: Images/Cations.png Graphic file (type png)
+<use Images/Cations.png>
+Package pdftex.def Info: Images/Cations.png  used on input line 1620.
+(pdftex.def)             Requested size: 500.49411pt x 307.42471pt.
+[23 <./Images/Cations.png>] [24] [25] [26] (Manual_NutsFor.aux) ) 
 Here is how much of TeX's memory you used:
- 16461 strings out of 479697
- 251324 string characters out of 2867132
- 592482 words of memory out of 3000000
- 33045 multiletter control sequences out of 15000+200000
- 469599 words of font info for 130 fonts, out of 3000000 for 9000
+ 16506 strings out of 479697
+ 252272 string characters out of 2867132
+ 593482 words of memory out of 3000000
+ 33070 multiletter control sequences out of 15000+200000
+ 469729 words of font info for 131 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  79i,13n,85p,521b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/siahl/AppDat
-a/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/AppData/Lo
-cal/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/siahl/AppData/Lo
-cal/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/siahl/AppData/Local
-/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/AppData/Local
-/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppData/Local/Pro
-grams/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/siahl/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/Local/Program
-s/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/lm/lmtti10.pfb>
-Output written on Manual_NutsFor.pdf (22 pages, 946703 bytes).
+{C:/Users/siah
+l/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/Ap
+pData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/siahl/Ap
+pData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/siahl/AppDa
+ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/AppDa
+ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppData/L
+ocal/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/siahl/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmtti10.pfb>
+Output written on Manual_NutsFor.pdf (26 pages, 1509375 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 85 named destinations out of 1000 (max. 500000)
- 12366 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 380 PDF objects out of 1000 (max. 8388607)
+ 98 named destinations out of 1000 (max. 500000)
+ 12391 words of extra memory for PDF output out of 14400 (max. 10000000)
 
