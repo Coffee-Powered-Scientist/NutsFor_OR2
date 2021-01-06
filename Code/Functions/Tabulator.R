@@ -40,3 +40,10 @@ Tab_Func_LF_Yr<-function(x){
   
 }
 
+#For Leaching Layers (aggregated, means)
+Tab_Func_LL_Yr_M<-function(x){
+  x %>% group_by(group_id) %>% summarise(across(Ca:HR, ~ mean(.x, na.rm = TRUE)))
+  
+  
+}
+
