@@ -368,7 +368,7 @@ Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
 Lys_Leaching %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
   kbl(caption="Actual Average Lysimeter Fluxes (2005)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>%
 kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
-         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times") %>% landscape() %>% add_header_above(c(" "=1,  "kg/ha"=24))
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times") %>% landscape() %>% add_header_above(c(" "=1,  "kg/ha"=13))
 
 
 ```
