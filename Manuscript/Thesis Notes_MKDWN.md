@@ -1,0 +1,161 @@
+### Abstract ###
+
+<!--Include elements from proposal, include Ca-specific stuff as well as giving an overview of the field-->
+
+<!--How similar should the introduction be to the proposal introduction?-->
+
+In this study the potential for forest nutrient limitation soil nutrient depletion under intensive forest management was analyzed for four unique soil types common to the Oregon Coast Range (OCR). The numerical model NutsFor was calibrated to represent each forest-site. These sites then underwent bole-only or whole-tree-harvest, growing through either a 40-year or 80-year rotation. This study defines the sources of nutrient loss and retention within each site, represents these factors in a dynamic ecosystem model, and quantifies the depletion of nutrients relative to stand requirements. This study provides an approximation of forest-soil behavior between the selected sites over the long term, however it isolates the relationship between soil N status, soil minerology, and forest harvest.  In summary, we found that more intensive harvest scenarios lead to soil Ca depletion and growth limitation in highly N saturated soils, whereas low N soils experienced more significant N and P limitations compared to other nutrients.  
+
+### Acknowledgements ###
+
+This is just a draft version, I will likely write this last. 
+
+### Introduction ### 
+
+<!--From Proposal-->
+
+Coastal Douglas-fir forests of the Pacific Northwest are among the most productive worldwide (Hermann and Lavender, 1999). This is largely due to a combination of high soil nitrogen (N) availability and favorable climate for tree growth. Whereas forest growth worldwide is often limited by low N availability, coastal Pacific Northwest forests often display high soil N availability due to a history of symbiotic N-fixation associated with red alder (Alnus rubra) (Binkley, 1983). In some cases, red alder can fix more N to soils than ecosystems can retain, leading to a condition known as N saturation (Perakis and Sinkhorn, 2011). In N saturated forests, excess soil N is converted to nitrate, which generates acidity and stimulates the leaching of nitrate and essential base cations (particularly calcium, Ca) from soils (Homann et al., 1994). When N-saturation and Ca leaching persist for centuries, it can result severe depletion of soil available Ca pools and Ca deficiency in Douglas-fir (Perakis et al., 2006). In these cases, the potential for soil Ca resupply from mineral weathering can differ by bedrock type (Hynicka et al., 2016). Specifically, even when high soil N depletes the soil exchangeable pool of Ca, it is possible that the base-cation rich minerals of basaltic sites have a higher capacity to replenish the exchangeable pool compared to the minerals of sedimentary sites (Hynicka et al., 2016). Removal of nutrients off-site through tree harvest is a primary cause of soil nutrient depletion in many managed forests (Johnson, 1983). Depletion of soil N through multiple harvest cycles is often a concern in N-limited forests (Himes et al., 2014), but nutrient depletion risk can shift to other nutrients such as Ca, P, K, S, etc., in forests with high N supply (Mainwaring et al., 2014; Perakis et al., 2013; Turner et al., 1977; Radwan and Shumway, 1985). Depletion of soil Ca in some N-saturated Douglas-fir forests has been hypothesized to be particularly imminent (~50 years) under whole-tree harvest, whereas stem-only harvest may extend site Ca supply up to 400 years (Perakis et al., 2006). Recent intensification of forest management to improve economic returns has led to shorter rotation schedules in many areas (Mason, 2003), with potential to accelerate nutrient removals as well. However, it remains unknown how many short-rotation harvests must occur to cause nutrient depletion under a variety of soil nutrient conditions. In Coastal Douglas-fir forests, it is likely to depend on the interaction of harvest intensity and how forest N saturation influences Ca supply from mineral weathering. Various approaches are used to evaluate soil nutrient depletion in managed forests. This ranges from field-based nutrient-budget analyses to static and dynamic modeling approaches. Static modeling cannot account for the long-term changes in site development, such as changes in CEC and nutrient availability. Representing the interactive relationship between forest management, soil N status, and site mineral weathering rates is therefore similarly impractical in such approaches. Dynamic models more realistically reflect how multiple ecosystem compartments interact to drive nutrient depletion (Johnson, 1983), as these models evaluate how changes in ecosystem processes interdependently affect each other over time. Dynamic models are generally more empirical or process-based in their formulation, with process-based modeling having more internal resolution than empirical models, allowing for changes in soil nutrient availability to be explicitly represented (Korzukhin et al., 1996). Relatively few dynamic models of forest nutrient cycling contain sufficient chemical detail to evaluate interactions between nitrogen cycling and calcium supply from mineral weathering. One such model is called “Nutrient Cycling in Forest Ecosystems”, or NutsFor. NutsFor is one of several dynamic process-oriented models that was developed to simulate forest-soil chemical responses to harvest and acidic deposition (van der Heijden et al., 2017). It is a hybrid of the Nutrient Cycling Model (NuCM), which has been used to study base cation nutrient depletion due to acidic deposition and harvest intensity (Verburg et al., 2001; van der Heijden et al., 2011; Liu et al., 1991). NutsFor has adopted NuCM’s exchange site simulations and N-transformation processes, while adding the PROFILE soil mineral weathering model (van der Heijden et al. 2017). NutsFor’s ability to link soil N transformations to soil acidification, mineral weathering, forest management, and exchange site depletion of base cations makes NutsFor well suited to the study of nutrient cycling and depletion in the biogeochemically diverse, intensively managed coastal forests of the PNW. The aim of this study is to evaluate how interactions among forest management, site N status, and site mineralogy influence the rate of nutrient depletion from soils. By applying NutsFor, the following set of questions can be answered; Q1: How does soil N saturation affect nutrient depletion (especially Ca) in coastal Douglas-fir stands? Q2: How do different stand rotation lengths and harvest types change the rate at which nutrient depletion occurs? Q3: How do different kinds of bedrock (basaltic versus sedimentary) and associated soil minerals influence the rate of nutrient depletion? The questions have the following corresponding hypotheses: Hypothesis 1: Highly N saturated soils will drive base cation leaching independent of the potential base cation supply by site mineralogy. Hypothesis 2: More intensive management scenarios (whole tree harvest and shorter rotations) will increase the rate of nutrient depletion compared to less intensive management scenarios (stem-only harvest and longer rotations).  5 Hypothesis 3a: Nutrient depletion will occur more rapidly in sedimentary than in basaltic sites because the weathering capacity of minerals in sedimentary sites will provide fewer base cation inputs from mineral weathering. Hypothesis 3b: Mineralogical differences among bedrock-type and consequent dynamics of Ca availability through weathering have a larger effect than static estimates of the exchangeable Ca pool on the long-term sustainability of forest Ca supply, as assessed by tree growth over time.
+
+ 
+
+Chapter 1: Introduction v.1
+
+<!--Chapter version-->
+
+The highly N saturated soils of the coastal Pacfific Northwest yield the most productive forests globally ~/citep{}. 
+
+Whereas the majority of forests worldwide are N limited due to low N availability, the Douglas-fir forests of the OCR  have undergone centuries of N saturation due to historic presence of the symbiotic N-fixing red alder (Alnus rubra) in the region ~/citep{}. 
+
+Although high soil N is conducive to tree growth, it is known to facilitate the leaching of base cations from soils ~/citep{}.  This occurs because the high nitrification rates in N saturated soils facilitates soil acidification ~citep{}. While soil nitrification generally leads to base cation leaching, it particularly accelerates calcium (Ca) and magnesium (Mg) losses from soils ~/citep{}. As Ca is required in higher quantities by trees than Mg, and is known to be distinctly limiting in forests predisposed to highly acidic and weathered soil conditions, it is more likely that Ca deficiency is to develop in the higher N soils of the Oregon Coast Range (OCR) ~/citep{}. In contrast to accelerated leaching, chronic N saturation leads to accelerated mineral weathering ~citep{}. However, over millennia, the  source of ecosystem Ca supply in the OCR has shifted from mineral to atmospheric, implying a depletion of the weatherable pools of nutrient cations ~/citep{}. Although ecosystem recycling processes are sufficient in supplying Ca in many unaltered forests ~/citep{}, Douglas-fir in the OCR is specifically grown for the harvest of timber ~/citep{}. Removals of tree nutrients through harvest is a primary cause of ecosystem nutrient losses in managed forests ~citep{}, and may quickly lead to soil Ca depletion and subsequent forest productivity losses ~citep{}. Intensive forest-harvest practices, such as whole-tree-harvest (WTH), are known to be the major cause of Ca losses in a range of forest plantations ~citep{}. Moderate practices such as bole-only (BOH) harvest allow ecosystems to retain more nutrients, allowing for more sustainable forest growth in the long term ~citep{}. Recent intensification of forest management to improve economic returns has led to shorter rotation schedules in many areas ~citep{}, with potential to accelerate nutrient removals as well. It is estimated that high N Douglas-fir forests under WTH will reach soil Ca depletion within ~50 years of continued use, whereas the application of BOH can extend this to ~400 years ~citep{}. However, it remains unknown how many short-rotation harvests must occur to cause nutrient depletion under a variety of soil nutrient conditions.  In Coastal Douglas-fir forests, it is likely to depend on the interaction of harvest intensity and how forest N saturation influences Ca supply from mineral weathering and exchangeable nutrient depletion. As an analysis of nutrient depletion in the OCR requires the observation of soil nutrient conditions from 40 to 500 years in the future~citep{}, a dynamic modelling approach is used to  observe the potential for soil N saturation and harvest to drive nutrient depletion in soils. 
+
+<!--This next part is the same as the proposal-->
+
+Relatively few dynamic models of forest nutrient cycling contain sufficient chemical detail to evaluate interactions between nitrogen cycling and calcium supply from mineral weathering. One such model is called “Nutrient Cycling in Forest Ecosystems”, or NutsFor. NutsFor is one of several dynamic process-oriented models that was developed to simulate forest-soil chemical responses to harvest and acidic deposition (van der Heijden et al., 2017). It is a hybrid of the Nutrient Cycling Model (NuCM), the ForSAFE model, and the PROFILE model, which have been used to study base cation nutrient depletion due to acidic deposition and harvest intensity (Verburg et al., 2001; van der Heijden et al., 2011; Liu et al., 1991). NutsFor has adopted NuCM’s exchange site simulations and N-transformation processes, while adding the PROFILE soil mineral weathering model (van der Heijden et al. 2017). NutsFor’s ability to link soil N transformations to soil acidification, mineral weathering, forest management, and exchange site depletion of base cations makes NutsFor well suited to the study of nutrient cycling and depletion in the biogeochemically diverse, intensively managed coastal forests of the PNW. NutsFor was calibrated to represent the forest sites with varying soil N, mineralogy, and forest harvest intensity to evaluate how interactions among forest management, site N status, and site mineralogy influence the rate of nutrient depletion from soils. 
+
+
+
+### Literature Review
+
+<!--Probably going to copy and paste my proposal literatur review here, for a good start.-->
+
+### Methods
+
+#### Overview
+
+Initial parameters were established in NutsFor for the four sites based on their soil N content and mineralogy. A table showing the sources for these initial parameters can be found in  Appendix A, Table A1. A hierarchy of calibration was established for each NutsFor sub-system, this constructed system was followed until simulated outputs matched ecosystem measurements and known behaviors. Once calibrated, bole-only harvest and whole-tree-harvest were simulated  over the course of 500 years. Harvest events were simulated to occur after either 40 years of tree growth (i.e., a 40-year rotation), 80 years of tree growth, or a full 500 years of growth. All simulated stands were assumed to be 20 years old at the beginning of the simulation (January, 2005). The first harvest event was therefore induced in 2025 for the 40-year rotations and 2065 for the 80-year rotations, two years of zero-growth were simulated in-between each harvest event to mimic the time between harvest and replanting operations. Sites were selected based on N-saturation, high N sites were parameterized using the highest N sites from  ~/cite{PerakisSinkhorn2011} and ~/cite{Hynickaetal2016} (~20,000 kg N/ha soil at 1m depth), whereas low N soils were parameterized using the lowest N soils (~4000 kg N/ha). These sites represent the two extreme ends of the N saturation spectrum that exists in the OCR, they were specifically chosen  to highlight the role of the N-cycle in determining long term nutrient cycling patterns.  
+
+#### Site Description
+
+Basaltic Bedrock
+
+Forest soils that develop on basaltic bedrock tend to form iron oxide rich Andisols, with kaolinite, halloysite, and gibbsite as commonly forming secondary minerals (Glasmann and Simonson, 1985; Southard et al., 2017). These minerals have high sulfate and phosphate adsorption capacities, limiting the mobility of these nutrients within the soil, and facilitating anion fixation (Johnson, 1984; Pigna and Violante 2003; Inskeep, 1989). Mineral fragments consist of olivine, pyroxenes and plagioclase (Franklin, 1990). This often produces soils that are relatively rich in base cations. High nitrate leaching can diminish exchangeable pools of base cations on soils derived from basaltic rock (Perakis et al., 2006). However, basaltic soils may nevertheless contain sufficient reserves of base cations in rock fragments that are released by mineral weathering to support plant uptake (Hynicka et al., 2016). 
+
+Sedimentary Bedrock 
+
+Parent material denoted as “sedimentary bedrock” in the OCR refers to sandstone and siltstone. This bedrock type lends itself to the formation of andic Inceptisols rich in quartz and iron oxides, with minor feldspar and lithic contribution to soil mineralogy (Bockheim and Langley‐ Turnbaugh, 1997; Anderson et al., 2002; Southard et al., 2017). Secondary clay mineralogy is dominated by gibbsite and vermiculite, with small contributions of smectite in areas of earthflow and physical disturbance (Bockheim and Langley‐Turnbaugh, 1997; Istok and Harward, 1982). Quartz becomes increasingly dominant in soil as sedimentary sites weather towards an Ultisol state, indicating the importance of site age on the mineral pool (Lindeburg et al., 2013). Bulk chemistry of rock fragments in soil shows that sedimentary sites have less total base cations than basaltic ones (Hynicka et al., 2016), and thus a potentially higher potential for base cation nutrient depletion. 
+
+#### Calibration
+
+<!--Start off describing what calibration is-->
+
+The use of calibration in process modelling in often criticized for allowing the modeler to produce any result desired [@]. This can certainly be true, any model with more than a three controls for a single process has an infinite number of ways though which it can be calibrated to obtain a single observed result [@]. To avoid this sort of calibration, a set of rules was established based on an initial analysis of NutsFor's processes and known site data, or lack thereof, to justify any needed calibration of model parameters.  The workflows from the NutsFor User Manual (Siah and Van der Heidjen, 2021) were used to calibrate each model subsystem based on a hierarchy of ecosystem control.  N-Cycle calibration was specifically included due to the dominance of N saturation and transformation processes in determining base cation nutrient mobility [@]. Calibration was completed through the following order:
+
+1). Hydrology
+
+
+
+All sites were assumed to have the same rainfall volume, rainfall concentration, evaporation, and drainage characteristics. Regional evaporation data from ~/citep{}  was used as a constraint on simulated evapotranspiration. Cloverdale and Newport data was specifically used as reference evaporation regions around the coast range, while evapotranspiration patterns were examined against other datasets in the pacfic northwest ~/citep{jassalEvapotranspirationWaterUse2009}. Extrapolated soil water drainage (~1500mm) at 1 m depth was calculated for the sites at 2500 mm rainfall. Drainage was used as an additional constraint on hydrology. All nutrient leaching fluxes were scaled to the extrapolated drainage, assuming the same concentration as measured in the original lysimeters. Rainfall volume was set as an average approximate value for the region, ambient air temperature values were derived from PRISM for the 2005-2007 time frame and repeated over the simulation time period ~/cite{}. 
+
+
+
+2).  Throughfall and Deposition
+
+Data describing  characteristics of throughfall leaching behavior for young Douglas-fir in the OCR was scare, regional data from the Integrated Forest Study (IFS) was used for a similarly aged Douglas-fir stand in Washington ~/citep{}. Dry deposition was not included in the model due to unknown recent patterns in dry deposition.  Wet deposition from the ALSEA OR02 site (coordinates), for the years of 2005-2007, was used to set rainfall concentrations in the model ~/citep{}. 
+
+3). Soil Organic Matter
+
+Decomposition parameters were adjusted after initial carbon pools in the O-horizon and SOM pools were set. Decomposition rates were adjusted until a). O-horizon C-stock increased over a 10-year time frame, consistent with data from ~/cite{} b). SOM C pools remained stable (neither increasing nor decreasing), and c). DOC leaching fluxes matched those observed in lysimeter measurements. As basalt sites had no lysimeters in place, the carbon calibration for the low N sedimentary site was adopted by the low N basalt site, and the high N basalt received the same C-pool parameterization as the high N sedimentary site. 
+
+Concentrations of organic acid (dissolved or solid) were not measured, however it was assumed that R- played a significant role in soil solution buffering due to the relatively high C stock of the sites ~/citep{}. This assumption is not unreasonable given the charge balance deficient present in the soil solution, when R- is unaccounted for (data no shown, YET). Additionally, NutsFor does not take into consideration the solid phase of organic acids, the dissolved phase of organic acid R- was therefore used as a necessary stand-in for all forms of organic acids in order to balance dissolved base concentrations in the soil solution. 
+
+4).  N-Cycle Calibration
+
+Calibration of the N cycle followed the rule that the high N sites (sedimentary or basaltic) should have the same N cycle parameters, whereas the low N sites should have the same parameters. This is because one of the key assertions of this research is that the N-cycle is what has hierarchy over mineral weathering, soil acidification, and CEC depletion.  Ammonium sorption parameters were set by assuming that each layer's CEC was occupied by 0.00005 cmol/kg (<!--report soil N contributed by CEC-->) for the low N sites and 0.00015cmol/kg for the high N sites <!--Maybe email the profs on this-->, this assumption was made as Hynicka's CEC data did not include ammonium sorption, and it is assumed that N uptake and nitrification largely restrict the ammonium pool, leading to a low amount of ammonium that can potentially adsorb onto CEC surfaces. 
+
+The decomposition dynamics between high and low N sites are different, very high N sites tend to have lower decomposition rates and greater N release ~citep{}. This behavior was mimicked by setting N-release factors to be lower in the low N sites, and setting them higher in the high N sites. The high N sites also had decomposition rates  limited to mimic observed behavior in each layer. Although there is data to suggest the magnitude of the N release factors, calibration was completed heuristically, N-release factors where chosen based on calibration of the soil solution concentrations of ammonium and nitrate. 
+
+5). Anion Calibration
+
+For all anions (excluding nitrate), soil adsorption models were set based on the Langmuir isotherm (Sulfate, Chloride) and Freundlich isotherm (Phosphate). Although all soils in this study have high anion adsorption capacity ~citep{}, most soil sulfur and phosphorous are stored in the SOM pool ~citep{}. Adsorption parameters were calibrated until soil solution concentrations matched those observed. All sites were given the same adsorption parameters, although high N sites were known to contain more SOM-S and SOM-P.  Soil solution chloride concentrations could not be adequately calibrated, possibly due to a disconnection between non-specific chloride adsorption and soil acidity within the model ~/citep{}. 
+
+6). Cation Calibration
+
+As sedimentary sites had complementary soil solution concentration data, Gapon coefficients were readily calculated. However, sedimentary sites had unconstrained Ca mineral weathering fluxes due to unknown weathering end-members ~/citep{}. Mineral weathering and subsequent cation concentrations were calibrated by using Si concentrations and fluxes as a rough tracer of mineral weathering. This method certainly underestimates mineral weathering fluxes, as NutsFor does not simulate Si mineral reconstitution nor Si uptake by trees ~/citep{}. Other estimates of mineral weathering for OCR soils derived from sedimentary bedrock tended to perturb ANC and soil solution pH, and were thus untenable for calibration ~/citep{}. 
+
+Basalt cation calibraion began by using the same concentrations Basalt site Ca weathering fluxes were able to be approximated from strontium isotope data ~/citep{}. Once weathering 
+
+7). Final Calibration
+
+8). Alternative Calibration
+
+
+
+The sites in this study represent the low (~4000 kg N/ha) and high ends (~20,000 kg N/ha) of soil N saturation in the OCR. 
+
+Each sub-model of NutsFor was independently calibrated based on no more than 2 chosen parameters for every 1 observed output. After a set of two parameters were calibrated for one output, they were not changed in the succeeding sub-model calibration steps.  
+
+
+
+***Sedimentary Base Case Calibration\***
+
+Gapon selectivity coefficients for sedimentary sites were calculated using averaged soil solution concentration and CEC data from Perakis and Sinkhorn 2011 and Hynicka et al., 2016. Highly base saturated low N sites encountered soil solution pH issues, due to an under-estimation of the Gapon-coefficient.  The low N site Gapon coefficients were calibrated, i.e., changed incrementally, until soil solution concentrations were well balanced with soil solution pH. 
+
+Soil solution pH is calculated from a cation-anion balance. Acid neutralizing capacity (ANC) was thus monitored as the difference between strong base cations and strong acid anions. Constraint of soil solution pH was carried out by ensuring a net persistent negative ANC, anion deficits were addressed by increasing organic acid (R-) residence time and quantity in the soil solution and calibrating aluminum ion concentrations.
+
+
+
+***Basalt Base Case Calibration\***
+
+Exchange site chemistry of a set of low N basaltic sites from [@] was used to parameterize starting CEC-adsorbed concentrations of cations. However, basaltic sites were not monitored in the 2005-2006 period as were sedimentary sites. Low N basalt site ion concentrations were calibrated from average lysimeter concentrations measured by [@]. These average concentrations served as the starting concentrations in the simulation, and acted as the initial reference concentration through which Gapon coefficients were calculated, with some notable caveats. For instance, the site in [@] was highly sulfate rich, and magnesium poor, this is not an expected result of the basalt minerals of this study.  Indeed, the minerals of the site (name site) are of a comparatively magnesium poor volcanically derived mineral [@]. This was mediated by consulting lysimeter data from chemically similar basalts in [@]. These sites generally showed a more equal distribution of  $Mg^{+2}$  and $Ca^{+2}$  in both early and late weathering stages in units of umol/L, with notably higher Mg concentrations in middle aged and older soils. Assuming that core principles of weathering and soil chemistry are comparable between the sites, this would suggest that for the middle-aged (if not slightly younger in comparison) soils of the OCR should also have such comparable Mg and Ca concentrations. The concentration of Ca from [@] was therefore divided by two, half of this concentration was assigned to Ca, the other to Mg. This was done only for the purposes of setting a starting concentration for Ca and Mg, and allowing for Gapon selectivity coefficients to be approximated. The same concentrations and selectivity coefficients were recycled for the high N basalt sites, however the site's N cycle was allowed to increase soil solution concentrations within the constraint of weathering estimates imposed. Once the concentrations raised to some stable, steady state concentration, the initial concentrations were reparametrized and the Gapon coefficients were recalculated. 
+
+The concentration of sulfate was significantly higher in the Sollins site (Citation; cite numbers) than those observed in sedimentary sites (Citation, cite numbers). This could imply an actively weathering sulfur pool, possibly due to the presence of the readily weatherable pyrite. This high sulfate generation would further explain the extremely high calcium concentrations measured at the site. However, since one of the assumptions of the research was both a uniform sulfur pool between the sedimentary and basaltic sites and that our sites were already somewhat weathered, it was further reasoned that sulfate concentrations should be similar to those measured in sedimentary sites. 
+
+Sulfate adsorption parameters were changed so the pools of sulfate (the total sulfate adsorbed onto anion exchange sites in the soil) were the same between different sites, while still mobilizing the same amount of sulfate. This was done to ensure that no one site was given too much sulfate, which could drive the model to overestimate sulfate availability and diminish the potential of simulated stands to experience sulfate depletion. According to the limited available data on western Oregon soil sulfate adsorption properties, high amounts of metal-oxide in both sedimentary and basalt derived soils 
+
+High N sites had no ion concentration data to use for either Gapon estimation for general calibration purposes. Instead, it was assumed that since the N-cycle of the high N and low N sites were kept the same, the magnitude in weathering of the CEC and of minerals would be proportional to N-status. Since the high N sedimentary site had *X* times the concentration of the low N sedimentary site, the same was assumed between the high and low N basalt sites. The next step was to take these assumed values and calculate baseline Gapon coefficients with them, and enter these values as starting concentrations for the high N basalt site. The weathering of this sites was then checked against general calculations from (name sources), the same process as the basalt low N site. 
+
+### Mineral Pool and Weathering Fluxes
+
+NutsFor splits the weatherable mineral pool into three sectors, the total weatherable mineral area, the percent of the total mineral area which each specific mineral occupies, and the identity of the mineral (including stoichiometry, temperature reaction dependence, and other reaction dependencies) (cite manual). An approximation of mineral weathering of calcium from sedimentary bedrock was impossible due to a lack of knowledge of the end members of sedimentary mineral weathering, I instead calibrated mineral weathering using silica (Si) concentrations for the sedimentary sites. According to NutsFor, only mineral weathering reactions can produce Si, tree uptake of Si is not modelled, but expected to be low in low Si concentration conditions [@].  The low N sedimentary sites used to parameterize the low N sedimentary base case consistently showed higher Si concentrations than high N sedimentary sites. This infers that the high N sedimentary sites, assuming a similar mineralogy,  have been somewhat depleted of silicate releasing minerals compared to the low N sites. Although it is known that soil N and nitrification can enhance mineral weathering [@], the reference high N site used in thus study has developed over thousands of years in highly N saturated conditions. It is logical to assume that the already comparatively small mineral pool in these sites would be depleted of readily weatherable calcium and other base cations. 
+
+In contrast to the sedimentary sites, the end members of the basalt minerals were known, and mineral weathering rates were able to be approximated (maybe should include a table to show this). Similar to the high N sedimentary site, the mineral weathering approximations showed that the high N basalt sites were relatively depleted of readily weatherable nutrients as compared to the sedimentary sites. This is well supported by strontium isotope data which shows that high N basalt sites rely increasingly on atmospheric Ca sources as N saturation increases [@]. Mineral pool data was approximated from 
+
+### Results
+
+### Discussion
+
+### Conclusion
+
+### Appendix
+
+Assumptions
+
+-Top 3 layers would have the most weathering proportional to the bottom layers (justifies them being orders of magnitude higher than bottom layers)
+
+-Sulfate that enters the system is largely from rainfall (thus similar to sedimentary sites), the slightly older, coastal, and weathered nature of our target soils would imply low sulfate containing minerals (like pyrite) which weather quickly; Mineral sources of sulfate already weathered (Andic soils, a little older than pyrite rich soils)
+
+-Ammonium CEC was at a constant amount per layer (however this translate to a different cumulative N content each layer as CEC per layer is different): 
+
+-Dissolved organic acids can be used as a anion source in lieu of the absence of solid organic acids in the SOM pool, which are not included in this model. This leads to greater carbon mobility (mobile R- in DOC). 
+
+-Averaged CEC and lysimeter data captured adequate summary of soil chemical behavior
+
+-Sulfate pool should be the same across sites, it is the K and n values which should differ 
+
+-Solid soil organic acids can be represented by dissolved soil organic acids, as long as organic leaching and C build up are not compromised. 
+
+-NCSS data is representative of soil moisture and some mineralogy of the sites
+
+-Our sites start off with different mineral areas due to different weathering histories, although there can certainly be limitations to this
+
+-Organic pool dynamics in high N and low N sites were similar by their N content (i.e., regardless of their)
