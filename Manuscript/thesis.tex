@@ -4,6 +4,7 @@
 \usepackage{rotating} %Package added to allow the rotation of figures and chart on a page, {sidewaysfigure} command
 \usepackage{tablefootnote} %Packaged added to allow footnotes in the tabular environment, use \tablefootnote command
 \usepackage[round]{natbib}
+\usepackage{booktabs}
 \bibliographystyle{plainnat}
 \title{An Analysis of Something}
 \author{Joseph A. Student}
@@ -14,6 +15,7 @@
 \depthead{Director}
 \major{Radiation Health Physics}
 \advisor{Jane R. Professor}
+\advisor{Jane D. Professor}
 \submitdate{January 1, 2013}
 \commencementyear{2013}
 
@@ -103,6 +105,20 @@ Item 5 & last thing \\ [1ex]      % [1ex] adds vertical space
 \label{table:misc} % is used to refer this table in the text
 \end{table}
 
+
+\begin{table}[ht]
+\centering
+\caption{Thicker horizontal lines above and below the table.}
+\begin{tabular}[t]{lcc}
+\toprule
+&Treatment A&Treatment B\\
+\midrule
+John Smith&1&2\\
+Jane Doe&--&3\\
+Mary Johnson&4&5\\
+\bottomrule
+\end{tabular}
+\end{table}%
 
 
 \section{More Methods}
@@ -252,6 +268,20 @@ Etiam non libero in leo egestas porta et eu nunc. Duis molestie suscipit semper.
 \pagebreak
 
 \appendix
+
+\begin{table}[ht]
+\centering
+\caption{Sources of Parameterization}
+\begin{tabular}[t]{cc}
+\toprule
+Parameter&Source\\
+\midrule
+Example Parameter& \cite{bockheimNutrientDynamicsDecomposing2011}\\
+Example 2&3\\
+4&5\\
+\bottomrule
+\end{tabular}
+\end{table}%
 
 \chapter{Things}
 

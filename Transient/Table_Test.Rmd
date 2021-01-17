@@ -1,0 +1,20 @@
+---
+title: "TEST"
+author: "Kaveh"
+date: "1/16/2021"
+output: pdf_document
+---
+
+```{r}
+library(kableExtra)
+
+Table_Example<-read.csv2("~/Book3.csv")
+```
+
+
+```{r}
+kbl(Table_Example, booktabs = T) %>%
+kable_styling(latex_options = "striped")
+
+```
+
