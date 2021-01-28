@@ -2,8 +2,6 @@
 
 <!--Include elements from proposal, include Ca-specific stuff as well as giving an overview of the field-->
 
-<!--How similar should the introduction be to the proposal introduction?-->
-
 In this study the potential for forest nutrient limitation soil nutrient depletion under intensive forest management was analyzed at the high and lower ranges of soil N saturation in Douglas-fir sites of the Oregon Coast Range (OCR). The numerical model NutsFor was calibrated to represent the forest sites. The sites underwent bole-only or whole-tree-harvest, growing through either a 40-year or 80-year rotation. The aim of this study was to identify the number of rotations each stand could undergo before nutrient limitation occurred. The study was specifically concerned with the incidence of calcium (Ca) limitation in highly N saturated soils, however NutsFor was parameterized such that any nutrient could become limiting over the course of the simulation. This study defines the sources of nutrient loss and retention within each site, represents these factors in a dynamic ecosystem model, and quantifies the depletion of nutrients relative to stand requirements. This study provides an approximation of forest-soil behavior between the selected sites over the long term, however it isolates the relationship between soil N status, soil minerology, and forest harvest.  In summary, we found that more intensive harvest scenarios lead to soil Ca depletion and growth limitation in highly N saturated soils, whereas low N soils experienced more significant N and P limitations compared to other nutrients.  
 
 
@@ -24,15 +22,15 @@ Chapter 1: Introduction v.1
 
 <!--Chapter version-->
 
-The Douglas-fir () forests of the coastal Pacific Northwest are among the most productive globally ~/citep{mcardleYieldDouglasFir1930,waringEvergreenConiferousForests1979,HermanLavender1999}. This is due to a combination of high soil nitrogen (N) and climate that is favorable to tree growth. Whereas the majority of forests worldwide are N limited due to low N availability, the coastal Douglas-fir forests  have undergone centuries of N saturation due to historic presence of the symbiotic N-fixing red alder (*Alnus rubra*) in the region ~/citep{binkley1983}. When soil N availability comes to exceed tree requirements, tree growth commonly becomes limited by other nutrients required in high quantities to sustain growth, such as P, Ca, K, and S ~citep{mainwaringThreeyearGrowthResponse2014; perakisForestCalciumDepletion2013; turnerUseFoliageSulphate1977; radwanNutritionDouglasfir}. 
+The Douglas-fir () forests of the coastal Pacific Northwest are among the most productive globally ~/citep{mcardleYieldDouglasFir1930,waringEvergreenConiferousForests1979,HermanLavender1999}. Maintaining forest productivity of this region is important for the continued viability of the Pacific Northwest timber industry, as well as for its potential to regulate atmospheric carbon in the ongoing climate crisis ~citep{}. This productivity is due to a combination of high soil nitrogen (N) and climate that is favorable to tree growth. Whereas the majority of forests worldwide are N limited due to low N availability, the coastal Douglas-fir forests  have undergone centuries of N saturation due to historic presence of the symbiotic N-fixing red alder (*Alnus rubra*) in the region ~/citep{binkley1983}. When soil N availability comes to exceed tree requirements, tree growth commonly becomes limited by other nutrients required in high quantities to sustain growth, such as P, Ca, K, and S ~citep{mainwaringThreeyearGrowthResponse2014; perakisForestCalciumDepletion2013; turnerUseFoliageSulphate1977; radwanNutritionDouglasfir}. 
 
-When soil N supply exceeds ecosystem N demand, N saturation is known to occur \citep{agrenNitrogenSaturationTerrestrial1988}. Highly N saturated soils undergo enhanced soil nitrification and subsequent coupled nitrate-base cation leaching ~/citep{perakisCoupledNitrogenCalcium2006}. Nitrification particularly accelerates calcium (Ca) and magnesium (Mg) losses from soils ~/citep{homann1994}. As Ca is required in higher quantities by trees than Mg, and is known to be distinctly limiting in forests predisposed to highly acidic and weathered soil conditions ~citep{likensHB1998, federerLongtermDepletionCalcium1989, bigelowNutrientLimitationJuvenile2007}, it is more likely that Ca deficiency is to develop in the higher N soils of the Oregon Coast Range (OCR). In contrast to accelerated leaching losses, chronic N saturation and nitrification can stimulate accelerated mineral weathering ~citep{berthelinMajorRoleNitrification1985, PerakisPettRidge2019}. However, over millennia, the  source of ecosystem Ca supply in the OCR has shifted from mineral to atmospheric, implying either a depletion or an inaccessibility of the weatherable pool of nutrient cations at N saturated sites ~/citep{hynicka2016, leysNaturalAnthropogenicDrivers2016a}. Despite a large disparity between potential base cation supply between soil minerals in OCR soils, chronic N saturation may nevertheless lead to base cation limitations all forests. 
+When soil N supply exceeds ecosystem N demand, N saturation is known to occur \citep{agrenNitrogenSaturationTerrestrial1988}. Highly N saturated soils undergo enhanced soil nitrification and subsequent coupled nitrate-base cation leaching ~/citep{perakisCoupledNitrogenCalcium2006}. Nitrification particularly accelerates calcium (Ca) and magnesium (Mg) losses from soils ~/citep{homann1994}. As Ca is required in higher quantities by trees than Mg, and is known to be distinctly limiting in forests predisposed to highly acidic and weathered soil conditions ~citep{likensHB1998, federerLongtermDepletionCalcium1989, bigelowNutrientLimitationJuvenile2007}, it is more likely that Ca deficiency is to develop in the higher N soils of the Oregon Coast Range (OCR) rather than other base cations. In contrast to accelerated leaching losses, chronic N saturation and nitrification can stimulate accelerated mineral weathering ~citep{berthelinMajorRoleNitrification1985, PerakisPettRidge2019}. However, over millennia, the  source of ecosystem Ca supply in the OCR has shifted from mineral to atmospheric in soils with either sedimentary or basaltic soil minerals. This implies either a depletion or an inaccessibility of the weatherable pool of nutrient cations at N saturated sites ~/citep{hynicka2016, leysNaturalAnthropogenicDrivers2016a}. Despite a large disparity between potential base cation supply between soil minerals in OCR soils, chronic N saturation may nevertheless lead to base cation limitations all forests. 
 
-Although ecosystem nutrient cycling processes are sufficient in supplying Ca in many unaltered forests ~/citep{vitousekLitterfallNutrientCycling1984, hiltonNutrientCyclingTropical1987}, a large portion of Douglas-fir in the OCR is specifically grown for the harvest of timber ~/citep{}. Removals of tree nutrients through harvest is a primary cause of ecosystem nutrient losses in managed forests ~citep{johnsonSymposiumForestSite1986}, and may quickly lead to soil Ca depletion and subsequent forest productivity losses in Ca deficient forests ~citep{federerLongtermDepletionCalcium1989,nykvistTropicalForestsCan2000}. Intensive forest-harvest practices, such as whole-tree-harvest (WTH), are known to be the major cause of nutrient losses in a range of forest plantations in comparison to moderate practices, such as bole-only (BOH) harvest  ~citep{achatQuantifyingConsequencesRemoving2015}. Recent intensification of forest management to improve economic returns has led to shorter rotation schedules~citep{diazTradeoffsTimberCarbon2018}, with potential to accelerate nutrient removals. It is estimated that high N Douglas-fir forests under WTH will reach soil Ca depletion within ~50 years of continued harvest, whereas the application of BOH can extend this to ~400 years ~citep{}. However, it remains unknown how many short-rotation harvests must occur to cause nutrient depletion under a variety of soil nutrient conditions.  In Coastal Douglas-fir forests, it is likely to depend on the interaction of harvest intensity and how forest N saturation influences Ca supply from mineral weathering and exchangeable nutrient supply. 
+Although ecosystem nutrient cycling processes are sufficient in supplying Ca in many unaltered forests ~/citep{vitousekLitterfallNutrientCycling1984, hiltonNutrientCyclingTropical1987}, a large portion of Douglas-fir in the OCR is specifically grown for the harvest of timber ~/citep{}. Removals of tree nutrients through harvest is a primary cause of ecosystem nutrient losses in managed forests ~citep{johnsonSymposiumForestSite1986}, and may quickly lead to soil Ca depletion and subsequent forest productivity losses in Ca deficient forests ~citep{federerLongtermDepletionCalcium1989,nykvistTropicalForestsCan2000}. Intensive forest-harvest practices, such as whole-tree-harvest (WTH), are known to be the major cause of nutrient losses in a range of forest plantations in comparison to moderate practices, such as bole-only (BOH) harvest  ~citep{achatQuantifyingConsequencesRemoving2015}. Recent intensification of forest management to improve economic returns has led to shorter rotation schedules of 40 years and lower ~citep{diazTradeoffsTimberCarbon2018}, with potential to accelerate nutrient removals substantially. It is estimated that high N Douglas-fir forests under WTH will reach soil Ca depletion within ~50 years of continued harvest, whereas the application of BOH can extend this to ~400 years ~citep{}. However, it remains unknown how many short-rotation harvests must occur to cause nutrient depletion under a variety of soil nutrient conditions.  In Coastal Douglas-fir forests, it is likely to depend on the interaction of harvest intensity and how forest N saturation influences Ca supply from mineral weathering and exchangeable nutrient supply. 
 
 As an analysis of nutrient depletion in the OCR requires the observation of soil nutrient conditions from 40 to 500 years in the future~citep{}, a dynamic modelling approach is used to  observe the potential for soil N saturation and harvest to drive nutrient depletion in soils. Relatively few dynamic models of forest nutrient cycling contain sufficient chemical detail to evaluate interactions between nitrogen cycling and calcium supply from mineral weathering. One such model is called “Nutrient Cycling in Forest Ecosystems”, or NutsFor. NutsFor is one of several dynamic process-oriented models that was developed to simulate forest-soil chemical responses to harvest and acidic deposition (van der Heijden et al., 2017). It is a hybrid of the Nutrient Cycling Model (NuCM), the ForSAFE model, and the PROFILE model, which have been used to study base cation nutrient depletion due to acidic deposition and harvest intensity (Verburg et al., 2001; van der Heijden et al., 2011; Liu et al., 1991). NutsFor has adopted NuCM’s exchange site simulations and N-transformation processes, while adding the PROFILE soil mineral weathering model (van der Heijden et al. 2017). NutsFor’s ability to link soil N transformations to soil acidification, mineral weathering, forest management, and exchange site depletion of base cations makes NutsFor well suited to the study of nutrient cycling and depletion in the biogeochemically diverse, intensively managed coastal forests of the PNW. 
 
-In this study, we report how extreme soil N enrichment affects long-term nutrient retention in OCR forests under repeated harvest. We further describe how bedrock type interacts with soil N to supply base cation nutrients to forests. We studied the effects that soil N extremes (low to high) have on nutrient limitation on forests sites overlying either sedimentary or basaltic minerals, over a range of harvest intensities to answer the following questions: Q1: How does soil N saturation affect nutrient losses (especially Ca) in coastal Douglas-fir stands? Q2: How do different stand rotation lengths and harvest types change the rate at which nutrient depletion occurs? Q3: How do different kinds of bedrock (basaltic versus sedimentary) and associated soil minerals influence the rate of nutrient depletion?
+In this study, we report how extreme soil N enrichment affects long-term nutrient retention in OCR forests under repeated harvest. We further describe how bedrock type interacts with soil N to supply base cation nutrients to forests. We studied the effects that soil N extremes (low to high) have on nutrient limitation on forests sites overlying either sedimentary or basaltic minerals, over a range of harvest intensities to answer the following questions: Q1: How does soil N saturation affect nutrient losses (especially Ca) in coastal Douglas-fir stands? Q2: How do different stand rotation lengths and harvest types change the rate at which nutrient depletion occurs? Q3: How do different kinds of bedrock (basaltic versus sedimentary) and associated soil minerals influence the rate of nutrient depletion? Q5: When (after how many harvests) do nutrient losses cause biomass accrual rates to slow?
 
 ### Literature Review
 
@@ -68,9 +66,11 @@ The use of calibration in process modelling in often criticized for allowing the
 
 Sedimentary mineral weathering fluxes were unknown due to a lack of knowledge of the sedimentary mineral end-members, weatherable mineral area was calibrated until lysimeter fluxes matched observed leaching fluxes ~citep{}.  Basaltic sites had known mineral weathering fluxes for Ca ~citep{}, the weatherable mineral area parameter was calibrated until these fluxes matched observed ones. Unlike sedimentary sites, leaching fluxes were unconstrained for basalt sites. Instead, tree uptake, mineral weathering, and exchangeable nutrient changes were monitored for long-term stability within the simulation. Still, the loss rate of nutrients in the basalt sites could not be easily constrained against regional data. The analyzed behavior of the basalt sites is thus more qualitative compared to the sedimentary sites, offering a more heuristic analysis of basalt sites. 
 
+In extension to calibration, the results of NutsFor simulations were observed and validated against a wide breadth of data noted in Table A2. This validation step ensures that simulated trends are within realistic constraints to observed ones. 
+
 #### Experimental Design
 
-
+Sedimentary and....
 
 
 
@@ -81,6 +81,38 @@ Sedimentary mineral weathering fluxes were unknown due to a lack of knowledge of
 
 
 <!--Maybe an extended methods proccess for the Appendix?-->
+
+1
+
+The sites in this study represent the low (~4000 kg N/ha) and high ends (~20,000 kg N/ha) of soil N saturation in the OCR. 
+
+Each sub-model of NutsFor was independently calibrated based on no more than 2 chosen parameters for every 1 observed output. After a set of two parameters were calibrated for one output, they were not changed in the succeeding sub-model calibration steps.  
+
+
+
+### Results
+
+*Calibration and Site Behavior* 
+
+*Nutrient Fluxes*
+
+*Simulated Biomass Accrual*
+
+### Discussion
+
+*High N Sites*
+
+*Low N Sites*
+
+Note:
+
+Ca limitation may not only lead to biomass accrual issues, as reported here, but may lead to wood-quality issues. Ca depletion thus has more nuanced implications for forest health and for the timber industry. On one hand, minor Ca depletion may lead to negligible grow impacts, but can negatively affect wood sinuosity, strength, and thus the value and integrity of Douglas-fir wood from the OCR ~citep{}. Where Ca leads to lower total biomass accrual, the ability of forests to regulate atmospheric carbon becomes limited. 
+
+### Conclusion
+
+### Appendix
+
+Methods A: Calibration by Step
 
 1). Hydrology
 
@@ -125,34 +157,6 @@ Basalt cation calibration began by using the same initial concentrations observe
 7). Final Calibration
 
 8). Alternative Calibration
-
-
-
-The sites in this study represent the low (~4000 kg N/ha) and high ends (~20,000 kg N/ha) of soil N saturation in the OCR. 
-
-Each sub-model of NutsFor was independently calibrated based on no more than 2 chosen parameters for every 1 observed output. After a set of two parameters were calibrated for one output, they were not changed in the succeeding sub-model calibration steps.  
-
-
-
-### Results
-
-*Calibration and Site Behavior* 
-
-*Nutrient Depletion and Limitation*
-
-
-
-### Discussion
-
-*High N Sites*
-
-*Low N Sites*
-
-
-
-### Conclusion
-
-### Appendix
 
 
 
