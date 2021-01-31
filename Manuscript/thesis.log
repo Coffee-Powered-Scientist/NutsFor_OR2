@@ -1,0 +1,450 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  30 JAN 2021 19:48
+entering extended mode
+**./thesis.tex
+(thesis.tex
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-12-03> xparse <2020-03-03> (beavtex.cls
+Document Class: beavtex 2013/12/05 v1.1 BeavTeX: OSU thesis class
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/ulem\ulem.sty
+\UL@box=\box47
+\UL@hyphenbox=\box48
+\UL@skip=\skip47
+\UL@hook=\toks15
+\UL@height=\dimen138
+\UL@pe=\count177
+\UL@pixel=\dimen139
+\ULC@box=\box49
+Package: ulem 2019/11/18
+\ULdepth=\dimen140
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
+File: bk12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+)
+\c@part=\count178
+\c@chapter=\count179
+\c@section=\count180
+\c@subsection=\count181
+\c@subsubsection=\count182
+\c@paragraph=\count183
+\c@subparagraph=\count184
+\c@figure=\count185
+\c@table=\count186
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen141
+))
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen142
+\Gin@req@width=\dimen143
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics\rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+\c@r@tfl@t=\count187
+\rotFPtop=\skip50
+\rotFPbot=\skip51
+\rot@float@box=\box50
+\rot@mess@toks=\toks17
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/tablefootnote\tablefoot
+note.sty
+Package: tablefootnote 2014/01/26 v1.1c Table foot notes (HMM)
+
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro
+.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/xifthen\xifthen.sty
+Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
+
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count188
+\calc@Bcount=\count189
+\calc@Adimen=\dimen144
+\calc@Bdimen=\dimen145
+\calc@Askip=\skip52
+\calc@Bskip=\skip53
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count190
+\calc@Cskip=\skip54
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/ifmtarg\ifmtarg.sty
+Package: ifmtarg 2018/04/16 v1.2b check for an empty argument
+))
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count191
+)) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip55
+\bibsep=\skip56
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count192
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen146
+\lightrulewidth=\dimen147
+\cmidrulewidth=\dimen148
+\belowrulesep=\dimen149
+\belowbottomsep=\dimen150
+\aboverulesep=\dimen151
+\abovetopsep=\dimen152
+\cmidrulesep=\dimen153
+\cmidrulekern=\dimen154
+\defaultaddspace=\dimen155
+\@cmidla=\count193
+\@cmidlb=\count194
+\@aboverulesep=\dimen156
+\@belowrulesep=\dimen157
+\@thisruleclass=\count195
+\@lastruleclass=\count196
+\@thisrulewidth=\dimen158
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
+\l__kernel_color_stack_int=\count197
+\l__pdf_internal_box=\box51
+) (thesis.aux)
+\openout1 = `thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count198
+\scratchdimen=\dimen159
+\scratchbox=\box52
+\nofMPsegments=\count199
+\nofMParguments=\count266
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count267
+\MPscratchDim=\dimen160
+\MPnumerator=\count268
+\makeMPintoPDFobject=\count269
+\everyMPtoPDFconversion=\toks19
+)
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+) [1
+
+] [2{C:/Users/siahl/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 30.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 30.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 30.
+
+[3
+
+] [4
+
+] [5
+
+] [6
+
+] (thesis.toc)
+\tf@toc=\write3
+\openout3 = `thesis.toc'.
+
+
+Overfull \hbox (2.61108pt too wide) has occurred while \output is active
+$[]$ 
+ []
+
+[7
+
+
+] (thesis.lof)
+\tf@lof=\write4
+\openout4 = `thesis.lof'.
+
+
+Overfull \hbox (2.61108pt too wide) has occurred while \output is active
+$[]$ 
+ []
+
+[8
+
+] (thesis.lot)
+\tf@lot=\write5
+\openout5 = `thesis.lot'.
+
+
+Overfull \hbox (2.61108pt too wide) has occurred while \output is active
+$[]$ 
+ []
+
+[9
+
+] (thesis.loap)
+\tf@loap=\write6
+\openout6 = `thesis.loap'.
+
+ (thesis.loaf)
+\tf@loaf=\write7
+\openout7 = `thesis.loaf'.
+
+ (thesis.loat)
+\tf@loat=\write8
+\openout8 = `thesis.loat'.
+
+
+Overfull \hbox (2.61108pt too wide) has occurred while \output is active
+$[]$ 
+ []
+
+[10
+
+
+
+]
+Chapter 1.
+
+Package natbib Warning: Citation `mcardleYieldDouglasFir1930' on page 1 undefin
+ed on input line 40.
+
+
+Package natbib Warning: Citation `waringEvergreenConiferousForests1979' on page
+ 1 undefined on input line 40.
+
+
+Package natbib Warning: Citation `HermanLavender1999' on page 1 undefined on in
+put line 40.
+
+
+Package natbib Warning: Citation `binkley1983' on page 1 undefined on input lin
+e 40.
+
+
+Package natbib Warning: Citation `mainwaringThreeyearGrowthResponse2014' on pag
+e 1 undefined on input line 40.
+
+
+Package natbib Warning: Citation `perakisForestCalciumDepletion2013' on page 1 
+undefined on input line 40.
+
+
+Package natbib Warning: Citation `turnerUseFoliageSulphate1977' on page 1 undef
+ined on input line 40.
+
+
+Package natbib Warning: Citation `agrenNitrogenSaturationTerrestrial1988' on pa
+ge 1 undefined on input line 42.
+
+
+Package natbib Warning: Citation `perakisCoupledNitrogenCalcium2006' on page 1 
+undefined on input line 42.
+
+
+Package natbib Warning: Citation `homann1994' on page 1 undefined on input line
+ 42.
+
+
+Package natbib Warning: Citation `likensHB1998' on page 1 undefined on input li
+ne 42.
+
+
+Package natbib Warning: Citation `federerLongtermDepletionCalcium1989' on page 
+1 undefined on input line 42.
+
+
+Package natbib Warning: Citation `berthelinMajorRoleNitrification1985' on page 
+1 undefined on input line 42.
+
+
+Package natbib Warning: Citation `PerakisPettRidge2019' on page 1 undefined on 
+input line 42.
+
+
+Package natbib Warning: Citation `hynicka2016' on page 1 undefined on input lin
+e 42.
+
+
+Package natbib Warning: Citation `leysNaturalAnthropogenicDrivers2016a' on page
+ 1 undefined on input line 42.
+
+[1
+
+
+]
+
+Package natbib Warning: Citation `vitousekLitterfallNutrientCycling1984' on pag
+e 2 undefined on input line 44.
+
+
+Package natbib Warning: Citation `johnsonSymposiumForestSite1986' on page 2 und
+efined on input line 44.
+
+
+Package natbib Warning: Citation `federerLongtermDepletionCalcium1989' on page 
+2 undefined on input line 44.
+
+
+Package natbib Warning: Citation `nykvistTropicalForestsCan2000' on page 2 unde
+fined on input line 44.
+
+
+Package natbib Warning: Citation `achatQuantifyingConsequencesRemoving2015' on 
+page 2 undefined on input line 44.
+
+
+Package natbib Warning: Citation `diazTradeoffsTimberCarbon2018' on page 2 unde
+fined on input line 44.
+
+
+Package natbib Warning: Citation `perakisCoupledNitrogenCalcium2006' on page 2 
+undefined on input line 44.
+
+[2]
+
+Package natbib Warning: Citation `perakisCoupledNitrogenCalcium2006' on page 3 
+undefined on input line 46.
+
+[3] [4] [5]
+Chapter 2.
+<Images/LN_SED/Base/test.pdf, id=52, 350.69019pt x 96.58083pt>
+File: Images/LN_SED/Base/test.pdf Graphic file (type pdf)
+<use Images/LN_SED/Base/test.pdf>
+Package pdftex.def Info: Images/LN_SED/Base/test.pdf  used on input line 70.
+(pdftex.def)             Requested size: 569.05511pt x 156.7194pt.
+
+Overfull \hbox (149.8889pt too wide) in paragraph at lines 70--71
+ [] 
+ []
+
+[6
+
+ <./Images/LN_SED/Base/test.pdf>] [7]
+Chapter 3.
+[8
+
+] [9]
+Chapter 4.
+[10
+
+] [11] [12]
+<chart.pdf, id=93, 455.7025pt x 255.95625pt>
+File: chart.pdf Graphic file (type pdf)
+<use chart.pdf>
+Package pdftex.def Info: chart.pdf  used on input line 177.
+(pdftex.def)             Requested size: 398.33858pt x 223.74245pt.
+File: chart.pdf Graphic file (type pdf)
+<use chart.pdf>
+Package pdftex.def Info: chart.pdf  used on input line 187.
+(pdftex.def)             Requested size: 512.1496pt x 287.66885pt.
+ [13 <./chart.pdf>] [14]
+Chapter 5.
+[15
+
+] [16] [17]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 255.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 255.
+ [18]
+Chapter 6.
+[19
+
+] [20] (thesis.bbl) [21
+
+] [22
+
+] [23
+
+]
+Appendix A.
+[24
+
+]
+Appendix B.
+[25
+
+] [26
+
+]
+
+Package natbib Warning: There were undefined citations.
+
+(thesis.aux) ) 
+Here is how much of TeX's memory you used:
+ 2708 strings out of 479697
+ 39853 string characters out of 2867132
+ 321181 words of memory out of 3000000
+ 19763 multiletter control sequences out of 15000+200000
+ 407561 words of font info for 41 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 66i,14n,72p,1758b,316s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\siahl\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\tcrm1200.pk><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmbx12.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/siahl/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/siahl/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/siahl/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/siahl/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/User
+s/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+<C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+r7.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb><C:/Users/siahl/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on thesis.pdf (36 pages, 241084 bytes).
+PDF statistics:
+ 199 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+

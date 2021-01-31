@@ -1,0 +1,46 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bigelow and Canham(2007)]{bigelowNutrientLimitationJuvenile2007}
+Seth~W. Bigelow and Charles~D. Canham.
+\newblock Nutrient limitation of juvenile trees in a northern hardwood forest:
+  {{Calcium}} and nitrate are preeminent.
+\newblock \emph{Forest Ecology and Management}, 243\penalty0 (2):\penalty0
+  310--319, May 2007.
+\newblock ISSN 0378-1127.
+\newblock \doi{10.1016/j.foreco.2007.03.027}.
+\newblock Describes species-specific growth responses of Northern Hardwood
+  trees to Ca and N additions over a fertility gradient. Generally, the study
+  shows that different species respond to soil nutrient conditions differently,
+  but that some northern hardwoods (saplings) specfically show slow growth
+  responses to Ca limitation. This opens up the possibility for soil N
+  saturation and acidic rain to drive successional changes in natural forests
+  via soil Ca depletion.
+
+\bibitem[Bockheim et~al.(2011)Bockheim, Jepsen, and
+  Heisey]{bockheimNutrientDynamicsDecomposing2011}
+J.~G. Bockheim, E.~A. Jepsen, and D.~M. Heisey.
+\newblock Nutrient dynamics in decomposing leaf litter of four tree species on
+  a sandy soil in northwestern {{Wisconsin}}.
+\newblock \emph{Canadian Journal of Forest Research}, 2011.
+\newblock \doi{10.1139/x91-113}.
+
+\bibitem[Hilton(1987)]{hiltonNutrientCyclingTropical1987}
+Guy Hilton.
+\newblock Nutrient cycling in tropical rainforests: {{Implications}} for
+  management and sustained yield.
+\newblock \emph{Forest Ecology and Management}, 22\penalty0 (3):\penalty0
+  297--300, December 1987.
+\newblock ISSN 0378-1127.
+\newblock \doi{10.1016/0378-1127(87)90114-9}.
+
+\bibitem[Radwan and ~()]{radwanNutritionDouglasfir}
+M~A Radwan and H~Brix~1986 ~.
+\newblock Nutrition of {{Douglas}}-fir.
+\newblock page~12.
+
+\end{thebibliography}
