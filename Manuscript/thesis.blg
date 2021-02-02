@@ -3,71 +3,55 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: plainnat.bst
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+A level-1 auxiliary file: intro_V1.aux
 Reallocating 'name_of_file' (item size: 1) to 7 items.
 Database file #1: thesis.bib
-Warning--I didn't find a database entry for "mcardleYieldDouglasFir1930"
-Warning--I didn't find a database entry for "waringEvergreenConiferousForests1979"
-Warning--I didn't find a database entry for "HermanLavender1999"
-Warning--I didn't find a database entry for "binkley1983"
-Warning--I didn't find a database entry for "mainwaringThreeyearGrowthResponse2014"
-Warning--I didn't find a database entry for "perakisForestCalciumDepletion2013"
-Warning--I didn't find a database entry for "turnerUseFoliageSulphate1977"
-Warning--I didn't find a database entry for "agrenNitrogenSaturationTerrestrial1988"
-Warning--I didn't find a database entry for "perakisCoupledNitrogenCalcium2006"
 Warning--I didn't find a database entry for "homann1994"
-Warning--I didn't find a database entry for "likensHB1998"
-Warning--I didn't find a database entry for "federerLongtermDepletionCalcium1989"
-Warning--I didn't find a database entry for "berthelinMajorRoleNitrification1985"
 Warning--I didn't find a database entry for "PerakisPettRidge2019"
 Warning--I didn't find a database entry for "hynicka2016"
-Warning--I didn't find a database entry for "leysNaturalAnthropogenicDrivers2016a"
-Warning--I didn't find a database entry for "vitousekLitterfallNutrientCycling1984"
-Warning--I didn't find a database entry for "johnsonSymposiumForestSite1986"
-Warning--I didn't find a database entry for "nykvistTropicalForestsCan2000"
-Warning--I didn't find a database entry for "achatQuantifyingConsequencesRemoving2015"
-Warning--I didn't find a database entry for "diazTradeoffsTimberCarbon2018"
 Warning--empty journal in radwanNutritionDouglasfir
 Warning--empty year in radwanNutritionDouglasfir
 Warning--empty year in radwanNutritionDouglasfir
-You've used 4 entries,
+You've used 22 entries,
             2773 wiz_defined-function locations,
-            662 strings with 7371 characters,
-and the built_in function-call counts, 1805 in all, are:
-= -- 170
-> -- 82
-< -- 4
-+ -- 28
-- -- 24
-* -- 143
-:= -- 282
-add.period$ -- 18
-call.type$ -- 4
-change.case$ -- 20
-chr.to.int$ -- 4
-cite$ -- 11
-duplicate$ -- 85
-empty$ -- 147
-format.name$ -- 32
-if$ -- 374
+            810 strings with 14465 characters,
+and the built_in function-call counts, 11878 in all, are:
+= -- 1109
+> -- 763
+< -- 14
++ -- 257
+- -- 235
+* -- 1080
+:= -- 1893
+add.period$ -- 106
+call.type$ -- 22
+change.case$ -- 143
+chr.to.int$ -- 22
+cite$ -- 47
+duplicate$ -- 458
+empty$ -- 842
+format.name$ -- 267
+if$ -- 2430
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 4
-newline$ -- 34
-num.names$ -- 16
-pop$ -- 38
+missing$ -- 20
+newline$ -- 157
+num.names$ -- 90
+pop$ -- 220
 preamble$ -- 1
-purify$ -- 16
+purify$ -- 121
 quote$ -- 0
-skip$ -- 61
+skip$ -- 346
 stack$ -- 0
-substring$ -- 62
-swap$ -- 10
-text.length$ -- 1
+substring$ -- 465
+swap$ -- 46
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 44
+type$ -- 242
 warning$ -- 3
-while$ -- 17
+while$ -- 102
 width$ -- 0
-write$ -- 68
-(There were 24 warnings)
+write$ -- 371
+(There were 6 warnings)
