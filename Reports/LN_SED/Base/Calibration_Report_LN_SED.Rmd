@@ -947,7 +947,7 @@ Sulfate adsorption is weak and drains easily, I set a low adsorbed sulfate pool 
 
 ```{r, echo=FALSE, message=FALSE}
 
-Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight*10
+Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight
 
 Litter_Fall[c(11:16)]<-lapply(Litter_Fall[c(11:16)], as.numeric)
 

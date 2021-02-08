@@ -106,7 +106,7 @@ Each sub-model of NutsFor was independently calibrated based on no more than 2 c
 
 Note:
 
-Ca limitation may not only lead to biomass accrual issues, as reported here, but may lead to wood-quality issues. Ca depletion thus has more nuanced implications for forest health and for the timber industry. On one hand, minor Ca depletion may lead to negligible grow impacts, but can negatively affect wood sinuosity, strength, and thus the value and integrity of Douglas-fir wood from the OCR ~citep{}. Where Ca leads to lower total biomass accrual, the ability of forests to regulate atmospheric carbon becomes limited. 
+Ca limitation may not only lead to shortages in biomass accrual, as reported here, but may lead to lower wood quality. Ca depletion thus has more nuanced implications for forest health and for the timber industry. On one hand, minor Ca depletion may lead to negligible grow impacts, but can negatively affect wood sinuosity, strength, and thus the value and integrity of Douglas-fir wood from the OCR ~citep{}. Where Ca leads to lower total biomass accrual, the ability of forests to regulate atmospheric carbon becomes limited. 
 
 ### Conclusion
 
