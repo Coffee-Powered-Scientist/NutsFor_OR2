@@ -716,7 +716,7 @@ Analysis_1_Ready<-Analysis_Bound %>% group_by(V1) %>%
 Analysis_Bound<-Analysis_Bound %>% ungroup(YEAR) %>% select(-YEAR)
 
 Ca_Flux<-Analysis_Bound %>% select (Ca, Ca_Wet, Ca_WTH, Ca_TU, Year, Ca_LF, Ca_L_Min)
-Ca_Flux$Ca_LF<-Ca_Flux$Ca_LF*10
+Ca_Flux$Ca_LF<-Ca_Flux$Ca_LF
 
 Ca_Melt<-melt(Ca_Flux, id.vars = c("Year") )
 
@@ -747,7 +747,7 @@ Bar_Ca
 ```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Magnesium input and output comparison graphs", fig.subcap=c("Mg input and output fluxes over time", "Total Average Mg input and output fluxes")}
 
 Mg_Flux<-Analysis_Bound %>% select (Mg, Mg_Wet, Mg_WTH, Mg_TU, Year, Mg_LF, Mg_L_Min)
-Mg_Flux$Mg_LF<-Mg_Flux$Mg_LF*10
+Mg_Flux$Mg_LF<-Mg_Flux$Mg_LF
 
 Mg_Melt<-melt(Mg_Flux, id.vars = c("Year") )
 
@@ -778,7 +778,7 @@ Bar_Mg
 ```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Potassium input and output comparison graphs", fig.subcap=c("K input and output fluxes over time", "Total Average K input and output fluxes")}
 
 K_Flux<-Analysis_Bound %>% select (K, K_Wet, K_WTH, K_TU, Year, K_LF, K_L_Min)
-K_Flux$K_LF<-K_Flux$K_LF*10
+K_Flux$K_LF<-K_Flux$K_LF
 
 K_Melt<-melt(K_Flux, id.vars = c("Year") )
 
@@ -805,7 +805,7 @@ Bar_K
 ```{r, fig.show="hold", echo=FALSE, out.width="50%", echo=FALSE, message=FALSE, fig.cap="Sulfur input and output comparison graphs", fig.subcap=c("S input and output fluxes over time", "Total Average S input and output fluxes")}
 
 SO4_Flux<-Analysis_Bound %>% select (SO4, SO4_Wet, S_TU, Year, S_LF, S_L_Min)
-SO4_Flux$S_LF<-SO4_Flux$S_LF*10
+SO4_Flux$S_LF<-SO4_Flux$S_LF
 
 SO4_Melt<-melt(SO4_Flux, id.vars = c("Year") )
 
@@ -839,7 +839,7 @@ The sulfate adsorbed pool depletes itself, the organic sulfur pool becomes incre
 
 N_Flux<-Analysis_Bound %>% select (NO3, NH4, Ntot_Wet, N_TU, Year, N_LF, N_L_Min, N_SOM_Min)
 N_Flux$LL<-N_Flux$NO3+N_Flux$NH4
-N_Flux$N_LF<-N_Flux$N_LF*10
+N_Flux$N_LF<-N_Flux$N_LF
 
 N_Flux<-N_Flux %>% select(-NO3, -NH4)
 
@@ -943,7 +943,7 @@ Sulfate adsorption is weak and drains easily, I set a low adsorbed sulfate pool 
 
 ```{r, echo=FALSE, message=FALSE}
 
-Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight*10
+Litter_Fall$Dry.weight_kgha<-Litter_Fall$Dry.weight
 
 Litter_Fall[c(11:16)]<-lapply(Litter_Fall[c(11:16)], as.numeric)
 

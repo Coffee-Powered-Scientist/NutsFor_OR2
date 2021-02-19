@@ -58,7 +58,7 @@ WTH_40_LNBAS_H3_MELT<-melt(WTH_40_LNBAS_H3, id.vars = c("Harvest", "Rock_Type", 
 
 WTH_40_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/Tree_Nut_All.csv")
 
-WTH_40_HNSED_H1<-WTH_40_LNSED %>% 
+WTH_40_HNSED_H1<-WTH_40_NSED %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
   mutate(Harvest="H1", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))

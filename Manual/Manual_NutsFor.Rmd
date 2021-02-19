@@ -1,22 +1,26 @@
 ---
-title: "Nutrient Cycling in Forest Ecosystems: User Manual v.()"
-author:
-   Kaveh Gholamhossein Siah and
-   Gregory van Der Heijden
-date:  "`r format(Sys.time(), '%d %B %Y')`"
-
-output: 
-   pdf_document:
+title: 'Nutrient Cycling in Forest Ecosystems: User Manual v.()'
+author: "Kaveh Gholamhossein Siah and Gregory van Der Heijden"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: '2'
+    df_print: paged
+  pdf_document:
     toc: yes
     toc_depth: 2
-    extra_dependencies: ["subfig", "float"]
+    extra_dependencies:
+    - subfig
+    - float
+  word_document:
+    toc: yes
+    toc_depth: '2'
 geometry: margin=2 cm
 fig_caption: yes
 citation_package: natbib
 bibliography: Manuscript.bib
-header-includes: 
-  \usepackage{float}
-  \floatplacement{figure}{H}
+header-includes: \usepackage{float} \floatplacement{figure}{H}
 ---
 
 ```{r global_options, include=FALSE}
@@ -43,13 +47,12 @@ model which simulates the forest nutrient dynamics of 16 chemical species. It wa
 of forest types at the Breuil-Chenue experimental
 site in Burgundy, France [@vanderheijdenNutsForProcessorientedModel2017]. NutsFor is based on aspects of 
 the Nutrient Cycling Model (NuCM) [@munsonNuCMCodeVersion1992] and the 
-ForSAFE model [@wallmanForSAFEIntegratedProcessoriented2005]. A comparison of NutsFor to it's
-parent models is given in table 1. 
-
+ForSAFE model [@wallmanForSAFEIntegratedProcessoriented2005].
 NutsFor integrates several biogeochemical processes, including hydrology, soil exchange chemistry, mineral
 weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most 
 recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, 
-and the ability to limit plant access to cation nutrients in the liquid and solid phases. 
+and the ability to limit plant access to cation nutrients in the liquid and solid phases. Although originally developed for 
+deciduous forests, the latest version of NutsFor can simulate evergreen forests. 
 
 ```{r, echo=FALSE, fig.cap="Pool and Flux Diagram for NutsFor. Blue text represents internal cycling proccesses, green input fluxes, and red output fluxes. Blue boxes show nutrient pools."}
 knitr::include_graphics("Images/NutsFor_Design.png")
@@ -57,11 +60,33 @@ knitr::include_graphics("Images/NutsFor_Design.png")
 ```
 
 
-changes from the original model are noted with an asterisk (“*”). As NutsFor is an active project 
-of Gregory van der Heijden, model capabilities are open to change based on collaboration.
-This user manual is intended to give relevant information about the model's capabilities, 
-useful tips regarding its usage, insight into the equations and theory which link model parameters,
-and information on how to effectively use NutsFor in parallel to R-Studio. 
+As NutsFor is an active project of Gregory van der Heijden, model capabilities are open to change based on collaboration, 
+changes noted from the original model are noted with an asterisk (“*”).This user manual is intended to give relevant 
+information about the model's capabilities, useful tips regarding its usage, insight into the equations and theory which
+link model parameters,and information on how to effectively use NutsFor in parallel to R-Studio. Below is a table of
+NutsFor's capabilities compared to other contemporaneous and historically used models, to help guide model choices. 
+
+
+```{r, echo=FALSE, message=FALSE}
+Model_Table<-data.frame(Model_Names=c("NutsFor", "Pnet-BGC", "NuCM","ForSAFE", "CENTURY", "3-PG"),
+
+   
+Forest_Management=c("X","X", "", "X", "X", "X"),
+
+BC=c("X", "X", "X", "", "", ""),
+
+Min_Weathering=c("X", "X", "X", "X", "", ""),
+
+
+N_Cycle=c("X", "X", "X", "X", "", ""),
+
+Soil_Layers=c("X", "", "X", "X", "", ""))
+
+kbl(Model_Table, col.names=c("Model Names", "Forest Management", "Base Cations", "Mineral Weathering", "N Cycle", "Soil Layers"), align="c")%>%
+   kable_classic(full_width = F, html_font = "Times")
+           
+```
+
 
 &nbsp;
 
@@ -292,15 +317,15 @@ Since this parameter is difficult to calculate, it will be likely that simulated
 
    General Equation #X.2
    $$
-   K_{H:Cation^{+n}}= (E_{Cation^{+n}}/[Cation^{+n}])*([H^{+}]/E_{H})^{n}
+   K_{H:Cation^{+n}}=(\frac{E_{Cation^{+n}}}{[Cation^{+n}]})*(\frac{[H^{+}]}{E_{H}})
    $$
    Where;
    $$
-   E_{H}=[H^{+}]_{adsorbed}/ECEC
+   E_{H}=\frac{[H^{+}]_{adsorbed}}{ECEC}
    $$
    and 
    $$
-   E_{Cation^{+n}}=[Cation^{+n}]_{adsorbed}/ECEC
+   E_{Cation^{+n}}=\frac{[Cation^{+n}]_{adsorbed}}{ECEC}
    $$
    Note that 
    $$
@@ -543,19 +568,19 @@ The equation calculates the summation of all chemical species (H+, H2O, CO2, and
 The inhibition coefficients are calculated dynamically based on the concentration of cations in soil solution layers. The higher the solution concentration of base cations, the lower favorability of the weathering reaction due to the generation of less active surface complexes over the course of weathering [@]. The equation which calculates the product inhibition factor $f_{species}$ for each weathering agent is:
 
 
-$$f_{H+}= (1+[Al]/C_{Al})^W_{Al_{H}}*(1+[BC^{+2}]/C_{BC})^W_{BC_{H}}$$
+$$f_{H+}= (1+\frac{[Al]}{C_{Al}})^W_{Al_{H}}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H}}$$
 
 
 
-$$f_{H_{2}O}= (1+[Al]/C_{Al})^W_{Al_{H_{2}O}}*(1+[BC^{+2}]/C_{BC})^W_{BC_{H_{2}O}}$$
+$$f_{H_{2}O}= (1+\frac{[Al]}{C_{Al}})^W_{Al_{H_{2}O}}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H_{2}O}}$$
 
 
 
 
-$$f_{CO_{2}}=(1+[BC^{+2}]/C_{BC})^W_{BC_{H}}$$
+$$f_{CO_{2}}=(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H}}$$
 
 
-$$f_{R-}=(1+[R-]/C_{R})^W_{R}*(1+[BC^{+2}]/C_{BC})^W_{BC_{H_{2}O}}$$
+$$f_{R-}=(1+\frac{[R-]}{C_{R}})^W_{R}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H_{2}O}}$$
 
 Where the $C_{Al}$, $C_{BC}$, and $C_{R}$ are saturation concentration parameters,
 
@@ -574,7 +599,8 @@ New minerals can be added to the NutsFor mineral data file, a more extensive lis
 With the calculation of the mineral weathering rate $r_j$ for each mineral $j$ over the simulated timestep,
 the total weathering flux $W_M$ can be calculated as
 
-$$W_M=\sum_{j=1}^{mineral}(r_{j}*A_{W}*X_{j}*\Theta*z)/Norm$$
+$$W_M=\sum_{j=1}^{mineral}(\frac{r_{j}*A_{W}*X_{j}*\Theta*z}{Norm})
+$$
 Where $r_j$ is the specific mineral weathering rate,
 
 $A_W$ is the user-specified exposed mineral area surfaces ($m^{-2}/m^{-3}$),
@@ -588,9 +614,9 @@ $z$ is the soil layer thickness (m),
 and $Norm$ is the number of base cation charges released per mol of weathered mineral $j$ ($mol_{c}*mol^{-1}$).
 
 
-Soil moisture saturation $$\Theta$$ is calculated by
+Soil moisture saturation $\Theta$ is calculated by
 
-$$\Theta=(\theta*\rho_{solid})/(\rho_{solid}-\rho_{soil}+\theta*\rho_{water})$$
+$$\Theta=\frac{(\theta*\rho_{solid})}{(\rho_{solid}-\rho_{soil}+\theta*\rho_{water})}$$
 
 Where $\theta$ is the soil volumetric water content ($m^{3}*m^{-3}$),
 

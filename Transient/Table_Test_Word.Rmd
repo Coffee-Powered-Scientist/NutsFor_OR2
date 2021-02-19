@@ -1,0 +1,29 @@
+---
+title: "Table_Test"
+author: "Kaveh"
+date: "2/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(kableExtra)
+```
+
+```{r echo=FALSE}
+library(kableExtra)
+Parameter<-c("Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial")
+
+Units<-c("N/A", "N/A", "cm", "cm", "$kg/m^3$", "$kg/m^3$", "Percent", "Fraction", "N/A", "N/A", "Unknown", "$m^2/m^3$", "Percent", "Percent", "Percent", "$c{mol}_c/kg$", "N/A", "Percent", "Fraction (max 1)", "ks: $\\mu$mol/L, knit: Fraction", "Multiple of Microbial Pool", "g Nutrient/kg soil)", "$\\mu$mol/L", "$\\mu$mol/kg", "c${mol}_c$/kg")
+
+Short_Description <-c("Desingates number of layers.", "Assigns layer number to each layer", "Tracks vertical depth of soil layer", "Designates the individual thickness of each soil layer", "N/A", "N/A", "Determines the percent of soil particles greater than 2mm in diameter", "Determines fraction of total tree root biomass in eah layer","Gibbsite formation constant","Al precipitation constant (unused in current version)", "Partial Pressure of CO2","Weatherable mineral area","Soil moisture at which stand cannot extract water", "Soil moisture after excessive water is leached", "Soil moisture at which all pore space is filled with water", "Total cation exchange capacity", "Gapon coefficients for each cation", "Porportion of total mineral area that each individually defined mineral occupies" , "Determines fraction of needed nutrient which stand uptakes from each", "Nitrification constants that determines NO3 production", "Determines fraction of SOM which turns over", "Iniital Amount of Nutrient Mineralized in the SOM pool.", "Concentration of all chemical species at beginning of simulation", "Adsorbed Concentration of anions at the beginning of the simulation", "Sorbed Concentration of Cations to the CEC at the beginning of the simulation")
+
+text_tbl_2 <- data.frame(
+Parameter, Units, Short_Description
+)
+
+kbl(text_tbl_2, caption="Soil Parameters File", booktabs = TRUE, col.names= c("Input Parameter", "Units", "Description"), escape=FALSE) %>% kable_classic(full_width = F, html_font = "Times", font_size=12)
+
+```
+

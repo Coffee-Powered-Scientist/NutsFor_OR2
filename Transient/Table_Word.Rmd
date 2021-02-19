@@ -1,0 +1,31 @@
+---
+title: "Param_Table"
+author: "Kaveh"
+date: "2/18/2021"
+output: html_document
+---
+
+```{r, echo=FALSE}
+library(kableExtra)
+```
+
+```{r, echo=FALSE}
+
+
+Parameters<-c("Dry Deposition", "Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial", "Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact", "Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms", "Mineral", "pKH", "pKH2O","pKCO2", "pKr","kH", "kH2O", "kCO2", "kr", "nH", "WAlH",	"WBCH",	"WAlH2O",	"WBCH2O", "nCO2",	"nr",	"$CAl*10^-6$",	"$CR*10^-6$",	"$CBC*10^-6$",	"Ca, Mg, K, Na, Al, Si,	PO4", "Ca.Iso, Mg.Iso, K.Iso	Na.Iso, Al.Iso, Si.Iso, PO4.Iso", "Foliage.start", "Foliage.End","PET.winter.factor","PET.summer.factor","interception" ,"AET.Reduc","Leaching.alpha","Absorption.alpha","Foliar.target.conc","Percent.variation, foliar","Translocation.Percent","Foliar.Exudation","Foliar.Leaching","Foliar.absorption","Wood.target.conc","Wood.initial.conc","Percent.variation, Wood","Bark.target.conc","Bark.initial.conc","Percent.variation, Bark","Branch.target.conc","Branch.initial.conc","Percent.variation, Branch", "Wood: Biomass.Start and Increment ", "Bark: Biomass.Start and Increment", "Branch: Biomass.Start and Increment", "Fol.DW.min: Increment", "Fol.DW.max: Increment")
+
+Source<-c("Dry Deposition", "Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial", "Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact", "Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms", "Mineral", "pKH", "pKH2O","pKCO2", "pKr","kH", "kH2O", "kCO2", "kr", "nH", "WAlH",	"WBCH",	"WAlH2O",	"WBCH2O", "nCO2",	"nr",	"$CAl*10^-6$",	"$CR*10^-6$",	"$CBC*10^-6$",	"Ca, Mg, K, Na, Al, Si,	PO4", "Ca.Iso, Mg.Iso, K.Iso	Na.Iso, Al.Iso, Si.Iso, PO4.Iso", "Foliage.start", "Foliage.End","PET.winter.factor","PET.summer.factor","interception" ,"AET.Reduc","Leaching.alpha","Absorption.alpha","Foliar.target.conc","Percent.variation, foliar","Translocation.Percent","Foliar.Exudation","Foliar.Leaching","Foliar.absorption","Wood.target.conc","Wood.initial.conc","Percent.variation, Wood","Bark.target.conc","Bark.initial.conc","Percent.variation, Bark","Branch.target.conc","Branch.initial.conc","Percent.variation, Branch", "Wood: Biomass.Start and Increment ", "Bark: Biomass.Start and Increment", "Branch: Biomass.Start and Increment", "Fol.DW.min: Increment", "Fol.DW.max: Increment")
+
+Parameter_Table<-data.frame(Parameters, Source)
+
+kbl(Parameter_Table, caption = "Table A1: Source of Parameteriation") %>%
+  kable_classic(full_width = F, html_font = "Times") %>%
+  pack_rows("Atmospheric Deposition", 1, 2) %>%
+  pack_rows("Soil Parameters", 3, 26) %>%
+  pack_rows("Organic Matter Parameters", 27, 32) %>%
+  pack_rows("General Data", 33, 44) %>%
+  pack_rows("Mineral Data", 45, 64) %>%
+  pack_rows("Tree Data", 64, 88) %>%
+  pack_rows("Biomass Data", 89, 93)
+```
+
