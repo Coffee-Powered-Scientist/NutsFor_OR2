@@ -8,7 +8,6 @@ rm(list = ls())
 
 setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data")
 
-
 library(dplyr)
 library(tidyverse)
 library(lubridate)
@@ -31,6 +30,8 @@ Soil_Soln$group_id <- Soil_Soln %>%
   group_by(id)%>%
   group_indices(id)
 
+
+Soil_Soln<- Soil_Soln %>% mutate(Date=make_date(YEAR, Month))
 
 write.csv2(Soil_Soln, "Soil_Solution_All2.csv", row.names=TRUE)
 

@@ -1,6 +1,6 @@
 rm(list = ls())
 
-library(dpylr)
+library(dplyr)
 
 setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data")
 
