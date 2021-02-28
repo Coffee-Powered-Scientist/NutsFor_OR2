@@ -5,21 +5,14 @@ library(dplyr)
 library(lubridate)
 
 
-
-rm(list = ls())
-###Total Litter Pool Script
-library(dplyr)
-library(lubridate)
-
-
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data")
 
 #Can't use above ground flux file, wrong time-step!
 source("~/Project_Master/Test_Rep/Code/Functions/Conversion_Func.R")
 
 
-Litter_Pool<-read.csv2("~/NutsForBASHN/Base/Output data/Litter/Litter pool kg_ha data.csv")
-Litter_Amount<-read.csv2("~/NutsForBASHN/Base/Output data/Litter/Litterfall.csv",header=FALSE)
+Litter_Pool<-read.csv2("~/NutsForSEDHN/80_BO/Output data/Litter/Litter pool kg_ha data.csv")
+Litter_Amount<-read.csv2("~/NutsForSEDHN/80_BO/Output data/Litter/Litterfall.csv",header=FALSE)
 
 Litter_Coarse<-Litter_Pool %>% select(c(17:23)) %>% row_to_names(row_number = 1) %>% 
   rename(Ca_CL=`Ca kg/ha`) %>% rename(Mg_CL=`Mg kg/ha`) %>%

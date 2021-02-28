@@ -1,18 +1,18 @@
-
-
 rm(list = ls())
 
 
 library(dplyr)
 library(lubridate)
+library(ggplot2)
 
 ### Plant Pool Script ###
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data")
+
 
 source("~/Project_Master/Test_Rep/Code/Functions/Uptake_Diff.R")
 
-Plant_Pool<-read.csv2("~/NutsForSEDHN/Base/Output data/Biomass/Plant pool.csv", header=FALSE)
+Plant_Pool<-read.csv2("~/NutsForBASHN/40_WTH/Output data/Biomass/Plant pool.csv", header=FALSE)
 
 Plant_Pool[c(1:32)]<-lapply(Plant_Pool[c(1:32)], as.numeric)
 

@@ -1,13 +1,14 @@
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data")
+
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data")
 
 library(dplyr)
 library(tidyverse)
 library(lubridate)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/NutsforBASHN/Base/Output data/SOM", pattern = "*.csv", full.names = TRUE)
+files <- list.files(path = "~/NutsforBASHN/40_WTH/Output data/SOM", pattern = "*.csv", full.names = TRUE)
 SOM<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
 
@@ -36,4 +37,6 @@ SOM_Mut<- SOM %>%
 SOM_Mut<-na.omit(SOM_Mut)
 
 
+
 write.csv2(SOM_Mut, "SOM.csv", row.names=TRUE)
+

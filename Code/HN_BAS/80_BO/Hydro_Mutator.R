@@ -1,3 +1,4 @@
+
 #Reads monthly hydrology file
 
 rm(list = ls())
@@ -7,7 +8,7 @@ library(dplyr)
 library(ggplot2)
 library(lubridate)
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data")
 
 Hydro<-read.csv2("~/NutsForBASHN/Base/Output data/Hydrology/Hydrology Monthly Output.csv")
 
@@ -25,3 +26,4 @@ Hydro_X<-Hydro_X %>%
 
 
 write.csv2(Hydro_X, "Hydrology.csv")
+
