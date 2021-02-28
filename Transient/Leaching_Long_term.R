@@ -3,9 +3,9 @@
 library(dplyr)
 library(ggplot2)
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Soil_Soln_HN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Soil_Soln_LN_SED_Mutator.R")
 
-Cal_Pretable_Parent<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable_Parent<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/Soil_Solution_All2.csv", header=TRUE)
 
 Cal_Pretable_LL_Shallow<-Cal_Pretable_Parent %>% filter(group_id %in% c("2"))
 Cal_Pretable_LL_Shallow$group_id<-as.character(Cal_Pretable_LL$group_id)
@@ -21,7 +21,8 @@ ggplot(BEEMP, aes(x=YEAR, y=Ca, color="Ca"))+geom_line()+
   geom_line(aes(y=Al*100, color="Al"))+
   geom_line(aes(y=K, color="K"))+
   geom_line(aes(y=DOC, color="DOC"))+
-  geom_line(aes(y=Mg, color="Mg"))
+  geom_line(aes(y=Mg, color="Mg"))+
+  geom_line(aes(y=P, color="P"))
   
 
 
@@ -36,7 +37,8 @@ ggplot(BEEMP2, aes(x=YEAR, y=Ca, color="Ca"))+geom_line()+
   geom_line(aes(y=Al*100, color="Al"))+
   geom_line(aes(y=DOC, color="DOC"))+
   geom_line(aes(y=K, color="K"))+
-  geom_line(aes(y=Mg, color="Mg"))
+  geom_line(aes(y=Mg, color="Mg"))+
+  geom_line(aes(y=P, color="P"))
 
 
 

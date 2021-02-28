@@ -3,11 +3,12 @@ title: 'Manuscript Report: Low N Sedimentary Site 40_WTH'
 author: "Kaveh Gholamhossein Siah"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
+  html_document:
+    toc_depth: '3'
+    df_print: paged
   pdf_document:
     toc_depth: 3
-    extra_dependencies: "subfig"
-    
-    
+    extra_dependencies: subfig
 geometry: margin=2 cm
 fig_caption: yes
 ---

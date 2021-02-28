@@ -7,12 +7,12 @@ library(ggplot2)
 
 ### Plant Pool Script ###
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data")
 
 
 source("~/Project_Master/Test_Rep/Code/Functions/Uptake_Diff.R")
 
-Plant_Pool<-read.csv2("~/NutsForBASLN/40_WTH/Output data/Biomass/Plant pool.csv", header=FALSE)
+Plant_Pool<-read.csv2("~/NutsForSEDLN/40_WTH/Output data/Biomass/Plant pool.csv", header=FALSE)
 
 Plant_Pool[c(1:32)]<-lapply(Plant_Pool[c(1:32)], as.numeric)
 
@@ -32,3 +32,5 @@ Plant_Pool$Mg_Diff<-Uptake_Diff(Plant_Pool$Mg_PU, Plant_Pool$Mg_AU)
 Plant_Pool$K_Diff<-Uptake_Diff(Plant_Pool$K_PU, Plant_Pool$K_AU)
 Plant_Pool$S_Diff<-Uptake_Diff(Plant_Pool$S_PU, Plant_Pool$S_AU)
 Plant_Pool$P_Diff<-Uptake_Diff(Plant_Pool$P_PU, Plant_Pool$P_AU)
+
+write.csv2(Plant_Pool, "Plant_Pool.csv")

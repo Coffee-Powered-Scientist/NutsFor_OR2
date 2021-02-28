@@ -690,7 +690,7 @@ Ca_Flux$Ca_LF<-Ca_Flux$Ca_LF*10
 Ca_Melt<-melt(Ca_Flux, id.vars = c("Year") )
 
 Ca_Stacked<-ggplot(Ca_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Ca Flux From Ecosystem Pools: kg/ha/yr")+
-   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total ", "Litterfall Return", "Litter Mineralization"))
 Ca_Stacked
 
 
@@ -702,7 +702,7 @@ Ca_ReForged_Mean<-melt(Ca_Forged_Mean)
 
 Bar_Ca<-ggplot(Ca_ReForged_Mean, aes(fill=variable, y=value, x="HN BAS Base Case")) + 
     geom_bar(position="stack", stat="identity")+
-   scale_fill_discrete(name = "Average Ca Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+   scale_fill_discrete(name = "Average Ca Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total ", "Litterfall Return", "Litter Mineralization"))+
   labs(x="Site", y=expression(Ca~kg~'*'~(ha~'*'~yr)^-1))
 
 Bar_Ca
@@ -721,7 +721,7 @@ Mg_Flux$Mg_LF<-Mg_Flux$Mg_LF*10
 Mg_Melt<-melt(Mg_Flux, id.vars = c("Year") )
 
 Mg_Stacked<-ggplot(Mg_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="Mg Flux From Ecosystem Pools: kg/ha/yr")+
-   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total ", "Litterfall Return", "Litter Mineralization"))
 Mg_Stacked
 
 Mg_Forged<-dcast(Mg_Melt, Year~variable)
@@ -732,7 +732,7 @@ Mg_ReForged_Mean<-melt(Mg_Forged_Mean)
 
 Bar_Mg<-ggplot(Mg_ReForged_Mean, aes(fill=variable, y=value, x="HN BAS Base Case")) + 
     geom_bar(position="stack", stat="identity")+
-   scale_fill_discrete(name = "Average Mg Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+   scale_fill_discrete(name = "Average Mg Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total ", "Litterfall Return", "Litter Mineralization"))+
   labs(x="Site", y=expression(Mg~kg~'*'~(ha~'*'~yr)^-1))
 
 Bar_Mg
@@ -752,7 +752,7 @@ K_Flux$K_LF<-K_Flux$K_LF*10
 K_Melt<-melt(K_Flux, id.vars = c("Year") )
 
 K_Stacked<-ggplot(K_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="K Flux From Ecosystem Pools: kg/ha/yr")+
-   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+   scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total ", "Litterfall Return", "Litter Mineralization"))
 K_Stacked
 
 K_Forged<-dcast(K_Melt, Year~variable)
@@ -763,7 +763,7 @@ K_ReForged_Mean<-melt(K_Forged_Mean)
 
 Bar_K<-ggplot(K_ReForged_Mean, aes(fill=variable, y=value, x="HN BAS Base Case")) + 
     geom_bar(position="stack", stat="identity")+
-   scale_fill_discrete(name = "Average K Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+   scale_fill_discrete(name = "Average K Fluxes", labels = c("Leaching Flux", "Deposition", "Weathering Flux", "Total ", "Litterfall Return", "Litter Mineralization"))+
   labs(x="Site", y=expression(K~kg~'*'~(ha~'*'~yr)^-1))
 
 Bar_K
@@ -780,7 +780,7 @@ SO4_Melt<-melt(SO4_Flux, id.vars = c("Year") )
 
 
 SO4_Stacked<-ggplot(SO4_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="SO4-S Flux From Ecosystem Pools:kg/ha/yr")+
-  scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))
+  scale_fill_discrete(name = "Legend", labels = c("Leaching Flux", "Deposition", "Total ", "Litterfall Return", "Litter Mineralization"))
 SO4_Stacked
 
 SO4_Forged<-dcast(SO4_Melt, Year~variable)
@@ -791,7 +791,7 @@ SO4_ReForged_Mean<-melt(SO4_Forged_Mean)
 
 Bar_SO4<-ggplot(SO4_ReForged_Mean, aes(fill=variable, y=value, x="HN BAS Base Case")) + 
     geom_bar(position="stack", stat="identity")+
-   scale_fill_discrete(name = "Average SO4-S Fluxes", labels = c("Leaching Flux", "Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization"))+
+   scale_fill_discrete(name = "Average SO4-S Fluxes", labels = c("Leaching Flux", "Deposition", "Total ", "Litterfall Return", "Litter Mineralization"))+
   labs(x="Site", y=expression(SO4~kg~'*'~(ha~'*'~yr)^-1))
 
 Bar_SO4
@@ -815,7 +815,7 @@ N_Flux<-N_Flux %>% select(-NO3, -NH4)
 N_Melt<-melt(N_Flux, id.vars = c("Year"))
 
 N_Stacked<-ggplot(N_Melt, aes(x=Year, y=value, fill=variable))+geom_area()+labs(y="N Flux From Ecosystem Pools: kg/ha/yr")+
-   scale_fill_discrete(name = "Legend", labels = c("Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))
+   scale_fill_discrete(name = "Legend", labels = c("Deposition", "Total ", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))
 N_Stacked
 
 N_Forged<-dcast(N_Melt, Year~variable)
@@ -826,13 +826,13 @@ N_ReForged_Mean<-melt(N_Forged_Mean)
 
 Bar_N<-ggplot(N_ReForged_Mean, aes(fill=variable, y=value, x="HN BAS Base Case")) + 
     geom_bar(position="stack", stat="identity")+
-   scale_fill_discrete(name = "Average N Fluxes", labels = c("Deposition", "Total Uptake", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))+
+   scale_fill_discrete(name = "Average N Fluxes", labels = c("Deposition", "Total ", "Litterfall Return", "Litter Mineralization", "SOM Mineralization", "Leaching Loss"))+
   labs(x="Site", y=expression(N~kg~'*'~(ha~'*'~yr)^-1))
 
 Bar_N
 ```
 
-There looks to be a SOM reporting bug which causes a large negative spike in N mineralization, it does not seem to affect the simulation in terms of N flux or nutrient uptake, which tells me it is likely a reporting error. 
+There looks to be a SOM reporting bug which causes a large negative spike in N mineralization, it does not seem to affect the simulation in terms of N flux or nutrient , which tells me it is likely a reporting error. 
 
 ### Cation Exchange Capacity
 ```{r, echo=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Calcium and Magnesium on exchangerover time", fig.subcup=c("Ca adsorption (kg/ha)", "Mg adsorption (kg/ha)")}
@@ -901,7 +901,7 @@ Cl_AEC+labs(y="Soil adsorbed Chloride kg/ha)")+scale_x_discrete(guide = guide_ax
 
 The phosphate adsorption is set from the original parameterization I received from Gregory. It tends to build up, which implies a high soil solution concentration (adsorption is determined by concentration).
 
-Sulfate adsorption is weak and drains easily, I set a low adsorbed sulfate pool following IFS data from the Thompson site (glacial outwash, inceptisol). According to the book *Atmospheric Sulfur Deposition: Environmental and Health Impacts*, sulfur is mostly locked in organic compartments rather than on the adsorption surfaces. We might expect that sulfate, like phosphate, would increase on the AEC, however the input of sulfate relative to the adsorption and uptake of sulfate is likely too low to facilitate adsorption. This is well supported by IFS data that show low sulfate adsorption on potentially high capacity adsorbing soils. The higher sulfate concentrations observed at the high N site could well be due to a higher inherent sulfur pool, possibly a condition of higher sulfate-mineral weathering, or due to a competitive response with phosphate.  
+Sulfate adsorption is weak and drains easily, I set a low adsorbed sulfate pool following IFS data from the Thompson site (glacial outwash, inceptisol). According to the book *Atmospheric Sulfur Deposition: Environmental and Health Impacts*, sulfur is mostly locked in organic compartments rather than on the adsorption surfaces. We might expect that sulfate, like phosphate, would increase on the AEC, however the input of sulfate relative to the adsorption and  of sulfate is likely too low to facilitate adsorption. This is well supported by IFS data that show low sulfate adsorption on potentially high capacity adsorbing soils. The higher sulfate concentrations observed at the high N site could well be due to a higher inherent sulfur pool, possibly a condition of higher sulfate-mineral weathering, or due to a competitive response with phosphate.  
 
 
 <br>
@@ -926,7 +926,7 @@ LF
 
 <br>
 
-```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="N and P Potential Uptake to Actual Uptake Difference", fig.subcup=c("N Uptake Difference", "P Uptake Difference")}
+```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="N and P Potential  to Actual  Difference", fig.subcup=c("N  Difference", "P  Difference")}
 
 
 N_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$N_Diff)
@@ -939,7 +939,7 @@ P_PP+labs(x="Year", y=expression(P~Diff.~(mol/m^2)))
 ```
 <br>
 
-```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Ca and Mg Potential Uptake to Actual Uptake Difference", fig.subcup=c("Ca Uptake Difference", "Mg Uptake Difference")}
+```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="Ca and Mg Potential  to Actual  Difference", fig.subcup=c("Ca  Difference", "Mg  Difference")}
 
 
 Ca_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Ca_Diff)
@@ -952,7 +952,7 @@ Mg_PP+labs(x="Year", y=expression(Mg~Diff.~(mol/m^2)))
 ```
 <br>
 
-```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="K and S Potential Uptake to Actual Uptake Difference", fig.subcup=c("K Uptake Difference", "S Uptake Difference")}
+```{r, echo=FALSE, message=FALSE, out.width="50%", fig.ncol=2, fig.show="hold", message=FALSE, fig.cap="K and S Potential  to Actual  Difference", fig.subcup=c("K  Difference", "S  Difference")}
 
 
 K_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$K_Diff)
@@ -964,4 +964,4 @@ S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
 
 ```
 
-What I get from this calculation is that for all nutrients except N and P, the stand is able to extract near exactly the required amount of each nutrient for growth. For K, foliar leaching causes excessive total uptake, however the mineral pool is rich enough in K to facilitate this excess uptake. These graphs do not take into consideration that uptake can vary by 20% before growth limitation is induced. 
+What I get from this calculation is that for all nutrients except N and P, the stand is able to extract near exactly the required amount of each nutrient for growth. For K, foliar leaching causes excessive total , however the mineral pool is rich enough in K to facilitate this excess . These graphs do not take into consideration that  can vary by 20% before growth limitation is induced. 
