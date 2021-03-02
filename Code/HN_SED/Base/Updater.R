@@ -6,13 +6,13 @@ rm(list = ls())
 # Read in any libraries I forgot to put into original scripts
 library(janitor)
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Weathering_HN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Weathering_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Soil_Soln_HN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Soil_Soln_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Litter_Pool_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/Base/TreeNut_HN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/Base/TreeNut_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_SED/Base/CEC_Mutator.R")
 

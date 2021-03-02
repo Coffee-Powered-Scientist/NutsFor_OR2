@@ -8,11 +8,11 @@ library(janitor)
 
 source("~/Project_Master/Test_Rep/Code/LN_BAS/Base/Weathering_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_BAS/Base/Soil_Soln_LN_BAS_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/Base/Soil_Soln_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/LN_BAS/Base/Litter_Pool_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_BAS/Base/TreeNut_LN_BAS_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/Base/TreeNut_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/LN_BAS/Base/CEC_Mutator.R")
 

@@ -2,11 +2,11 @@ rm(list = ls())
 
 library(dplyr)
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data")
 
 
-Above_Flux<-read.csv2("~/NutsForSEDLN/40_BO/Output data/Budgets/Above ground fluxes.csv", header=FALSE)
-Bio_Flux<-read.csv2("~/NutsForSEDLN/40_BO/Output data/Budgets/Biological cycle.csv",header=FALSE)
+Above_Flux<-read.csv2("~/NutsForBASLN/40_BO/Output data/Budgets/Above ground fluxes.csv", header=FALSE)
+Bio_Flux<-read.csv2("~/NutsForBASLN/40_BO/Output data/Budgets/Biological cycle.csv",header=FALSE)
 
 Bio_Flux<-Bio_Flux %>% rename(Year=V1, N_TU=V2, Ca_TU=V3, Mg_TU=V4, K_TU=V5, S_TU=V6, P_TU=V7, 
                    N_LF=V8, Ca_LF=V9, Mg_LF=V10, K_LF=V11, S_LF=V12, P_LF=V13,

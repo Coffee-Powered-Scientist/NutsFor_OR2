@@ -5,9 +5,9 @@ rm(list = ls())
 library(dplyr)
 library(lubridate)
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data")
 
-files <- list.files(path = "~/NutsforSEDHN/80_WTH/Output data/AEC", pattern = "AEC", full.names = TRUE)
+files <- list.files(path = "~/NutsforBASHN/80_WTH/Output data/AEC", pattern = "AEC", full.names = TRUE)
 
 AEC_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
