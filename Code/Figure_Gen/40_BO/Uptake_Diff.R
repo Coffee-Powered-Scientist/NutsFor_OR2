@@ -3,7 +3,7 @@
 rm(list = ls())
 
 library(ggplot2)
-library(dpylr)
+library(dplyr)
 library(reshape2)
 library(scales)
 
