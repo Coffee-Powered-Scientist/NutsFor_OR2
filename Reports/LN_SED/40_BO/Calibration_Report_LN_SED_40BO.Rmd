@@ -174,20 +174,32 @@ Reliable_Table %>% mutate_if(is.numeric, format, digits=3,nsmall = 0) %>%
 
 <br>
 
-```{r echo=FALSE, message=FALSE}
+```{r}
+LL_Year<-Cal_Pretable_LL %>% group_by(YEAR, group_id) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=FALSE)))
 
-Lys_Table[c(1:26)]<-lapply(Lys_Table[c(1:26)], as.numeric)
+Test_LL<-ggplot(LL_Year, aes(x=YEAR, y=Ca, color=group_id))+geom_line()+labs(x="Year", y="Calcium Leaching by Layer (kg/ha)")
+Test_LL
 
-Better_Names<-c("Layer",	"Ca",	"Ca SD"	, "Mg",	"Mg SD"	, "K",	"K SD",	 "Na"	,"Na SD"	, "NO3",	"NO3 SD",	 "NH4",	"NH4 SD",	 "SO4",	"SO4 SD",	 "Cl",	"Cl SD",	 "$P^a$",	"P SD"	, "DOC"	,"DOC SD"	, "$Al^b$",	"Al SD"	, "$Si^c$"	,"Si SD", "$pH^d$")
+Test_LL<-ggplot(LL_Year, aes(x=YEAR, y=Mg, color=group_id))+geom_line()+labs(x="Year", y="Magnesium Leaching by Layer (kg/ha)")
+Test_LL
 
-Lys_Table %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
-  kbl(caption = "Lysimeter Measured Soil Solution Concentrations of Reliable Months (2005)", col.names=Better_Names,         format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down",     "hold_position")) %>% 
-         kable_styling(font_size = 12) %>% 
-              kable_classic(full_width = F, html_font = "Times") %>% landscape() %>%
-                        footnote(alphabet=c("Average based on TP annual average", "Does not distinguish between organic-Al and free Al", "Model does   not simulate Si uptake", "From Hynicka et al., 2017 (10-50cm) extrapolated to 1m")) %>% add_header_above(c(" "=1,  "$\\\\mu$mol/L"=25))
 
 
 ```
+
+
+<br>
+
+```{r, message=FALSE}
+
+Sim_Lysimeter_Flux<-Cal_Pretable_LL %>% filter(group_id %in% c("2", "8")) %>% group_by(group_id, YEAR) %>% summarise(across(Ca:HR, ~sum(.x, na.rm=TRUE))) %>% select(-H, -pH, -R, -HR) %>% filter (YEAR %in% c("2005", "2006")) %>% rename(Depth="group_id")
+
+
+Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
+  kbl(caption = "Simulated Lysimeter Fluxes by Depth (2005-2006)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
+         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=2,  "kg/ha"=12))
+```
+
 
 
 
