@@ -14,7 +14,7 @@ library(reshape2)
 library(ggplot2)
 
 #Maybe have a function script-maybe have a script library of individual scripts
-Tree_Nut<-read.csv2("~/NutsForSEDHN /40_WTH/Output data/Biomass/Tree data.csv", header=FALSE)
+Tree_Nut<-read.csv2("~/NutsForSEDHN/40_WTH/Output data/Biomass/Tree data.csv", header=FALSE)
 
 Tree_Nut_2<-Tree_Nut %>%
   select(V1:V3, V10:V15, V16, V23:V29, V36:V42, V49:V61)

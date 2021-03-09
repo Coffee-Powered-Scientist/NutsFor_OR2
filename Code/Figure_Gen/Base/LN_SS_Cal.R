@@ -1,10 +1,12 @@
 
 #----------------------------------------------------#
-### Calibration Figures (HN SED and LN SED Only)######
+### Calibration Figures LN SED Only###
 #____________________________________________________#
 
+rm(list = ls())
+
 library(ggplot2)
-library(dpylr)
+library(dplyr)
 library(reshape2)
 library(lubridate)
 library(multipanelfigure)
@@ -103,23 +105,42 @@ G_R<- ggplot(subset(Cal_Melt, variable %in% c("R") & group_id %in% c("10")), aes
 ## Do 3 by 1 Graphs ##
 
 figure1 <- multi_panel_figure(
-  width = 1500, height = 1000,
-  columns = 4, rows = 3)
+  width = 1000, height = 275,
+  columns = 3, rows = 1)
 
 Fig1<-figure1 %>% fill_panel(G_Ca,column =1,row = 1) %>%
   fill_panel(G_Mg, column=2, row=1) %>%
-  fill_panel(G_K, column=3, row=1) %>%
-  fill_panel(G_Na, column=4, row=1) %>%
-  fill_panel(G_Al, column=1, row=2) %>%
-  fill_panel(G_Cl, column=2, row=2) %>%
-  fill_panel(G_SO4, column=3, row=2) %>%
-  fill_panel(G_P, column=4, row=2) %>%
-  fill_panel(G_NO3, column=1, row=3) %>%
-  fill_panel(G_NH4, column=2, row=3) %>%
-  fill_panel(G_R, column=3, row=3)%>%
-  fill_panel(G_R, column=4, row=3)
+  fill_panel(G_K, column=3, row=1) 
 
-save_multi_panel_figure(Fig1, "bEEMp.png", limitsize=FALSE)
+figure2 <- multi_panel_figure(
+  width = 1000, height = 275,
+  columns = 3, rows = 1)
+
+Fig2<-figure2 %>% fill_panel(G_Na,column =1,row = 1) %>%
+  fill_panel(G_Al, column=2, row=1) %>%
+  fill_panel(G_DOC, column=3, row=1)
+
+figure3 <- multi_panel_figure(
+  width = 1000, height = 275,
+  columns = 3, rows = 1)
+
+Fig3<-figure3 %>% fill_panel(G_P,column =1,row = 1) %>%
+  fill_panel(G_Cl, column=2, row=1) %>%
+  fill_panel(G_SO4, column=3, row=1) 
+
+figure4 <- multi_panel_figure(
+  width = 1000, height = 275,
+  columns = 3, rows = 1)
+
+Fig4<-figure4 %>% fill_panel(G_NH4,column =1,row = 1) %>%
+  fill_panel(G_NO3, column=2, row=1) %>%
+  fill_panel(G_R, column=3, row=1) 
+
+save_multi_panel_figure(Fig1, "L1_1.png", limitsize=FALSE)
+save_multi_panel_figure(Fig2, "L1_2.png", limitsize=FALSE)
+save_multi_panel_figure(Fig3, "L1_3.png", limitsize=FALSE)
+save_multi_panel_figure(Fig4, "L1_4.png", limitsize=FALSE)
+
 
 
 

@@ -326,7 +326,7 @@ Biomass_Master<-rbind(WTH_40_LNSED_H1_MELT, WTH_40_LNSED_H2_MELT, WTH_40_LNSED_H
                       WTH_40_LNBAS_H11_MELT)
 
 Biomass_Master$Harvest<-factor(Biomass_Master$Harvest, levels=c("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "H11"))
-Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_WTHl"))
+Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_Bol"))
 
 
 # Graphs
@@ -339,7 +339,7 @@ WTH_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decr
   scale_x_discrete(guide = guide_axis(n.dodge = 2))+ 
   labs(y="Dry Weight (kg/ha)", fill="Biomass Compartment")+
   guides(fill = guide_legend(reverse=FALSE))+ 
-  scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "WTHle"))+
+  scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "Bole"))+
   theme_bw()+
   theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=12))
 
@@ -351,5 +351,3 @@ WTH_Aggregated_Biomass
 png("WTH_Biomass.png", height=350, width=500)
 print(WTH_Aggregated_Biomass)
 dev.off()
-
-

@@ -40,13 +40,13 @@ library(reshape2)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Weathering_HN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Weathering_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Soil_Soln_HN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Soil_Soln_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Litter_Pool_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/TreeNut_HN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/TreeNut_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/CEC_Mutator.R")
 
@@ -98,7 +98,7 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 
 AEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/AEC_All.csv", header=TRUE)
 
-Lys_Table<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDLN/HN_SED_Lys_Table.csv")
+
 
 Hydro_Table<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/Hydrology.csv", header=TRUE)
 Hydro_Table$Date<-as.Date(Hydro_Table$Date)
@@ -106,7 +106,7 @@ Hydro_Table$Date<-as.Date(Hydro_Table$Date)
 SOM<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/SOM.csv")
 SOM$Date<-as.Date(SOM$Date)
 
-Lys_Leaching<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDLN/HN_SED_Leaching_Lys.csv")
+
 
 Plant_Pool<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/Plant_Pool.csv")
 
@@ -172,24 +172,7 @@ Reliable_Table %>% mutate_if(is.numeric, format, digits=3,nsmall = 0) %>%
 
 <br>
 
-```{r echo=FALSE, message=FALSE}
 
-Lys_Table[c(1:26)]<-lapply(Lys_Table[c(1:26)], as.numeric)
-
-Better_Names<-c("Layer",	"Ca",	"Ca SD"	, "Mg",	"Mg SD"	, "K",	"K SD",	 "Na"	,"Na SD"	, "NO3",	"NO3 SD",	 "NH4",	"NH4 SD",	 "SO4",	"SO4 SD",	 "Cl",	"Cl SD",	 "$P^a$",	"P SD"	, "DOC"	,"DOC SD"	, "$Al^b$",	"Al SD"	, "$Si^c$"	,"Si SD", "$pH^d$")
-
-Lys_Table %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
-  kbl(caption = "Lysimeter Measured Soil Solution Concentrations of Reliable Months (2005)", col.names=Better_Names,         format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>% kable_styling(latex_options = c("striped", "scale_down",     "hold_position")) %>% 
-         kable_styling(font_size = 12) %>% 
-              kable_classic(full_width = F, html_font = "Times") %>% landscape() %>%
-                        footnote(alphabet=c("Average based on TP annual average", "Does not distinguish between organic-Al and free Al", "Model does   not simulate Si uptake", "From Hynicka et al., 2017 (10-50cm) extrapolated to 1m")) %>% add_header_above(c(" "=1,  "$\\\\mu$mol/L"=25))
-
-
-```
-
-
-
-<br><br><br>
 
 
 ```{r, echo=FALSE, fig.cap="Monthly Calcium Concentrations by Soil Layer", figures-side, fig.show="hold", out.width="50%", message=FALSE, fig.ncol=2}
@@ -360,15 +343,7 @@ Sim_Lysimeter_Flux %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
 
 <br>
 
-```{r, echo=FALSE, message=FALSE}
 
-Lys_Leaching %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
-  kbl(caption="Actual Average Lysimeter Fluxes (2005)", format="latex", booktabs=TRUE, escape=FALSE, align="c") %>% t(.) %>%
-kable_styling(latex_options = c("striped", "scale_down", "HOLD_position")) %>% 
-         kable_styling(font_size = 12) %>% kable_classic(full_width = F, html_font = "Times") %>% landscape() %>% add_header_above(c(" "=1,  "kg/ha"=13))
-
-
-```
 
 
 <br>
