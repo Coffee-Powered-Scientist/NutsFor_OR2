@@ -10,6 +10,7 @@ library(reshape2)
 library(lubridate)
 library(multipanelfigure)
 
+source("~/Project_Master/Test_Rep/Code/HN_SED/Base/Soil_Soln_Mutator.R")
 # Set WD #
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/HN_SED/Base")
@@ -20,6 +21,7 @@ Df_Lys_HNSED_Conc<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForS
 Df_Lys_HNSED_Conc[c(4:5)]<-lapply(Df_Lys_HNSED_Conc[c(4:5)], as.numeric)
 
 Df_Lys_HNSED_Conc<-Df_Lys_HNSED_Conc %>% mutate(Date=make_date(Year, Month))
+
 ### Simulated ###
 Cal_Pretable_Parent<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
 Cal_Pretable_SS<-Cal_Pretable_Parent %>% filter(group_id %in% c("10", "11", "12", "13", "14", "15", "16", "17"))
