@@ -1,0 +1,111 @@
+---
+title: "Concentration Figure Production"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(janitor)
+library(lubridate)
+```
+
+```{r}
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/TreeNut_Mutator.R")
+
+Tree_Nut<-read.csv2("~/NutsForSEDLN/40_BO/Output data/Biomass/Tree data.csv", header=FALSE)
+
+Tree_Nut_Fol<-Tree_Nut %>%
+  select(V1:V15)
+
+Tree_Nut_Fol2<-Tree_Nut_Fol %>% 
+  rename("Year"=V1, "Fol_Biomass"=V3, "Month"=V2, "N_Conc"=V4, "Ca_Conc"=V5,
+         "Mg_Conc"=V6, "K_Conc"=V7, "S_Conc"=V8, "P_Conc"=V9, "N_Content"=V10, "Ca_Content"=V11,
+         "Mg_Content"=V12, "K_Content"=V13, "S_Content"=V14, "P_Content"=V15) 
+  
+Tree_Nut_Fol2[c(1:15)]<-lapply(Tree_Nut_Fol2[c(1:15)], as.numeric)
+
+AnalysisTime<-na.omit(Tree_Nut_Fol2)
+
+AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
+
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio
+
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+
+Ca_Conc
+
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
+
+N_Conc
+
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
+
+P_Conc
+
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
+
+S_Conc
+
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+
+K_Conc
+
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
+
+Mg_Conc
+```
+```{r}
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/TreeNut_Mutator.R")
+
+Tree_Nut<-read.csv2("~/NutsForBASLN/40_BO/Output data/Biomass/Tree data.csv", header=FALSE)
+
+Tree_Nut_Fol<-Tree_Nut %>%
+  select(V1:V15)
+
+Tree_Nut_Fol2<-Tree_Nut_Fol %>% 
+  rename("Year"=V1, "Fol_Biomass"=V3, "Month"=V2, "N_Conc"=V4, "Ca_Conc"=V5,
+         "Mg_Conc"=V6, "K_Conc"=V7, "S_Conc"=V8, "P_Conc"=V9, "N_Content"=V10, "Ca_Content"=V11,
+         "Mg_Content"=V12, "K_Content"=V13, "S_Content"=V14, "P_Content"=V15) 
+  
+Tree_Nut_Fol2[c(1:15)]<-lapply(Tree_Nut_Fol2[c(1:15)], as.numeric)
+
+AnalysisTime<-na.omit(Tree_Nut_Fol2)
+
+AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
+
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio
+
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+
+Ca_Conc
+
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
+
+N_Conc
+
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
+
+P_Conc
+
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
+
+S_Conc
+
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+
+K_Conc
+
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
+
+Mg_Conc
+```
+

@@ -18,7 +18,7 @@ BEEMP<-Cal_Pretable_LL_Shallow %>% group_by(YEAR) %>% summarize(across(Ca:Si, ~s
 
 ggplot(BEEMP, aes(x=YEAR, y=Ca, color="Ca"))+geom_line()+
   geom_line(aes(y=NO3, color="NO3"))+
-  geom_line(aes(y=Al*100, color="Al"))+
+  geom_line(aes(y=Al*10, color="Al"))+
   geom_line(aes(y=K, color="K"))+
   geom_line(aes(y=DOC, color="DOC"))+
   geom_line(aes(y=Mg, color="Mg"))+
@@ -34,7 +34,7 @@ BEEMP2<-Cal_Pretable_LL_Deep %>% group_by(YEAR) %>% summarize(across(Ca:Si, ~sum
 
 ggplot(BEEMP2, aes(x=YEAR, y=Ca, color="Ca"))+geom_line()+
   geom_line(aes(y=NO3, color="NO3"))+
-  geom_line(aes(y=Al*100, color="Al"))+
+  geom_line(aes(y=Al*10, color="Al"))+
   geom_line(aes(y=DOC, color="DOC"))+
   geom_line(aes(y=K, color="K"))+
   geom_line(aes(y=Mg, color="Mg"))+

@@ -11,6 +11,10 @@ library(reshape2)
 library(lubridate)
 library(multipanelfigure)
 
+# Update File
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Soil_Soln_LN_SED_Mutator.R")
+
 # Set WD #
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/LN_SED/Base")
@@ -18,7 +22,7 @@ setwd("~/Project_Master/Test_Rep/Manuscript/Images/LN_SED/Base")
 ### Measured ###
 Df_Lys_LNSED_Conc<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDLN/LN_SED_MonthlyConc.csv")
 
-Df_Lys_LNSED_Conc[c(4:5)]<-lapply(Df_Lys_LNSED_Conc[c(4:5)], as.numeric)
+Df_Lys_LNSED_Conc[c(4:7)]<-lapply(Df_Lys_LNSED_Conc[c(4:7)], as.numeric)
 
 Df_Lys_LNSED_Conc<-Df_Lys_LNSED_Conc %>% mutate(Date=make_date(Year, Month))
 ### Simulated ###
@@ -43,64 +47,118 @@ Cal_Melt[c(4)]<-lapply(Cal_Melt[c(4)], as.numeric)
 
 Cal_Melt<-na.omit(Cal_Melt)
 
-G_Ca<-ggplot(subset(Cal_Melt, variable %in% c("Ca") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-    geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("Ca")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-      labs(y=expression(Ca~Concentration~mu*mol/L), title="Ca")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
 
-G_Mg<- ggplot(subset(Cal_Melt, variable %in% c("Mg") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("Mg")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(Mg~Concentration~mu*mol/L), title="Mg")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
+TestCa_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Ca")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+          geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*24.95134488, ymax=Concentration_Shallow+SD_S*24.95134488))+ 
+            geom_line(subset(Cal_Melt, variable %in% c("Ca") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+                labs(y=expression(Ca~(mu~mol/l)), color="Legend")+
+                  ggtitle("Ca") +theme(plot.title = element_text(hjust = 0.5))+
+                    scale_color_manual(values=c("#E69F00", "#56B4E9"))
 
-G_K<-ggplot(subset(Cal_Melt, variable %in% c("K") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("K")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(K~Concentration~mu*mol/L), title="K")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
 
-G_Na<- ggplot(subset(Cal_Melt, variable %in% c("Na") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("Na")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(Na~Concentration~mu*mol/L), title="Na")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
+TestCa_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Ca")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Deep-SD_D*24.95134488, ymax=Concentration_Deep+SD_D*24.95134488))+
+  geom_line(subset(Cal_Melt, variable %in% c("Ca") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Ca~(mu~mol/l)))
 
-G_Al<-ggplot(subset(Cal_Melt, variable %in% c("Al") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("Al")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(Al~Concentration~mu*mol/L), title="Al")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
 
-G_DOC<- ggplot(subset(Cal_Melt, variable %in% c("DOC") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("DOC")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(DOC~Concentration~mu*mol/L), title="DOC")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
+TestMg_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Mg")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*41.14379757, ymax=Concentration_Shallow+SD_S*41.14379757))+
+  geom_line(subset(Cal_Melt, variable %in% c("Mg") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Mg~(mu~mol/l)))
 
-G_P<- ggplot(subset(Cal_Melt, variable %in% c("P") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(aes(x=Date, y=1.7, color="Observed"))+  labs(y=expression(P~Concentration~mu*mol/L), title="P")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
+TestMg_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Ca")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Deep-SD_D*41.14379757, ymax=Concentration_Deep+SD_D*41.14379757))+
+  geom_line(subset(Cal_Melt, variable %in% c("Mg") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Mg~(mu~mol/l)))
 
-G_Cl<- ggplot(subset(Cal_Melt, variable %in% c("DOC") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("Cl")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(C1~Concentration~mu*mol/L), title="Cl")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
 
-G_SO4<- ggplot(subset(Cal_Melt, variable %in% c("SO4") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("SO4")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(SO4~Concentration~mu*mol/L), title="SO4")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
+TestK_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("K")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*33.22446783, ymax=Concentration_Shallow+SD_S*33.22446783))+
+  geom_line(subset(Cal_Melt, variable %in% c("K") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(K~(mu~mol/l)))
 
-G_NO3<- ggplot(subset(Cal_Melt, variable %in% c("NO3") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("NO3")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(NO3~Concentration~mu*mol/L), title="NO3")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
+TestK_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("K")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*33.22446783, 0), ymax=Concentration_Deep+SD_D*33.22446783))+
+  geom_line(subset(Cal_Melt, variable %in% c("K") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(K~(mu~mol/l)))
 
-G_NH4<- ggplot(subset(Cal_Melt, variable %in% c("NH4") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("NH4")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(NH4~Concentration~mu*mol/L), title="NH4")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
 
-G_R<- ggplot(subset(Cal_Melt, variable %in% c("R") & group_id %in% c("10")), aes(x=Date, y=value, color="Simulated"))+geom_line()+
-  geom_line(subset(Df_Lys_LNSED_Conc, Species %in% c("ChargeB")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
-  labs(y=expression(R-~Concentration~mu*mol/L), title="R")+
-  theme(legend.background = element_rect(fill = "lightgray"), text= element_text(size=20))
+TestNa_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Na")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*43.51610096, ymax=Concentration_Shallow+SD_S*43.51610096))+
+  geom_line(subset(Cal_Melt, variable %in% c("Na") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Na~(mu~mol/l)))
+
+TestNa_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Na")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*43.51610096, 0), ymax=Concentration_Deep+SD_D*43.51610096))+
+  geom_line(subset(Cal_Melt, variable %in% c("Na") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Na~(mu~mol/l)))
+
+
+
+TestDOC_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("DOC")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*83.33333333, ymax=Concentration_Shallow+SD_S*83.33333333))+
+  geom_line(subset(Cal_Melt, variable %in% c("DOC") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(DOC~(mu~mol/l)))
+
+TestDOC_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("DOC")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*83.33333333, 0), ymax=Concentration_Deep+SD_D*83.33333333))+
+  geom_line(subset(Cal_Melt, variable %in% c("DOC") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(DOC~(mu~mol/l)))
+
+
+TestAl_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Al")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*0.037062378, ymax=Concentration_Shallow+SD_S*0.037062378))+
+  geom_line(subset(Cal_Melt, variable %in% c("Al") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Al~(mu~mol/l)))
+
+TestAl_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Al")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*0.037062378, 0), ymax=Concentration_Deep+SD_D*0.037062378))+
+  geom_line(subset(Cal_Melt, variable %in% c("Al") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Al~(mu~mol/l)))
+
+
+TestNO3_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("NO3")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*0.071397468, ymax=Concentration_Shallow+SD_S*0.071397468))+
+  geom_line(subset(Cal_Melt, variable %in% c("NO3") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(NO3~(mu~mol/l)))
+
+TestNO3_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("NO3")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*0.071397468, 0), ymax=Concentration_Deep+SD_D*0.071397468))+
+  geom_line(subset(Cal_Melt, variable %in% c("NO3") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(NO3~(mu~mol/l)))
+
+
+TestCl_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Cl")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*28.20635771, ymax=Concentration_Shallow+SD_S*28.20635771))+
+  geom_line(subset(Cal_Melt, variable %in% c("Cl") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Cl~(mu~mol/l)))
+
+TestCl_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("Cl")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*28.20635771, 0), ymax=Concentration_Deep+SD_D*28.20635771))+
+  geom_line(subset(Cal_Melt, variable %in% c("Cl") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(Cl~(mu~mol/l)))
+
+TestNH4_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("NH4")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*0.071389135, ymax=Concentration_Shallow+SD_S*0.071389135))+
+  geom_line(subset(Cal_Melt, variable %in% c("NH4") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(NH4~(mu~mol/l)))
+
+TestNH4_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("NH4")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*0.071389135, 0), ymax=Concentration_Deep+SD_D*0.071389135))+
+  geom_line(subset(Cal_Melt, variable %in% c("NH4") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(NH4~(mu~mol/l)))
+
+TestSO4_L1<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("SO4")), mapping=aes(x=Date, y=Concentration_Shallow, color="Observed"))+
+  geom_pointrange(aes(ymin=Concentration_Shallow-SD_S*43.49906477, ymax=Concentration_Shallow+SD_S*43.49906477))+
+  geom_line(subset(Cal_Melt, variable %in% c("SO4") & group_id %in% c("10")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(SO4~(mu~mol/l)))
+
+TestSO4_L2<- ggplot(subset(Df_Lys_LNSED_Conc, Species %in% c("SO4")), mapping=aes(x=Date, y=Concentration_Deep, color="Observed"))+
+  geom_pointrange(aes(ymin=pmax(Concentration_Deep-SD_D*43.49906477, 0), ymax=Concentration_Deep+SD_D*43.49906477))+
+  geom_line(subset(Cal_Melt, variable %in% c("SO4") & group_id %in% c("17")), mapping= aes(x=Date, y=value, color="Simulated"))+
+  labs(y=expression(SO4~(mu~mol/l)))
+
 
 ## Do 3 by 1 Graphs ##
 
@@ -108,38 +166,58 @@ figure1 <- multi_panel_figure(
   width = 1000, height = 275,
   columns = 3, rows = 1)
 
-Fig1<-figure1 %>% fill_panel(G_Ca,column =1,row = 1) %>%
-  fill_panel(G_Mg, column=2, row=1) %>%
-  fill_panel(G_K, column=3, row=1) 
+Fig1<-figure1 %>% fill_panel(TestCa_L1,column =1,row = 1) %>%
+  fill_panel(TestMg_L1, column=2, row=1) %>%
+  fill_panel(TestK_L1, column=3, row=1) 
 
 figure2 <- multi_panel_figure(
   width = 1000, height = 275,
   columns = 3, rows = 1)
 
-Fig2<-figure2 %>% fill_panel(G_Na,column =1,row = 1) %>%
-  fill_panel(G_Al, column=2, row=1) %>%
-  fill_panel(G_DOC, column=3, row=1)
+Fig2<-figure2 %>% fill_panel(TestNa_L1,column =1,row = 1) %>%
+  fill_panel(TestAl_L1, column=2, row=1) %>%
+  fill_panel(TestSO4_L1, column=3, row=1)
 
 figure3 <- multi_panel_figure(
   width = 1000, height = 275,
   columns = 3, rows = 1)
 
-Fig3<-figure3 %>% fill_panel(G_P,column =1,row = 1) %>%
-  fill_panel(G_Cl, column=2, row=1) %>%
-  fill_panel(G_SO4, column=3, row=1) 
+Fig3<-figure3 %>% fill_panel(TestDOC_L1,column =1,row = 1) %>%
+  fill_panel(TestCl_L1, column=2, row=1) %>%
+  fill_panel(TestNH4_L1, column=3, row=1) 
 
 figure4 <- multi_panel_figure(
   width = 1000, height = 275,
   columns = 3, rows = 1)
 
-Fig4<-figure4 %>% fill_panel(G_NH4,column =1,row = 1) %>%
-  fill_panel(G_NO3, column=2, row=1) %>%
-  fill_panel(G_R, column=3, row=1) 
+Fig4<-figure4 %>% fill_panel(TestCa_L2,column =1,row = 1) %>%
+  fill_panel(TestMg_L2, column=2, row=1) %>%
+  fill_panel(TestK_L2, column=3, row=1) 
+
+figure5 <- multi_panel_figure(
+  width = 1000, height = 275,
+  columns = 3, rows = 1)
+
+Fig5<-figure5 %>% fill_panel(TestNa_L2,column =1,row = 1) %>%
+  fill_panel(TestAl_L2, column=2, row=1) %>%
+  fill_panel(TestSO4_L2, column=3, row=1)
+
+figure6 <- multi_panel_figure(
+  width = 1000, height = 275,
+  columns = 3, rows = 1)
+
+Fig6<-figure6 %>% fill_panel(TestDOC_L2,column =1,row = 1) %>%
+  fill_panel(TestCl_L2, column=2, row=1) %>%
+  fill_panel(TestNH4_L2, column=3, row=1)
+
 
 save_multi_panel_figure(Fig1, "L1_1.png", limitsize=FALSE)
 save_multi_panel_figure(Fig2, "L1_2.png", limitsize=FALSE)
 save_multi_panel_figure(Fig3, "L1_3.png", limitsize=FALSE)
-save_multi_panel_figure(Fig4, "L1_4.png", limitsize=FALSE)
+save_multi_panel_figure(Fig4, "L2_1.png", limitsize=FALSE)
+save_multi_panel_figure(Fig5, "L2_2.png", limitsize=FALSE)
+save_multi_panel_figure(Fig6, "L2_3.png", limitsize=FALSE)
+
 
 
 

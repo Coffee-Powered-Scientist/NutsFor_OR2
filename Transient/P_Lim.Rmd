@@ -1,0 +1,110 @@
+---
+title: "Untitled"
+author: "Kaveh"
+date: "3/11/2021"
+output: html_document
+---
+```{r}
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Plant_Pool_Mutator.R")
+source("~/Project_master/Test_Rep/Code/Functions/Grapher_PP.R")
+
+
+Plant_Pool<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data/Plant_Pool.csv")
+
+N_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$N_Diff)
+N_PP+labs(x="Year", y=expression(N~Diff.~(mol/m^2)))
+
+P_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$P_Diff)
+P_PP+labs(x="Year", y=expression(P~Diff.~(mol/m^2)))
+
+Ca_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Ca_Diff)
+Ca_PP+labs(x="Year", y=expression(Ca~Diff.~(mol/m^2)))
+
+Mg_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Mg_Diff)
+Mg_PP+labs(x="Year", y=expression(Mg~Diff.~(mol/m^2)))
+
+K_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$K_Diff)
+K_PP+labs(x="Year", y=expression(K~Diff.~(mol/m^2)))
+
+S_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$S_Diff)
+S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
+```
+
+
+```{r}
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Plant_Pool_Mutator.R")
+source("~/Project_master/Test_Rep/Code/Functions/Grapher_PP.R")
+
+
+Plant_Pool<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/Plant_Pool.csv")
+
+N_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$N_Diff)
+N_PP+labs(x="Year", y=expression(N~Diff.~(mol/m^2)))
+
+P_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$P_Diff)
+P_PP+labs(x="Year", y=expression(P~Diff.~(mol/m^2)))
+
+Ca_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Ca_Diff)
+Ca_PP+labs(x="Year", y=expression(Ca~Diff.~(mol/m^2)))
+
+Mg_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Mg_Diff)
+Mg_PP+labs(x="Year", y=expression(Mg~Diff.~(mol/m^2)))
+
+K_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$K_Diff)
+K_PP+labs(x="Year", y=expression(K~Diff.~(mol/m^2)))
+
+S_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$S_Diff)
+S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
+```
+```{r}
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Plant_Pool_Mutator.R")
+source("~/Project_master/Test_Rep/Code/Functions/Grapher_PP.R")
+
+
+Plant_Pool<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data/Plant_Pool.csv")
+
+N_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$N_Diff)
+N_PP+labs(x="Year", y=expression(N~Diff.~(mol/m^2)))
+
+P_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$P_Diff)
+P_PP+labs(x="Year", y=expression(P~Diff.~(mol/m^2)))
+
+Ca_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Ca_Diff)
+Ca_PP+labs(x="Year", y=expression(Ca~Diff.~(mol/m^2)))
+
+Mg_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Mg_Diff)
+Mg_PP+labs(x="Year", y=expression(Mg~Diff.~(mol/m^2)))
+
+K_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$K_Diff)
+K_PP+labs(x="Year", y=expression(K~Diff.~(mol/m^2)))
+
+S_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$S_Diff)
+S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
+```
+
+
+```{r}
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Plant_Pool_Mutator.R")
+source("~/Project_master/Test_Rep/Code/Functions/Grapher_PP.R")
+
+
+Plant_Pool<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data/Plant_Pool.csv")
+
+N_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$N_Diff)
+N_PP+labs(x="Year", y=expression(N~Diff.~(mol/m^2)))
+
+P_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$P_Diff)
+P_PP+labs(x="Year", y=expression(P~Diff.~(mol/m^2)))
+
+Ca_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Ca_Diff)
+Ca_PP+labs(x="Year", y=expression(Ca~Diff.~(mol/m^2)))
+
+Mg_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$Mg_Diff)
+Mg_PP+labs(x="Year", y=expression(Mg~Diff.~(mol/m^2)))
+
+K_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$K_Diff)
+K_PP+labs(x="Year", y=expression(K~Diff.~(mol/m^2)))
+
+S_PP<-Plant_Pool_Graph(Plant_Pool$Year, Plant_Pool$S_Diff)
+S_PP+labs(x="Year", y=expression(S~Diff.~(mol/m^2)))
+```
