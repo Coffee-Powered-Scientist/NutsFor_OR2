@@ -1,11 +1,16 @@
 
-# Compares Uptake Lim. Line Graphs to one another, this file is for the base case. 
+# Compares Uptake Lim. Line Graphs to one another, this file is for 40_BO case
 rm(list = ls())
 
 library(ggplot2)
-library(dpylr)
+library(dplyr)
 library(reshape2)
 library(scales)
+
+#set wd 
+
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/Base")
 
 # Update
 
