@@ -1,0 +1,1 @@
+Each folder in this file contains code that generates a figure for each harvest type, the non-enclosed codes "_parent" runs all the codes in this directory and generates output. 
