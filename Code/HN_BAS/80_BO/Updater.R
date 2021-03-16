@@ -3,9 +3,9 @@ rm(list = ls())
 # Read in any libraries I forgot to put into original scripts
 library(janitor)
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Weathering_HN_BAS_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Weathering_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Soil_Soln_HN_BAS_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Soil_Soln_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Litter_Pool_Mutator.R")
 

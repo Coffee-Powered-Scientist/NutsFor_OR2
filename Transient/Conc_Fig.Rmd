@@ -125,61 +125,54 @@ AnalysisTime<-na.omit(Tree_Nut_Fol2)
 AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 
-Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
 
 
 
-Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
-
-
-P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
-
-
-
-S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+
+
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
-
-png('Fol_Bio.png', height=480, width=600)
-plot(Fol_Bio)
-dev.off()
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('Ca_Conc.png', height=480, width=600)
-plot(Ca_Conc)
-dev.off()
+windowsFonts(A = windowsFont("Times New Roman"))
 
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
 
-png('Mg_Conc.png', height=480, width=600)
-plot(Mg_Conc)
-dev.off()
-
-png('N_Conc.png', height=480, width=600)
-plot(N_Conc)
-dev.off()
-
-
-png('P_Conc.png', height=480, width=600)
-plot(P_Conc)
-dev.off()
-
-png('S_Conc.png', height=480, width=600)
-plot(S_Conc)
-dev.off()
-
-png('K_Conc.png', height=480, width=600)
-plot(K_Conc)
-dev.off()
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
 ```
 
 ```{r}
@@ -216,61 +209,54 @@ AnalysisTime<-na.omit(Tree_Nut_Fol2)
 AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 
-Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
 
 
 
-Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
-
-
-P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
-
-
-
-S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+
+
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
-
-png('Fol_Bio.png', height=480, width=600)
-plot(Fol_Bio)
-dev.off()
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('Ca_Conc.png', height=480, width=600)
-plot(Ca_Conc)
-dev.off()
+windowsFonts(A = windowsFont("Times New Roman"))
 
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
 
-png('Mg_Conc.png', height=480, width=600)
-plot(Mg_Conc)
-dev.off()
-
-png('N_Conc.png', height=480, width=600)
-plot(N_Conc)
-dev.off()
-
-
-png('P_Conc.png', height=480, width=600)
-plot(P_Conc)
-dev.off()
-
-png('S_Conc.png', height=480, width=600)
-plot(S_Conc)
-dev.off()
-
-png('K_Conc.png', height=480, width=600)
-plot(K_Conc)
-dev.off()
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
 
 
 ```
@@ -309,61 +295,54 @@ AnalysisTime<-na.omit(Tree_Nut_Fol2)
 AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 
-Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
 
 
 
-Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
-
-
-P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
-
-
-
-S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+
+
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
-
-png('Fol_Bio.png', height=480, width=600)
-plot(Fol_Bio)
-dev.off()
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('Ca_Conc.png', height=480, width=600)
-plot(Ca_Conc)
-dev.off()
+windowsFonts(A = windowsFont("Times New Roman"))
 
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
 
-png('Mg_Conc.png', height=480, width=600)
-plot(Mg_Conc)
-dev.off()
-
-png('N_Conc.png', height=480, width=600)
-plot(N_Conc)
-dev.off()
-
-
-png('P_Conc.png', height=480, width=600)
-plot(P_Conc)
-dev.off()
-
-png('S_Conc.png', height=480, width=600)
-plot(S_Conc)
-dev.off()
-
-png('K_Conc.png', height=480, width=600)
-plot(K_Conc)
-dev.off()
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
 ```
 
 
@@ -392,61 +371,54 @@ AnalysisTime<-na.omit(Tree_Nut_Fol2)
 AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 
-Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
 
 
 
-Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
-N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
-
-
-
-P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
-
-
-
-S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
-
-
-K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-png('Fol_Bio.png', height=480, width=600)
-plot(Fol_Bio)
-dev.off()
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
 
 
-png('Ca_Conc.png', height=480, width=600)
-plot(Ca_Conc)
-dev.off()
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('Mg_Conc.png', height=480, width=600)
-plot(Mg_Conc)
-dev.off()
 
-png('N_Conc.png', height=480, width=600)
-plot(N_Conc)
-dev.off()
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('P_Conc.png', height=480, width=600)
-plot(P_Conc)
-dev.off()
+windowsFonts(A = windowsFont("Times New Roman"))
 
-png('S_Conc.png', height=480, width=600)
-plot(S_Conc)
-dev.off()
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
 
-png('K_Conc.png', height=480, width=600)
-plot(K_Conc)
-dev.off()
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
 ```
 
 
@@ -475,61 +447,54 @@ AnalysisTime<-na.omit(Tree_Nut_Fol2)
 AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 
-Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
 
 
 
-Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
-N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
-
-
-
-P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
-
-
-
-S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
-
-
-K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-png('Fol_Bio.png', height=480, width=600)
-plot(Fol_Bio)
-dev.off()
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
 
 
-png('Ca_Conc.png', height=480, width=600)
-plot(Ca_Conc)
-dev.off()
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('Mg_Conc.png', height=480, width=600)
-plot(Mg_Conc)
-dev.off()
 
-png('N_Conc.png', height=480, width=600)
-plot(N_Conc)
-dev.off()
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('P_Conc.png', height=480, width=600)
-plot(P_Conc)
-dev.off()
+windowsFonts(A = windowsFont("Times New Roman"))
 
-png('S_Conc.png', height=480, width=600)
-plot(S_Conc)
-dev.off()
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
 
-png('K_Conc.png', height=480, width=600)
-plot(K_Conc)
-dev.off()
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
 ```
 
 ```{r}
@@ -557,62 +522,57 @@ AnalysisTime<-na.omit(Tree_Nut_Fol2)
 AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 
-Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
 
 
 
-Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
-N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
-
-
-
-P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
-
-
-
-S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
-
-
-K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-png('Fol_Bio.png', height=480, width=600)
-plot(Fol_Bio)
-dev.off()
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
 
 
-png('Ca_Conc.png', height=480, width=600)
-plot(Ca_Conc)
-dev.off()
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('Mg_Conc.png', height=480, width=600)
-plot(Mg_Conc)
-dev.off()
 
-png('N_Conc.png', height=480, width=600)
-plot(N_Conc)
-dev.off()
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('P_Conc.png', height=480, width=600)
-plot(P_Conc)
-dev.off()
+windowsFonts(A = windowsFont("Times New Roman"))
 
-png('S_Conc.png', height=480, width=600)
-plot(S_Conc)
-dev.off()
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
 
-png('K_Conc.png', height=480, width=600)
-plot(K_Conc)
-dev.off()
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
 ```
+
+
 ```{r}
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/TreeNut_Mutator.R")
 
@@ -638,62 +598,131 @@ AnalysisTime<-na.omit(Tree_Nut_Fol2)
 AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 
-Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
 
 
 
-Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
-N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))
-
-
-
-P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))
-
-
-
-S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))
-
-
-K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
 
-png('Fol_Bio.png', height=480, width=600)
-plot(Fol_Bio)
-dev.off()
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
 
 
-png('Ca_Conc.png', height=480, width=600)
-plot(Ca_Conc)
-dev.off()
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('Mg_Conc.png', height=480, width=600)
-plot(Mg_Conc)
-dev.off()
 
-png('N_Conc.png', height=480, width=600)
-plot(N_Conc)
-dev.off()
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
 
 
-png('P_Conc.png', height=480, width=600)
-plot(P_Conc)
-dev.off()
+windowsFonts(A = windowsFont("Times New Roman"))
 
-png('S_Conc.png', height=480, width=600)
-plot(S_Conc)
-dev.off()
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
 
-png('K_Conc.png', height=480, width=600)
-plot(K_Conc)
-dev.off()
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
 ```
+
+
+```{r}
+source("~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/TreeNut_Mutator.R")
+
+
+rm(list = ls())
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/LN_BAS/80_WTH")
+
+Tree_Nut<-read.csv2("~/NutsForBASLN/80_WTH/Output data/Biomass/Tree data.csv", header=FALSE)
+
+Tree_Nut_Fol<-Tree_Nut %>%
+  select(V1:V15)
+
+Tree_Nut_Fol2<-Tree_Nut_Fol %>% 
+  rename("Year"=V1, "Fol_Biomass"=V3, "Month"=V2, "N_Conc"=V4, "Ca_Conc"=V5,
+         "Mg_Conc"=V6, "K_Conc"=V7, "S_Conc"=V8, "P_Conc"=V9, "N_Content"=V10, "Ca_Content"=V11,
+         "Mg_Content"=V12, "K_Content"=V13, "S_Content"=V14, "P_Content"=V15) 
+  
+Tree_Nut_Fol2[c(1:15)]<-lapply(Tree_Nut_Fol2[c(1:15)], as.numeric)
+
+AnalysisTime<-na.omit(Tree_Nut_Fol2)
+
+AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
+
+
+
+Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
+  labs(title="Foliar Biomass")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20))
+
+
+
+Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
+  labs(title="Ca Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+
+
+P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+
+
+S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+
+
+K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+
+
+Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
+  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+
+
+windowsFonts(A = windowsFont("Times New Roman"))
+
+figure1 <- multi_panel_figure(
+  width = 1000, height = 500,
+  columns = 3, rows = 2)
+
+Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
+  fill_panel(Mg_Conc, column=2, row=1) %>%
+  fill_panel(K_Conc, column=3, row=1) %>%
+  fill_panel(P_Conc, column=1, row=2) %>%
+  fill_panel(S_Conc, column=2, row=2) %>%
+  fill_panel(N_Conc, column=3, row=2)
+  
+save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+```
+
 
 
 
