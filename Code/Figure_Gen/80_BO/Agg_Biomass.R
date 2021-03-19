@@ -218,20 +218,20 @@ Biomass_Master<-rbind(BO_80_LNSED_H1_MELT, BO_80_LNSED_H2_MELT, BO_80_LNSED_H3_M
 Biomass_Master$Harvest<-factor(Biomass_Master$Harvest, levels=c("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "H11"))
 Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_Bol"))
 
-
-# Graphs
-#Load Times New Roman
-windowsFonts(A = windowsFont("Times New Roman"))
-
-BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decreasing=T),], aes(fill=variable, y=value, x=Harvest, group=N)) + 
+BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decreasing=T),], aes(fill=variable, y=value/1000, x=Harvest, group=N)) + 
   geom_bar(position="stack", stat="identity")+ 
   facet_wrap(~Rock_Type+N)+
   scale_x_discrete(guide = guide_axis(n.dodge = 2))+ 
-  labs(y="Dry Weight (kg/ha)", fill="Biomass Compartment")+
+  labs(y="Dry Weight (Mg/ha)", fill="Biomass Compartment")+
   guides(fill = guide_legend(reverse=FALSE))+ 
   scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "Bole"))+
   theme_bw()+
   theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=12))
+# Graphs
+#Load Times New Roman
+windowsFonts(A = windowsFont("Times New Roman"))
+
+
 
 #Check
 BO_Aggregated_Biomass

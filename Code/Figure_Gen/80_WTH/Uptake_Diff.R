@@ -57,91 +57,91 @@ All_Df<-cbind(Plant_Pool_HNBAS, Plant_Pool_LNBAS, Plant_Pool_LNSED, Plant_Pool_H
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH")
 # Graphing 
 
-P_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=P_Diff, color=ID))+geom_line()+ 
+P_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=P_Diff*30.97*10000/1e6/1000, color=ID))+geom_line()+ 
   geom_point(Plant_Pool_HNBAS, mapping= aes(shape=ID, color=ID),size= 2)+
-  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=P_Diff, color=ID))+
+  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=P_Diff*30.97*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNBAS, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=P_Diff, color=ID))+
+  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=P_Diff*30.97*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNSED, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=P_Diff, color=ID))+
+  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=P_Diff*30.97*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_HNSED, mapping= aes(shape=ID, color=ID), size=2)+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="P Potential-Actual Uptake Difference")
+  labs(x="Year", y="P Potential-Actual Uptake Difference (kg/ha)")
 
 png('P_Diff.png', height=480, width=600)
 plot(P_Diff)
 dev.off()
 
-N_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=N_Diff, color=ID))+geom_line()+ 
+N_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=N_Diff*14.0067*10000/1e6/1000, color=ID))+geom_line()+ 
   geom_point(Plant_Pool_HNBAS, mapping= aes(shape=ID, color=ID),size= 2)+
-  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=N_Diff, color=ID))+
+  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=N_Diff*14.0067*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNBAS, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=N_Diff, color=ID))+
+  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=N_Diff*14.0067*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNSED, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=N_Diff, color=ID))+
+  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=N_Diff*14.0067*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_HNSED, mapping= aes(shape=ID, color=ID), size=2)+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="N Potential-Actual Uptake Difference")
+  labs(x="Year", y="N Potential-Actual Uptake Difference (kg/ha)")
 
 png('N_Diff.png', height=480, width=600)
 plot(N_Diff)
 dev.off()
 
-Ca_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=Ca_Diff, color=ID))+geom_line()+ 
+Ca_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=Ca_Diff*40.078*10000/1e6/1000, color=ID))+geom_line()+ 
   geom_point(Plant_Pool_HNBAS, mapping= aes(shape=ID, color=ID),size= 2)+
-  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=Ca_Diff, color=ID))+
+  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=Ca_Diff*40.078*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNBAS, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=Ca_Diff, color=ID))+
+  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=Ca_Diff*40.078*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNSED, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=Ca_Diff, color=ID))+
+  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=Ca_Diff*40.078*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_HNSED, mapping= aes(shape=ID, color=ID), size=2)+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="Ca Potential-Actual Uptake Difference")
+  labs(x="Year", y="Ca Potential-Actual Uptake Difference (kg/ha)")
 
 png('Ca_Diff.png', height=480, width=600)
 plot(Ca_Diff)
 dev.off()
 
-Mg_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=Mg_Diff, color=ID))+geom_line()+ 
+Mg_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=Mg_Diff*24.305*10000/1e6/1000, color=ID))+geom_line()+ 
   geom_point(Plant_Pool_HNBAS, mapping= aes(shape=ID, color=ID),size= 2)+
-  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=Mg_Diff, color=ID))+
+  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=Mg_Diff*24.305*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNBAS, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=Mg_Diff, color=ID))+
+  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=Mg_Diff*24.305*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNSED, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=Mg_Diff, color=ID))+
+  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=Mg_Diff*24.305*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_HNSED, mapping= aes(shape=ID, color=ID), size=2)+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="Mg Potential-Actual Uptake Difference")
+  labs(x="Year", y="Mg Potential-Actual Uptake Difference (kg/ha)")
 
 png('Mg_Diff.png', height=480, width=600)
 plot(Mg_Diff)
 dev.off()
 
-K_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=K_Diff, color=ID))+geom_line()+ 
+K_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=K_Diff*39.0983*10000/1e6/1000, color=ID))+geom_line()+ 
   geom_point(Plant_Pool_HNBAS, mapping= aes(shape=ID, color=ID),size= 2)+
-  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=K_Diff, color=ID))+
+  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=K_Diff*39.0983*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNBAS, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=K_Diff, color=ID))+
+  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=K_Diff*39.0983*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNSED, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=K_Diff, color=ID))+
+  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=K_Diff*39.0983*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_HNSED, mapping= aes(shape=ID, color=ID), size=2)+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="K Potential-Actual Uptake Difference")
+  labs(x="Year", y="K Potential-Actual Uptake Difference (kg/ha)")
 
 png('K_Diff.png', height=480, width=600)
 plot(K_Diff)
 dev.off()
 
-S_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=S_Diff, color=ID))+geom_line()+ 
+S_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10000/1e6/1000, color=ID))+geom_line()+ 
   geom_point(Plant_Pool_HNBAS, mapping= aes(shape=ID, color=ID),size= 2)+
-  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=S_Diff, color=ID))+
+  geom_line(Plant_Pool_LNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNBAS, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=S_Diff, color=ID))+
+  geom_line(Plant_Pool_LNSED, mapping= aes(x=Year, y=S_Diff*32.065*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_LNSED, mapping= aes(shape=ID, color=ID), size=2)+
-  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=S_Diff, color=ID))+
+  geom_line(Plant_Pool_HNSED, mapping= aes(x=Year, y=S_Diff*32.065*10000/1e6/1000, color=ID))+
   geom_point(Plant_Pool_HNSED, mapping= aes(shape=ID, color=ID), size=2)+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="S Potential-Actual Uptake Difference")
+  labs(x="Year", y="S Potential-Actual Uptake Difference (kg/ha)")
 
 png('S_Diff.png', height=480, width=600)
 plot(S_Diff)

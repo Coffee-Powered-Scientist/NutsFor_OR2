@@ -1,0 +1,141 @@
+---
+title: "Table_Gen"
+author: "Kaveh"
+date: "3/16/2021"
+output:
+  html_document: default
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+# LN SED 
+
+
+Lys_Table<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDLN/LN_SED_Lys_Table.csv")
+
+Lys_Table[c(1:26)]<-lapply(Lys_Table[c(1:26)], as.numeric)
+
+Better_Names<-c("Layer",	"Ca",	"Ca SD"	, "Mg",	"Mg SD"	, "K",	"K SD",	 "Na"	,"Na SD"	, "NO3",	"NO3 SD",	 "NH4",	"NH4 SD",	 "SO4",	"SO4 SD",	 "Cl",	"Cl SD",	 "$P^a$",	"P SD"	, "DOC"	,"DOC SD"	, "$Al^b$",	"Al SD"	, "$Si^c$"	,"Si SD", "$pH^d$")
+
+Lys_Table %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
+  kbl(caption = "Lysimeter Measured Soil Solution Concentrations of Reliable Months (2005-2006)", col.names=Better_Names, escape=FALSE, align="c") %>% t(.) %>% kable_styling() %>% 
+         kable_styling(font_size = 12) %>% 
+              kable_classic(full_width = F, html_font = "Times") %>% landscape() %>%
+                        footnote(alphabet=c("Average based on TP annual average", "Does not distinguish between organic-Al and free Al", "Model does   not simulate Si uptake", "From Hynicka et al., 2017 (10-50cm) extrapolated to 1m")) %>% add_header_above(c(" "=1,  "$\\mu$mol/L"=25))
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Soil_Soln_LN_SED_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
+
+
+Cal_Pretable_Parent<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable_SS<-Cal_Pretable_Parent %>% filter(group_id %in% c("11","17"))
+Cal_Pretable_SS$group_id<-as.character(Cal_Pretable_SS$group_id)
+Cal_Pretable_SS$Date<-as.Date(Cal_Pretable_SS$Date)
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+SS_Reliable_Avg<-Tab_Func_SS_Reliable(Cal_Pretable_SS)
+
+SS_Reliable_Avg<-SS_Reliable_Avg %>% select(-X)
+
+
+
+Reliable_Table<-SS_Reliable_Avg %>% ungroup(Month) %>% group_by(group_id) %>% summarise(across(Ca:HR, ~ mean(.x, na.rm = TRUE)))
+
+
+SD<-SS_Reliable_Avg %>% ungroup(Month) %>% group_by(group_id) %>% summarise(across(Ca:HR, ~ sd(.x, na.rm = TRUE))) %>%
+  rename("Ca_sd"="Ca", "Mg_sd"="Mg", "K_sd"="K", "Na_sd"="Na", "NO3_sd"="NO3", "NH4_sd"="NH4", "SO4_sd"="SO4", "Cl_sd"="Cl", "PO4_sd"="P", "DOC_sd"="DOC", "Al_sd"="Al",
+         "Si_sd"="Si", "H_sd"="H", "pH_sd"="pH", "R_sd"="R", "HR_sd"="HR")
+
+RT_Test<-cbind(Reliable_Table, SD)
+
+
+
+Better_Table<-RT_Test[c(1, 2, 19, 3, 20, 4, 21, 5, 22, 6, 23, 7, 24, 8, 25, 9, 26, 10, 27, 11, 28, 12, 29, 13, 30, 14, 31, 15, 32, 16, 33, 17, 34)]
+
+
+Better_Table$pH = -log(Better_Table$H*10^-6, 10)
+
+
+
+Better_Table %>% mutate_if(is.numeric, format, digits=1,nsmall = 0) %>%
+  kbl(caption = "Average Soil Solution Concentrations of Reliable Months (2005-2006)", col.names=c("Soil Layer", "Ca", "Ca SD","Mg", "Mg SD","K", "K SD" ,"Na","Na SD" , "NO3","NO3 SD", "NH4","NH4 SD" ,"SO4", "SO4 SD","Cl", "Cl SD","PO4","PO4 SD" ,"DOC", "DOC SD","Al", "Al SD" ,"Si", "Si SD","H+","H SD" ,"pH","pH SD" ,"R","R SD" ,"HR", "HR SD"), align = "l", escape = FALSE) %>%t(.)%>% kable_styling() %>%
+    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=1,  "$\\mu$mol/L"=32), escape=FALSE)
+```
+
+```{r}
+
+Lys_Table<-read.csv2("~/Project_Master/Test_Rep/Data/Base Sites/NutsForSEDHN/HN_SED_Lys_Table.csv")
+
+Lys_Table[c(1:26)]<-lapply(Lys_Table[c(1:26)], as.numeric)
+
+Better_Names<-c("Layer",	"Ca",	"Ca SD"	, "Mg",	"Mg SD"	, "K",	"K SD",	 "Na"	,"Na SD"	, "NO3",	"NO3 SD",	 "NH4",	"NH4 SD",	 "SO4",	"SO4 SD",	 "Cl",	"Cl SD",	 "$P^a$",	"P SD"	, "DOC"	,"DOC SD"	, "$Al^b$",	"Al SD"	, "$Si^c$"	,"Si SD", "$pH^d$")
+
+Lys_Table %>% mutate_if(is.numeric, format, digits=2, nsmall= 0) %>%
+  kbl(caption = "Lysimeter Measured Soil Solution Concentrations of Reliable Months (2005-2006)", col.names=Better_Names, escape=FALSE, align="c") %>% t(.) %>% kable_styling() %>% 
+         kable_styling(font_size = 12) %>% 
+              kable_classic(full_width = F, html_font = "Times") %>% landscape() %>%
+                        footnote(alphabet=c("Average based on TP annual average", "Does not distinguish between organic-Al and free Al", "Model does   not simulate Si uptake", "From Hynicka et al., 2017 (10-50cm) extrapolated to 1m")) %>% add_header_above(c(" "=1,  "$\\mu$mol/L"=25))
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+source("~/Project_Master/Test_Rep/Code/Functions/Tabulator.R")
+
+Cal_Pretable_Parent<-read.csv2("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data/Soil_Solution_All2.csv", header=TRUE)
+Cal_Pretable_SS<-Cal_Pretable_Parent %>% filter(group_id %in% c("11","17"))
+Cal_Pretable_SS$group_id<-as.character(Cal_Pretable_SS$group_id)
+Cal_Pretable_SS$Date<-as.Date(Cal_Pretable_SS$Date)
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+SS_Reliable_Avg<-Tab_Func_SS_Reliable(Cal_Pretable_SS)
+
+SS_Reliable_Avg<-SS_Reliable_Avg %>% select(-X)
+
+
+
+Reliable_Table<-SS_Reliable_Avg %>% ungroup(Month) %>% group_by(group_id) %>% summarise(across(Ca:HR, ~ mean(.x, na.rm = TRUE)))
+
+
+SD<-SS_Reliable_Avg %>% ungroup(Month) %>% group_by(group_id) %>% summarise(across(Ca:HR, ~ sd(.x, na.rm = TRUE))) %>%
+  rename("Ca_sd"="Ca", "Mg_sd"="Mg", "K_sd"="K", "Na_sd"="Na", "NO3_sd"="NO3", "NH4_sd"="NH4", "SO4_sd"="SO4", "Cl_sd"="Cl", "PO4_sd"="P", "DOC_sd"="DOC", "Al_sd"="Al",
+         "Si_sd"="Si", "H_sd"="H", "pH_sd"="pH", "R_sd"="R", "HR_sd"="HR")
+
+RT_Test<-cbind(Reliable_Table, SD)
+
+
+
+Better_Table<-RT_Test[c(1, 2, 19, 3, 20, 4, 21, 5, 22, 6, 23, 7, 24, 8, 25, 9, 26, 10, 27, 11, 28, 12, 29, 13, 30, 14, 31, 15, 32, 16, 33, 17, 34)]
+
+
+Better_Table$pH = -log(Better_Table$H*10^-6, 10)
+
+
+
+Better_Table %>% mutate_if(is.numeric, format, digits=1,nsmall = 0) %>%
+  kbl(caption = "Average Soil Solution Concentrations of Reliable Months (2005-2006)", col.names=c("Soil Layer", "Ca", "Ca SD","Mg", "Mg SD","K", "K SD" ,"Na","Na SD" , "NO3","NO3 SD", "NH4","NH4 SD" ,"SO4", "SO4 SD","Cl", "Cl SD","PO4","PO4 SD" ,"DOC", "DOC SD","Al", "Al SD" ,"Si", "Si SD","H+","H SD" ,"pH","pH SD" ,"R","R SD" ,"HR", "HR SD"), align = "l", escape = FALSE) %>%t(.)%>% kable_styling() %>%
+    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=1,  "$\\mu$mol/L"=32), escape=FALSE)
+```
+
+

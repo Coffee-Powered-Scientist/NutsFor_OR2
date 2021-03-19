@@ -342,11 +342,11 @@ Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Br
 #Load Times New Roman
 windowsFonts(A = windowsFont("Times New Roman"))
 
-BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decreasing=T),], aes(fill=variable, y=value, x=Harvest, group=N)) + 
+BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decreasing=T),], aes(fill=variable, y=value/1000, x=Harvest, group=N)) + 
   geom_bar(position="stack", stat="identity")+ 
   facet_wrap(~Rock_Type+N)+
   scale_x_discrete(guide = guide_axis(n.dodge = 2))+ 
-  labs(y="Dry Weight (kg/ha)", fill="Biomass Compartment")+
+  labs(y="Dry Weight (Mg/ha)", fill="Biomass Compartment")+
   guides(fill = guide_legend(reverse=FALSE))+ 
   scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "Bole"))+
   theme_bw()+
