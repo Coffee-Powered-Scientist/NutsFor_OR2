@@ -5,9 +5,9 @@ rm(list = ls())
 library(dplyr)
 library(lubridate)
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_BAS/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/WhatIF/LN_BAS/Base/Edited Data")
 
-files <- list.files(path = "~/NutsforBASLN/Base/Output data/CEC", pattern = "CEC", full.names = TRUE)
+files <- list.files(path = "~/WHATIF/NutsforBASLN/Base/Output data/CEC", pattern = "CEC", full.names = TRUE)
 
 CEC_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
