@@ -144,31 +144,8 @@ RF_Plot
 ### Soil Solution Results
 <br>
 
-```{r, message=FALSE, echo=FALSE, results="hide", include=FALSE}
 
-                                               ##Table 1##
-SS_Reliable_Avg<-Tab_Func_SS_Reliable(Cal_Pretable_SS)
 
-SS_Reliable_Avg<-mutate(SS_Reliable_Avg, group_id=recode(group_id, "'10'='Layer 1' ; '11'='Layer 2' ; '12'='Layer 3' ; '13'='Layer 4'; '14'='Layer 5'; '15'='Layer 6'; '16'='Layer 7'; '17'='Layer 8'")) %>% select(-X)
-
-SS_Reliable_Avg %>% mutate_if(is.character, format, digits=3,nsmall = 0) %>%
-  kbl(caption = "Average Monthly Soil Solution Concentration (2005-2006)", col.names=c("Soil Layer","Month", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR"), "latex", escape = FALSE) %>%
-  t(.)%>% kable_styling(latex_options = c("striped", "scale_down", "hold_position")) %>% 
-    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=2,  "$\\\\u$mol/L"=16))
-```
-
-```{r, echo=FALSE, message=FALSE}
-##Average 2005-2006 per layer
-
-Reliable_Table<-SS_Reliable_Avg %>% ungroup(Month) %>% group_by(group_id) %>% summarise(across(Ca:HR, ~ mean(.x, na.rm = TRUE)))
-
-#Change pH average (else it won't make sense!)
-Reliable_Table$pH = -log(Reliable_Table$H*10^-6, 10)
-
-Reliable_Table %>% mutate_if(is.numeric, format, digits=3,nsmall = 0) %>%
-  kbl(caption = "Average Soil Solution Concentrations of Reliable Months (2005-2006)", col.names=c("Soil Layer", "Ca", "Mg", "K", "Na", "NO3", "NH4", "SO4", "Cl", "PO4", "DOC", "Al", "Si", "H+", "pH", "R", "HR"), align = "l", format="latex", booktabs = TRUE, escape = FALSE) %>%t(.)%>% kable_styling(latex_options = c("striped", "scale_down", "hold_position")) %>%
-    kable_classic(full_width = F, html_font = "Times") %>% add_header_above(c(" "=1,  "$\\\\mu$mol/L"=16), escape=FALSE)
-```
 
 <br>
 
