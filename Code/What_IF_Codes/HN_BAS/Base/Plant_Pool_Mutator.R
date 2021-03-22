@@ -8,11 +8,11 @@ library(lubridate)
 
 ### Plant Pool Script ###
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_SED/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/WhatIF/Base/Edited Data")
 
 source("~/Project_Master/Test_Rep/Code/Functions/Uptake_Diff.R")
 
-Plant_Pool<-read.csv2("~/NutsForSEDHN/Base/Output data/Biomass/Plant pool.csv", header=FALSE)
+Plant_Pool<-read.csv2("~/WHATIF/NutsForBASHN/Base/Output data/Biomass/Plant pool.csv", header=FALSE)
 
 Plant_Pool[c(1:32)]<-lapply(Plant_Pool[c(1:32)], as.numeric)
 

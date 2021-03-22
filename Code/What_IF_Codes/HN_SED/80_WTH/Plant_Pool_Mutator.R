@@ -7,12 +7,12 @@ library(ggplot2)
 
 ### Plant Pool Script ###
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/WhatIF/HN_SED/80_WTH/Edited Data")
 
 
 source("~/Project_Master/Test_Rep/Code/Functions/Uptake_Diff.R")
 
-Plant_Pool<-read.csv2("~/NutsForSEDHN/80_WTH/Output data/Biomass/Plant pool.csv", header=FALSE)
+Plant_Pool<-read.csv2("~/WHATIF/NutsForSEDHN/80_WTH/Output data/Biomass/Plant pool.csv", header=FALSE)
 
 Plant_Pool[c(1:32)]<-lapply(Plant_Pool[c(1:32)], as.numeric)
 
