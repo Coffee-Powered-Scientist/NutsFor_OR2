@@ -6,14 +6,14 @@
 #Need to note units for different files, they are in different goddamn units
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_LN_SED/Sens/Min/Upper")
+setwd("~/Project_Master/Test_Rep/Output/Calibration/Output_HN_BAS/Sens/Min/Upper")
 
 library(dplyr)
 library(tidyverse)
 library(lubridate)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/Sens_Parent/Sens_Min/LN_SED/Base/Maximum/Output data/Soil solution", pattern = "*.csv", full.names = TRUE)
+files <- list.files(path = "~/Sens_Parent/Sens_Min/HN_BAS/Base/Maximum/Output data/Soil solution", pattern = "*.csv", full.names = TRUE)
 Soil_Soln<- sapply(files, read.csv2, simplify=FALSE) %>% 
   bind_rows(.id = "id")
 
