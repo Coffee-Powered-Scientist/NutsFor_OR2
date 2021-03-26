@@ -58,22 +58,22 @@ WTH_40_LNSED_H6<-WTH_40_LNSED %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_LNSED_H7<-WTH_40_LNSED %>% 
-  filter(YEAR == "2283" & Month == "8") %>% 
+  filter(YEAR == "2326" & Month == "8") %>% 
   mutate(Harvest="H7", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_40_LNSED_H8<- WTH_40_LNSED %>% 
-  filter(YEAR == "2326" & Month == "8") %>% 
+  filter(YEAR == "2369" & Month == "8") %>% 
   mutate(Harvest="H8", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_40_LNSED_H9<-WTH_40_LNSED %>%
-  filter(YEAR == "2369" & Month == "8") %>%
+  filter(YEAR == "2412" & Month == "8") %>%
   mutate(Harvest="H9", Rock_Type="Sedimentary", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_LNSED_H10<-WTH_40_LNSED %>% 
-  filter(YEAR == "2412" & Month == "8") %>% 
+  filter(YEAR == "2455" & Month == "8") %>% 
   mutate(Harvest="H10", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
@@ -132,22 +132,22 @@ WTH_40_LNBAS_H6<-WTH_40_LNBAS %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_LNBAS_H7<-WTH_40_LNBAS %>% 
-  filter(YEAR == "2283" & Month == "8") %>% 
+  filter(YEAR == "2326" & Month == "8") %>% 
   mutate(Harvest="H7", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_40_LNBAS_H8<- WTH_40_LNBAS %>% 
-  filter(YEAR == "2326" & Month == "8") %>% 
+  filter(YEAR == "2369" & Month == "8") %>% 
   mutate(Harvest="H8", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_40_LNBAS_H9<-WTH_40_LNBAS %>%
-  filter(YEAR == "2369" & Month == "8") %>%
+  filter(YEAR == "2412" & Month == "8") %>%
   mutate(Harvest="H9", Rock_Type="Basalt", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_LNBAS_H10<-WTH_40_LNBAS %>% 
-  filter(YEAR == "2412" & Month == "8") %>% 
+  filter(YEAR == "2455" & Month == "8") %>% 
   mutate(Harvest="H10", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
@@ -207,22 +207,22 @@ WTH_40_HNBAS_H6<-WTH_40_HNBAS %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_HNBAS_H7<-WTH_40_HNBAS %>% 
-  filter(YEAR == "2283" & Month == "8") %>% 
+  filter(YEAR == "2326" & Month == "8") %>% 
   mutate(Harvest="H7", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_40_HNBAS_H8<- WTH_40_HNBAS %>% 
-  filter(YEAR == "2326" & Month == "8") %>% 
+  filter(YEAR == "2369" & Month == "8") %>% 
   mutate(Harvest="H8", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_40_HNBAS_H9<-WTH_40_HNBAS %>%
-  filter(YEAR == "2369" & Month == "8") %>%
+  filter(YEAR == "2412" & Month == "8") %>%
   mutate(Harvest="H9", Rock_Type="Basalt", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_HNBAS_H10<-WTH_40_HNBAS %>% 
-  filter(YEAR == "2412" & Month == "8") %>% 
+  filter(YEAR == "2455" & Month == "8") %>% 
   mutate(Harvest="H10", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
@@ -280,22 +280,22 @@ WTH_40_HNSED_H6<-WTH_40_HNSED %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_HNSED_H7<-WTH_40_HNSED %>% 
-  filter(YEAR == "2283" & Month == "8") %>% 
+  filter(YEAR == "2326" & Month == "8") %>% 
   mutate(Harvest="H7", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_40_HNSED_H8<- WTH_40_HNSED %>% 
-  filter(YEAR == "2326" & Month == "8") %>% 
+  filter(YEAR == "2369" & Month == "8") %>% 
   mutate(Harvest="H8", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_40_HNSED_H9<-WTH_40_HNSED %>%
-  filter(YEAR == "2369" & Month == "8") %>%
+  filter(YEAR == "2412" & Month == "8") %>%
   mutate(Harvest="H9", Rock_Type="Sedimentary", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_40_HNSED_H10<-WTH_40_HNSED %>% 
-  filter(YEAR == "2412" & Month == "8") %>% 
+  filter(YEAR == "2455" & Month == "8") %>% 
   mutate(Harvest="H10", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
@@ -354,6 +354,7 @@ WTH_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decr
 
 #Check
 WTH_Aggregated_Biomass
+
 
 #Save to Image Directory
 

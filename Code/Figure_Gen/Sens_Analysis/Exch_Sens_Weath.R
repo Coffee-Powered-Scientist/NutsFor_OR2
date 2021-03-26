@@ -1,8 +1,7 @@
-
 #--------------------------#
 #---Sensitivity Analysis---#
 #$---Mineral Weathering---$#
-#%------Mineral Area------%#
+#%------Exchangeable Pool------%#
 #--------------------------#
 
 rm(list = ls())
@@ -44,13 +43,13 @@ Orig_HNBAS<-sum(Orig_HNBAS$Ca)
 
 # Maximum
 
-Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
-Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
-Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
-Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
 LNSED_Mine_Max<-sum(Mine_10_Plus_LNSED$Ca)
 
@@ -62,13 +61,13 @@ HNBAS_Mine_Max<-sum(Mine_10_Plus_HNBAS$Ca)
 
 # Minimum
 
-Mine_10_Minus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
-Mine_10_Minus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
-Mine_10_Minus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
-Mine_10_Minus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Ex/Lower/Weathering_All.csv")
 
 
 LNSED_Mine_Min<-sum(Mine_10_Minus_LNSED$Ca)
@@ -112,6 +111,6 @@ G<-ggplot(Y, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChan
   theme_bw()+
   labs(x="Sensitivity Scenario", y="Percent Difference from Original")
 
-png("Ca_Min.png", width=1000, height=500, res=115)
+png("Ca_Ex.png", width=1000, height=500, res=115)
 plot(G)
 dev.off()
