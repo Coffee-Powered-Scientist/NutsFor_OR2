@@ -1,5 +1,5 @@
 # Percent Diff
 
 Diff<-function(x, y){
-  100*((y-x)/x)
+  100*((x-y)/y)
 }

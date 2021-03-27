@@ -44,13 +44,13 @@ Orig_HNBAS<-sum(Orig_HNBAS$Ca)
 
 # Maximum
 
-Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Min/Upper/Weathering_All.csv")
 
-Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Min/Upper/Weathering_All.csv")
 
-Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Min/Upper/Weathering_All.csv")
 
-Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Min/Upper/Weathering_All.csv")
 
 LNSED_Mine_Max<-sum(Mine_10_Plus_LNSED$Ca)
 
