@@ -8,6 +8,7 @@ rm(list = ls())
 
 library(dplyr)
 library(reshape2)
+library(ggplot2)
 
 # Update
 
@@ -126,10 +127,10 @@ Y$Var2 <- factor(Y$Var2,levels = c("PerChange_LNSED_Min", "PerChange_LNSED_Max",
                                    "PerChange_LNBAS_Min", "PerChange_LNBAS_Max",
                                    "PerChange_HNBAS_Min", "PerChange_HNBAS_Max"))
 
-G<-ggplot(Y, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChange_LNSED_Min"="LN SED -10%", "PerChange_LNSED_Max"="LN SED +10%",
-                                                                        "PerChange_HNSED_Min"="HN SED -10%", "PerChange_HNSED_Max"="HN SED +10%", 
-                                                                        "PerChange_LNBAS_Min"="LN BAS -10%", "PerChange_LNBAS_Max"="LN BAS +10%",
-                                                                        "PerChange_HNBAS_Min"="HN BAS -10%", "PerChange_HNBAS_Max"="HN BAS +10%"))+
+G<-ggplot(Y, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChange_LNSED_Min"="LN SED -50%", "PerChange_LNSED_Max"="LN SED +50%",
+                                                                        "PerChange_HNSED_Min"="HN SED -50%", "PerChange_HNSED_Max"="HN SED +50%", 
+                                                                        "PerChange_LNBAS_Min"="LN BAS -50%", "PerChange_LNBAS_Max"="LN BAS +50%",
+                                                                        "PerChange_HNBAS_Min"="HN BAS -50%", "PerChange_HNBAS_Max"="HN BAS +50%"))+
   theme_bw()+
   labs(x="Sensitivity Scenario", y="Percent Difference from Original")
 

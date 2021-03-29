@@ -8,6 +8,7 @@ rm(list = ls())
 
 library(dplyr)
 library(reshape2)
+library(ggplot2)
 
 # Updates
 
@@ -117,22 +118,22 @@ PerChange_HNBAS_Max<-Diff(HN_BAS_Mine_Max1, Df_Originals$WTH_40_HNBAS_SUM)
 PerChange_Df<-cbind(PerChange_LNSED_Min, PerChange_HNSED_Min,PerChange_LNBAS_Min,PerChange_HNBAS_Min,PerChange_LNSED_Max,PerChange_HNSED_Max,
                     PerChange_LNBAS_Max,PerChange_HNBAS_Max)
 
-X<-melt(PerChange_Df)
+J<-melt(PerChange_Df)
 
 # Reorder Factorv
 
-Y<-as.data.frame(X)
-Y$Var2 <- factor(Y$Var2,levels = c("PerChange_LNSED_Min", "PerChange_LNSED_Max",
+Z<-as.data.frame(J)
+Z$Var2 <- factor(Z$Var2,levels = c("PerChange_LNSED_Min", "PerChange_LNSED_Max",
                                    "PerChange_HNSED_Min", "PerChange_HNSED_Max", 
                                    "PerChange_LNBAS_Min", "PerChange_LNBAS_Max",
                                    "PerChange_HNBAS_Min", "PerChange_HNBAS_Max"))
 
-G<-ggplot(Y, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChange_LNSED_Min"="LN SED -10%", "PerChange_LNSED_Max"="LN SED +10%",
-                                                                        "PerChange_HNSED_Min"="HN SED -10%", "PerChange_HNSED_Max"="HN SED +10%", 
-                                                                        "PerChange_LNBAS_Min"="LN BAS -10%", "PerChange_LNBAS_Max"="LN BAS +10%",
-                                                                        "PerChange_HNBAS_Min"="HN BAS -10%", "PerChange_HNBAS_Max"="HN BAS +10%"))+
+G<-ggplot(Z, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChange_LNSED_Min"="LN SED -50%", "PerChange_LNSED_Max"="LN SED +50%",
+                                                                        "PerChange_HNSED_Min"="HN SED -50%", "PerChange_HNSED_Max"="HN SED +50%", 
+                                                                        "PerChange_LNBAS_Min"="LN BAS -50%", "PerChange_LNBAS_Max"="LN BAS +50%",
+                                                                        "PerChange_HNBAS_Min"="HN BAS -50%", "PerChange_HNBAS_Max"="HN BAS +50%"))+
   theme_bw()+
-  labs(x="Sensitivity Scenario", y="Percent Difference from Original")
+  labs(x="Sensitivity Scenario 1", y="Percent Difference from Original")
 
 
 png("Bio_Nit.png", width=1000, height=500, res=115)
