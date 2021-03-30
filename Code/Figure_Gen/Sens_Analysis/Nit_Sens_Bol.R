@@ -133,7 +133,7 @@ G<-ggplot(Z, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChan
                                                                         "PerChange_LNBAS_Min"="LN BAS -50%", "PerChange_LNBAS_Max"="LN BAS +50%",
                                                                         "PerChange_HNBAS_Min"="HN BAS -50%", "PerChange_HNBAS_Max"="HN BAS +50%"))+
   theme_bw()+
-  labs(x="Sensitivity Scenario 1", y="Percent Difference from Original")
+  labs(x="Nitrification Fraction % Change", y="Percent Difference from Original")
 
 
 png("Bio_Nit.png", width=1000, height=500, res=115)

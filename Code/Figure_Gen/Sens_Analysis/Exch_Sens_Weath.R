@@ -120,7 +120,7 @@ G<-ggplot(Y, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChan
                                                                         "PerChange_LNBAS_Min"="LN BAS -50%", "PerChange_LNBAS_Max"="LN BAS +50%",
                                                                         "PerChange_HNBAS_Min"="HN BAS -50%", "PerChange_HNBAS_Max"="HN BAS +50%"))+
   theme_bw()+
-  labs(x="Sensitivity Scenario", y="Percent Difference from Original")
+  labs(x="Exchangeable Cation Pool % Change", y="Percent Difference from Original")
 
 png("Ca_Ex.png", width=1000, height=500, res=115)
 plot(G)
