@@ -11,21 +11,21 @@ library(extrafont)
 
 # Update Files
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/80_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/LN_SED/80_BO/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/80_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/HN_SED/80_BO/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_BAS/80_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/LN_BAS/80_BO/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/HN_BAS/80_BO/TreeNut_Mutator.R")
 
 # Set Working Directory
 
-setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_BO")
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/What_IF/Aggregated/80_BO")
 
 # 80_BO LN SED
 
-BO_80_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
+BO_80_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_80_LNSED_H1<-BO_80_LNSED %>% 
   filter(YEAR == "2065" & Month == "8") %>% 
@@ -72,7 +72,7 @@ BO_80_LNSED_H6_MELT<-melt(BO_80_LNSED_H6, id.vars = c("Harvest", "Rock_Type", "N
 
 # 80_BO LN BAS
 
-BO_80_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
+BO_80_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_80_LNBAS_H1<-BO_80_LNBAS %>% 
   filter(YEAR == "2065" & Month == "8") %>% 
@@ -120,7 +120,7 @@ BO_80_LNBAS_H6_MELT<-melt(BO_80_LNBAS_H6, id.vars = c("Harvest", "Rock_Type", "N
 
 # 80_BO HN BAS
 
-BO_80_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
+BO_80_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_80_HNBAS_H1<-BO_80_HNBAS %>% 
   filter(YEAR == "2065" & Month == "8") %>% 
@@ -163,7 +163,7 @@ BO_80_HNBAS_H6_MELT<-melt(BO_80_HNBAS_H6, id.vars = c("Harvest", "Rock_Type", "N
 
 # 80 BO HN SED
 
-BO_80_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
+BO_80_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_80_HNSED_H1<-BO_80_HNSED %>% 
   filter(YEAR == "2065" & Month == "8") %>% 

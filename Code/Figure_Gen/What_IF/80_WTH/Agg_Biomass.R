@@ -11,22 +11,22 @@ library(extrafont)
 
 # Update Files
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/LN_SED/80_WTH/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/80_WTH/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/HN_SED/80_WTH/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/LN_BAS/80_WTH/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_WTH/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/HN_BAS/80_WTH/TreeNut_Mutator.R")
 
 
 # Set Working Directory
 
-setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH")
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/What_IF/Aggregated/80_WTH")
 
 # 80_WTH LN SED
 
-WTH_80_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Tree_Nut_All.csv")
+WTH_80_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_SED/80_WTH/Edited Data/Tree_Nut_All.csv")
 
 WTH_80_LNSED_H1<-WTH_80_LNSED %>% 
   filter(YEAR == "2065" & Month == "8") %>% 
@@ -73,7 +73,7 @@ WTH_80_LNSED_H6_MELT<-melt(WTH_80_LNSED_H6, id.vars = c("Harvest", "Rock_Type", 
 
 # 80_WTH LN BAS
 
-WTH_80_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
+WTH_80_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
 
 WTH_80_LNBAS_H1<-WTH_80_LNBAS %>% 
   filter(YEAR == "2065" & Month == "8") %>% 
@@ -121,7 +121,7 @@ WTH_80_LNBAS_H6_MELT<-melt(WTH_80_LNBAS_H6, id.vars = c("Harvest", "Rock_Type", 
 
 # 80_WTH HN BAS
 
-WTH_80_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
+WTH_80_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
 
 WTH_80_HNBAS_H1<-WTH_80_HNBAS %>% 
   filter(YEAR == "2065" & Month == "8") %>% 
@@ -164,7 +164,7 @@ WTH_80_HNBAS_H6_MELT<-melt(WTH_80_HNBAS_H6, id.vars = c("Harvest", "Rock_Type", 
 
 # 80 WTH HN SED
 
-WTH_80_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/Tree_Nut_All.csv")
+WTH_80_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_SED/80_WTH/Edited Data/Tree_Nut_All.csv")
 
 WTH_80_HNSED_H1<-WTH_80_HNSED %>% 
   filter(YEAR == "2065" & Month == "8") %>% 

@@ -14,21 +14,21 @@ library(scales)
 
 # Update
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/Plant_Pool_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/Plant_Pool_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Plant_Pool_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/Plant_Pool_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/WHAT_IF_Codes/HN_BAS/40_WTH/Plant_Pool_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/WHAT_IF_Codes/LN_BAS/40_WTH/Plant_Pool_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/WHAT_IF_Codes/HN_SED/40_WTH/Plant_Pool_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/WHAT_IF_Codes/LN_SED/40_WTH/Plant_Pool_Mutator.R")
 
-# HN BAS File Reading\
+# HN BAS File Reading
 
-Plant_Pool_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/Plant_Pool.csv")
+Plant_Pool_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_BAS/40_WTH/Edited Data/Plant_Pool.csv")
 Plant_Pool_HNBAS$ID<-"HNBAS"
 
 Plant_Pool_HNBAS$Year<-as.Date(paste(Plant_Pool_HNBAS$Year, 1, 1, sep = "-"))
 
 # LN BAS File Reading
 
-Plant_Pool_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/Plant_Pool.csv")
+Plant_Pool_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_BAS/40_WTH/Edited Data/Plant_Pool.csv")
 Plant_Pool_LNBAS$ID<-"LNBAS"
 
 Plant_Pool_LNBAS$Year<-as.Date(paste(Plant_Pool_LNBAS$Year, 1, 1, sep = "-"))
@@ -36,14 +36,14 @@ Plant_Pool_LNBAS$Year<-as.Date(paste(Plant_Pool_LNBAS$Year, 1, 1, sep = "-"))
 
 # HN SED File Reading
 
-Plant_Pool_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/Plant_Pool.csv")
+Plant_Pool_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_SED/40_WTH/Edited Data/Plant_Pool.csv")
 Plant_Pool_HNSED$ID<-"HNSED"
 
 Plant_Pool_HNSED$Year<-as.Date(paste(Plant_Pool_HNSED$Year, 1, 1, sep = "-"))
 
 # LN SED File Reading
 
-Plant_Pool_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/Plant_Pool.csv")
+Plant_Pool_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_SED/40_WTH/Edited Data/Plant_Pool.csv")
 Plant_Pool_LNSED$ID<-"LNSED"
 
 Plant_Pool_LNSED$Year<-as.Date(paste(Plant_Pool_LNSED$Year, 1, 1, sep = "-"))
@@ -54,7 +54,7 @@ All_Df<-cbind(Plant_Pool_HNBAS, Plant_Pool_LNBAS, Plant_Pool_LNSED, Plant_Pool_H
 
 # SET WD (Needs to ve here)
 
-setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_WTH")
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/What_IF/Aggregated/40_WTH")
 # Graphing 
 
 P_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=P_Diff*30.97*10000/1e6/1000, color=ID))+geom_line()+ 
@@ -146,7 +146,6 @@ S_Diff<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10000/1e6/
 png('S_Diff.png', height=480, width=600)
 plot(S_Diff)
 dev.off()
-
 
 LNSED_All_Nut<- ggplot(Plant_Pool_LNSED, mapping= aes(x=Year, y=S_Diff*32.065*10000/1e6/1000, color="S"))+geom_line()+ 
   geom_line(aes(y=K_Diff*39.0983*10000/1e6/1000, color="K"))+

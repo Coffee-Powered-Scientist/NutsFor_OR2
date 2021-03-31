@@ -1,4 +1,4 @@
-# This specific code is for the 40_BO
+# This specific Code/What_IF_Codes is for the 40_BO
 
 rm(list = ls())
 
@@ -11,21 +11,21 @@ library(extrafont)
 
 # Update Files
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/LN_SED/40_BO/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/HN_SED/40_BO/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/LN_BAS/40_BO/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/What_IF_Codes/HN_BAS/40_BO/TreeNut_Mutator.R")
 
 # Set Working Directory
 
-setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_BO")
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/What_IF/Aggregated/40_BO")
 
 # 40_BO LN SED
 
-BO_40_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_SED/40_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_40_LNSED_H1<-BO_40_LNSED %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
@@ -38,22 +38,22 @@ BO_40_LNSED_H2<- BO_40_LNSED %>%
       select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_LNSED_H3<-BO_40_LNSED %>%
-  filter(YEAR == "2154" & Month == "8") %>%
+  filter(YEAR == "2111" & Month == "8") %>%
     mutate(Harvest="H3", Rock_Type="Sedimentary", N="Low") %>%
         select(Harvest, Rock_Type, N, matches ("DW"))
 
 BO_40_LNSED_H4<-BO_40_LNSED %>% 
-  filter(YEAR == "2197" & Month == "8") %>% 
+  filter(YEAR == "2154" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 BO_40_LNSED_H5<- BO_40_LNSED %>% 
-  filter(YEAR == "2240" & Month == "8") %>% 
+  filter(YEAR == "2197" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_LNSED_H6<-BO_40_LNSED %>%
-  filter(YEAR == "2283" & Month == "8") %>%
+  filter(YEAR == "2240" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Sedimentary", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
@@ -99,7 +99,7 @@ BO_40_LNSED_H11_MELT<-melt(BO_40_LNSED_H11, id.vars = c("Harvest", "Rock_Type", 
 
 # 40_BO LN BAS
 
-BO_40_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/LN_BAS/40_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_40_LNBAS_H1<-BO_40_LNBAS %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
@@ -112,22 +112,22 @@ BO_40_LNBAS_H2<- BO_40_LNBAS %>%
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_LNBAS_H3<-BO_40_LNBAS %>%
-  filter(YEAR == "2154" & Month == "8") %>%
+  filter(YEAR == "2111" & Month == "8") %>%
   mutate(Harvest="H3", Rock_Type="Basalt", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 BO_40_LNBAS_H4<-BO_40_LNBAS %>% 
-  filter(YEAR == "2197" & Month == "8") %>% 
+  filter(YEAR == "2154" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 BO_40_LNBAS_H5<- BO_40_LNBAS %>% 
-  filter(YEAR == "2240" & Month == "8") %>% 
+  filter(YEAR == "2197" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_LNBAS_H6<-BO_40_LNBAS %>%
-  filter(YEAR == "2283" & Month == "8") %>%
+  filter(YEAR == "2240" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Basalt", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
@@ -174,7 +174,7 @@ BO_40_LNBAS_H11_MELT<-melt(BO_40_LNBAS_H11, id.vars = c("Harvest", "Rock_Type", 
 
 # 40_BO HN BAS
 
-BO_40_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_BAS/40_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_40_HNBAS_H1<-BO_40_HNBAS %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
@@ -187,22 +187,22 @@ BO_40_HNBAS_H2<- BO_40_HNBAS %>%
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_HNBAS_H3<-BO_40_HNBAS %>%
-  filter(YEAR == "2154" & Month == "8") %>%
+  filter(YEAR == "2111" & Month == "8") %>%
   mutate(Harvest="H3", Rock_Type="Basalt", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 BO_40_HNBAS_H4<-BO_40_HNBAS %>% 
-  filter(YEAR == "2197" & Month == "8") %>% 
+  filter(YEAR == "2154" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 BO_40_HNBAS_H5<- BO_40_HNBAS %>% 
-  filter(YEAR == "2240" & Month == "8") %>% 
+  filter(YEAR == "2197" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_HNBAS_H6<-BO_40_HNBAS %>%
-  filter(YEAR == "2283" & Month == "8") %>%
+  filter(YEAR == "2240" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Basalt", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
@@ -247,7 +247,7 @@ BO_40_HNBAS_H11_MELT<-melt(BO_40_HNBAS_H11, id.vars = c("Harvest", "Rock_Type", 
 
 # 40 BO HN SED
 
-BO_40_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/WhatIF/HN_SED/40_BO/Edited Data/Tree_Nut_All.csv")
 
 BO_40_HNSED_H1<-BO_40_HNSED %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
@@ -260,22 +260,22 @@ BO_40_HNSED_H2<- BO_40_HNSED %>%
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_HNSED_H3<-BO_40_HNSED %>%
-  filter(YEAR == "2154" & Month == "8") %>%
+  filter(YEAR == "2111" & Month == "8") %>%
   mutate(Harvest="H3", Rock_Type="Sedimentary", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 BO_40_HNSED_H4<-BO_40_HNSED %>% 
-  filter(YEAR == "2197" & Month == "8") %>% 
+  filter(YEAR == "2154" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 BO_40_HNSED_H5<- BO_40_HNSED %>% 
-  filter(YEAR == "2240" & Month == "8") %>% 
+  filter(YEAR == "2197" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_HNSED_H6<-BO_40_HNSED %>%
-  filter(YEAR == "2283" & Month == "8") %>%
+  filter(YEAR == "2240" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Sedimentary", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
