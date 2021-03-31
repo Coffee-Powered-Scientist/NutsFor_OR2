@@ -21,7 +21,7 @@ source("~/Project_Master/Test_Rep/Code/What_IF_Codes/HN_BAS/80_BO/TreeNut_Mutato
 
 # Set Working Directory
 
-setwd("~/Project_Master/Test_Rep/Manuscript/Images/What_IF/Aggregated/80_BO")
+
 
 # 80_BO LN SED
 
@@ -237,6 +237,8 @@ windowsFonts(A = windowsFont("Times New Roman"))
 BO_Aggregated_Biomass
 
 #Save to Image Directory
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/What_IF/Aggregated/80_BO")
 
 png("BO_Biomass.png", height=350, width=500)
 print(BO_Aggregated_Biomass)
