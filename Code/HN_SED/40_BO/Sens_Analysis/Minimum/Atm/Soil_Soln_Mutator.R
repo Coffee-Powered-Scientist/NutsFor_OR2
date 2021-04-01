@@ -6,7 +6,7 @@
 #Need to note units for different files, they are in different goddamn units
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Atmos/Lower")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Sens/Atmos/Lower")
 library(dplyr)
 library(tidyverse)
 library(lubridate)

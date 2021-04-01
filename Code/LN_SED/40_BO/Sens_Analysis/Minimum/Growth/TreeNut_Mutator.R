@@ -1,10 +1,9 @@
 
 rm(list = ls())
 #Set wd to edited data in mutator files; that way writecsv always deposits it in one place
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Ex/Lower")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Sens/Growth/Lower")
 
 #This File Specifically mutates data for stacked plots, as per request!
-
 
 #Set wd to edited data in mutator files; that way writecsv always deposits it in one place
 library(dplyr)
@@ -14,7 +13,7 @@ library(reshape2)
 library(ggplot2)
 
 #Maybe have a function script-maybe have a script library of individual scripts
-Tree_Nut<-read.csv2("~/Sens_Parent/Sens_Exch/LN_SED/40_WTH/Minimum/Output data/Biomass/Tree data.csv", header=FALSE)
+Tree_Nut<-read.csv2("~/Sens_Parent/Sens_Growth/LN_SED/Minimum/Output data/Biomass/Tree data.csv", header=FALSE)
 
 Tree_Nut_2<-Tree_Nut %>%
   select(V1:V3, V10:V15, V16, V23:V29, V36:V42, V49:V61)

@@ -6,7 +6,8 @@
 #Need to note units for different files, they are in different goddamn units
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Ex/Upper")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Sens/Atmos/Upper")
+
 
 library(dplyr)
 library(tidyverse)
@@ -14,13 +15,13 @@ library(lubridate)
 library(car)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/Sens_Parent/Sens_Exch/LN_SED/40_WTH/Maximum/Output data/Weathering", pattern = "Layer", full.names = TRUE)
+files <- list.files(path = "~/Sens_Parent/Sens_Atm/LN_SED/Maximum/Output data/Weathering", pattern = "Layer", full.names = TRUE)
 
 Weathering_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
 
 
-#The below codes don't like being thrown into a function (x) type argument, likely because lapply is a loop 
+#The below codes don't like being thrown into a function (x) type arguement, likely because lapply is a loop 
 #(although, I'm not sure what's wrong with the indexing)
 Weathering_All[,c(2:10)] <- lapply(Weathering_All[,c(2:10)], as.numeric)
 
