@@ -11,22 +11,22 @@ library(dplyr)
 library(reshape2)
 library(ggplot2)
 
-# Update 40_WTH Sites, Use Sens_Updater.R seperate to update Sens files!
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/Weathering_LN_SED_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/Weathering_Mutator.R")
+# Update 40_BO Sites, Use Sens_Updater.R seperate to update Sens files!
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Weathering_LN_SED_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Weathering_Mutator.R")
 
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Sens_Analysis/Maximum/Mineral/Weathering_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Sens_Analysis/Minimum/Mineral/Weathering_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/Functions/Per_Diff.R")
 
@@ -36,32 +36,32 @@ setwd("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis")
 
 # Original
 
-Orig_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/Weathering_All.csv")
+Orig_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/Weathering_All.csv")
 
 Orig_LNSED<-sum(Orig_LNSED$Ca, na.rm=TRUE)
 
-Orig_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/Weathering_All.csv")
+Orig_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data/Weathering_All.csv")
 
 
 Orig_HNSED<-sum(Orig_HNSED$Ca, na.rm=TRUE)
 
-Orig_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/Weathering_All.csv")
+Orig_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data/Weathering_All.csv")
 
 Orig_LNBAS<-sum(Orig_LNBAS$Ca, na.rm=TRUE)
 
-Orig_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/Weathering_All.csv")
+Orig_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data/Weathering_All.csv")
 
 Orig_HNBAS<-sum(Orig_HNBAS$Ca, na.rm=TRUE)
 
 # Maximum
 
-Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Min/Upper/Weathering_All.csv")
+Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Sens/Min/Upper/Weathering_All.csv")
 
-Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Min/Upper/Weathering_All.csv")
+Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Sens/Min/Upper/Weathering_All.csv")
 
-Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Min/Upper/Weathering_All.csv")
+Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Sens/Min/Upper/Weathering_All.csv")
 
-Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Min/Upper/Weathering_All.csv")
+Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Sens/Min/Upper/Weathering_All.csv")
 
 LNSED_Mine_Max<-sum(Mine_10_Plus_LNSED$Ca, na.rm=TRUE)
 
@@ -73,13 +73,13 @@ HNBAS_Mine_Max<-sum(Mine_10_Plus_HNBAS$Ca, na.rm=TRUE)
 
 # Minimum
 
-Mine_10_Minus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Sens/Min/Lower/Weathering_All.csv")
 
-Mine_10_Minus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Sens/Min/Lower/Weathering_All.csv")
 
-Mine_10_Minus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Sens/Min/Lower/Weathering_All.csv")
 
-Mine_10_Minus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Min/Lower/Weathering_All.csv")
+Mine_10_Minus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Sens/Min/Lower/Weathering_All.csv")
 
 
 LNSED_Mine_Min<-sum(Mine_10_Minus_LNSED$Ca, na.rm=TRUE)

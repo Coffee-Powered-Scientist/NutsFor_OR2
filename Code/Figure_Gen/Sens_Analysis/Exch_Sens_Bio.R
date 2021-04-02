@@ -12,20 +12,20 @@ library(ggplot2)
 
 # Update
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Sens_Analysis/Maximum/Exchanger/TreeNut_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Sens_Analysis/Minimum/Exchanger/TreeNut_Mutator.R")
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis")
 
@@ -36,13 +36,13 @@ Df_Originals<-read.csv("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/A
 
 # Maximum
 
-Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Ex/Upper/Tree_Nut_All.csv")
+Mine_10_Plus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Sens/Ex/Upper/Tree_Nut_All.csv")
 
-Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Ex/Upper/Tree_Nut_All.csv")
+Mine_10_Plus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Sens/Ex/Upper/Tree_Nut_All.csv")
 
-Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Ex/Upper/Tree_Nut_All.csv")
+Mine_10_Plus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Sens/Ex/Upper/Tree_Nut_All.csv")
 
-Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Ex/Upper/Tree_Nut_All.csv")
+Mine_10_Plus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Sens/Ex/Upper/Tree_Nut_All.csv")
 
 LNSED_Mine_Max<-Mine_10_Plus_LNSED %>% 
   filter(YEAR %in%  c("2025" , "2068", "2498" , "2154" , "2197" , "2240" , "2283" , "2326" , "2369" , "2412" , "2455") & Month %in% 8) %>% 
@@ -69,13 +69,13 @@ HNBAS_Mine_Max<-Mine_10_Plus_HNBAS %>%
 HN_BAS_Mine_Max1<-sum(HNBAS_Mine_Max$DW_Bol, HNBAS_Mine_Max$DW_Brh,HNBAS_Mine_Max$DW_Brk, HNBAS_Mine_Max$DW_F)
 # Minimum
 
-Mine_10_Minus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Sens/Ex/Lower/Tree_Nut_All.csv")
+Mine_10_Minus_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Sens/Ex/Lower/Tree_Nut_All.csv")
 
-Mine_10_Minus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Sens/Ex/Lower/Tree_Nut_All.csv")
+Mine_10_Minus_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Sens/Ex/Lower/Tree_Nut_All.csv")
 
-Mine_10_Minus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Sens/Ex/Lower/Tree_Nut_All.csv")
+Mine_10_Minus_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Sens/Ex/Lower/Tree_Nut_All.csv")
 
-Mine_10_Minus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Sens/Ex/Lower/Tree_Nut_All.csv")
+Mine_10_Minus_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Sens/Ex/Lower/Tree_Nut_All.csv")
 
 LNSED_Mine_Min<-Mine_10_Minus_LNSED %>% 
   filter(YEAR %in%  c("2025" , "2068", "2498" , "2154" , "2197" , "2240" , "2283" , "2326" , "2369" , "2412" , "2455") & Month %in% 8) %>% 
@@ -104,15 +104,15 @@ HN_BAS_Mine_Min1<-sum(HNBAS_Mine_Min$DW_Bol, HNBAS_Mine_Min$DW_Brh,HNBAS_Mine_Mi
 
 # Percent difference is 100*(Final-IExchangerial/iExchangerial)
 
-PerChange_LNSED_Min<-Diff(LN_SED_Mine_Min1, Df_Originals$WTH_40_LNSED_SUM)
-PerChange_HNSED_Min<-Diff(HN_SED_Mine_Min1, Df_Originals$WTH_40_HNSED_SUM)
-PerChange_LNBAS_Min<-Diff(LN_BAS_Mine_Min1, Df_Originals$WTH_40_LNBAS_SUM)
-PerChange_HNBAS_Min<-Diff(HN_BAS_Mine_Min1, Df_Originals$WTH_40_HNBAS_SUM)
+PerChange_LNSED_Min<-Diff(LN_SED_Mine_Min1, Df_Originals$BO_40_LNSED_SUM)
+PerChange_HNSED_Min<-Diff(HN_SED_Mine_Min1, Df_Originals$BO_40_HNSED_SUM)
+PerChange_LNBAS_Min<-Diff(LN_BAS_Mine_Min1, Df_Originals$BO_40_LNBAS_SUM)
+PerChange_HNBAS_Min<-Diff(HN_BAS_Mine_Min1, Df_Originals$BO_40_HNBAS_SUM)
 
-PerChange_LNSED_Max<-Diff(LN_SED_Mine_Max1, Df_Originals$WTH_40_LNSED_SUM)
-PerChange_HNSED_Max<-Diff(HN_SED_Mine_Max1, Df_Originals$WTH_40_HNSED_SUM)
-PerChange_LNBAS_Max<-Diff(LN_BAS_Mine_Max1, Df_Originals$WTH_40_LNBAS_SUM)
-PerChange_HNBAS_Max<-Diff(HN_BAS_Mine_Max1, Df_Originals$WTH_40_HNBAS_SUM)
+PerChange_LNSED_Max<-Diff(LN_SED_Mine_Max1, Df_Originals$BO_40_LNSED_SUM)
+PerChange_HNSED_Max<-Diff(HN_SED_Mine_Max1, Df_Originals$BO_40_HNSED_SUM)
+PerChange_LNBAS_Max<-Diff(LN_BAS_Mine_Max1, Df_Originals$BO_40_LNBAS_SUM)
+PerChange_HNBAS_Max<-Diff(HN_BAS_Mine_Max1, Df_Originals$BO_40_HNBAS_SUM)
 
 PerChange_Df<-cbind(PerChange_LNSED_Min, PerChange_HNSED_Min,PerChange_LNBAS_Min,PerChange_HNBAS_Min,PerChange_LNSED_Max,PerChange_HNSED_Max,
                     PerChange_LNBAS_Max,PerChange_HNBAS_Max)
