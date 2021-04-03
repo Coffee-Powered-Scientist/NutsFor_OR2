@@ -106,22 +106,34 @@ PerChange_HNBAS_Max<-Diff(HNBAS_Mine_Max, Orig_HNBAS)
 PerChange_Df<-cbind(PerChange_LNSED_Min, PerChange_HNSED_Min,PerChange_LNBAS_Min,PerChange_HNBAS_Min,PerChange_LNSED_Max,PerChange_HNSED_Max,
                     PerChange_LNBAS_Max,PerChange_HNBAS_Max)
 
+PerChange_Df<-as.data.frame(PerChange_Df)
+
+PerChange_Df<-na.omit(PerChange_Df)
+
+
 X<-melt(PerChange_Df)
+
+X$Inc<-c("Lower", "Lower", "Lower", "Lower",
+         "Upper", "Upper", "Upper", "Upper")
+
+X$Site<-c("LN SED", "HN SED",
+          "LN BAS", "HN BAS")
 
 # Reorder Factorv
 
-Y<-as.data.frame(X)
-Y$Var2 <- factor(Y$Var2,levels = c("PerChange_LNSED_Min", "PerChange_LNSED_Max",
-                                   "PerChange_HNSED_Min", "PerChange_HNSED_Max", 
-                                   "PerChange_LNBAS_Min", "PerChange_LNBAS_Max",
-                                   "PerChange_HNBAS_Min", "PerChange_HNBAS_Max"))
 
-G<-ggplot(Y, aes(x=Var2, y=value))+geom_col()+scale_x_discrete(labels=c("PerChange_LNSED_Min"="LN SED -50%", "PerChange_LNSED_Max"="LN SED +50%",
-                                                                        "PerChange_HNSED_Min"="HN SED -50%", "PerChange_HNSED_Max"="HN SED +50%", 
-                                                                        "PerChange_LNBAS_Min"="LN BAS -50%", "PerChange_LNBAS_Max"="LN BAS +50%",
-                                                                        "PerChange_HNBAS_Min"="HN BAS -50%", "PerChange_HNBAS_Max"="HN BAS +50%"))+
+
+Y<-as.data.frame(X)
+
+Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
+
+
+G<-ggplot(Y, aes(x=factor(Site), y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+
   theme_bw()+
-  labs(x="Mineral Abdundance % Change", y="Percent Difference from Original")
+  labs(x="Mineral Abundance % Change", y="Percent Difference from Original", fill="Increment")+
+  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
+  theme(legend.position = c(0.925, 0.85))
 
 png("Ca_Min.png", width=1000, height=500, res=115)
 plot(G)
