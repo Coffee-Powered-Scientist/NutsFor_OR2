@@ -6,7 +6,7 @@
 #Need to note units for different files, they are in different goddamn units
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data")
 
 library(dplyr)
 library(tidyverse)
