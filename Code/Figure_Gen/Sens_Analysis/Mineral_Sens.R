@@ -32,7 +32,7 @@ setwd("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis")
 
 source("~/Project_Master/Test_Rep/Code/Functions/Per_Diff.R")
 
-Df_Originals<-read.csv("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/All_Biomass.csv", sep=";")
+Df_Originals<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/All_Biomass.csv")
 
 
 # Maximum

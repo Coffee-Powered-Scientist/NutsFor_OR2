@@ -5,7 +5,7 @@ setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data")
 
 #This File Specifically mutates data for stacked plots, as per request!
 
-rm(list = ls())
+
 #Set wd to edited data in mutator files; that way writecsv always deposits it in one place
 library(dplyr)
 library(janitor)

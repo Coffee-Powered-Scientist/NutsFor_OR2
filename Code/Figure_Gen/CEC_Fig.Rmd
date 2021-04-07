@@ -8,7 +8,12 @@ output:
 ```{r}
 library(ggplot2)
 library(dplyr)
-library(multipanelfigure)
+library(reshape2)
+library(lubridate)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(cowplot)
 
 ```
 
@@ -28,35 +33,25 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(CEC_Ca, CEC_Mg, CEC_K, CEC_Na, CEC_Al, CEC_NH4, labels=c("A", "B"),ncol = 2, nrow = 3) %>%
+  ggexport(filename="Test.png", height=1500, width=1850, res=95)
 
 ```
 ```{r}
@@ -71,35 +66,32 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+
+
+
+
+
 ```
 
 ```{r}
@@ -114,35 +106,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -157,35 +141,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -200,35 +176,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 
@@ -249,35 +217,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 
@@ -296,35 +256,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 
@@ -344,36 +296,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
-
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 ```{r}
 source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/CEC_Mutator.R")
@@ -387,35 +330,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -430,35 +365,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -473,35 +400,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -516,35 +435,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 
@@ -565,35 +476,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -612,35 +515,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 
 ```
 ```{r}
@@ -655,35 +550,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -698,35 +585,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -739,37 +618,28 @@ CEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edi
 CEC_All$group_id<-as.factor(CEC_All$group_id)
 
 CEC_All$Date<-as.Date(CEC_All$Date)
-
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -784,35 +654,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 
@@ -833,35 +695,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 
@@ -881,35 +735,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 
 ```
 ```{r}
@@ -924,35 +770,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -967,35 +805,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -1008,37 +838,28 @@ CEC_All<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edi
 CEC_All$group_id<-as.factor(CEC_All$group_id)
 
 CEC_All$Date<-as.Date(CEC_All$Date)
-
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 ```{r}
@@ -1053,35 +874,27 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 
 
@@ -1102,34 +915,26 @@ CEC_All$group_id<-as.factor(CEC_All$group_id)
 CEC_All$Date<-as.Date(CEC_All$Date)
 
 CEC_Ca<-CEC_Grapher(CEC_All$Ca)
-Ca<-CEC_Ca+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Ca<-CEC_Ca+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+labs(y="Ca on cation exchange surfaces (kg/ha)", color="Layer Number")+theme_bw()
 
 CEC_Mg<-CEC_Grapher(CEC_All$Mg)
-Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Mg<-CEC_Mg+labs(y="Mg on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_K<-CEC_Grapher(CEC_All$K)
-K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+K<-CEC_K+labs(y="K on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Na<-CEC_Grapher(CEC_All$Na)
-Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Na<-CEC_Na+labs(y="Na on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_Al<-CEC_Grapher(CEC_All$Al)
-Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
-NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")
+NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
 
-Fig1<-figure1 %>% fill_panel(Ca,column =1,row = 1) %>%
-  fill_panel(Mg, column=2, row=1) %>%
-  fill_panel(K, column=3, row=1) %>%
-  fill_panel(Na, column=1, row=2) %>%
-  fill_panel(Al, column=2, row=2) %>%
-  fill_panel(NH4, column=3, row=2)
 
-save_multi_panel_figure(Fig1, "CEC_All.png", limitsize=FALSE)
+ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
+  ggexport(filename="Test.png", height=1000, width=1850, res=95)
 ```
 

@@ -176,10 +176,13 @@ Y<-rbind(Ca, Mg, K)
 
 Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 
-G<-ggplot(Y, aes(x=factor(Site), y=value, fill=ID, color=Species))+geom_col(position = "dodge", width=.75)+
+G_LN<-ggplot(Y, aes(x=factor(Site), y=value, fill=ID, color=Species))+geom_col(position = "dodge", width=.75)+
   theme_bw()+
   labs(x="Nitrification % Change", y="Percent Difference from Original", fill="Increment")+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
   scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
-  theme(legend.position = c(0.925, 0.85))+
   scale_color_manual(values=c("Ca"="red", "Mg"="blue", "K"="green"))
+
+png("Leach_Nit.png", width=1000, height=500, res=115)
+plot(G_LN)
+dev.off()

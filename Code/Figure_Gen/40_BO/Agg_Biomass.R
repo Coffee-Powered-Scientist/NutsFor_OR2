@@ -338,6 +338,7 @@ Biomass_Master$Harvest<-factor(Biomass_Master$Harvest, levels=c("H1", "H2", "H3"
 Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_Bol"))
 
 
+write.csv2(Biomass_Master, "Biomass_Master.csv")
 # Graphs
 #Load Times New Roman
 windowsFonts(A = windowsFont("Times New Roman"))

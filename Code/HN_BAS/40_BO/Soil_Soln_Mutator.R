@@ -13,7 +13,7 @@ library(tidyverse)
 library(lubridate)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/NutsforBASLN/40_BO/Output data/Soil solution", pattern = "*.csv", full.names = TRUE)
+files <- list.files(path = "~/NutsforBASHN/40_BO/Output data/Soil solution", pattern = "*.csv", full.names = TRUE)
 Soil_Soln<- sapply(files, read.csv2, simplify=FALSE) %>% 
   bind_rows(.id = "id")
 
