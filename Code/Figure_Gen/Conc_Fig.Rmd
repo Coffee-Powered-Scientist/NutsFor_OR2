@@ -8,9 +8,13 @@ output:
 ```{r}
 library(ggplot2)
 library(dplyr)
-library(janitor)
+library(reshape2)
 library(lubridate)
-library(multipanelfigure)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(cowplot)
+library(scales)
 ```
 
 ```{r}
@@ -40,51 +44,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 
 
 
@@ -128,51 +146,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -212,51 +244,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 
 
 ```
@@ -298,51 +344,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -374,51 +434,66 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
+
 ```
 
 
@@ -450,51 +525,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -525,51 +614,66 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
+
 ```
 
 
@@ -600,51 +704,66 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
+
 ```
 
 
@@ -676,51 +795,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -751,51 +884,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -826,51 +973,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -902,51 +1063,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -979,51 +1154,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -1054,51 +1243,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -1129,51 +1332,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -1205,51 +1422,65 @@ AnalysisTime<-AnalysisTime %>% mutate(Date=make_date(Year, Month))
 
 Fol_Bio<-ggplot(AnalysisTime, aes(x=Date, y=Fol_Biomass))+geom_line()+labs(x="Date", y="Foliar Biomass (kg/ha)")+ theme_bw()+
   labs(title="Foliar Biomass")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 Ca_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Ca_Conc))+geom_line()+labs(x="Date", y=expression(Ca~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+
   labs(title="Ca Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 N_Conc<-ggplot(AnalysisTime,aes(x=Date, y=N_Conc))+geom_line()+labs(x="Date", y=expression(N~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="N Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 P_Conc<-ggplot(AnalysisTime,aes(x=Date, y=P_Conc))+geom_line()+labs(x="Date", y=expression(P~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="P Foliar Concentration")+ 
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 
 S_Conc<-ggplot(AnalysisTime,aes(x=Date, y=S_Conc))+geom_line()+labs(x="Date", y=expression(S~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="S Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20),  text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14),  text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 K_Conc<-ggplot(AnalysisTime,aes(x=Date, y=K_Conc))+geom_line()+labs(x="Date", y=expression(K~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+ labs(title="K Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 1,
+                                 decimal.mark = '.'))
 
 
 
 Mg_Conc<-ggplot(AnalysisTime,aes(x=Date, y=Mg_Conc))+geom_line()+labs(x="Date", y=expression(Mg~Foliar~Concentration~(mu~mol/g)))+ theme_bw()+labs(title="Mg Foliar Concentration")+
-  theme(plot.title = element_text(hjust = 0.5, size=20), text=element_text(size=20))
+  theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
 
 
 windowsFonts(A = windowsFont("Times New Roman"))
 
-figure1 <- multi_panel_figure(
-  width = 1000, height = 500,
-  columns = 3, rows = 2)
+ggarrange(Ca_Conc, Mg_Conc, K_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc1.png", height=1000, width=650, res=95)
 
-Fig1<-figure1 %>% fill_panel(Ca_Conc,column =1,row = 1) %>%
-  fill_panel(Mg_Conc, column=2, row=1) %>%
-  fill_panel(K_Conc, column=3, row=1) %>%
-  fill_panel(P_Conc, column=1, row=2) %>%
-  fill_panel(S_Conc, column=2, row=2) %>%
-  fill_panel(N_Conc, column=3, row=2)
-  
-save_multi_panel_figure(Fig1, "Conc_1.png", limitsize=FALSE)
+ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 ```
 
 

@@ -50,10 +50,15 @@ Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number"
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
-ggarrange(CEC_Ca, CEC_Mg, CEC_K, CEC_Na, CEC_Al, CEC_NH4, labels=c("A", "B"),ncol = 2, nrow = 3) %>%
-  ggexport(filename="Test.png", height=1500, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 
 ```
+
+
 ```{r}
 source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/Functions/Grapher_CEC_AEC.R")
@@ -85,11 +90,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-
-
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 
 
 ```
@@ -124,9 +129,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -159,9 +166,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -195,8 +204,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -236,8 +248,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -274,9 +289,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -314,9 +331,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 ```{r}
 source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/CEC_Mutator.R")
@@ -349,8 +368,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -382,10 +404,11 @@ Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number"
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -419,8 +442,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -454,8 +480,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -494,9 +523,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -534,8 +565,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 
 ```
 ```{r}
@@ -567,10 +601,11 @@ Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number"
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -604,8 +639,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -636,10 +674,11 @@ Al<-CEC_Al+labs(y="Al on cation exchange surfaces (kg/ha)", color="Layer Number"
 CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -672,9 +711,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -714,8 +755,12 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
+
 ```
 
 
@@ -753,10 +798,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
-
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 ```{r}
 source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/CEC_Mutator.R")
@@ -789,8 +835,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -823,9 +872,11 @@ CEC_NH4<-CEC_Grapher(CEC_All$NH4)
 NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Number")+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = "%Y")+theme_bw()
 
 
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -858,8 +909,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 ```{r}
@@ -893,8 +947,11 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
 
@@ -934,7 +991,10 @@ NH4<-CEC_NH4+labs(y="NH4 on cation exchange surfaces (kg/ha)", color="Layer Numb
 
 
 
-ggarrange(Ca, Mg, K, Na, Al, NH4, labels=c("A", "B", "C", "D", "E", "F"),ncol = 3, nrow = 2) %>%
-  ggexport(filename="Test.png", height=1000, width=1850, res=95)
+ggarrange(Ca, Mg, K, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test1.png", height=1000, width=650, res=95)
+
+ggarrange(Na, Al, NH4, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>%
+  ggexport(filename="Test2.png", height=1000, width=650, res=95)
 ```
 
