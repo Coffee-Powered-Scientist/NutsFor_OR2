@@ -1,0 +1,75 @@
+---
+title: "SOM_Fig"
+author: "Kaveh"
+date: "4/8/2021"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+library(lubridate)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(cowplot)
+library(scales)
+```
+
+
+
+```{r}
+rm(list = ls())
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/SOM_Mutator.R")
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/LN_SED/40_BO")
+
+SOM<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/SOM.csv")
+SOM$Date<-as.Date(SOM$Date)
+
+
+SOM<-SOM %>%group_by(Year, group_id)%>% summarize(across(C:P, ~mean(.x, na.rm = TRUE)))
+
+SOM_C<-ggplot(SOM, aes(x=Year, y=C*12*10/1000,color=group_id))+geom_line()+labs(y="SOM-C Storage (Mg/ha)", color="Layer Number")+theme_bw()+
+  theme(legend.position = "none", plot.title = element_text(hjust = 0.5), axis.title.x=element_blank()) + ggtitle("SOM-C Content")+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
+
+SOM_N<-ggplot(SOM, aes(x=Year, y=N*14*10/1000,color=group_id))+geom_line()+labs(y="SOM-N Storage (Mg/ha)", color="Layer Number")+theme_bw()+
+  theme(legend.position = "none", plot.title = element_text(hjust = 0.5), axis.title.x=element_blank()) + ggtitle("SOM-N Content")+
+  scale_y_continuous(
+  labels = scales::number_format(accuracy = 0.1,
+                                 decimal.mark = '.'))
+
+
+SOM_P<-ggplot(SOM, aes(x=Year, y=P*30.974*10,color=group_id))+geom_line()+labs(y="SOM-P Storage (kg/ha)", color="Layer Number")+theme_bw()+theme(legend.position = "none", plot.title = element_text(hjust = 0.5)) + ggtitle("SOM-P Content")
+
+SOM_S<-ggplot(SOM, aes(x=Year, y=S*32.065*10,color=group_id))+geom_line()+labs(y="SOM-S Storage (kg/ha)", color="Layer Number")+theme(legend.position = "none", plot.title = element_text(hjust = 0.5)) + ggtitle("SOM-S Content")+theme_bw()
+
+
+ggarrange(SOM_C,SOM_N, SOM_P, SOM_S,labels=c("A", "B", "C", "D"),ncol = 2, nrow = 2, common.legend = TRUE, legend="bottom", heights =1, widths = 1)%>%
+  ggexport(filename="SOM.png", height=1000, width=1000, res=95)
+```
+
+```{r}
+rm(list = ls())
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/SOM_Mutator.R")
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/LN_SED/40_WTH")
+
+SOM<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/SOM.csv")
+SOM$Date<-as.Date(SOM$Date)
+
+
+SOM<-SOM %>%group_by(Year, group_id)%>% summarize(across(C:P, ~mean(.x, na.rm = TRUE)))
+
+SOM_C<-ggplot(SOM, aes(x=Year, y=C*12*10/1000,color=group_id))+geom_line()+labs(y="SOM C Storage (Mg/ha)")
+
+SOM_N<-ggplot(SOM, aes(x=Year, y=N*14*10/1000,color=group_id))+geom_line()+labs(y="SOM-N Storage (Mg/ha)")
+```
+
+

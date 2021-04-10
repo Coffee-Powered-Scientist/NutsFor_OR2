@@ -139,13 +139,19 @@ Y<-as.data.frame(X)
 Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 
 
+
+Y$value2<-c("NR", " ", "*", " ", "NR", " ", " ", " ")
+
+
 G<-ggplot(Y, aes(x=factor(Site), y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+
 
     theme_bw()+
     labs(x="Atmospheric Deposition % Change", y="Percent Difference from Original", fill="Increment")+
     geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
     scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
-    theme(legend.position = c(0.925, 0.85))
+    theme(legend.position = c(0.925, 0.85))+
+  geom_text(aes(label =value2, y=2.5, color=Site), position = position_dodge(0.9), size=5, show.legend = FALSE)
+  
 
 png("Bio_Atm.png", width=1000, height=500, res=115)
 plot(G)

@@ -105,7 +105,8 @@ ggarrange(N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C"),ncol = 1, nrow = 3) %>
   ggexport(filename="Conc2.png", height=1000, width=650, res=95)
 
 
-
+ggarrange(Ca_Conc, Mg_Conc, K_Conc,N_Conc, P_Conc, S_Conc, labels=c("A", "B", "C", "D", "E", "F"),ncol = 2, nrow = 3) %>%
+  ggexport(filename="Conc3.png", height=1000, width=800, res=95)
 ```
 
 

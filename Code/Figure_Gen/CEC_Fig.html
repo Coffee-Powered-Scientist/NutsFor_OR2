@@ -205,17 +205,36 @@ library(dplyr)</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(multipanelfigure)</code></pre>
-<pre class="r"><code># LN_SED Base Case\
-
-# Update File
-
-source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/Base/CEC_Mutator.R&quot;)</code></pre>
+<pre class="r"><code>library(reshape2)
+library(lubridate)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;lubridate&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     date, intersect, setdiff, union</code></pre>
+<pre class="r"><code>library(ggpubr)
+library(gridExtra)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;gridExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     combine</code></pre>
+<pre class="r"><code>library(grid)
+library(cowplot)</code></pre>
+<pre><code>## Warning: package &#39;cowplot&#39; was built under R version 4.0.4</code></pre>
+<pre><code>## 
+## Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggpubr&#39;:
+## 
+##     get_legend</code></pre>
+<pre><code>## The following object is masked from &#39;package:lubridate&#39;:
+## 
+##     stamp</code></pre>
+<pre class="r"><code># LN_SED Base Case\
+
+# Update File
+
+source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/Base/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
@@ -259,41 +278,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -334,41 +347,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -409,41 +416,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -484,41 +485,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -559,41 +554,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code># LN_SED Base Case\
 
 # Update File
@@ -638,41 +627,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/Base/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -713,41 +696,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code># HN_SED Base Case\
 
 # Update File
@@ -792,41 +769,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/40_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -867,41 +838,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -942,41 +907,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/80_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1017,41 +976,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/80_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1092,41 +1045,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code># HN_SED Base Case\
 
 # Update File
@@ -1171,41 +1118,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code># HN_BAS Base Case\
 
 # Update File
@@ -1250,41 +1191,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1325,41 +1260,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1400,41 +1329,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1475,41 +1398,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/80_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1550,41 +1467,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code># HN_BAS Base Case\
 
 # Update File
@@ -1629,41 +1540,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code># LN_BAS Base Case\
 
 # Update File
@@ -1708,41 +1613,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1783,41 +1682,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1858,41 +1751,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/80_BO/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -1931,43 +1818,36 @@ CEC_All&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/8
 CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
-
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion
 
@@ -2008,41 +1888,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 <pre class="r"><code># LN_BAS Base Case\
 
 # Update File
@@ -2087,41 +1961,35 @@ CEC_All$group_id&lt;-as.factor(CEC_All$group_id)
 CEC_All$Date&lt;-as.Date(CEC_All$Date)
 
 CEC_Ca&lt;-CEC_Grapher(CEC_All$Ca)
-Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Ca&lt;-CEC_Ca+labs(y=&quot;Ca on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Ca&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Mg&lt;-CEC_Grapher(CEC_All$Mg)
-Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Mg&lt;-CEC_Mg+labs(y=&quot;Mg on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Mg&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_K&lt;-CEC_Grapher(CEC_All$K)
-K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+K&lt;-CEC_K+labs(y=&quot;K on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable K&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Na&lt;-CEC_Grapher(CEC_All$Na)
-Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Na&lt;-CEC_Na+labs(y=&quot;Na on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Na&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_Al&lt;-CEC_Grapher(CEC_All$Al)
-Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+Al&lt;-CEC_Al+labs(y=&quot;Al on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable Al&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <pre class="r"><code>CEC_NH4&lt;-CEC_Grapher(CEC_All$NH4)
-NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)</code></pre>
+NH4&lt;-CEC_NH4+labs(y=&quot;NH4 on cation exchange surfaces (kg/ha)&quot;, color=&quot;Layer Number&quot;)+ scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+ scale_x_date(date_labels = &quot;%Y&quot;)+theme_bw()+labs(title=&quot;Exhcangeable NH4&quot;)+theme(plot.title = element_text(hjust = 0.5, size=14), text=element_text(size=12))</code></pre>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
-<pre class="r"><code>figure1 &lt;- multi_panel_figure(
-  width = 1000, height = 350,
-  columns = 3, rows = 2)
-
-Fig1&lt;-figure1 %&gt;% fill_panel(Ca,column =1,row = 1) %&gt;%
-  fill_panel(Mg, column=2, row=1) %&gt;%
-  fill_panel(K, column=3, row=1) %&gt;%
-  fill_panel(Na, column=1, row=2) %&gt;%
-  fill_panel(Al, column=2, row=2) %&gt;%
-  fill_panel(NH4, column=3, row=2)
-
-save_multi_panel_figure(Fig1, &quot;CEC_All.png&quot;, limitsize=FALSE)</code></pre>
+<pre class="r"><code>ggarrange(Ca, Mg, K, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test1.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test1.png</code></pre>
+<pre class="r"><code>ggarrange(Na, Al, NH4, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),ncol = 1, nrow = 3) %&gt;%
+  ggexport(filename=&quot;Test2.png&quot;, height=1250, width=650, res=95)</code></pre>
+<pre><code>## file saved to Test2.png</code></pre>
 
 
 

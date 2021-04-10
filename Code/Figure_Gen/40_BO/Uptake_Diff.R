@@ -5,6 +5,11 @@ rm(list = ls())
 library(ggplot2)
 library(dplyr)
 library(reshape2)
+library(lubridate)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(cowplot)
 library(scales)
 
 # Working directory set below
@@ -154,8 +159,8 @@ LNSED_All_Nut<- ggplot(Plant_Pool_LNSED, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P"))+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient")+
-  theme_bw()
+  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="Low N Sedimentary")+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))
 
 png('LNSED_All_Nut.png', height=480, width=650, res=125)
 plot(LNSED_All_Nut)
@@ -169,8 +174,8 @@ HNSED_All_Nut<- ggplot(Plant_Pool_HNSED, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P"))+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient")+
-  theme_bw()
+  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="High N Sedimentary")+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))
 
 png('HNSED_All_Nut.png', height=480, width=650, res=125)
 plot(HNSED_All_Nut)
@@ -184,8 +189,8 @@ LNBAS_All_Nut<- ggplot(Plant_Pool_LNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P"))+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient")+
-  theme_bw()
+  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="Low N Basalt")+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))
 
 png('LNBAS_All_Nut.png', height=480, width=650, res=125)
 plot(LNBAS_All_Nut)
@@ -198,9 +203,13 @@ HNBAS_All_Nut<- ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P"))+
   scale_x_date(labels = date_format("%Y"))+
-  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient")+
-  theme_bw()
+  labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="High N Basalt")+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))
 
 png('HNBAS_All_Nut.png', height=480, width=650, res=125)
 plot(HNBAS_All_Nut)
 dev.off()
+
+ggarrange(HNBAS_All_Nut, LNBAS_All_Nut, HNSED_All_Nut, LNSED_All_Nut, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="QuadDiff.png", height=1000, width=1000, res=95)

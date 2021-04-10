@@ -176,12 +176,21 @@ Y<-rbind(Ca, Mg, K)
 
 Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 
-G_LGR<-ggplot(Y, aes(x=factor(Site), y=value, fill=ID, color=Species))+geom_col(position = "dodge", width=.75)+
-  theme_bw()+
-  labs(x="Growth Increment % Change", y="Percent Difference from Original", fill="Increment")+
-  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
-  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
-  scale_color_manual(values=c("Ca"="red", "Mg"="blue", "K"="green"))
+G_LGR<-ggplot(data = Y, aes(x = Site, y = value, fill=ID, pattern = Species, width=.75)) +
+  geom_col_pattern(position = position_dodge(preserve = "single"),
+                   color = "black", 
+                   pattern_fill = "black",
+                   pattern_angle = 45,
+                   pattern_density = 0.1,
+                   pattern_spacing = 0.025,
+                   pattern_key_scale_factor = 0.6) + 
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange1"), labels=c("Lower"="Lower (-50%)", "Upper"="Upper (+50%)")) +
+  scale_pattern_manual(values = c(Ca = "stripe", K = "none", Mg='circle')) +
+  labs(x = "Site", y = "Base Cation Leaching % Change", pattern = "Species", fill="Increment") + 
+  guides(pattern = guide_legend(override.aes = list(fill = "white")),
+         fill = guide_legend(override.aes = list(pattern = "none")))+ theme_bw()+
+  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Growth Rate")+
+  theme(plot.title = element_text(hjust = 0.5, size=14))
 
 png("Leach_Growth.png", width=1000, height=500, res=115)
 plot(G_LGR)
