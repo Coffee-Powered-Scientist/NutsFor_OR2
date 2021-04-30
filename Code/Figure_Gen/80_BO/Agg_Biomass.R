@@ -238,7 +238,7 @@ BO_Aggregated_Biomass
 
 #Save to Image Directory
 
-png("BO_Biomass.png", height=350, width=500)
+png("BO_Biomass.png", height=650, width=1000, res=100)
 print(BO_Aggregated_Biomass)
 dev.off()
 

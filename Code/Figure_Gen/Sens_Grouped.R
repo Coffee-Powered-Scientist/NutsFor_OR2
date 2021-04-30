@@ -9,6 +9,8 @@ library(ggpubr)
 library(gridExtra)
 library(grid)
 library(cowplot)
+library(extrafont)
+loadfonts(device = "win")
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis")
 
@@ -44,7 +46,7 @@ R1<-ggplot(Test, aes(x=Sens, y=value, fill=Inc))+geom_col(position = "dodge", wi
   labs(x="Sensitivity Variable", y="Cumulative Biomass % Difference", fill="Increment")+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
   scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
-  theme(legend.position = "right", plot.title = element_text(hjust = 0.5, size=14))+
+  theme(legend.position = "right", plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
   geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)+
   ggtitle("Tree Growth")
@@ -57,7 +59,7 @@ R2_K<-ggplot(subset(Test2, ID %in% "K"), aes(x = Sens, y = value, fill=Inc, widt
   guides(pattern = guide_legend(override.aes = list(fill = "white")),
          fill = guide_legend(override.aes = list(pattern = "none")))+ theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Weathering")+
-  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
   geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)
 
@@ -68,7 +70,7 @@ R2_Ca<-ggplot(subset(Test2, ID %in% "Ca"), aes(x = Sens, y = value, fill=Inc, pa
   labs(x = "Sensitivity Variable", y = "Total Weathering Supply (Ca) % Change", pattern = "ID", fill="Increment") + 
   theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Weathering")+
-  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
   geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)
 
@@ -78,7 +80,7 @@ R3_K<-ggplot(subset(Test3, Species %in% "K"), aes(x = Sens, y = value, fill=ID, 
   labs(x = "Sensitivity Variable", y = "Total Leached K % Change", pattern = "Species", fill="Increment") + 
   theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Leaching")+
-  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
   geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)
 
@@ -88,9 +90,28 @@ R3_Ca<-ggplot(subset(Test3, Species %in% "Ca"), aes(x = Sens, y = value, fill=ID
   labs(x = "Sensitivity Variable", y = "Total Leached Ca % Change", pattern = "Species", fill="Increment") + 
   theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Leaching")+
-  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
   geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)
 
 
 
+png("R1.png", height=500, width=750, res=100)
+plot(R1)
+dev.off()
+
+png("R2_K.png", height=500, width=750, res=100)
+plot(R2_K)
+dev.off()
+
+png("R2_Ca.png", height=500, width=750, res=100)
+plot(R2_Ca)
+dev.off()
+
+png("R3_K.png", height=500, width=750, res=100)
+plot(R3_K)
+dev.off()
+
+png("R3_Ca.png", height=500, width=750, res=100)
+plot(R3_Ca)
+dev.off()

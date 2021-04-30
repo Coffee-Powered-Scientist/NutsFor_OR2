@@ -160,9 +160,10 @@ LNSED_All_Nut<- ggplot(Plant_Pool_LNSED, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N", linetype="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P", linetype="P"))+
   scale_x_date(labels = date_format("%Y"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="Low N Sedimentary", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+scale_color_brewer(palette="Set2")+
-  scale_colour_hue(l = 45)
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
 
 
 png('LNSED_All_Nut.png', height=480, width=650, res=125)
@@ -177,9 +178,11 @@ HNSED_All_Nut<- ggplot(Plant_Pool_HNSED, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N", linetype="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P", linetype="P"))+
   scale_x_date(labels = date_format("%Y"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="High N Sedimentary", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+scale_color_brewer(palette="Set2")+
-  scale_colour_hue(l = 45)
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
+
 
 
 
@@ -195,9 +198,11 @@ LNBAS_All_Nut<- ggplot(Plant_Pool_LNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N", linetype="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P", linetype="P"))+
   scale_x_date(labels = date_format("%Y"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="Low N Basalt", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+scale_color_brewer(palette="Set2")+
-  scale_colour_hue(l = 45)
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
+
 
 
 
@@ -213,9 +218,11 @@ HNBAS_All_Nut<- ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10
   geom_line(aes(y=N_Diff*14.0067*10000/1e6/1000, color="N", linetype="N"))+
   geom_line(aes(y=P_Diff*30.97*10000/1e6/1000, color="P", linetype="P"))+
   scale_x_date(labels = date_format("%Y"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="High N Basalt", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+scale_color_brewer(palette="Set2")+
-  scale_colour_hue(l = 45)
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
+
 
 
 png('HNBAS_All_Nut.png', height=480, width=650, res=125)

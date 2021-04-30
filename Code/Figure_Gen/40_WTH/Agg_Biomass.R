@@ -358,6 +358,6 @@ WTH_Aggregated_Biomass
 
 #Save to Image Directory
 
-png("WTH_Biomass.png", height=350, width=500)
+png("WTH_Biomass.png", height=650, width=1000, res=100)
 print(WTH_Aggregated_Biomass)
 dev.off()
