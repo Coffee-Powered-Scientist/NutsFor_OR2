@@ -1,5 +1,5 @@
 ---
-title: 'Nutrient Cycling in Forest Ecosystems: User Manual v.()'
+title: 'Nutrient Cycling in Forest Ecosystems: User Manual v.3_04_21'
 author: "Kaveh Gholamhossein Siah and Gregory van Der Heijden"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
@@ -13,9 +13,6 @@ output:
     extra_dependencies:
     - subfig
     - float
-  word_document:
-    toc: yes
-    toc_depth: '2'
 geometry: margin=2 cm
 fig_caption: yes
 citation_package: natbib
@@ -50,9 +47,8 @@ the Nutrient Cycling Model (NuCM) [@munsonNuCMCodeVersion1992] and the
 ForSAFE model [@wallmanForSAFEIntegratedProcessoriented2005].
 NutsFor integrates several biogeochemical processes, including hydrology, soil exchange chemistry, mineral
 weathering, stand growth and uptake, and atmospheric deposition. This manual describes the most 
-recent iteration of NutsFor (version ……), which further includes stand harvest, biomass residues, 
-and the ability to limit plant access to cation nutrients in the liquid and solid phases. Although originally developed for 
-deciduous forests, the latest version of NutsFor can simulate evergreen forests. 
+recent iteration of NutsFor (version 3_04_2021), which further includes stand harvest, biomass residues, 
+and the ability to limit plant access to cation nutrients in the liquid and solid phases.
 
 ```{r, echo=FALSE, fig.cap="Pool and Flux Diagram for NutsFor. Blue text represents internal cycling proccesses, green input fluxes, and red output fluxes. Blue boxes show nutrient pools."}
 knitr::include_graphics("Images/NutsFor_Design.png")
@@ -65,6 +61,8 @@ changes noted from the original model are noted with an asterisk (“*”).This 
 information about the model's capabilities, useful tips regarding its usage, insight into the equations and theory which
 link model parameters,and information on how to effectively use NutsFor in parallel to R-Studio. Below is a table of
 NutsFor's capabilities compared to other contemporaneous and historically used models, to help guide model choices. 
+
+&nbsp;
 
 
 ```{r, echo=FALSE, message=FALSE}
@@ -172,6 +170,8 @@ The Weather data file contains rainfall (RF), potential evapotranspiration (PET)
 data on a dailey timestep. This data is used to calculate the wet atmospheric deposition flux, the water input flux, and the actual evapotranspiration (AET), along with several other files. 
 
 \newpage
+
+&nbsp;
  
 ### Soil Files
 &nbsp;
@@ -179,11 +179,11 @@ data on a dailey timestep. This data is used to calculate the wet atmospheric de
 ```{r, echo=FALSE}
 
 
-Parameter<-c("Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial")
+Parameter<-c("Soil Layer", "Soil Layer", "Depth", "Thickness", "Bulk Density", "Solid Density", "Stoniness", "Root Fraction", "pKGibb", "pkAl precip", "pCO2", "Area", "Wilting Point", "Field Capacity", "Saturation", "CEC", "KH Cation", "Percent Mineral Area", "Uptake Fraction Per Layer (all nutrients)", "Nitrification (ks, knit)", "Microbial Turnover", "Organic Matter Parameters", "Soil Solution Initial (Multiple Species)", "Soil Adsorbed Anions Initial", "CEC Initial", "Organic Uptake Fraction (N, P, S)")
 
-Units<-c("N/A", "N/A", "cm", "cm", "$kg/m^3$", "$kg/m^3$", "Percent", "Fraction", "N/A", "N/A", "Unknown", "$m^2/m^3$", "Percent", "Percent", "Percent", "$c{mol}_c/kg$", "N/A", "Percent", "Fraction (max 1)", "ks: $\\mu$mol/L, knit: Fraction", "Multiple of Microbial Pool", "g Nutrient/kg soil)", "$\\mu$mol/L", "$\\mu$mol/kg", "c${mol}_c$/kg")
+Units<-c("N/A", "N/A", "cm", "cm", "$kg/m^3$", "$kg/m^3$", "Percent", "Fraction", "N/A", "N/A", "Unknown", "$m^2/m^3$", "Percent", "Percent", "Percent", "$c{mol}_c/kg$", "N/A", "Percent", "Fraction (max 1)", "ks: $\\mu$mol/L, knit: Fraction", "Multiple of Microbial Pool", "g Nutrient/kg soil)", "$\\mu$mol/L", "$\\mu$mol/kg", "c${mol}_c$/kg", "Fraction")
 
-Short_Description <-c("Desingates number of layers.", "Assigns layer number to each layer", "Tracks vertical depth of soil layer", "Designates the individual thickness of each soil layer", "N/A", "N/A", "Determines the percent of soil particles greater than 2mm in diameter", "Determines fraction of total tree root biomass in eah layer","Gibbsite formation constant","Al precipitation constant (unused in current version)", "Partial Pressure of CO2","Weatherable mineral area","Soil moisture at which stand cannot extract water", "Soil moisture after excessive water is leached", "Soil moisture at which all pore space is filled with water", "Total cation exchange capacity", "Gapon coefficients for each cation", "Porportion of total mineral area that each individually defined mineral occupies" , "Determines fraction of needed nutrient which stand uptakes from each", "Nitrification constants that determines NO3 production", "Determines fraction of SOM which turns over", "Iniital Amount of Nutrient Mineralized in the SOM pool.", "Concentration of all chemical species at beginning of simulation", "Adsorbed Concentration of anions at the beginning of the simulation", "Sorbed Concentration of Cations to the CEC at the beginning of the simulation")
+Short_Description <-c("Desingates number of layers.", "Assigns layer number to each layer", "Tracks vertical depth of soil layer", "Designates the individual thickness of each soil layer", "N/A", "N/A", "Determines the percent of soil particles greater than 2mm in diameter", "Determines fraction of root distribution in each layer","Gibbsite formation constant","Al precipitation constant (unused in current version)", "Partial Pressure of CO2","Weatherable mineral area","Soil moisture at which stand cannot extract water", "Soil moisture after excessive water is leached", "Soil moisture at which all pore space is filled with water", "Total cation exchange capacity", "Gapon coefficients for each cation", "Porportion of total mineral area that each individually defined mineral occupies" , "Determines fraction of needed nutrient which stand uptakes from each", "Nitrification constants that determines NO3 production", "Determines fraction of SOM which turns over", "Iniital Amount of Nutrient Mineralized in the SOM pool.", "Concentration of all chemical species at beginning of simulation", "Adsorbed Concentration of anions at the beginning of the simulation", "Sorbed Concentration of Cations to the CEC at the beginning of the simulation", "Allows trees to access nutrient directly from SOM.")
 
 text_tbl_2 <- data.frame(
 Parameter, Units, Short_Description
@@ -262,7 +262,9 @@ multiple of atmospheric CO2 and is <u>not dynamic with decomposition rates.</u>
 
 This parameter designates the total weatherable mineral surface area of the soil. It is calculated from the equation:
 
-General Equation 1:
+&nbsp;
+
+<u>General Equation 1:</u>
 
 $$
 (8*X.Clay)+(2.2*X.Silt)+(0.3*X.Sand)
@@ -270,11 +272,16 @@ $$
 
 Citation: [@sverdrupCalculatingFieldWeathering1993]
 
-Note, that clays dominant in high area clays may be misrepresented by this equation *(Citation)*
+Note, that clays dominant in high area clays may be misrepresented by this equation.
 
 A more detailed equation, which takes into consideration different sand and silt size particles;
 
-General Equation 2:
+&nbsp;
+
+<u>General Equation 2:</u>
+
+&nbsp;
+
 $$
 (8*X.Clay)+(2.2*X.Silt)+(0.3*X.FineSand)+(0.05*X.CoarseSand)
 $$
@@ -283,39 +290,51 @@ Citation: [@sverdrupGeochemistryKeyUnderstanding1996]
 The mineral area parameter is historically difficult to obtain empirically, clay mineralogy plays a large role in determining this parameter, and is seldom measured to its full capacity. The fraction of soil particles in each size class (X.Clay, X.Silt, and X.Sand) are to be calculated from the <u>whole soil</u> (including coarse fragment count), not just the fine particulate fraction. The above approximations of weatherable mineral area do not include the mineral surface area contributed by amorphous minerals such as Al and Fe sesquioxides. They also tend to "breakdown" when soils are high in clay (>20%) [@hodsonDeterminationMineralSurface1998]. In cases where a soil is high in clay, calculated mineral areas must be calibrated to achieve desired weathering rates. It is likely that the Sverdrup 1993 simple surface area equation will under estimate mineral area in high clay soils than over estimate. 
 
 Since this parameter is difficult to calculate, it will be likely that simulated mineral weathering rates are lower than those observed or calculated for a given stand. In this case the mineral weathering rates must be calibrated by increasing (or decreasing, if weathering is too high) the mineral area parameter. Mineral weathering rates are linked to proton concentrations, lower pH stimulates mineral weathering. Mineral weathering thus consumes protons and can be included in the calibration of pH and alkalinity. 
+&nbsp;
 
 **Soil Moisture Parameters**
 
 1). ***Wilting Point***
 
-   The percent soil moisture which corresponds to the wilting point; i.e., the pressure of water in the soil matrix is at -15kPa. Wilting point may have a different reference pressure depending on the texture of the soil. 
+   The percent soil moisture which corresponds to the wilting point; i.e., the pressure of water in the soil matrix is at -15kPa. Wilting point may have a different reference pressure depending on the texture of the soil.
+   
+&nbsp;
 
 2). ***Field Capacity***
 
    The percent soil moisture which corresponds to how much water the soil can hold after drainage of excess water. Typically this measurement is set to the reference pressure of -33kPa. 
+   
+&nbsp;
 
 3). ***Saturation***
 
    The percent of soil moisture corresponding to all pore space in soil being filled with water. Effective porosity can be measured to obtain this parameter. 
+   
+&nbsp;
 
 **CEC Parameters and CEC Initial**
 
 1). ***CEC***
 
    This parameter is the effective cation exchange capacity (ECEC) of each soil layer. This parameter is usually measured for every soil and soil layer for every depth increment, however there are multiple methods through which this can be accomplished (Citation, General technical manual). In general, ECEC can be calculated as:
+   
+&nbsp;
 
-   General Equation #X.1
+<u>Equation 1:</u>
+
    $$
    ECEC= 2[Ca^{+2}]+ 2[Mg^{+2}]+[K^+]+[Na^+]+3[Al^{+3}]+[NH_{4}^{+}]
    $$
+
+&nbsp;
 
 2). ***Gapon Selectivity Coefficients (KH_Cation)***
 
    These coefficients determine the propensity of each cation to be replaced on the CEC with H+.  High selectivity coefficients indicate that a cation has a high affinity for the CEC, and are thus liable to stay on the CEC rather than weather off due to the presence of other cations. Low coefficients will likely lead to high CEC weathering of cations, which may result in high soil solution pH. This is due to both the consumption of protons in the soil solution, which kick off low-affinity cations, as well as the increase in acid neutralizing capacity (ANC) that comes with increased base cation concentrations. This is because ANC is calculated as the sum of base cations minus the sum of acid anions. When ANC is near or above 0, soil solution pH will be difficult to constrain. 
 
-   Gapon coefficients are to be calculated as:
+Gapon coefficients are to be calculated as:
 
-   General Equation #X.2
+<u>Equation 2:</u>
    $$
    K_{H:Cation^{+n}}=(\frac{E_{Cation^{+n}}}{[Cation^{+n}]})*(\frac{[H^{+}]}{E_{H}})
    $$
@@ -333,12 +352,14 @@ Since this parameter is difficult to calculate, it will be likely that simulated
    $$
    
    All concentration units are in mmol/L. It should be noted that these values heavily rely on measured initial cation concentrations, and so they may be manipulated to get a better match between adsorbed and dissolved cations. Note that increasing the selectivity coefficient of one cation will change the relative selectivity of all cations. For instance, increasing Ca selectivity will lead to more Ca adsorption to the CEC, which will in turn kick off other cations, assuming the selectivity of the other cations remains the same. 
+   
+&nbsp;
 
 3). ***CEC Initial***
 
    This parameter is not under the "CEC parameters" heading in the Soil Parameter file, rather it is located at the bottom of the Soil Parameter File (it it the last table, named CEC Initial). This parameter determines the total adsorbed supply of cations initially on the cation exchange complex. 
 
-   
+&nbsp;
 
 **AEC Parameters**
 
@@ -346,16 +367,16 @@ Since this parameter is difficult to calculate, it will be likely that simulated
 
 1). ***Soil Adsorbed Anions Parameters***
 
-Each anion has two AEC adsorption parameters associated with it, Parameter #1 and Parameter #2. 
-These parameters will stand for different variables depending on the adsorption isotherm selected. 
+Each anion has two AEC adsorption parameters associated with it, Parameter #1 (Langmuir) and Parameter #2 (Freundlich). 
+These parameters will stand for different variables depending on the adsorption isotherm selected.
 
+&nbsp;
 
 2). ***Soil Adsorbed Anions Initial***
 
+The initial adsorbed anion pool must be specified in the model. This value is in $\mu mol/kg$. 
 
-
-
-
+&nbsp;
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -375,10 +396,13 @@ kbl(text_tbl_9, caption="Soil Temperature File", booktabs = TRUE, col.names= c("
 
 ```
 
+&nbsp;
+
 **Description of Parameters: Soil Temperature File**
 
 The structure of this file is fairly straight forward, for each layer, month, and year of simulation, an average soil temperature is entered. The soil temperature value is used to calculate decomposition and chemical reaction kinetics. Numerous soil-temperature monitoring stations are active around the world [Cite Here.]
-   
+
+&nbsp;   
 
 ```{r, echo=FALSE}
 Parameter_T3<-c("Litter Concentration (N, Ca, Mg,K, S, P)", "Litter C Pool", "Layer frac (Fine, Coarse, Humus)", "Decomp rate", "CO2FACT", "Nutrient Factor (DOCFACT, N Fact, Ca Fact, Mg Fact, K Fact, S Fact, P Fact", "NULL")
@@ -402,13 +426,17 @@ kbl(text_tbl_3, caption="OM Decomposition File", booktabs=TRUE, col.names= c("In
 ***Description of Parameters: OM Decomposition***
 
 **Litter Parameters**
-&nbsp;
+
 
 The litter nutrient concentration, C pool, and decomposition rate parameters are used to calculate the
-litter decompositon of carbon at every time and the nutrient release rate (also known as 
+litter decomposition of carbon at every time and the nutrient release rate (also known as 
 the mineralization rate). Nutrient release also uses the release factor parameter specified by the user.
 
 Litter decomposition follows the equation:
+
+&nbsp;
+
+<u>Equation 3:</u>
 
 $$DecompC(t,n)=k_{n}*Pool_{C}(t,n)*f(T)*10^3$$
 Where $DecompC$ is the decomposition rate of C at time step $t$ for litter layer $n$ ($mmol*m^{-2}*month^{-1}$),
@@ -418,6 +446,10 @@ $k_{n}$ is the user specified decomposition rate or "Decomp rate" ($mmol C*month
 $Pool_C$ is the carbon pool at time step $t$ for litter layer $n$ ($mol*mol^{-2}$), and 
 
 the temperature limiting factor $f(T)$ is given by:
+
+&nbsp;
+
+<u>Equation 4:</u>
 
 $$f(T)= e^{(\frac{T_{ave}-T_{ref}}m)}$$
 Where $T_{ave}$ is the average air temperature from the weather data file,
@@ -429,12 +461,16 @@ $m$ is a function parameter.
 
 The nutrient release following litter carbon decomposition is driven by the following equation:
 
+&nbsp;
+
+<u>Equation 5:</u>
+
 $$R_{\sigma}=DecompC(t,n)*[\sigma]_{Litter}(t,n)*ReleaseFact(\sigma, n)*10^{-3}$$
 
 
 Where $R_{\sigma}$ is the flux of nutrient $\sigma$ ($mmol*m^{-2}*mol^{-1}$),
 
-$[\sigma]_{Litter}(t,n)$ is the coencentration of nutrient $\sigma$ at time $t$ for litter
+$[\sigma]_{Litter}(t,n)$ is the concentration of nutrient $\sigma$ at time $t$ for litter
 layer $n$ ($mmol*m^{-2}*mol^{-1} C$) , and
 
 $ReleaseFact(\sigma, n)$ is the user-specified nutrient release factor for each litter layer $n$. 
@@ -453,14 +489,14 @@ litter [@rustadElementDynamicsDecay1994]. However, NutsFor does not simulate $Fe
 not simulate organic-Al chemical interactions. Since the short-term behaviors of nutrient release and retention
 in litter can vary significantly [@rustadElementDynamicsDecay1994], the user should look to broader nutrient
 build-up trends over decadal time scales to confirm model outputs. The user should also observe
-seasonal trends in litter decompostion and nutrient release fluxes to help confirm model parameters. 
+seasonal trends in litter decomposition and nutrient release fluxes to help confirm model parameters. 
 
 &nbsp;
 
 
 
 ### General Files
-
+&nbsp;
 ```{r, echo=FALSE}
 Parameter_T4<-c("Start Year", "End Year", "Nb Layers", "Nb Minerals", "Mineral names", "OA pka", "Aluminum", "Phosphoric Acid", "DIC", "Organic acid size", "Nb Tree comp*", "Anion Adsorption isotherms")
 
@@ -484,8 +520,12 @@ kbl(text_tbl_4, caption="General Data File", booktabs = TRUE, col.names= c("Inpu
 
 Simulation length (the number of years which is simulated) is determined by the Start_Year and End_Year parameters. For example, a starting year of 2015 and an ending year of 2020 is 6 total years of simulation (starting in Jan of 2015 and ending in December of 2020). Note that deposition files and the soil temperature file must be extended by however long the simulation is run for (the program does NOT loop over these files). 
 
+&nbsp;
+
 ***Acid pka***
-Numerous acids have their pKas (-log of their dissolution constant) set here. These parameters can be taken from online chemical databases, assuming an average room temperature (25 degrees celsius).
+Numerous acids have their pKas (-log of their dissolution constant) set here. These parameters can be taken from online chemical databases, assuming an average room temperature (25 $\circ$C).
+
+&nbsp;
 
 ***Organic Acid Size***
 This parameters determines the number of carbons for every charged site on an organic acid; it is used to calculate the charge density of organic acids. Note that this is a global parameter, changing this number changes R- concentrations in all layers. Lowering this parameter leads to a higher charge density (and thus more acidic) soil solution, which tends to cause cations from the CEC to dissolve into solution. 
@@ -515,6 +555,8 @@ kbl(text_tbl_5, caption="Mineral Data File", booktabs = TRUE, col.names= c("Inpu
 
 ```
 
+&nbsp;
+
 **Description of Parameters: Mineral Data File**
 
 The NutsFor weathering sub-module is derived from the PROFILE mineral
@@ -537,6 +579,10 @@ In general, NutsFor mineral weathering will be controlled by weatherable mineral
 ***Dissolution Reaction Parameters***
 The parameters which determine mineral dissolution dynamics are the equilibrium constants (pK values), the thermal dependencies (k values) and the reaction orders (n values). These are then combined in the following equation:
 
+&nbsp;
+
+<u>Equation 6:</u>
+
 $$r_j=(\frac{k_{H^+}*{[H^+ ]}^{n_{H^{+}}}}{f_{H^+}}) +(\frac{k_{H_{2}O}}{f_{H_{2}O}}) +(\frac{k_{CO_2}*P_{CO_2}^{n_{CO_2}}}{f_{CO_2}}) +(\frac{k_R*[R^- ]^{n_{R^-}}}{f_{R^-}})$$
 
 
@@ -548,6 +594,10 @@ and $n_{species}$ is the reaction order (or weathering dependence) of each speci
 
 
 The reaction rate coefficient $k_{species}$ of a specific reaction is calculated by the equation:
+
+&nbsp;
+
+<u>Equation 7:</u> 
 
 $k=10^{-(pK+(E_{A}/R*ln(10))*(1/T)-8.56*10^{-3})}$
 
@@ -567,17 +617,23 @@ The equation calculates the summation of all chemical species (H+, H2O, CO2, and
 ***Inhibition Reaction Parameters***
 The inhibition coefficients are calculated dynamically based on the concentration of cations in soil solution layers. The higher the solution concentration of base cations, the lower favorability of the weathering reaction due to the generation of less active surface complexes over the course of weathering [@]. The equation which calculates the product inhibition factor $f_{species}$ for each weathering agent is:
 
+&nbsp;
 
+<u>Equation 8:</u>
 $$f_{H+}= (1+\frac{[Al]}{C_{Al}})^W_{Al_{H}}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H}}$$
+
+<u>Equation 9:</u>
 
 
 
 $$f_{H_{2}O}= (1+\frac{[Al]}{C_{Al}})^W_{Al_{H_{2}O}}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H_{2}O}}$$
 
 
-
+<u>Equation 10:</u>
 
 $$f_{CO_{2}}=(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H}}$$
+
+<u>Equation 11:</u>
 
 
 $$f_{R-}=(1+\frac{[R-]}{C_{R}})^W_{R}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H_{2}O}}$$
@@ -599,8 +655,9 @@ New minerals can be added to the NutsFor mineral data file, a more extensive lis
 With the calculation of the mineral weathering rate $r_j$ for each mineral $j$ over the simulated timestep,
 the total weathering flux $W_M$ can be calculated as
 
-$$W_M=\sum_{j=1}^{mineral}(\frac{r_{j}*A_{W}*X_{j}*\Theta*z}{Norm})
-$$
+</u>Equation 12:</u>
+
+$$W_M=\sum_{j=1}^{mineral}(\frac{r_{j}*A_{W}*X_{j}*\Theta*z}{Norm})$$
 Where $r_j$ is the specific mineral weathering rate,
 
 $A_W$ is the user-specified exposed mineral area surfaces ($m^{-2}/m^{-3}$),
@@ -616,6 +673,8 @@ and $Norm$ is the number of base cation charges released per mol of weathered mi
 
 Soil moisture saturation $\Theta$ is calculated by
 
+<u>Equation 13:</u>
+
 $$\Theta=\frac{(\theta*\rho_{solid})}{(\rho_{solid}-\rho_{soil}+\theta*\rho_{water})}$$
 
 Where $\theta$ is the soil volumetric water content ($m^{3}*m^{-3}$),
@@ -627,11 +686,6 @@ $\rho_{soil}$ is the bulk density of soil ($kg*m^{-3}$), and
 $\rho_{water}$ is the density of water ($kg*m^{-3}$). 
 
 
-
-***Stoichiometry and Isometric Substitution***
-
-
-&nbsp;
 
 ### Tree and Stand Files
 
@@ -684,6 +738,10 @@ which is intercepted by the canopy.
 
 Foliar leaching follows the equation:
 
+&nbsp;
+
+<u>Equation 14:</u> 
+
 $$FolLeach(t, \sigma)=L_{\sigma}*[\sigma]_{Leaf}(t)*DW_{Leaf}(t)*[H^{+}]^{\alpha}$$
 Where the $L_{\sigma}$ is the specific leaching rate coefficient of ionic nutrient $\sigma$ ($month^-1$), and
 
@@ -696,6 +754,10 @@ $[H^+]^{\alpha}$ is the hydrogen concentration of throughfall to the power of le
 2). ***Foliar Adsorption***
 
 Foliar adsorption is the proccess through which throughfall nutrients are absorbed into the leaf, acting as a kind of foliar nutrient uptake. 
+
+&nbsp;
+
+<u>Equation 15:</u> 
 
 $$FolAbs(t, \sigma)=A_{\sigma}*[\sigma]_{TF}(t)*TF(t)*([\sigma]_{TF}(t))^\beta$$
 
@@ -716,6 +778,9 @@ $beta$ is the rate dependence of adsorption (unitless).
 Some nutrients are exuded from leaf surfaces over time, and can picked up by intercepted water to be
 deposited onto the soil. 
 
+&nbsp;
+
+<u>Equation 16: </u>
 
 $$FolEx(t,\sigma)=\gamma_{\sigma}*[\sigma]_{Leaf}(t)*DW_{Leaf}(t)$$
 
@@ -732,6 +797,10 @@ $DW_{Leaf}(t)$ is the dry weight of the leaf at time step $(t)$ ($g*m^-2$).
 4). ***Translocation (redistribution)***
 
 Translocation allows for the model to store a fraction of the stand's nutrients during litterfall events. This can reduce the uptake demand of the foliar biomass compartment. The equation which calculates translocation in NutsFor is as follows:
+
+&nbsp;
+
+<u>Equation 17:</u> 
 
 $$T_{\sigma}(t)=[\sigma]_{Leaf}(t)*DW_{Litterfall}(t)*TransFact(\sigma)$$
 Where $T_{\sigma}(t)$ is the translocation of nutrient $\sigma$ at time $(t)$, 
@@ -770,6 +839,10 @@ kbl(text_tbl_7, caption="Stand Harvesting File", booktabs = TRUE, col.names= c("
 The Stand Harvesting file is used to dictate when and what intensity of harvest events over the course of a stand. The Year and Month sections designates which year and month a harvest event is to occur. The stand fraction parameter tells to model what fraction of the total stand is harvested (ranges from 0 to 1). If the stand fraction parameter is set below 1, this indicates a partial harvest or a thinning event. The compartment biomass export fractions dictate what fraction of the harvested stand is taken off site, these parameters can be used to test a range of residue removal conditions on the stand. 
 
 Biomass removal is calculated following the equation:
+
+&nbsp;
+
+<u>Equation 18:</u> 
 
 $$HarvestedFraction=Stand.Frac*Export.Frac$$
 
@@ -827,17 +900,25 @@ There are 60 output files that NutsFor.exe generates, separated into 9 folders. 
 
 The first folder in the Output data directory is the AEC folder. AEC contains anion adsorption data (SO4, PO4, Cl) for each layer, and so the number of .csv files contained in this folder depends on the user-specified number of soil layers. Each file has a year and month column, and AEC data in units of $\\mu$mol/kg and kg/ha. 
 
+&nbsp;
+
 ***Biomass***
 
 The biomass folder contains the "Plant pool" and "Tree data" files. Plant pool contains (I don't know). The Tree data file contains compartment nutrient content and biomass data for the stand. Nutrient contents are given in units of $\\mu$mol/g and kg/ha. Biomass or "dry weight" is given in kg/ha. 
+
+&nbsp;
 
 ***Budgets***
 
 The Budgets folder reports the "Above ground fluxes" and "Biological cycle" files. These files contain simplified yearly summary data on nutrient inputs and outputs, and can be used to calculate ecosystem nutrient budgets. The Above ground fluxes files contains deposition fluxes, throughfall flux, net foliar exchanges, litterflow flux, leaching flux, and weathering flux of each nutrient every annual time point. The Biological cycle file contains uptake, litterfall, and organic matter mineralization fluxes. All fluxes are in units of kg/ha/yr. NO3, NH4, SO4, and PO4 are in units of N, S and P (NH4-N, NO3-N, SO4-S, and PO4-P). 
 
+&nbsp;
+
 ***CEC***
 
 The CEC folder is identical to the AEC folder in basic structure, it holds a csv file for every soil layer specified. Each file contains cation adsorption data in both $\mu$mol/kg and kg/ha. 
+
+&nbsp;
 
 ***Hydrology***
 
@@ -845,6 +926,8 @@ The hydrology folder has two datafiles, the "Hydrology Daily Output" and the "Hy
 The monthly output file is smaller and more practical for use, although they contain the same data distributed 
 over different time steps. The file begins by reporting the Year and month of each measurement, then reports 
 the rainfall (RF), potential evapotranspiration (PET), the actual evapotranspiration (AET), the throughfall. 
+
+&nbsp;
 
 ***Litter***
 
@@ -856,10 +939,9 @@ The next file in the directory is the Litter_kg_ha file. This data file contains
 
 The final output file in the Litter directory is the litterfall file. This file contains information on litterfall distribution throughout the time frame simulated. Litterfall dry weight ($g*m^-2$) and nutrient concentrations ($\mu mol*g^-1$ and $\mu mol*m^-2$) are given in this file. 
 
+&nbsp;
 
 ***Soil Solution***
-
-&nbsp;
 
 The soil solution output folder will contain a throughfall concentration file, a Litterflow concentration file, 
 and both a soil solution and leaching layer concentration file for each soil layer specified. All files 
@@ -870,8 +952,6 @@ fluxes in units of ($kg*ha^{-1}$). All data is output on a monthly time step.
 
 ***SOM***
 
-&nbsp;
-
 The SOM output folder contains a SOM data file for each soil layer specified. The file reports nutrient content 
 in the SOM mineral pool in terms of total storage of nutrient every month ($mol*m^{-1}$) and the gain of
 nutrients every month ($mmol*m^{-2}*month^{-1}$). This file should be used to calibrate SOM outputs in the model. 
@@ -881,7 +961,6 @@ nutrients every month ($mmol*m^{-2}*month^{-1}$). This file should be used to ca
 
 
 ***Weathering***
-&nbsp;
 
 The weathering output folder reports the weathering of every layer for every chemical species defined in 
 the mineral pool. The "Weathering Annual" file contains average annual weathering data over the total
@@ -977,7 +1056,7 @@ To calibrate hydrology AET outputs, the user should either adjust the PET entere
 
 I found that spring time PET was often over estimated by the reference crop PET calculator that I used, so during my calibrations I chose to manually change PET values for each site I used. If possible, it is always more efficient to directly measured PET and AET for a specific site. 
 
-```{r, echo=FALSE, fig.cap="No caption yet!"}
+```{r, echo=FALSE, fig.cap="Hydrological Calibration Workflow. Hydrology can be calibrated using PET and AET factor adjustment parameters located in the tree parameters file. The weather data file can also be edited for more precise adjustment."}
 knitr::include_graphics("Images/Hydrological_Workflow.png")
 
 ```
@@ -995,19 +1074,22 @@ Generally, throughfall fluxes of K+ are significant, a source of data or direct 
 Once throughfall concentrations and depositions fluxes match those observed or estimated, the calibration can be said to be complete. If little is known about a depositional input, an effort should be made to estimate or measure its contribution to the stand as some forests rely extensively on atmospheric deposition to supply nutrients [@]. 
 
 
-```{r, echo=FALSE, fig.cap="No caption yet!"}
+
+
+```{r, echo=FALSE, fig.cap="Throughfall depositon calibration workflow. Foliar adsorption, leaching, and exudation parameters can be adjusted to calibrate this parameter. These paramters are all in the tree parameter's file, output is observed in the Above ground fluxes output file in the Budgets file."}
 knitr::include_graphics("Images/THRU_DEP.png")
 
 ```
 
-&nbsp;
 
 3). **Soil Organic Matter**
 &nbsp;
 
-Soil Organic matter should be calibrated using the OM decomposition file, there are numerous parameters which control SOM C stabilization. In general, unless data is available, SOM in mineral soil should not build up or decrease over the course of the simulation. The calibration of SOM is dictated by Decomp_rate, C_Assim, DOC_Decomp, and DOC_Assim. The key to SOM calibration is to control DOC leaching and R- concentrations while keeping the SOM C content stable. Decomp_rate is the most sensitive parameter which determines SOM C dynamics, C_Assim and DOC_Assim dictate how much decomposed solid and dissolved carbon are assimilated into the SOM pool, and can be used to enhance or reduce SOM C buildup. DOC_Decomp can be used to reduce DOC leaching. 
+Soil Organic matter should be calibrated using the OM decomposition file, there are numerous parameters which control SOM C stabilization. In general, unless data is available, SOM in mineral soil should not build up or decrease over the course of the simulation, particularly over short time frames. The calibration of SOM is dictated by Decomp_rate, C_Assim, DOC_Decomp, and DOC_Assim. The key to SOM calibration is to control DOC leaching and R- concentrations while keeping the SOM C content stable. Decomp_rate is the most sensitive parameter which determines SOM C dynamics, C_Assim and DOC_Assim dictate how much decomposed solid and dissolved carbon are assimilated into the SOM pool, and can be used to enhance or reduce SOM C buildup. DOC_Decomp can be used to reduce DOC leaching. 
 
-```{r, echo=FALSE, fig.cap="No caption yet!"}
+
+
+```{r, echo=FALSE, fig.cap="Soil organic matter calibration workflow. All SOM adjustment can be achieved in the OM decomposition file. Output can be observed by graphing the files in the SOM output folder."}
 knitr::include_graphics("Images/OM_C.png")
 
 ```
@@ -1026,7 +1108,7 @@ Depending on the role of organic acids at the site, an initial calibration of th
 
 It is important to calibrate these anions before moving on to cation calibration, all anions will have some control over CEC adsorption and thus cation concentrations. 
 
-```{r, echo=FALSE, fig.cap="No caption yet!"}
+```{r, echo=FALSE, fig.cap="Anion calibration workflow. Anion soil soultion adjustment is achieved by adjusting sulfate, phosphate, and chloride adsorption. Sulfate and phosphate concentrations may minorly be adjusted throigh SOM release."}
 knitr::include_graphics("Images/Anions.png")
 
 ```
@@ -1039,7 +1121,7 @@ knitr::include_graphics("Images/Anions.png")
 
 Cation concentrations should be calibrated last as every other sub-model can affect cation release through mineral weathering or acidification of the exchange complex. This calibration requires knowledge of cation concentrations in the soil solution, such as those measured by lysimeters, in order to complete calibration. The point of this calibration would be to match simulated cation concentrations to those observed. Another point of constraint on cation concentrations would be leaching fluxes, which can also be calculated from lysimeter measurements. 
 
-Generally, the cations on the exchange complex should not rapidly change-although decadal responses in CEC chemistry are not unreasonable [@]. Gapon selectivity coefficients calculated for each cation will generally exert the greatest control on cation mobility and concentrations in the soil solution. However, I do not suggest using these Gapon coefficients for calibration of cation concentrations. Changing the value of the coefficient for, as example, Ca, will change the relative strength of adsorption for all cations. 
+Generally, the cations on the exchange complex should not rapidly change-although decadal responses in CEC chemistry are not unreasonable [@johnsonBaseCations1992]. Gapon selectivity coefficients calculated for each cation will generally exert the greatest control on cation mobility and concentrations in the soil solution. However, I do not suggest using these Gapon coefficients for calibration of cation concentrations. Changing the value of the coefficient for, as example, Ca, will change the relative strength of adsorption for all cations. 
 
 If concentrations are generally too low, the issue may be with hydrological calibration, in which hydrological calibration is not leading to enough evaporation. If hydrology calibration is acceptable, the issue may be with the release rate of nutrient cations from litter and SOM pools. Initially, the release factors of Ca, Mg, and K in the OM decomposition file should be set to 1, and reduced if cation concentrations exceed those desired for calibration, assuming hydrology calibration has been accepted. If the cation concentrations are generally too high, the issue may be with an unbalanced anion calibration, too much mineral weathering, or too weak CEC adsorption. Pin-pointing the source of error in this case requires that the user has a way to visualize these changes in the model graphically, as noted in the previous section. 
 
@@ -1048,7 +1130,7 @@ The user should be able to directly tell if an over-abundance of anions are resp
 
 If the user has lysimeter silica concentrations, an extra check on hydrology and mineral weathering can be completed. Ideally, an approximation of mineral weathering fluxes should be made, however it can be difficult to achieve such a calculation.In such a case, mineral area can be calibrated until silica concentrations match those observed. The model does not simulate the uptake or secondary mineral formation of silica, only mineral weathering and hydrology enact control on silica concentrations. Silica can thus be used as a kind of tracer on the calibration of both hydrology and weathering release rates of cations, but will certainly underestimate weathering. 
 
-```{r, echo=FALSE, fig.cap="No caption yet!"}
+```{r, echo=FALSE, fig.cap="Cation calibration workflow. Cation calibration is achieved by adjusting gapon selectivity coefficients, after accoutning for every other ecosystem proccess. Microbial uptake may be implemented if the microbial pool is a large sink of cation nutrients. Cation monthly soil solution concentrations and leaching fluxes can be viewed in the Soil solution output folder."}
 knitr::include_graphics("Images/Cations.png")
 
 ```
@@ -1077,8 +1159,9 @@ Once the initial and final calibrations are complete, the user may move on to th
 
 Depending on the site in question, another sub-system of the model may need to be addressed through calibration. 
 For example, forest soils with extremely high N content will likely have mineral weathering and nutrient 
-cycling of base cations dominated by nitrogen transformation and cycling [@]. In order to calibrate the 
-model to be representative of a high N site, the N-cycle sub-system of NutsFor must be individually calibrated.
+cycling of base cations dominated by nitrogen transformation and cycling [@perakisCoupledNitrogenCalcium2006]. 
+In order to calibrate the model to be representative of a high N site, the N-cycle sub-system of NutsFor 
+must be individually calibrated.
 Since the N-cycle is dependent on multiple other sub-modules and sub-systems within NutsFor, this kind of calibration necessitates that a hiearchal order of importance is established among the model's
 sub-systems.
 This ensures that "over-calibration" does not occur and that the calibration of sub-systems does not perturb 
@@ -1105,7 +1188,7 @@ Stand Harvesting specific file, which allows for harvest residues to be left ove
 pertaining to harvest intensity may be tested. If the user wishes to simulate long term nutrient
 cycling behavior(under any set of conditions),the Weather data, soil temperature, rain fall concentration, 
 and tree growth files must be lengthened such that input data is present for every time point to
-be simulated. Failure to do so will result in model being unable to run. 
+be simulated.  
 
 The program does not currently include N-fixation or fertilization specific processes. If these processes 
 occur in the stand, they can be broadly simulated by "dosing" the atmospheric deposition file with 
@@ -1118,17 +1201,244 @@ prior to dosing the rain concentration file or adding a fertilizer mineral.
 
 &nbsp;
 
+## Sensitivity Analysis
+
+The purpose of conducting sensitivity analysis on process-based models is to exam the influence of parameter uncertainty 
+on model outputs ().  Sensitivity analysis takes the range of numbers in a standard deviation for a given measurement, separates them into discrete increments, and runs the model with each increment as a parameter value. For large numerical models like NutsFor,
+sensitivity analysis is best (most easily) done by setting a minimum and maximum around the parameter of interest (typically, $\pm 10$% or $\pm 50$% the original parameter value). To accomplish this in the current framework of NutsFor, a new NutsFor directory can be made for every sensitivity parameter and increment. 
+
+If sensitivity analysis is examined for the same parameters at different scales, or different sensitivity increments, a 
+coefficient called a " relative sensitivity coefficient" should be calculated. This coefficient allows for direct comparisons to 
+be made between the different analysis on different scales. 
+
+
+$$\frac{\frac{x}{v}{x}{x}}$$
+
 ## List of Equations
 
 ### NutsFor Encoded Equations
 
-**Canopy**
 
-**Litter Layer**
+***Chemical Equations***
 
-**Mineral Weathering**
+<u>Equation 1:</u>
+   $$
+   ECEC= 2[Ca^{+2}]+ 2[Mg^{+2}]+[K^+]+[Na^+]+3[Al^{+3}]+[NH_{4}^{+}]
+   $$
+   &nbsp;
+   
+   <u>Equation 2: </u>
+   $$
+   K_{H:Cation^{+n}}=(\frac{E_{Cation^{+n}}}{[Cation^{+n}]})*(\frac{[H^{+}]}{E_{H}})
+   $$
+   Where;
+   $$
+   E_{H}=\frac{[H^{+}]_{adsorbed}}{ECEC}
+   $$
+   and 
+   $$
+   E_{Cation^{+n}}=\frac{[Cation^{+n}]_{adsorbed}}{ECEC}
+   $$
+   Note that 
+   $$
+   n = Valence
+   $$
+   
 
-**Soil Chemistry**
+***Litter***
+
+<u>Equation 3:</u>
+
+$$DecompC(t,n)=k_{n}*Pool_{C}(t,n)*f(T)*10^3$$
+Where $DecompC$ is the decomposition rate of C at time step $t$ for litter layer $n$ ($mmol*m^{-2}*month^{-1}$),
+
+$k_{n}$ is the user specified decomposition rate or "Decomp rate" ($mmol C*month^{-1}$),
+
+$Pool_C$ is the carbon pool at time step $t$ for litter layer $n$ ($mol*mol^{-2}$), and 
+
+the temperature limiting factor $f(T)$ is given by:
+
+&nbsp;
+
+<u>Equation 4:</u>
+
+$$f(T)= e^{(\frac{T_{ave}-T_{ref}}m)}$$
+Where $T_{ave}$ is the average air temperature from the weather data file,
+
+$T_{ref}$ is the optimal temperature of decomposition, and
+
+$m$ is a function parameter. 
+
+&nbsp;
+
+<u>Equation 5:</u>
+
+$$R_{\sigma}=DecompC(t,n)*[\sigma]_{Litter}(t,n)*ReleaseFact(\sigma, n)*10^{-3}$$
+
+
+Where $R_{\sigma}$ is the flux of nutrient $\sigma$ ($mmol*m^{-2}*mol^{-1}$),
+
+$[\sigma]_{Litter}(t,n)$ is the concentration of nutrient $\sigma$ at time $t$ for litter
+layer $n$ ($mmol*m^{-2}*mol^{-1} C$) , and
+
+$ReleaseFact(\sigma, n)$ is the user-specified nutrient release factor for each litter layer $n$.
+
+
+***Weathering***
+
+
+<u>Equation 6:</u>
+
+$$r_j=(\frac{k_{H^+}*{[H^+ ]}^{n_{H^{+}}}}{f_{H^+}}) +(\frac{k_{H_{2}O}}{f_{H_{2}O}}) +(\frac{k_{CO_2}*P_{CO_2}^{n_{CO_2}}}{f_{CO_2}}) +(\frac{k_R*[R^- ]^{n_{R^-}}}{f_{R^-}})$$
+
+
+where $r_j$ is the Weathering Rate of mineral $j$, 
+
+$k_{species}$ is the rate coefficient of each species for each mineral,
+
+and $n_{species}$ is the reaction order (or weathering dependence) of each species. 
+
+
+The reaction rate coefficient $k_{species}$ of a specific reaction is calculated by the equation:
+
+&nbsp;
+
+<u>Equation 7:</u>
+
+$$k=10^{-(pK+(E_{A}/R*ln(10))*(1/T)-8.56*10^{-3})}$$
+
+Where $pK$ is the rate coefficient of the reaction at the temperature T=280°K, expressed as $-log_{10}(K)$,
+
+$E_{A}$ is the Arrhenius activation energy ($J*kmol^{-1}$), 
+
+$R$ is the universal gas constant ($J*kmol^{-1}*K^{-1}$), and
+
+$T$ is the absolute temperature ($°K$). 
+
+
+
+
+&nbsp;
+
+
+
+<u>Equation 8:</u> 
+$$f_{H+}= (1+\frac{[Al]}{C_{Al}})^W_{Al_{H}}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H}}$$
+
+
+<u>Equation 9:</u> 
+
+
+
+$$f_{H_{2}O}= (1+\frac{[Al]}{C_{Al}})^W_{Al_{H_{2}O}}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H_{2}O}}$$
+
+&nbsp;
+
+<u>Equation 10:</u> 
+
+$$f_{CO_{2}}=(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H}}$$
+
+&nbsp;
+
+<u>Equation 11:</u>
+
+
+$$f_{R-}=(1+\frac{[R-]}{C_{R}})^W_{R}*(1+\frac{[BC^{+2}]}{C_{BC}})^W_{BC_{H_{2}O}}$$
+
+Where the $C_{Al}$, $C_{BC}$, and $C_{R}$ are saturation concentration parameters,
+
+and the $W_{BC_{H}}$, $W_{BC_{H_{2}O}}$, and $W_{Al_{H}}$ are reaction orders.
+
+&nbsp;
+
+<u>Equation 12:</u>
+
+$$W_M=\sum_{j=1}^{mineral}(\frac{r_{j}*A_{W}*X_{j}*\Theta*z}{Norm})$$
+Where $r_j$ is the specific mineral weathering rate,
+
+$A_W$ is the user-specified exposed mineral area surfaces ($m^{-2}/m^{-3}$),
+
+$X_j$ is the user-specified fraction exposed mineral area which mineral $j$ occupies, 
+
+$\Theta$ is the soil moisture saturation,
+
+$z$ is the soil layer thickness (m),
+
+and $Norm$ is the number of base cation charges released per mol of weathered mineral $j$ ($mol_{c}*mol^{-1}$).
+
+&nbsp;
+
+<u>Equation 13:</u>
+
+$$\Theta=\frac{(\theta*\rho_{solid})}{(\rho_{solid}-\rho_{soil}+\theta*\rho_{water})}$$
+
+Where $\theta$ is the soil volumetric water content ($m^{3}*m^{-3}$),
+
+$\rho_{solid}$ is the solid density of soil ($kg*m^{-3}$), 
+
+$\rho_{soil}$ is the bulk density of soil ($kg*m^{-3}$), and
+
+$\rho_{water}$ is the density of water ($kg*m^{-3}$). 
+
+&nbsp;
+
+<u>Equation 14:</u>
+
+$$FolLeach(t, \sigma)=L_{\sigma}*[\sigma]_{Leaf}(t)*DW_{Leaf}(t)*[H^{+}]^{\alpha}$$
+Where the $L_{\sigma}$ is the specific leaching rate coefficient of ionic nutrient $\sigma$ ($month^-1$), and
+
+$[\sigma]_{Leaf}(t)$ is the concentration of ionic nutrient $\sigma$ at time $(t)$ in the foliage ($\mu mol*g^-1$), and
+
+$[H^+]^{\alpha}$ is the hydrogen concentration of throughfall to the power of leaching rate dependence $\alpha$ ($\mu$mol/L, unitless). 
+
+&nbsp;
+
+
+<u>Equation 15:</u>
+
+$$FolAbs(t, \sigma)=A_{\sigma}*[\sigma]_{TF}(t)*TF(t)*([\sigma]_{TF}(t))^\beta$$
+
+Where foliar adsorption for nutrient $\sigma$ at time $(t)$ ($FolAbs(t, \sigma)$) ($\mu mol*m^-2*month^-1$), 
+
+$A_{\sigma}$ is the specific adsorption constant ($month^-1$), 
+
+$[\sigma]_{TF}(t)$ is the throughfall concentration of nutrients at time $(t)$ ($\mu mol*L^-1$),
+
+$TF(t)$ is the throughfall flux at time $(t)$ (mm or $L*m^-2$), and
+
+$beta$ is the rate dependence of adsorption (unitless). 
+
+&nbsp;
+
+
+<u>Equation 16:</u>
+
+$$FolEx(t,\sigma)=\gamma_{\sigma}*[\sigma]_{Leaf}(t)*DW_{Leaf}(t)$$
+
+Where foliar exudation ($FolEx(t,\sigma)$)) at time step $(t)$ for nutrient $\sigma$,
+
+{$\gamma_\sigma$} is the effective leaf turnover rate of ionic species $\sigma$ ($month^-1$), 
+
+$[\sigma]_{Leaf}(t)$ is the concentration of ionic nutrient $\sigma$ in the foliage ($\mu mol*m^-2$), and
+
+$DW_{Leaf}(t)$ is the dry weight of the leaf at time step $(t)$ ($g*m^-2$). 
+
+&nbsp;
+
+
+<u>Equation 17:</u> 
+
+$$T_{\sigma}(t)=[\sigma]_{Leaf}(t)*DW_{Litterfall}(t)*TransFact(\sigma)$$
+Where $T_{\sigma}(t)$ is the translocation of nutrient $\sigma$ at time $(t)$, 
+
+$[\sigma]_{Leaf}(t)$ is the concentration of nutrient $\sigma$ in the foliage at time $(t)$,
+
+$DW_{Litterfall}(t)$ is the dry weight of litterfall at time $(t)$, and
+
+$TransFact(\sigma)$ is the user-specified fraction of foliar nutrient translocated during each litterfall event. 
+
+
+
 
 ### General Equations
 

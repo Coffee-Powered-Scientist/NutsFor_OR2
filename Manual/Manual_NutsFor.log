@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  2 JAN 2021 17:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.10)  10 APR 2021 11:44
 entering extended mode
 **./Manual_NutsFor.tex
 (Manual_NutsFor.tex
@@ -20,7 +20,69 @@ File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
-) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
+) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2020/09/23 v2.17i AMS math features
+\@mathmargin=\skip49
+For additional information on amsmath, use the `?' option.
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks15
+\ex@=\dimen139
+)) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen140
+) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count185
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count186
+\leftroot@=\count187
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count188
+\DOTSCASE@=\count189
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box47
+\strutbox@=\box48
+\big@size=\dimen141
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count190
+\c@MaxMatrixCols=\count191
+\dotsspace@=\muskip16
+\c@parentequation=\count192
+\dspbrk@lvl=\count193
+\tag@help=\toks16
+\row@=\count194
+\column@=\count195
+\maxfields@=\count196
+\andhelp@=\toks17
+\eqnshift@=\dimen142
+\alignsep@=\dimen143
+\tagshift@=\dimen144
+\tagwidth@=\dimen145
+\totwidth@=\dimen146
+\lineht@=\dimen147
+\@envbody=\toks18
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
 Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -54,69 +116,6 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks15
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
-Package: amsmath 2020/09/23 v2.17i AMS math features
-\@mathmargin=\skip49
-For additional information on amsmath, use the `?' option.
-(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
-Package: amstext 2000/06/29 v2.01 AMS text
-(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
-File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
-\ex@=\dimen139
-)) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen140
-) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
-Package: amsopn 2016/03/08 v2.02 operator names
-)
-\inf@bad=\count185
-LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count186
-\leftroot@=\count187
-LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count188
-\DOTSCASE@=\count189
-LaTeX Info: Redefining \ldots on input line 496.
-LaTeX Info: Redefining \dots on input line 499.
-LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box47
-\strutbox@=\box48
-\big@size=\dimen141
-LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count190
-\c@MaxMatrixCols=\count191
-\dotsspace@=\muskip16
-\c@parentequation=\count192
-\dspbrk@lvl=\count193
-\tag@help=\toks17
-\row@=\count194
-\column@=\count195
-\maxfields@=\count196
-\andhelp@=\toks18
-\eqnshift@=\dimen142
-\alignsep@=\dimen143
-\tagshift@=\dimen144
-\tagwidth@=\dimen145
-\totwidth@=\dimen146
-\lineht@=\dimen147
-\@envbody=\toks19
-\multlinegap=\skip50
-\multlinetaggap=\skip51
-\mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2923.
-LaTeX Info: Redefining \] on input line 2924.
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifxetex.sty
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
@@ -131,8 +130,8 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2020/08/01 v1.3d Input encoding file
-\inpenc@prehook=\toks21
-\inpenc@posthook=\toks22
+\inpenc@prehook=\toks20
+\inpenc@posthook=\toks21
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/upquote\upquote.sty
@@ -143,9 +142,9 @@ tim
 Package: microtype 2019/11/18 v2.7d Micro-typographical refinements (RS)
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks23
+\KV@toks@=\toks22
 )
-\MT@toks=\toks24
+\MT@toks=\toks23
 \MT@count=\count197
 LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen148
@@ -341,7 +340,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutheight=\dimen158
 \Gm@layouthoffset=\dimen159
 \Gm@layoutvoffset=\dimen160
-\Gm@dimlist=\toks25
+\Gm@dimlist=\toks24
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
 Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
@@ -373,17 +372,12 @@ Package graphics Info: Driver file: pdftex.def on input line 105.
 )
 \Gin@req@height=\dimen165
 \Gin@req@width=\dimen166
-) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/grffile\grffile.sty
-Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
-y)
-Package grffile Info: This package is an empty stub for compatibility on input 
-line 40.
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count283
-\float@exts=\toks26
+\float@exts=\toks25
 \float@box=\box50
-\@float@everytoks=\toks27
+\@float@everytoks=\toks26
 \@floatcapt=\box51
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/subfig\subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
@@ -453,13 +447,13 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 \LT@rows=\count299
 \c@LT@tables=\count300
 \c@LT@chunks=\count301
-\LT@p@ftn=\toks28
+\LT@p@ftn=\toks27
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \col@sep=\dimen189
 \ar@mcellbox=\box56
 \extrarowheight=\dimen190
-\NC@list=\toks29
+\NC@list=\toks28
 \extratabsurround=\skip64
 \backup@length=\skip65
 \ar@cellbox=\box57
@@ -474,11 +468,11 @@ Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \WF@size=\dimen193
 \c@WF@wrappedlines=\count303
 \WF@box=\box58
-\WF@everypar=\toks30
+\WF@everypar=\toks29
 Package: wrapfig 2003/01/31  v 3.6
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
-\everycr=\toks31
+\everycr=\toks30
 \minrowclearance=\skip68
 )
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
@@ -511,8 +505,8 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \abovetabulinesep=\dimen258
 \belowtabulinesep=\dimen259
 \tabustrutrule=\dimen260
-\tabu@thebody=\toks32
-\tabu@footnotes=\toks33
+\tabu@thebody=\toks31
+\tabu@footnotes=\toks32
 \tabu@box=\box60
 \tabu@arstrutbox=\box61
 \tabu@hleads=\box62
@@ -539,7 +533,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \UL@box=\box65
 \UL@hyphenbox=\box66
 \UL@skip=\skip71
-\UL@hook=\toks34
+\UL@hook=\toks33
 \UL@height=\dimen261
 \UL@pe=\count311
 \UL@pixel=\dimen262
@@ -550,42 +544,57 @@ Package: ulem 2019/11/18
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen264
 \c@nlinenum=\count312
-\TeXr@lab=\toks35
+\TeXr@lab=\toks34
+)
+\cslhangindent=\skip72
+\csllabelwidth=\skip73
+(C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count313
+\calc@Bcount=\count314
+\calc@Adimen=\dimen265
+\calc@Bdimen=\dimen266
+\calc@Askip=\skip74
+\calc@Bskip=\skip75
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count315
+\calc@Cskip=\skip76
 )
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count313
+\l__kernel_color_stack_int=\count316
 \l__pdf_internal_box=\box68
 ) (Manual_NutsFor.aux)
 \openout1 = `Manual_NutsFor.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Info: Redefining \microtypecontext on input line 123.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Info: Redefining \microtypecontext on input line 146.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 123.
+LaTeX Info: Redefining \showhyphens on input line 146.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -596,17 +605,17 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count314
-\scratchdimen=\dimen265
+\scratchcounter=\count317
+\scratchdimen=\dimen267
 \scratchbox=\box69
-\nofMPsegments=\count315
-\nofMParguments=\count316
-\everyMPshowfont=\toks36
-\MPscratchCnt=\count317
-\MPscratchDim=\dimen266
-\MPnumerator=\count318
-\makeMPintoPDFobject=\count319
-\everyMPtoPDFconversion=\toks37
+\nofMPsegments=\count318
+\nofMParguments=\count319
+\everyMPshowfont=\toks35
+\MPscratchCnt=\count320
+\MPscratchDim=\dimen268
+\MPnumerator=\count321
+\makeMPintoPDFobject=\count322
+\everyMPtoPDFconversion=\toks36
 )
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -614,7 +623,7 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
-Package hyperref Info: Link coloring OFF on input line 123.
+Package hyperref Info: Link coloring OFF on input line 146.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
@@ -624,11 +633,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count320
+\c@section@level=\count323
 )
-LaTeX Info: Redefining \ref on input line 123.
-LaTeX Info: Redefining \pageref on input line 123.
-LaTeX Info: Redefining \nameref on input line 123.
+LaTeX Info: Redefining \ref on input line 146.
+LaTeX Info: Redefining \pageref on input line 146.
+LaTeX Info: Redefining \nameref on input line 146.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -673,39 +682,39 @@ Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-25.
+48.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-25.
+48.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-125.
+148.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-125.
+148.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 125.
+(Font)              <12> on input line 148.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 125.
+(Font)              <8> on input line 148.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 125.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 125
+(Font)              <6> on input line 148.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 148
 .
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 125
+LaTeX Font Info:    Trying to load font information for U+msb on input line 148
 .
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -725,111 +734,143 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [1
 
 {C:/Users/siahl/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-<Images/NutsFor_Design.png, id=31, 1096.8177pt x 786.0567pt>
+<Images/NutsFor_Design.png, id=31, 2437.105pt x 1746.525pt>
 File: Images/NutsFor_Design.png Graphic file (type png)
 <use Images/NutsFor_Design.png>
-Package pdftex.def Info: Images/NutsFor_Design.png  used on input line 153.
-(pdftex.def)             Requested size: 500.4754pt x 358.67587pt.
-[2 <./Images/NutsFor_Design.png>] [3] [4] [5] [6]
+Package pdftex.def Info: Images/NutsFor_Design.png  used on input line 173.
+(pdftex.def)             Requested size: 950.46715pt x 681.14201pt.
+
+Overfull \hbox (449.98315pt too wide) in paragraph at lines 173--173
+[][] 
+ []
+
+[2]
+Overfull \vbox (33.98303pt too high) has occurred while \output is active []
+
+[3 <./Images/NutsFor_Design.png>] [4] [5] [6] [7]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7] [8]
+[8] [9]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 7
-88.
+[10]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 8
+28.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 794.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 834.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 794.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 834.
 
-[10] [11] [12] [13] [14] [15]
+[11] [12] [13] [14] [15] [16] [17]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-293.
+342.
 (C:\Users\siahl\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1295.
-[16] [17]
-<Images/Hydrological_Workflow.png, id=147, 749.9217pt x 415.5525pt>
+) [18]
+<Images/Hydrological_Workflow.png, id=151, 749.9217pt x 415.5525pt>
 File: Images/Hydrological_Workflow.png Graphic file (type png)
 <use Images/Hydrological_Workflow.png>
 Package pdftex.def Info: Images/Hydrological_Workflow.png  used on input line 1
-437.
-(pdftex.def)             Requested size: 500.4882pt x 277.33444pt.
-[18]
-<Images/THRU_DEP.png, id=152, 803.55206pt x 552.41382pt>
+485.
+(pdftex.def)             Requested size: 749.9542pt x 415.5705pt.
+
+Overfull \hbox (249.4702pt too wide) in paragraph at lines 1485--1485
+[][] 
+ []
+
+[19]
+<Images/THRU_DEP.png, id=157, 803.55206pt x 552.41382pt>
 File: Images/THRU_DEP.png Graphic file (type png)
 <use Images/THRU_DEP.png>
-Package pdftex.def Info: Images/THRU_DEP.png  used on input line 1473.
-(pdftex.def)             Requested size: 500.48997pt x 344.06927pt.
-[19 <./Images/Hydrological_Workflow.png>]
-<Images/OM_C.png, id=160, 1084.05pt x 546.6021pt>
+Package pdftex.def Info: Images/THRU_DEP.png  used on input line 1519.
+(pdftex.def)             Requested size: 803.59914pt x 552.44617pt.
+
+Overfull \hbox (303.11514pt too wide) in paragraph at lines 1519--1519
+[][] 
+ []
+
+[20 <./Images/Hydrological_Workflow.png>] [21 <./Images/THRU_DEP.png>]
+<Images/OM_C.png, id=170, 1084.05pt x 546.6021pt>
 File: Images/OM_C.png Graphic file (type png)
 <use Images/OM_C.png>
-Package pdftex.def Info: Images/OM_C.png  used on input line 1495.
-(pdftex.def)             Requested size: 500.4886pt x 252.35747pt.
-[20 <./Images/THRU_DEP.png>] [21 <./Images/OM_C.png>]
-<Images/Anions.png, id=173, 1082.6046pt x 728.9634pt>
+Package pdftex.def Info: Images/OM_C.png  used on input line 1538.
+(pdftex.def)             Requested size: 1084.11353pt x 546.63411pt.
+
+Overfull \hbox (583.62953pt too wide) in paragraph at lines 1538--1538
+[][] 
+ []
+
+[22 <./Images/OM_C.png>]
+<Images/Anions.png, id=177, 1082.6046pt x 728.9634pt>
 File: Images/Anions.png Graphic file (type png)
 <use Images/Anions.png>
-Package pdftex.def Info: Images/Anions.png  used on input line 1559.
-(pdftex.def)             Requested size: 500.48204pt x 336.99568pt.
-[22 <./Images/Anions.png>]
-<Images/Cations.png, id=180, 794.97pt x 488.3043pt>
+Package pdftex.def Info: Images/Anions.png  used on input line 1600.
+(pdftex.def)             Requested size: 1011.63548pt x 681.17688pt.
+
+Overfull \hbox (511.15149pt too wide) in paragraph at lines 1600--1600
+[][] 
+ []
+
+[23]
+Overfull \vbox (34.0179pt too high) has occurred while \output is active []
+
+[24 <./Images/Anions.png>]
+<Images/Cations.png, id=188, 794.97pt x 488.3043pt>
 File: Images/Cations.png Graphic file (type png)
 <use Images/Cations.png>
-Package pdftex.def Info: Images/Cations.png  used on input line 1620.
-(pdftex.def)             Requested size: 500.49411pt x 307.42471pt.
-[23 <./Images/Cations.png>] [24] [25] [26] (Manual_NutsFor.aux) ) 
+Package pdftex.def Info: Images/Cations.png  used on input line 1659.
+(pdftex.def)             Requested size: 794.99231pt x 488.31801pt.
+
+Overfull \hbox (294.50832pt too wide) in paragraph at lines 1659--1659
+[][] 
+ []
+
+[25] [26 <./Images/Cations.png>] [27] [28] [29] (Manual_NutsFor.aux) ) 
 Here is how much of TeX's memory you used:
- 16506 strings out of 479697
- 252272 string characters out of 2867132
- 593482 words of memory out of 3000000
- 33070 multiletter control sequences out of 15000+200000
- 469729 words of font info for 131 fonts, out of 3000000 for 9000
+ 16601 strings out of 479697
+ 253576 string characters out of 2867132
+ 595962 words of memory out of 3000000
+ 33162 multiletter control sequences out of 15000+200000
+ 469541 words of font info for 131 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,13n,85p,521b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/siah
-l/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/siahl/Ap
-pData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/siahl/Ap
-pData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/siahl/AppDa
-ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/AppDa
-ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppData/L
-ocal/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/siahl/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/Local/
-Programs/MiKTeX/fonts/type1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Program
-s/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/siahl/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Manual_NutsFor.pdf (26 pages, 1509375 bytes).
+ 79i,13n,85p,538b,369s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users
+/siahl/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/sia
+hl/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/sia
+hl/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/siahl/
+AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/siahl/
+AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/siahl/AppD
+ata/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/siahl/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/siahl/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/siahl/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/siahl/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/siahl/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/siahl/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/siahl/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/siahl/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/siahl/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/siahl/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/siahl/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/siahl/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/siahl/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/lm/lmr5.pfb><C:/Users/siahl/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/siahl/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/siahl/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/siahl/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/siahl/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/lm/lmsy5.pfb><C:/Users/siahl/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/siahl/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/siahl/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/lm/lmtti10.pfb>
+Output written on Manual_NutsFor.pdf (29 pages, 1292887 bytes).
 PDF statistics:
- 380 PDF objects out of 1000 (max. 8388607)
- 98 named destinations out of 1000 (max. 500000)
+ 390 PDF objects out of 1000 (max. 8388607)
+ 102 named destinations out of 1000 (max. 500000)
  12391 words of extra memory for PDF output out of 14400 (max. 10000000)
 

@@ -41,7 +41,7 @@ Test3<-rbind(Atm_3, Ex_3, Nit_3, SOMP_3, Min_3, Growth_3)
 
 R1<-ggplot(Test, aes(x=Sens, y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+
   theme_bw()+
-  labs(x="Sensitivity Variable", y="Percent Difference from Original", fill="Increment")+
+  labs(x="Sensitivity Variable", y="Cumulative Biomass % Difference", fill="Increment")+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
   scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
   theme(legend.position = "right", plot.title = element_text(hjust = 0.5, size=14))+
@@ -49,49 +49,48 @@ R1<-ggplot(Test, aes(x=Sens, y=value, fill=Inc))+geom_col(position = "dodge", wi
   facet_wrap(~Site)+
   ggtitle("Tree Growth")
 
-R2<-ggplot(data = Test2, aes(x = Sens, y = value, fill=Inc, pattern = ID, width=.75)) +
-  geom_col_pattern(position="dodge",
-                   color = "black", 
-                   pattern_fill = "black",
-                   pattern_angle = 45,
-                   pattern_density = 0.1,
-                   pattern_spacing = 0.025,
-                   pattern_key_scale_factor = 0.6) + 
-  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange1"), labels=c("Lower"="Lower (-50%)", "Upper"="Upper (+50%)")) +
+R2_K<-ggplot(subset(Test2, ID %in% "K"), aes(x = Sens, y = value, fill=Inc, width=.75)) +
+  geom_col(position="dodge")+
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"), labels=c("Lower"="Lower", "Upper"="Upper")) +
   scale_pattern_manual(values = c(Ca = "stripe", K = "none")) +
-  labs(x = "Sensitivity Variable", y = "Total Weathering Flux % Change", pattern = "ID", fill="Increment") + 
+  labs(x = "Sensitivity Variable", y = "Total Weathering Supply (K) % Difference", pattern = "ID", fill="Increment") + 
   guides(pattern = guide_legend(override.aes = list(fill = "white")),
          fill = guide_legend(override.aes = list(pattern = "none")))+ theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Weathering")+
   theme(plot.title = element_text(hjust = 0.5, size=14))+
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)
 
-R3<-ggplot(data = Test3, aes(x = Sens, y = value, fill=ID, pattern = Species, width=.75)) +
-  geom_col_pattern(position="dodge",
-                   color = "black", 
-                   pattern_fill = "black",
-                   pattern_angle = 45,
-                   pattern_density = 0.1,
-                   pattern_spacing = 0.025,
-                   pattern_key_scale_factor = 0.6) + 
-  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange1"), labels=c("Lower"="Lower (-50%)", "Upper"="Upper (+50%)")) +
-  scale_pattern_manual(values = c(Ca = "stripe", K = "none", Mg='circle')) +
-  labs(x = "Sensitivity Variable", y = "Base Cation Leaching % Change", pattern = "Species", fill="Increment") + 
-  guides(pattern = guide_legend(override.aes = list(fill = "white")),
-         fill = guide_legend(override.aes = list(pattern = "none")))+ theme_bw()+
+
+R2_Ca<-ggplot(subset(Test2, ID %in% "Ca"), aes(x = Sens, y = value, fill=Inc, pattern = ID, width=.75)) +
+  geom_col(position="dodge")+
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"), labels=c("Lower"="Lower", "Upper"="Upper"))+ 
+  labs(x = "Sensitivity Variable", y = "Total Weathering Supply (Ca) % Change", pattern = "ID", fill="Increment") + 
+  theme_bw()+
+  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Weathering")+
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  facet_wrap(~Site)
+
+R3_K<-ggplot(subset(Test3, Species %in% "K"), aes(x = Sens, y = value, fill=ID, pattern = Species, width=.75)) +
+  geom_col(position="dodge")+
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"), labels=c("Lower"="Lower", "Upper"="Upper"))+
+  labs(x = "Sensitivity Variable", y = "Total Leached K % Change", pattern = "Species", fill="Increment") + 
+  theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Leaching")+
   theme(plot.title = element_text(hjust = 0.5, size=14))+
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  facet_wrap(~Site)
+
+R3_Ca<-ggplot(subset(Test3, Species %in% "Ca"), aes(x = Sens, y = value, fill=ID, pattern = Species, width=.75)) +
+  geom_col(position="dodge")+
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"), labels=c("Lower"="Lower", "Upper"="Upper"))+
+  labs(x = "Sensitivity Variable", y = "Total Leached Ca % Change", pattern = "Species", fill="Increment") + 
+  theme_bw()+
+  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Leaching")+
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)
 
 
-png("R1.png", height=650, width=1000, res=100)
-plot(R1)
-dev.off()
 
-png("R2.png", height=650, width=1000, res=100)
-plot(R2)
-dev.off()
-
-png("R3.png", height=650, width=1000, res=100)
-plot(R3)
-dev.off()
