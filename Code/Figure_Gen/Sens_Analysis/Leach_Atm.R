@@ -27,6 +27,7 @@ source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Sens_Analysis/Minimum/Atm/So
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis")
 
 source("~/Project_Master/Test_Rep/Code/Functions/Per_Diff.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Sens_Coeff.R")
 
 BaseLeaching<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/LeachingBase.csv")
 
@@ -122,6 +123,68 @@ PerChange_LNBAS_Min_Mg<-Diff(LNBAS_Mine_Min$Mg, BaseLeaching$Mg_LNBAS)
 
 PerChange_HNBAS_Min_Mg<-Diff(HNBAS_Mine_Min$Mg, BaseLeaching$Mg_HNBAS)
 
+Sens_Coeff_LNSED_Min_Ca<-Sens_Coeff(LNSED_Mine_Min$Ca, BaseLeaching$Ca_LNSED, .5, 1)
+
+
+Sens_Coeff_HNSED_Min_Ca<-Sens_Coeff(HNSED_Mine_Min$Ca, BaseLeaching$Ca_HNSED, .5, 1)
+
+
+Sens_Coeff_LNBAS_Min_Ca<-Sens_Coeff(LNBAS_Mine_Min$Ca, BaseLeaching$Ca_LNBAS, .5, 1)
+
+
+Sens_Coeff_HNBAS_Min_Ca<-Sens_Coeff(HNBAS_Mine_Min$Ca, BaseLeaching$Ca_HNBAS, .5, 1)
+
+
+Sens_Coeff_LNSED_Max_Ca<-Sens_Coeff(LNSED_Mine_Max$Ca, BaseLeaching$Ca_LNSED, 1.5, 1)
+Sens_Coeff_HNSED_Max_Ca<-Sens_Coeff(HNSED_Mine_Max$Ca, BaseLeaching$Ca_HNSED, 1.5, 1)
+Sens_Coeff_LNBAS_Max_Ca<-Sens_Coeff(LNBAS_Mine_Max$Ca, BaseLeaching$Ca_LNBAS, 1.5, 1)
+Sens_Coeff_HNBAS_Max_Ca<-Sens_Coeff(HNBAS_Mine_Max$Ca, BaseLeaching$Ca_HNBAS, 1.5, 1)
+
+Sens_Coeff_LNSED_Min_K<-Sens_Coeff(LNSED_Mine_Min$K, BaseLeaching$K_LNSED, .5, 1)
+
+
+Sens_Coeff_HNSED_Min_K<-Sens_Coeff(HNSED_Mine_Min$K, BaseLeaching$K_HNSED, .5, 1)
+
+
+Sens_Coeff_LNBAS_Min_K<-Sens_Coeff(LNBAS_Mine_Min$K, BaseLeaching$K_LNBAS, .5, 1)
+
+
+Sens_Coeff_HNBAS_Min_K<-Sens_Coeff(HNBAS_Mine_Min$K, BaseLeaching$K_HNBAS, .5, 1)
+
+
+Sens_Coeff_LNSED_Max_K<-Sens_Coeff(LNSED_Mine_Max$K, BaseLeaching$K_LNSED, 1.5, 1)
+Sens_Coeff_HNSED_Max_K<-Sens_Coeff(HNSED_Mine_Max$K, BaseLeaching$K_HNSED, 1.5, 1)
+Sens_Coeff_LNBAS_Max_K<-Sens_Coeff(LNBAS_Mine_Max$K, BaseLeaching$K_LNBAS, 1.5, 1)
+Sens_Coeff_HNBAS_Max_K<-Sens_Coeff(HNBAS_Mine_Max$K, BaseLeaching$K_HNBAS, 1.5, 1)
+
+Sens_Coeff_LNSED_Min_Mg<-Sens_Coeff(LNSED_Mine_Min$Mg, BaseLeaching$Mg_LNSED, .5, 1)
+
+
+Sens_Coeff_HNSED_Min_Mg<-Sens_Coeff(HNSED_Mine_Min$Mg, BaseLeaching$Mg_HNSED, .5, 1)
+
+
+Sens_Coeff_LNBAS_Min_Mg<-Sens_Coeff(LNBAS_Mine_Min$Mg, BaseLeaching$Mg_LNBAS, .5, 1)
+
+
+Sens_Coeff_HNBAS_Min_Mg<-Sens_Coeff(HNBAS_Mine_Min$Mg, BaseLeaching$Mg_HNBAS, .5, 1)
+
+
+Sens_Coeff_LNSED_Max_Mg<-Sens_Coeff(LNSED_Mine_Max$Mg, BaseLeaching$Mg_LNSED, 1.5, 1)
+Sens_Coeff_HNSED_Max_Mg<-Sens_Coeff(HNSED_Mine_Max$Mg, BaseLeaching$Mg_HNSED, 1.5, 1)
+Sens_Coeff_LNBAS_Max_Mg<-Sens_Coeff(LNBAS_Mine_Max$Mg, BaseLeaching$Mg_LNBAS, 1.5, 1)
+Sens_Coeff_HNBAS_Max_Mg<-Sens_Coeff(HNBAS_Mine_Max$Mg, BaseLeaching$Mg_HNBAS, 1.5, 1)
+
+Sens_Coeff_Df_Ca<-cbind(Sens_Coeff_LNSED_Min_Ca, Sens_Coeff_HNSED_Min_Ca,Sens_Coeff_LNBAS_Min_Ca,Sens_Coeff_HNBAS_Min_Ca,Sens_Coeff_LNSED_Max_Ca,Sens_Coeff_HNSED_Max_Ca,
+                        Sens_Coeff_LNBAS_Max_Ca,Sens_Coeff_HNBAS_Max_Ca)
+Sens_Coeff_Df_Mg<-cbind(Sens_Coeff_LNSED_Min_Mg, Sens_Coeff_HNSED_Min_Mg,Sens_Coeff_LNBAS_Min_Mg,Sens_Coeff_HNBAS_Min_Mg,Sens_Coeff_LNSED_Max_Mg,Sens_Coeff_HNSED_Max_Mg,
+                        Sens_Coeff_LNBAS_Max_Mg,Sens_Coeff_HNBAS_Max_Mg)
+Sens_Coeff_Df_K<-cbind(Sens_Coeff_LNSED_Min_K, Sens_Coeff_HNSED_Min_K,Sens_Coeff_LNBAS_Min_K,Sens_Coeff_HNBAS_Min_K,Sens_Coeff_LNSED_Max_K,Sens_Coeff_HNSED_Max_K,
+                       Sens_Coeff_LNBAS_Max_K,Sens_Coeff_HNBAS_Max_K)
+
+See<-cbind(Sens_Coeff_Df_Ca, Sens_Coeff_Df_Mg, Sens_Coeff_Df_K)
+See<-data.frame(See)
+See$ID<-"Atm"
+
 
 PerChange_LNSED_Max_Mg<-Diff(LNSED_Mine_Max$Mg, BaseLeaching$Mg_LNSED)
 PerChange_HNSED_Max_Mg<-Diff(HNSED_Mine_Max$Mg, BaseLeaching$Mg_HNSED)
@@ -144,6 +207,8 @@ PerChange_Df_K<-cbind(PerChange_LNSED_Min_K, PerChange_HNSED_Min_K,PerChange_LNB
                       PerChange_LNBAS_Max_K,PerChange_HNBAS_Max_K)
 
 PerChange_Df_K<-as.data.frame(PerChange_Df_K)
+
+PerChange_Df<-cbind(PerChange_Df_Ca, PerChange_Df_K, PerChange_Df_Mg)
 
 
 Ca<-melt(PerChange_Df_Ca)
@@ -178,6 +243,10 @@ K$Species<-"K"
 Y<-rbind(Ca, Mg, K)
 
 Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
+Y$Sens<-"Atm"
+Y$Response<-"Leach"
+
+Y$value2<-ifelse(abs(Y$value)<=1, "NR", " ")
 
 
 G_LAtm<-ggplot(data = Y, aes(x = Site, y = value, fill=ID, pattern = Species, width=.75)) +
@@ -200,3 +269,7 @@ G_LAtm<-ggplot(data = Y, aes(x = Site, y = value, fill=ID, pattern = Species, wi
 png("Leach_Atm.png", width=1000, height=500, res=115)
 plot(G_LAtm)
 dev.off()
+
+write.csv2(See, "Sens_Tbl_Atm_Leach.csv")
+write.csv2(Y, "Atm_Leach.csv")
+write.csv(PerChange_Df, "AtmLeach_Per.csv")

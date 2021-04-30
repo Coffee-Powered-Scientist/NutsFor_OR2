@@ -1,0 +1,97 @@
+
+rm(list = ls())
+
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(ggpattern)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(cowplot)
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis")
+
+Atm_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Atm_Bio.csv")
+Ex_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Exch_Bio.csv")
+Nit_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Nit_Bio.csv")
+SOMP_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/SOMP_Bio.csv")
+Min_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Min_Bio.csv")
+Growth_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Growth_Bio.csv")
+
+Atm_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Atm_Weath.csv")
+Ex_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Ex_Weath.csv")
+Nit_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Nit_Weath.csv")
+SOMP_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/SOMP_Weath.csv")
+Min_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Min_Weath.csv")
+Growth_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Growth_Weath.csv")
+
+Atm_3<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Atm_Leach.csv")
+Ex_3<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Ex_Leach.csv")
+Nit_3<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Nit_Leach.csv")
+SOMP_3<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/SOMP_Leach.csv")
+Min_3<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Min_Leach.csv")
+Growth_3<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Growth_Leach.csv")
+
+Test<-rbind(Atm_1, Ex_1, Nit_1, SOMP_1, Min_1, Growth_1)
+
+Test2<-rbind(Atm_2, Ex_2, Nit_2, SOMP_2, Min_2, Growth_2)
+
+Test3<-rbind(Atm_3, Ex_3, Nit_3, SOMP_3, Min_3, Growth_3)
+
+R1<-ggplot(Test, aes(x=Sens, y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+
+  theme_bw()+
+  labs(x="Sensitivity Variable", y="Percent Difference from Original", fill="Increment")+
+  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
+  theme(legend.position = "right", plot.title = element_text(hjust = 0.5, size=14))+
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  facet_wrap(~Site)+
+  ggtitle("Tree Growth")
+
+R2<-ggplot(data = Test2, aes(x = Sens, y = value, fill=Inc, pattern = ID, width=.75)) +
+  geom_col_pattern(position="dodge",
+                   color = "black", 
+                   pattern_fill = "black",
+                   pattern_angle = 45,
+                   pattern_density = 0.1,
+                   pattern_spacing = 0.025,
+                   pattern_key_scale_factor = 0.6) + 
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange1"), labels=c("Lower"="Lower (-50%)", "Upper"="Upper (+50%)")) +
+  scale_pattern_manual(values = c(Ca = "stripe", K = "none")) +
+  labs(x = "Sensitivity Variable", y = "Total Weathering Flux % Change", pattern = "ID", fill="Increment") + 
+  guides(pattern = guide_legend(override.aes = list(fill = "white")),
+         fill = guide_legend(override.aes = list(pattern = "none")))+ theme_bw()+
+  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Weathering")+
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  facet_wrap(~Site)
+
+R3<-ggplot(data = Test3, aes(x = Sens, y = value, fill=ID, pattern = Species, width=.75)) +
+  geom_col_pattern(position="dodge",
+                   color = "black", 
+                   pattern_fill = "black",
+                   pattern_angle = 45,
+                   pattern_density = 0.1,
+                   pattern_spacing = 0.025,
+                   pattern_key_scale_factor = 0.6) + 
+  scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange1"), labels=c("Lower"="Lower (-50%)", "Upper"="Upper (+50%)")) +
+  scale_pattern_manual(values = c(Ca = "stripe", K = "none", Mg='circle')) +
+  labs(x = "Sensitivity Variable", y = "Base Cation Leaching % Change", pattern = "Species", fill="Increment") + 
+  guides(pattern = guide_legend(override.aes = list(fill = "white")),
+         fill = guide_legend(override.aes = list(pattern = "none")))+ theme_bw()+
+  geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Base Cation Leaching")+
+  theme(plot.title = element_text(hjust = 0.5, size=14))+
+  facet_wrap(~Site)
+
+
+png("R1.png", height=650, width=1000, res=100)
+plot(R1)
+dev.off()
+
+png("R2.png", height=650, width=1000, res=100)
+plot(R2)
+dev.off()
+
+png("R3.png", height=650, width=1000, res=100)
+plot(R3)
+dev.off()

@@ -32,7 +32,7 @@ SOM_Mut<- SOM %>%
   rename(C= 'V3') %>% rename(N='V4') %>%rename(Ca= 'V5') %>% rename(Mg= 'V6') %>%
   rename(K= 'V7') %>% rename(S= 'V8') %>%
   rename(P= 'V9') %>% rename(Year=V1, Month=V2) %>%
-  select(C, N, Ca, Mg, K, S, Date)
+  select(C, N, Ca, Mg, K, S, P, Date)
 
 SOM_Mut<-na.omit(SOM_Mut)
 

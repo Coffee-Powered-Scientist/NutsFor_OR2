@@ -40,7 +40,8 @@ Cal_Pre<-Cal_Pretable_SS %>%
   filter(group_id %in% c("10", "17")) %>%
   filter(YEAR %in% c("2005", "2006")) 
 
-Cal_Pre<-Cal_Pre[!(Cal_Pre$Month == c("7", "8", "9", "10", "11", "12") & Cal_Pre$YEAR == "2006"),]
+Cal_Pre1<-Cal_Pre[!(Cal_Pre$Month == c("7", "8", "9", "10", "11", "12") & Cal_Pre$YEAR == "2006"),]
+
 
 
 Cal_Melt<-melt(Cal_Pre, id.vars = c("Date", "group_id"))

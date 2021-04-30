@@ -1,5 +1,4 @@
 
-
 #---------------------#
 #Sensitivity Analysis#
 #$---Tree Biomass---$#
@@ -31,6 +30,7 @@ source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Sens_Analysis/Minimum/Minera
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis")
 
 source("~/Project_Master/Test_Rep/Code/Functions/Per_Diff.R")
+source("~/Project_Master/Test_Rep/Code/Functions/Sens_Coeff.R")
 
 Df_Originals<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/All_Biomass.csv")
 
@@ -115,6 +115,23 @@ PerChange_HNSED_Max<-Diff(HN_SED_Mine_Max1, Df_Originals$BO_40_HNSED_SUM)
 PerChange_LNBAS_Max<-Diff(LN_BAS_Mine_Max1, Df_Originals$BO_40_LNBAS_SUM)
 PerChange_HNBAS_Max<-Diff(HN_BAS_Mine_Max1, Df_Originals$BO_40_HNBAS_SUM)
 
+LNS_Min<-Sens_Coeff(LN_SED_Mine_Min1,Df_Originals$BO_40_LNSED_SUM, .5, 1)
+LNS_Max<-Sens_Coeff(LN_SED_Mine_Max1,Df_Originals$BO_40_LNSED_SUM, 1.5, 1)
+LNB_Min<-Sens_Coeff(LN_BAS_Mine_Min1,Df_Originals$BO_40_LNBAS_SUM, .5, 1)
+LNB_Max<-Sens_Coeff(LN_BAS_Mine_Max1,Df_Originals$BO_40_LNBAS_SUM, 1.5, 1)
+HNB_Min<-Sens_Coeff(HN_BAS_Mine_Min1,Df_Originals$BO_40_HNBAS_SUM, .5, 1)
+HNB_Max<-Sens_Coeff(HN_BAS_Mine_Max1,Df_Originals$BO_40_HNBAS_SUM, 1.5, 1)
+HNS_Max<-Sens_Coeff(HN_SED_Mine_Max1,Df_Originals$BO_40_HNSED_SUM, 1.5, 1)
+HNS_Min<-Sens_Coeff(HN_SED_Mine_Min1,Df_Originals$BO_40_HNSED_SUM, 1.5, 1)
+
+Sens_Coef_Tbl<-cbind(LNS_Min, LNS_Max, LNB_Min, LNB_Max,
+                     HNB_Min, HNB_Max, HNS_Max, HNS_Min)
+
+Sens_Coef_Tbl<-as.data.frame(Sens_Coef_Tbl)
+
+Sens_Coef_Tbl$ID<-"Mineral"
+
+
 PerChange_Df<-cbind(PerChange_LNSED_Min, PerChange_HNSED_Min,PerChange_LNBAS_Min,PerChange_HNBAS_Min,PerChange_LNSED_Max,PerChange_HNSED_Max,
       PerChange_LNBAS_Max,PerChange_HNBAS_Max)
 
@@ -138,15 +155,29 @@ X$Site<-c("LN SED", "HN SED",
 Y<-as.data.frame(X)
 
 Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
+Y$Sens<-"Min"
+Y$Response<-"Bio"
 
 
-G<-ggplot(Y, aes(x=factor(Site), y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+
+
+Y$value2<-c(" ", " ", "", "*", " ", " ", " ", "NR")
+
+Y$value2<-ifelse(abs(Y$value)<=1, "NR", " ")
+
+
+G_BioMin<-ggplot(Y, aes(x=factor(Site), y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+
+  
   theme_bw()+
-  labs(x="Mineral Abundance % Change", y="Percent Difference from Original", fill="Increment")+
+  labs(x="Atmospheric Deposition % Change", y="Percent Difference from Original", fill="Increment")+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
   scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
-  theme(legend.position = c(0.925, 0.85))
+  theme(legend.position = c(0.925, 0.85))+
+  geom_text(aes(label =value2, y=2.5, color=Site), position = position_dodge(0.9), size=5, show.legend = FALSE)
 
 png("Bio_Min.png", width=1000, height=500, res=115)
-plot(G)
+plot(G_BioMin)
 dev.off()
+
+write.csv2(Sens_Coef_Tbl, "Sens_Tbl_Mineral_Bio.csv")
+write.csv2(Y, "Min_Bio.csv")
+write.csv(PerChange_Df, "MinBio_Per.csv")
