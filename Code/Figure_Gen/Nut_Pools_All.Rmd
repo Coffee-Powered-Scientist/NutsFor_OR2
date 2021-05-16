@@ -24,6 +24,12 @@ source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/SOM_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/CEC_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/SOM_Mutator.R")
 
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/SOM_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/SOM_Mutator.R")
+
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_BO")
 
 # LNS Break
@@ -57,8 +63,8 @@ CEC_LNS$Date<-as.Date(CEC_LNS$Date)
 LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
-  geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
-  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/9340.759+Litter_All_LNS$N/9340.759, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/668.52+Litter_All_LNS$P/668.52, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   theme_classic2()+
@@ -66,7 +72,7 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_hline(yintercept= 1)+
   ggtitle("LN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
 
 # HNS Break
 
@@ -99,16 +105,16 @@ CEC_HNS$Date<-as.Date(CEC_HNS$Date)
 HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
-  geom_line(SOM_HNS, mapping=aes(y=N*14*10/12246.21+Litter_All_HNS$N/12246.21, color="N", linetype="N"))+
-  geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_HNS$P/586.2, color="P", linetype="P"))+
-  geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/754+Litter_All_HNS$S/754, color="S", linetype="S"))+
+  geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
+  geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
+  geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
-  ggtitle("LN Sedimentary")+
+  ggtitle("HN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
 
 # LNB Break
 
@@ -150,7 +156,7 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_hline(yintercept= 1)+
   ggtitle("LN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5) , legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
 
 # HNB Break 
 
@@ -185,7 +191,199 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color="K", linetype="K"))+
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
   geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
-  geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/1722.198+Litter_All_HNB$S/1722.198, color="S", linetype="S"))+
+  geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("HN Basalt")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
+
+# Aggregate
+
+ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
+
+```
+```{r}
+rm(list = ls())
+
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/SOM_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/SOM_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/SOM_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/SOM_Mutator.R")
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_WTH")
+
+# LNS Break
+
+SOM_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/SOM.csv")
+
+
+SOM_LNS<-SOM_LNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_LNS<-Litter_All_LNS %>% filter(Month %in% 1)
+
+
+CEC_All_LNS$Date<-as.Date(CEC_All_LNS$Date)
+
+CEC_All_LNS[, "year"] <- format(CEC_All_LNS[,"Date"], "%Y")
+CEC_All_LNS[, "month"] <- format(CEC_All_LNS[,"Date"], "%m")
+
+CEC_LNS<-CEC_All_LNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_LNS$Date<-as.Date(CEC_LNS$Date)
+
+LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("LN Sedimentary")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# HNS Break
+
+SOM_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/SOM.csv")
+
+
+SOM_HNS<-SOM_HNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_HNS<-Litter_All_HNS %>% filter(Month %in% 1)
+
+
+CEC_All_HNS$Date<-as.Date(CEC_All_HNS$Date)
+
+CEC_All_HNS[, "year"] <- format(CEC_All_HNS[,"Date"], "%Y")
+CEC_All_HNS[, "month"] <- format(CEC_All_HNS[,"Date"], "%m")
+
+CEC_HNS<-CEC_All_HNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_HNS$Date<-as.Date(CEC_HNS$Date)
+
+HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
+  geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
+  geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
+  geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("HN Sedimentary")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# LNB Break
+
+SOM_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/SOM.csv")
+
+
+SOM_LNB<-SOM_LNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_LNB<-Litter_All_LNB %>% filter(Month %in% 1)
+
+
+CEC_All_LNB$Date<-as.Date(CEC_All_LNB$Date)
+
+CEC_All_LNB[, "year"] <- format(CEC_All_LNB[,"Date"], "%Y")
+CEC_All_LNB[, "month"] <- format(CEC_All_LNB[,"Date"], "%m")
+
+CEC_LNB<-CEC_All_LNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_LNB$Date<-as.Date(CEC_LNB$Date)
+
+LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color="K", linetype="K"))+
+  geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
+  geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
+  geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("LN Basalt")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# HNB Break 
+
+SOM_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/SOM.csv")
+
+
+SOM_HNB<-SOM_HNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_HNB<-Litter_All_HNB %>% filter(Month %in% 1)
+
+
+CEC_All_HNB$Date<-as.Date(CEC_All_HNB$Date)
+
+CEC_All_HNB[, "year"] <- format(CEC_All_HNB[,"Date"], "%Y")
+CEC_All_HNB[, "month"] <- format(CEC_All_HNB[,"Date"], "%m")
+
+CEC_HNB<-CEC_All_HNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_HNB$Date<-as.Date(CEC_HNB$Date)
+
+HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color="K", linetype="K"))+
+  geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
+  geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
+  geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
@@ -196,7 +394,397 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
 
 # Aggregate
 
+ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
 
 ```
+
+```{r}
+rm(list = ls())
+
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/80_BO/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/80_BO/SOM_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/80_BO/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/80_BO/SOM_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/SOM_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_BAS/80_BO/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/80_BO/SOM_Mutator.R")
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_BO")
+
+# LNS Break
+
+SOM_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/SOM.csv")
+
+
+SOM_LNS<-SOM_LNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_LNS<-Litter_All_LNS %>% filter(Month %in% 1)
+
+
+CEC_All_LNS$Date<-as.Date(CEC_All_LNS$Date)
+
+CEC_All_LNS[, "year"] <- format(CEC_All_LNS[,"Date"], "%Y")
+CEC_All_LNS[, "month"] <- format(CEC_All_LNS[,"Date"], "%m")
+
+CEC_LNS<-CEC_All_LNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_LNS$Date<-as.Date(CEC_LNS$Date)
+
+LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("LN Sedimentary")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# HNS Break
+
+SOM_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/SOM.csv")
+
+
+SOM_HNS<-SOM_HNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_HNS<-Litter_All_HNS %>% filter(Month %in% 1)
+
+
+CEC_All_HNS$Date<-as.Date(CEC_All_HNS$Date)
+
+CEC_All_HNS[, "year"] <- format(CEC_All_HNS[,"Date"], "%Y")
+CEC_All_HNS[, "month"] <- format(CEC_All_HNS[,"Date"], "%m")
+
+CEC_HNS<-CEC_All_HNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_HNS$Date<-as.Date(CEC_HNS$Date)
+
+HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
+  geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
+  geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
+  geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("HN Sedimentary")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# LNB Break
+
+SOM_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/SOM.csv")
+
+
+SOM_LNB<-SOM_LNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_LNB<-Litter_All_LNB %>% filter(Month %in% 1)
+
+
+CEC_All_LNB$Date<-as.Date(CEC_All_LNB$Date)
+
+CEC_All_LNB[, "year"] <- format(CEC_All_LNB[,"Date"], "%Y")
+CEC_All_LNB[, "month"] <- format(CEC_All_LNB[,"Date"], "%m")
+
+CEC_LNB<-CEC_All_LNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_LNB$Date<-as.Date(CEC_LNB$Date)
+
+LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color="K", linetype="K"))+
+  geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
+  geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
+  geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("LN Basalt")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# HNB Break 
+
+SOM_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/SOM.csv")
+
+
+SOM_HNB<-SOM_HNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_HNB<-Litter_All_HNB %>% filter(Month %in% 1)
+
+
+CEC_All_HNB$Date<-as.Date(CEC_All_HNB$Date)
+
+CEC_All_HNB[, "year"] <- format(CEC_All_HNB[,"Date"], "%Y")
+CEC_All_HNB[, "month"] <- format(CEC_All_HNB[,"Date"], "%m")
+
+CEC_HNB<-CEC_All_HNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_HNB$Date<-as.Date(CEC_HNB$Date)
+
+HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color="K", linetype="K"))+
+  geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
+  geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
+  geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("HN Basalt")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# Aggregate
+
+ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
+```
+
+```{r}
+rm(list = ls())
+
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/SOM_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/80_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/80_WTH/SOM_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_WTH/SOM_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/CEC_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/SOM_Mutator.R")
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH")
+
+# LNS Break
+
+SOM_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/SOM.csv")
+
+
+SOM_LNS<-SOM_LNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_LNS<-Litter_All_LNS %>% filter(Month %in% 1)
+
+
+CEC_All_LNS$Date<-as.Date(CEC_All_LNS$Date)
+
+CEC_All_LNS[, "year"] <- format(CEC_All_LNS[,"Date"], "%Y")
+CEC_All_LNS[, "month"] <- format(CEC_All_LNS[,"Date"], "%m")
+
+CEC_LNS<-CEC_All_LNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_LNS$Date<-as.Date(CEC_LNS$Date)
+
+LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("LN Sedimentary")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# HNS Break
+
+SOM_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/SOM.csv")
+
+
+SOM_HNS<-SOM_HNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_HNS<-Litter_All_HNS %>% filter(Month %in% 1)
+
+
+CEC_All_HNS$Date<-as.Date(CEC_All_HNS$Date)
+
+CEC_All_HNS[, "year"] <- format(CEC_All_HNS[,"Date"], "%Y")
+CEC_All_HNS[, "month"] <- format(CEC_All_HNS[,"Date"], "%m")
+
+CEC_HNS<-CEC_All_HNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_HNS$Date<-as.Date(CEC_HNS$Date)
+
+HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
+  geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
+  geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
+  geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("HN Sedimentary")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# LNB Break
+
+SOM_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/SOM.csv")
+
+
+SOM_LNB<-SOM_LNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_LNB<-Litter_All_LNB %>% filter(Month %in% 1)
+
+
+CEC_All_LNB$Date<-as.Date(CEC_All_LNB$Date)
+
+CEC_All_LNB[, "year"] <- format(CEC_All_LNB[,"Date"], "%Y")
+CEC_All_LNB[, "month"] <- format(CEC_All_LNB[,"Date"], "%m")
+
+CEC_LNB<-CEC_All_LNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_LNB$Date<-as.Date(CEC_LNB$Date)
+
+LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color="K", linetype="K"))+
+  geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
+  geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
+  geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("LN Basalt")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# HNB Break 
+
+SOM_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/SOM.csv")
+
+
+SOM_HNB<-SOM_HNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+  mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 1)
+
+
+
+
+CEC_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+
+Litter_All_HNB<-Litter_All_HNB %>% filter(Month %in% 1)
+
+
+CEC_All_HNB$Date<-as.Date(CEC_All_HNB$Date)
+
+CEC_All_HNB[, "year"] <- format(CEC_All_HNB[,"Date"], "%Y")
+CEC_All_HNB[, "month"] <- format(CEC_All_HNB[,"Date"], "%m")
+
+CEC_HNB<-CEC_All_HNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE))) %>% 
+  mutate(Date=make_date(year, month))%>% 
+  filter(month %in% "01")
+
+CEC_HNB$Date<-as.Date(CEC_HNB$Date)
+
+HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color="Ca", linetype="Ca")) + geom_line()+
+  geom_line(aes(y=CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2, color="Mg", linetype="Mg"))+
+  geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color="K", linetype="K"))+
+  geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
+  geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
+  geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  theme_classic2()+
+  labs(color  = "Species", linetype="Species")+
+  geom_hline(yintercept= 1)+
+  ggtitle("HN Basalt")+
+  labs(x="Year", y="Change in Nutrient Pool Size")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# Aggregate
+
+ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
+```
+
+
+
 
 

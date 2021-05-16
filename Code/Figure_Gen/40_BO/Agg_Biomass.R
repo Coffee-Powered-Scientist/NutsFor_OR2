@@ -351,7 +351,7 @@ BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decre
   guides(fill = guide_legend(reverse=FALSE))+ 
   scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "Bole"))+
   theme_bw()+
-  theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=12))
+  theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=18), strip.text.x = element_text(size = 18))
 
 #Check
 BO_Aggregated_Biomass
@@ -359,7 +359,7 @@ BO_Aggregated_Biomass
   
 #Save to Image Directory
 
-png("BO_Biomass.png", height=650, width=1000, res=100)
+png("BO_Biomass.png", height=750, width=1000, res=100)
 print(BO_Aggregated_Biomass)
 dev.off()
 

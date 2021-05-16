@@ -162,7 +162,7 @@ LNSED_All_Nut<- ggplot(Plant_Pool_LNSED, mapping= aes(x=Year, y=S_Diff*32.065*10
   scale_x_date(labels = date_format("%Y"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="Low N Sedimentary", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
 
 
@@ -180,7 +180,7 @@ HNSED_All_Nut<- ggplot(Plant_Pool_HNSED, mapping= aes(x=Year, y=S_Diff*32.065*10
   scale_x_date(labels = date_format("%Y"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="High N Sedimentary", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
 
 
@@ -200,7 +200,7 @@ LNBAS_All_Nut<- ggplot(Plant_Pool_LNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10
   scale_x_date(labels = date_format("%Y"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="Low N Basalt", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
 
 
@@ -220,7 +220,7 @@ HNBAS_All_Nut<- ggplot(Plant_Pool_HNBAS, mapping= aes(x=Year, y=S_Diff*32.065*10
   scale_x_date(labels = date_format("%Y"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x="Year", y="Uptake Deficit (kg/ha)", color="Nutrient", title="High N Basalt", linetype="Nutrient")+
-  theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
+  theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))
 
 
