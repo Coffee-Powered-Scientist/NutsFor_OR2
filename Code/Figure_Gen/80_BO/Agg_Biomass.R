@@ -217,6 +217,9 @@ Biomass_Master<-rbind(BO_80_LNSED_H1_MELT, BO_80_LNSED_H2_MELT, BO_80_LNSED_H3_M
 
 Biomass_Master$Harvest<-factor(Biomass_Master$Harvest, levels=c("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "H11"))
 Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_Bol"))
+Biomass_Master$N<-factor(Biomass_Master$N, levels=c("Low", "High"))
+
+Biomass_Master$Rock_Type<-factor(Biomass_Master$Rock_Type, levels=c("Sedimentary", "Basalt"))
 
 BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decreasing=T),], aes(fill=variable, y=value/1000, x=Harvest, group=N)) + 
   geom_bar(position="stack", stat="identity")+ 

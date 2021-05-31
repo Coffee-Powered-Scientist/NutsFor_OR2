@@ -336,7 +336,9 @@ Biomass_Master<-rbind(BO_40_LNSED_H1_MELT, BO_40_LNSED_H2_MELT, BO_40_LNSED_H3_M
 
 Biomass_Master$Harvest<-factor(Biomass_Master$Harvest, levels=c("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "H11"))
 Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_Bol"))
+Biomass_Master$N<-factor(Biomass_Master$N, levels=c("Low", "High"))
 
+Biomass_Master$Rock_Type<-factor(Biomass_Master$Rock_Type, levels=c("Sedimentary", "Basalt"))
 
 write.csv2(Biomass_Master, "Biomass_Master.csv")
 # Graphs

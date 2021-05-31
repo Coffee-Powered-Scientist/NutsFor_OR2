@@ -337,6 +337,9 @@ Biomass_Master<-rbind(WTH_40_LNSED_H1_MELT, WTH_40_LNSED_H2_MELT, WTH_40_LNSED_H
 Biomass_Master$Harvest<-factor(Biomass_Master$Harvest, levels=c("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "H11"))
 Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_Bol"))
 
+Biomass_Master$N<-factor(Biomass_Master$N, levels=c("Low", "High"))
+
+Biomass_Master$Rock_Type<-factor(Biomass_Master$Rock_Type, levels=c("Sedimentary", "Basalt"))
 
 # Graphs
 #Load Times New Roman
@@ -350,7 +353,7 @@ WTH_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decr
   guides(fill = guide_legend(reverse=FALSE))+ 
   scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "Bole"))+
   theme_bw()+
-  theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=12))
+  theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=18))
 
 #Check
 WTH_Aggregated_Biomass

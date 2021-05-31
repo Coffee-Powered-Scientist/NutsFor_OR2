@@ -229,6 +229,6 @@ png('HNBAS_All_Nut.png', height=480, width=650, res=125)
 plot(HNBAS_All_Nut)
 dev.off()
 
-ggarrange(HNBAS_All_Nut, LNBAS_All_Nut, HNSED_All_Nut, LNSED_All_Nut, labels=c("A", "B", "C", "D"),
+ggarrange(LNSED_All_Nut, HNSED_All_Nut ,LNBAS_All_Nut,HNBAS_All_Nut, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   ggexport(filename="QuadDiff.png", height=1000, width=1000, res=100)

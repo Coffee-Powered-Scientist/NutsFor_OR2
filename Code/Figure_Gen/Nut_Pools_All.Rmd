@@ -60,13 +60,16 @@ CEC_LNS<-CEC_All_LNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(
 
 CEC_LNS$Date<-as.Date(CEC_LNS$Date)
 
+label_color<-c("Ca", "Mg", "K", expression(N[O]), expression(P[O]), expression(S[O]))
+
 LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/9340.759+Litter_All_LNS$N/9340.759, color="N", linetype="N"))+
   geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/668.52+Litter_All_LNS$P/668.52, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -108,7 +111,8 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -150,7 +154,8 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
   geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
   geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -192,7 +197,8 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
   geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
   geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -200,13 +206,63 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   labs(x="Year", y="Change in Nutrient Pool Size")+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
 
+
+# BEEMP
+
+Color_C<-c(expression(C[Litter]),expression(C[SOM]))
+
+C_LNS<-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_LNB<-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+C_HNS<-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_HNB<-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+
 # Aggregate
 
-ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="C_Pool.png", height=1000, width=1000, res=100)
+
+
+
+ggarrange(LNS, HNS, LNB, HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
 
 ```
+
+
+
 ```{r}
 rm(list = ls())
 
@@ -221,6 +277,8 @@ source("~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/SOM_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/CEC_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/SOM_Mutator.R")
+
+label_color<-c("Ca", "Mg", "K", expression(N[O]), expression(P[O]), expression(S[O]))
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_WTH")
 
@@ -258,7 +316,8 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
   geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -300,7 +359,8 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -342,7 +402,8 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
   geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
   geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -384,7 +445,8 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
   geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
   geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -392,11 +454,54 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   labs(x="Year", y="Change in Nutrient Pool Size")+
   theme(plot.title = element_text(hjust = 0.5))
 
+Color_C<-c(expression(C[Litter]),expression(C[SOM]))
+
+C_LNS<-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_LNB<-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+C_HNS<-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_HNB<-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+
 # Aggregate
 
-ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="C_Pool.png", height=1000, width=1000, res=100)
+
+ggarrange(LNS, HNS, LNB, HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
+
 
 ```
 
@@ -416,6 +521,8 @@ source("~/Project_Master/Test_Rep/Code/LN_BAS/80_BO/CEC_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/LN_BAS/80_BO/SOM_Mutator.R")
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_BO")
+
+label_color<-c("Ca", "Mg", "K", expression(N[O]), expression(P[O]), expression(S[O]))
 
 # LNS Break
 
@@ -451,7 +558,8 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
   geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -493,7 +601,8 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+ scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -535,7 +644,8 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
   geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
   geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -577,7 +687,8 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
   geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
   geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -585,11 +696,54 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   labs(x="Year", y="Change in Nutrient Pool Size")+
   theme(plot.title = element_text(hjust = 0.5))
 
+Color_C<-c(expression(C[Litter]),expression(C[SOM]))
+
+C_LNS<-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_LNB<-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+C_HNS<-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_HNB<-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+
 # Aggregate
 
-ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="C_Pool.png", height=1000, width=1000, res=100)
+
+ggarrange(LNS, HNS, LNB, HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
+
 ```
 
 ```{r}
@@ -608,6 +762,8 @@ source("~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/CEC_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/SOM_Mutator.R")
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH")
+
+label_color<-c("Ca", "Mg", "K", expression(N[O]), expression(P[O]), expression(S[O]))
 
 # LNS Break
 
@@ -643,7 +799,8 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
   geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -685,7 +842,8 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -727,7 +885,8 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
   geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
   geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -769,7 +928,8 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color="N", linetype="N"))+
   geom_line(SOM_HNB, mapping=aes(y=P*30.974*10/1242.458+Litter_All_HNB$P/1242.458, color="P", linetype="P"))+
   geom_line(SOM_HNB, mapping=aes(y=S*32.065*10/699.88+Litter_All_HNB$S/699.88, color="S", linetype="S"))+
-  scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
+   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
   theme_classic2()+
   labs(color  = "Species", linetype="Species")+
   geom_hline(yintercept= 1)+
@@ -777,11 +937,54 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   labs(x="Year", y="Change in Nutrient Pool Size")+
   theme(plot.title = element_text(hjust = 0.5))
 
+Color_C<-c(expression(C[Litter]),expression(C[SOM]))
+
+C_LNS<-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_LNB<-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("Low N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+C_HNS<-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Sedimentary")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+C_HNB<-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color="CLit"))+
+  ggtitle("High N Basalt")+
+  labs(x="Year", y="Soil C Storage (Mg/ha)", color='C Pool')+
+  scale_color_manual(values=c("red", "green"),label = Color_C)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+
 # Aggregate
 
-ggarrange(HNB, LNB, HNS, LNS, labels=c("A", "B", "C", "D"),
+ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="C_Pool.png", height=1000, width=1000, res=100)
+
+ggarrange(LNS, HNS, LNB, HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   ggexport(filename="Nutrient_Pool.png", height=1000, width=1000, res=100)
+
 ```
 
 
