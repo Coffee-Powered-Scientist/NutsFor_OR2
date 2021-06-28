@@ -6,7 +6,7 @@
 #Need to note units for different files, they are in different goddamn units
 rm(list = ls())
 
-setwd("~/Project_Master/Test_Rep/Output/WhatIF/HN_SED/80_BO/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data")
 
 library(dplyr)
 library(tidyverse)
@@ -14,7 +14,7 @@ library(lubridate)
 library(car)
 
 #Reads all files in folder at once, then 
-files <- list.files(path = "~/WHATIF/NutsforSEDHN/80_BO/Output data/Weathering", pattern = "Layer", full.names = TRUE)
+files <- list.files(path = "~/NutsforSEDHN/80_BO/Output data/Weathering", pattern = "Layer", full.names = TRUE)
 
 Weathering_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
@@ -43,13 +43,13 @@ Weathering_All<-Weathering_All[-c(2:10)]
 
 Weathering_All$group_id <- Weathering_All %>% 
   group_by(id)%>%
-    group_indices(id)
+  group_indices(id)
 
 
 Weathering_All$group_id<- as.character(Weathering_All$group_id)
-  
+
 Weathering_All<- Weathering_All %>%
-      mutate(group_id=recode(group_id, "'1'='Layer 1' ; '2'='Layer 2' ; 
+  mutate(group_id=recode(group_id, "'1'='Layer 1' ; '2'='Layer 2' ; 
                                               '3'='Layer 3' ; '4'='Layer 4'; '5'='Layer 5'; '6'='Layer 6'; 
                                               '7'='Layer 7'; '8'='Layer 8'"))
 
@@ -58,3 +58,4 @@ Weathering_All<-Weathering_All %>% mutate(Date=make_date(YEAR,Month))
 
 #write csv
 write.csv2(Weathering_All, "Weathering_All.csv", row.names=TRUE)
+

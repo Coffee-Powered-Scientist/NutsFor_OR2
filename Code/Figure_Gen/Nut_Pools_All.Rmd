@@ -65,8 +65,8 @@ label_color<-c("Ca", "Mg", "K", expression(N[O]), expression(P[O]), expression(S
 LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
-  geom_line(SOM_LNS, mapping=aes(y=N*14*10/9340.759+Litter_All_LNS$N/9340.759, color="N", linetype="N"))+
-  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/668.52+Litter_All_LNS$P/668.52, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/667.97+Litter_All_LNS$P/667.97, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
@@ -75,7 +75,9 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_hline(yintercept= 1)+
   ggtitle("LN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNS Break
 
@@ -107,7 +109,7 @@ CEC_HNS$Date<-as.Date(CEC_HNS$Date)
 
 HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
-  geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
+  geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color="K", linetype="K"))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
@@ -118,7 +120,9 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_hline(yintercept= 1)+
   ggtitle("HN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # LNB Break
 
@@ -161,7 +165,9 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_hline(yintercept= 1)+
   ggtitle("LN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5) , legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
+  theme(plot.title = element_text(hjust = 0.5) , legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+         
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNB Break 
 
@@ -204,7 +210,9 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_hline(yintercept= 1)+
   ggtitle("HN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 
 # BEEMP
@@ -313,8 +321,8 @@ CEC_LNS$Date<-as.Date(CEC_LNS$Date)
 LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
-  geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
-  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/667.97+Litter_All_LNS$P/667.97, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
@@ -323,7 +331,9 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_hline(yintercept= 1)+
   ggtitle("LN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNS Break
 
@@ -355,7 +365,7 @@ CEC_HNS$Date<-as.Date(CEC_HNS$Date)
 
 HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
-  geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
+  geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color="K", linetype="K"))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
@@ -366,7 +376,9 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_hline(yintercept= 1)+
   ggtitle("HN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # LNB Break
 
@@ -409,7 +421,9 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_hline(yintercept= 1)+
   ggtitle("LN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNB Break 
 
@@ -452,7 +466,9 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_hline(yintercept= 1)+
   ggtitle("HN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 Color_C<-c(expression(C[Litter]),expression(C[SOM]))
 
@@ -488,6 +504,36 @@ C_HNB<-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_l
   scale_color_manual(values=c("red", "green"),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
+
+Ca_LNB<-CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286
+Ca_LNS<-CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915
+Ca_HNS<-CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037
+Ca_HNB<-CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
+
+Mg_LNS<-CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663
+Mg_LNB<-CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168
+Mg_HNS<-CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244
+Mg_HNB<-CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2
+
+K_HNS<-CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207
+N_HNS<-SOM_HNS$N*14*10/22247.05+Litter_All_HNS$N/22247.05
+P_HNS <-SOM_HNS$P*30.974*10/2214+Litter_All_HNS$P/2214
+S_HNS<-SOM_HNS$S*32.065*10/1271.698+Litter_All_HNS$S/1271.698
+
+K_LNB<-CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967
+N_LNB<-SOM_LNB$N*14*10/9205.251+Litter_All_LNB$N/9205.251
+P_LNB<-SOM_LNB$P*30.974*10/643.33+Litter_All_LNB$P/643.33
+S_LNB<-SOM_LNB$S*32.065*10/824.22+Litter_All_LNB$S/824.22
+
+K_HNB<-CEC_HNB$K/163.11+Litter_All_HNB$K/163.11
+N_HNB<-SOM_HNB$N*14*10/16757+Litter_All_HNB$N/16757
+P_HNB<-SOM_HNB$P*30.974*10/1242.458+Litter_All_HNB$P/1242.458
+S_HNB<-SOM_HNB$S*32.065*10/699.88+Litter_All_HNB$S/699.88
+
+K_LNS<-CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840
+N_LNS <-SOM_LNS$N*14*10/8263+Litter_All_LNS$N/8263
+P_LNS<-SOM_LNS$P*30.974*10/586.2+Litter_All_LNS$P/586.2
+S_LNS<-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 
 
@@ -555,8 +601,8 @@ CEC_LNS$Date<-as.Date(CEC_LNS$Date)
 LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
-  geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
-  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/667.97+Litter_All_LNS$P/667.97, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
@@ -565,7 +611,9 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_hline(yintercept= 1)+
   ggtitle("LN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNS Break
 
@@ -597,7 +645,7 @@ CEC_HNS$Date<-as.Date(CEC_HNS$Date)
 
 HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
-  geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
+  geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color="K", linetype="K"))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
@@ -608,7 +656,9 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_hline(yintercept= 1)+
   ggtitle("HN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # LNB Break
 
@@ -642,7 +692,7 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color="K", linetype="K"))+
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color="N", linetype="N"))+
-  geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/643.33+Litter_All_LNB$P/643.33, color="P", linetype="P"))+
+  geom_line(SOM_LNB, mapping=aes(y=P*30.974*10/667.97+Litter_All_LNS$P/667.97, color="P", linetype="P"))+
   geom_line(SOM_LNB, mapping=aes(y=S*32.065*10/824.22+Litter_All_LNB$S/824.22, color="S", linetype="S"))+
    scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
@@ -651,7 +701,9 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_hline(yintercept= 1)+
   ggtitle("LN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNB Break 
 
@@ -694,7 +746,9 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_hline(yintercept= 1)+
   ggtitle("HN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 Color_C<-c(expression(C[Litter]),expression(C[SOM]))
 
@@ -732,6 +786,35 @@ C_HNB<-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_l
   theme(plot.title = element_text(hjust = 0.5))
 
 
+Ca_LNB<-CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286
+Ca_LNS<-CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915
+Ca_HNS<-CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037
+Ca_HNB<-CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
+
+Mg_LNS<-CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663
+Mg_LNB<-CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168
+Mg_HNS<-CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244
+Mg_HNB<-CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2
+
+K_HNS<-CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207
+N_HNS<-SOM_HNS$N*14*10/22247.05+Litter_All_HNS$N/22247.05
+P_HNS <-SOM_HNS$P*30.974*10/2214+Litter_All_HNS$P/2214
+S_HNS<-SOM_HNS$S*32.065*10/1271.698+Litter_All_HNS$S/1271.698
+
+K_LNB<-CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967
+N_LNB<-SOM_LNB$N*14*10/9205.251+Litter_All_LNB$N/9205.251
+P_LNB<-SOM_LNB$P*30.974*10/643.33+Litter_All_LNB$P/643.33
+S_LNB<-SOM_LNB$S*32.065*10/824.22+Litter_All_LNB$S/824.22
+
+K_HNB<-CEC_HNB$K/163.11+Litter_All_HNB$K/163.11
+N_HNB<-SOM_HNB$N*14*10/16757+Litter_All_HNB$N/16757
+P_HNB<-SOM_HNB$P*30.974*10/1242.458+Litter_All_HNB$P/1242.458
+S_HNB<-SOM_HNB$S*32.065*10/699.88+Litter_All_HNB$S/699.88
+
+K_LNS<-CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840
+N_LNS <-SOM_LNS$N*14*10/8263+Litter_All_LNS$N/8263
+P_LNS<-SOM_LNS$P*30.974*10/586.2+Litter_All_LNS$P/586.2
+S_LNS<-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 
 # Aggregate
@@ -796,8 +879,8 @@ CEC_LNS$Date<-as.Date(CEC_LNS$Date)
 LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color="Mg", linetype="Mg"))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color="K", linetype="K"))+
-  geom_line(SOM_LNS, mapping=aes(y=N*14*10/8263+Litter_All_LNS$N/8263, color="N", linetype="N"))+
-  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/586.2+Litter_All_LNS$P/586.2, color="P", linetype="P"))+
+  geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color="N", linetype="N"))+
+  geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/667.97+Litter_All_LNS$P/667.97, color="P", linetype="P"))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color="S", linetype="S"))+
    scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"), label=label_color)+
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"), label=label_color)+
@@ -806,7 +889,9 @@ LNS<-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.91
   geom_hline(yintercept= 1)+
   ggtitle("LN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNS Break
 
@@ -838,7 +923,7 @@ CEC_HNS$Date<-as.Date(CEC_HNS$Date)
 
 HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color="Ca", linetype="Ca")) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color="Mg", linetype="Mg"))+
-  geom_line(aes(y=CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207, color="K", linetype="K"))+
+  geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color="K", linetype="K"))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color="N", linetype="N"))+
   geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color="P", linetype="P"))+
   geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color="S", linetype="S"))+
@@ -849,7 +934,9 @@ HNS<-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.403
   geom_hline(yintercept= 1)+
   ggtitle("HN Sedimentary")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # LNB Break
 
@@ -892,7 +979,9 @@ LNB<-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.28
   geom_hline(yintercept= 1)+
   ggtitle("LN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 # HNB Break 
 
@@ -935,7 +1024,9 @@ HNB<-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, c
   geom_hline(yintercept= 1)+
   ggtitle("HN Basalt")+
   labs(x="Year", y="Change in Nutrient Pool Size")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=15))+          
+  scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
+  coord_cartesian(ylim = c(0, 1.5))
 
 Color_C<-c(expression(C[Litter]),expression(C[SOM]))
 
@@ -971,6 +1062,36 @@ C_HNB<-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color="CSOM"))+geom_l
   scale_color_manual(values=c("red", "green"),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
+
+Ca_LNB<-CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286
+Ca_LNS<-CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915
+Ca_HNS<-CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037
+Ca_HNB<-CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
+
+Mg_LNS<-CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663
+Mg_LNB<-CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168
+Mg_HNS<-CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244
+Mg_HNB<-CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2
+
+K_HNS<-CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207
+N_HNS<-SOM_HNS$N*14*10/22247.05+Litter_All_HNS$N/22247.05
+P_HNS <-SOM_HNS$P*30.974*10/2214+Litter_All_HNS$P/2214
+S_HNS<-SOM_HNS$S*32.065*10/1271.698+Litter_All_HNS$S/1271.698
+
+K_LNB<-CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967
+N_LNB<-SOM_LNB$N*14*10/9205.251+Litter_All_LNB$N/9205.251
+P_LNB<-SOM_LNB$P*30.974*10/643.33+Litter_All_LNB$P/643.33
+S_LNB<-SOM_LNB$S*32.065*10/824.22+Litter_All_LNB$S/824.22
+
+K_HNB<-CEC_HNB$K/163.11+Litter_All_HNB$K/163.11
+N_HNB<-SOM_HNB$N*14*10/16757+Litter_All_HNB$N/16757
+P_HNB<-SOM_HNB$P*30.974*10/1242.458+Litter_All_HNB$P/1242.458
+S_HNB<-SOM_HNB$S*32.065*10/699.88+Litter_All_HNB$S/699.88
+
+K_LNS<-CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840
+N_LNS <-SOM_LNS$N*14*10/8263+Litter_All_LNS$N/8263
+P_LNS<-SOM_LNS$P*30.974*10/586.2+Litter_All_LNS$P/586.2
+S_LNS<-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 
 

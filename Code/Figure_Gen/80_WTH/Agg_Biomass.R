@@ -19,12 +19,9 @@ source("~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/TreeNut_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_WTH/TreeNut_Mutator.R")
 
-
 # Set Working Directory
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH")
-
-# 80_WTH LN SED
 
 WTH_80_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Tree_Nut_All.csv")
 
@@ -34,28 +31,33 @@ WTH_80_LNSED_H1<-WTH_80_LNSED %>%
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_LNSED_H2<- WTH_80_LNSED %>% 
-  filter(YEAR == "2148" & Month == "8") %>% 
+  filter(YEAR == "2147" & Month == "8") %>% 
   mutate(Harvest="H2", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_LNSED_H3<-WTH_80_LNSED %>%
-  filter(YEAR == "2231" & Month == "8") %>%
+  filter(YEAR == "2229" & Month == "8") %>%
   mutate(Harvest="H3", Rock_Type="Sedimentary", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_80_LNSED_H4<-WTH_80_LNSED %>% 
-  filter(YEAR == "2314" & Month == "8") %>% 
+  filter(YEAR == "2311" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_LNSED_H5<- WTH_80_LNSED %>% 
-  filter(YEAR == "2392" & Month == "8") %>% 
+  filter(YEAR == "2393" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Sedimentary", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_LNSED_H6<-WTH_80_LNSED %>%
-  filter(YEAR == "2480" & Month == "8") %>%
+  filter(YEAR == "2475" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Sedimentary", N="Low") %>%
+  select(Harvest, Rock_Type, N, matches ("DW"))
+
+WTH_80_LNSED_H7<-WTH_80_LNSED %>%
+  filter(YEAR == "2517" & Month == "12") %>%
+  mutate(Harvest="H7", Rock_Type="Sedimentary", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 
@@ -68,6 +70,7 @@ WTH_80_LNSED_H3_MELT<-melt(WTH_80_LNSED_H3, id.vars = c("Harvest", "Rock_Type", 
 WTH_80_LNSED_H4_MELT<-melt(WTH_80_LNSED_H4, id.vars = c("Harvest", "Rock_Type", "N")) 
 WTH_80_LNSED_H5_MELT<-melt(WTH_80_LNSED_H5, id.vars = c("Harvest", "Rock_Type", "N"))
 WTH_80_LNSED_H6_MELT<-melt(WTH_80_LNSED_H6, id.vars = c("Harvest", "Rock_Type", "N"))
+WTH_80_LNSED_H7_MELT<-melt(WTH_80_LNSED_H7, id.vars = c("Harvest", "Rock_Type", "N"))
 
 
 
@@ -81,28 +84,33 @@ WTH_80_LNBAS_H1<-WTH_80_LNBAS %>%
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_LNBAS_H2<- WTH_80_LNBAS %>% 
-  filter(YEAR == "2148" & Month == "8") %>% 
+  filter(YEAR == "2147" & Month == "8") %>% 
   mutate(Harvest="H2", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_LNBAS_H3<-WTH_80_LNBAS %>%
-  filter(YEAR == "2231" & Month == "8") %>%
+  filter(YEAR == "2229" & Month == "8") %>%
   mutate(Harvest="H3", Rock_Type="Basalt", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_80_LNBAS_H4<-WTH_80_LNBAS %>% 
-  filter(YEAR == "2314" & Month == "8") %>% 
+  filter(YEAR == "2311" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_LNBAS_H5<- WTH_80_LNBAS %>% 
-  filter(YEAR == "2392" & Month == "8") %>% 
+  filter(YEAR == "2393" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Basalt", N="Low") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_LNBAS_H6<-WTH_80_LNBAS %>%
-  filter(YEAR == "2480" & Month == "8") %>%
+  filter(YEAR == "2475" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Basalt", N="Low") %>%
+  select(Harvest, Rock_Type, N, matches ("DW"))
+
+WTH_80_LNBAS_H7<-WTH_80_LNBAS %>%
+  filter(YEAR == "2517" & Month == "12") %>%
+  mutate(Harvest="H7", Rock_Type="Basalt", N="Low") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 
@@ -115,6 +123,7 @@ WTH_80_LNBAS_H3_MELT<-melt(WTH_80_LNBAS_H3, id.vars = c("Harvest", "Rock_Type", 
 WTH_80_LNBAS_H4_MELT<-melt(WTH_80_LNBAS_H4, id.vars = c("Harvest", "Rock_Type", "N")) 
 WTH_80_LNBAS_H5_MELT<-melt(WTH_80_LNBAS_H5, id.vars = c("Harvest", "Rock_Type", "N"))
 WTH_80_LNBAS_H6_MELT<-melt(WTH_80_LNBAS_H6, id.vars = c("Harvest", "Rock_Type", "N"))
+WTH_80_LNBAS_H7_MELT<-melt(WTH_80_LNBAS_H7, id.vars = c("Harvest", "Rock_Type", "N"))
 
 
 
@@ -129,29 +138,36 @@ WTH_80_HNBAS_H1<-WTH_80_HNBAS %>%
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_HNBAS_H2<- WTH_80_HNBAS %>% 
-  filter(YEAR == "2148" & Month == "8") %>% 
+  filter(YEAR == "2147" & Month == "8") %>% 
   mutate(Harvest="H2", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_HNBAS_H3<-WTH_80_HNBAS %>%
-  filter(YEAR == "2231" & Month == "8") %>%
+  filter(YEAR == "2229" & Month == "8") %>%
   mutate(Harvest="H3", Rock_Type="Basalt", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_80_HNBAS_H4<-WTH_80_HNBAS %>% 
-  filter(YEAR == "2314" & Month == "8") %>% 
+  filter(YEAR == "2311" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_HNBAS_H5<- WTH_80_HNBAS %>% 
-  filter(YEAR == "2392" & Month == "8") %>% 
+  filter(YEAR == "2393" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Basalt", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_HNBAS_H6<-WTH_80_HNBAS %>%
-  filter(YEAR == "2480" & Month == "8") %>%
+  filter(YEAR == "2475" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Basalt", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
+
+WTH_80_HNBAS_H7<-WTH_80_HNBAS %>%
+  filter(YEAR == "2517" & Month == "12") %>%
+  mutate(Harvest="H7", Rock_Type="Basalt", N="High") %>%
+  select(Harvest, Rock_Type, N, matches ("DW"))
+
+
 
 
 
@@ -161,6 +177,7 @@ WTH_80_HNBAS_H3_MELT<-melt(WTH_80_HNBAS_H3, id.vars = c("Harvest", "Rock_Type", 
 WTH_80_HNBAS_H4_MELT<-melt(WTH_80_HNBAS_H4, id.vars = c("Harvest", "Rock_Type", "N")) 
 WTH_80_HNBAS_H5_MELT<-melt(WTH_80_HNBAS_H5, id.vars = c("Harvest", "Rock_Type", "N"))
 WTH_80_HNBAS_H6_MELT<-melt(WTH_80_HNBAS_H6, id.vars = c("Harvest", "Rock_Type", "N"))
+WTH_80_HNBAS_H7_MELT<-melt(WTH_80_HNBAS_H7, id.vars = c("Harvest", "Rock_Type", "N"))
 
 # 80 WTH HN SED
 
@@ -172,29 +189,35 @@ WTH_80_HNSED_H1<-WTH_80_HNSED %>%
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_HNSED_H2<- WTH_80_HNSED %>% 
-  filter(YEAR == "2148" & Month == "8") %>% 
+  filter(YEAR == "2147" & Month == "8") %>% 
   mutate(Harvest="H2", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_HNSED_H3<-WTH_80_HNSED %>%
-  filter(YEAR == "2231" & Month == "8") %>%
+  filter(YEAR == "2229" & Month == "8") %>%
   mutate(Harvest="H3", Rock_Type="Sedimentary", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
 
 WTH_80_HNSED_H4<-WTH_80_HNSED %>% 
-  filter(YEAR == "2314" & Month == "8") %>% 
+  filter(YEAR == "2311" & Month == "8") %>% 
   mutate(Harvest="H4", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N,matches("DW"))
 
 WTH_80_HNSED_H5<- WTH_80_HNSED %>% 
-  filter(YEAR == "2392" & Month == "8") %>% 
+  filter(YEAR == "2393" & Month == "8") %>% 
   mutate(Harvest="H5", Rock_Type="Sedimentary", N="High") %>% 
   select(Harvest,Rock_Type ,N, matches("DW"))
 
 WTH_80_HNSED_H6<-WTH_80_HNSED %>%
-  filter(YEAR == "2480" & Month == "8") %>%
+  filter(YEAR == "2475" & Month == "8") %>%
   mutate(Harvest="H6", Rock_Type="Sedimentary", N="High") %>%
   select(Harvest, Rock_Type, N, matches ("DW"))
+
+WTH_80_HNSED_H7<-WTH_80_HNSED %>%
+  filter(YEAR == "2517" & Month == "12") %>%
+  mutate(Harvest="H7", Rock_Type="Sedimentary", N="High") %>%
+  select(Harvest, Rock_Type, N, matches ("DW"))
+
 
 
 
@@ -205,16 +228,17 @@ WTH_80_HNSED_H3_MELT<-melt(WTH_80_HNSED_H3, id.vars = c("Harvest", "Rock_Type", 
 WTH_80_HNSED_H4_MELT<-melt(WTH_80_HNSED_H4, id.vars = c("Harvest", "Rock_Type", "N")) 
 WTH_80_HNSED_H5_MELT<-melt(WTH_80_HNSED_H5, id.vars = c("Harvest", "Rock_Type", "N"))
 WTH_80_HNSED_H6_MELT<-melt(WTH_80_HNSED_H6, id.vars = c("Harvest", "Rock_Type", "N"))
+WTH_80_HNSED_H7_MELT<-melt(WTH_80_HNSED_H7, id.vars = c("Harvest", "Rock_Type", "N"))
 
 
 
 # BIND, SET, RUCK!!!!
 
 Biomass_Master<-rbind(WTH_80_LNSED_H1_MELT, WTH_80_LNSED_H2_MELT, WTH_80_LNSED_H3_MELT, WTH_80_LNSED_H4_MELT,
-                      WTH_80_LNSED_H5_MELT, WTH_80_LNSED_H6_MELT, WTH_80_HNSED_H1_MELT, WTH_80_HNSED_H2_MELT, WTH_80_HNSED_H3_MELT, WTH_80_HNSED_H4_MELT,
-                      WTH_80_HNSED_H5_MELT, WTH_80_HNSED_H6_MELT,WTH_80_HNBAS_H1_MELT, WTH_80_HNBAS_H2_MELT, WTH_80_HNBAS_H3_MELT, WTH_80_HNBAS_H4_MELT,
-                      WTH_80_HNBAS_H5_MELT, WTH_80_HNBAS_H6_MELT, WTH_80_LNBAS_H1_MELT, WTH_80_LNBAS_H2_MELT, WTH_80_LNBAS_H3_MELT, WTH_80_LNBAS_H4_MELT,
-                      WTH_80_LNBAS_H5_MELT, WTH_80_LNBAS_H6_MELT)
+                      WTH_80_LNSED_H5_MELT, WTH_80_LNSED_H6_MELT,WTH_80_LNSED_H7_MELT ,WTH_80_HNSED_H1_MELT, WTH_80_HNSED_H2_MELT, WTH_80_HNSED_H3_MELT, WTH_80_HNSED_H4_MELT,
+                      WTH_80_HNSED_H5_MELT, WTH_80_HNSED_H6_MELT,WTH_80_HNSED_H7_MELT,WTH_80_HNBAS_H1_MELT, WTH_80_HNBAS_H2_MELT, WTH_80_HNBAS_H3_MELT, WTH_80_HNBAS_H4_MELT,
+                      WTH_80_HNBAS_H5_MELT, WTH_80_HNBAS_H6_MELT, WTH_80_HNBAS_H7_MELT,WTH_80_LNBAS_H1_MELT, WTH_80_LNBAS_H2_MELT, WTH_80_LNBAS_H3_MELT, WTH_80_LNBAS_H4_MELT,
+                      WTH_80_LNBAS_H5_MELT, WTH_80_LNBAS_H6_MELT, WTH_80_LNBAS_H7_MELT)
 
 Biomass_Master$Harvest<-factor(Biomass_Master$Harvest, levels=c("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "H11"))
 Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Brk", "DW_Brh", "DW_Bol"))
@@ -222,6 +246,8 @@ Biomass_Master$variable<-factor(Biomass_Master$variable, levels=c("DW_F", "DW_Br
 Biomass_Master$N<-factor(Biomass_Master$N, levels=c("Low", "High"))
 
 Biomass_Master$Rock_Type<-factor(Biomass_Master$Rock_Type, levels=c("Sedimentary", "Basalt"))
+
+write.csv(Biomass_Master, "Biomass_Master.csv")
 
 
 # Graphs
@@ -236,7 +262,9 @@ WTH_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decr
   guides(fill = guide_legend(reverse=FALSE))+ 
   scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "Bole"))+
   theme_bw()+
-  theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=18))
+  theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=18))+
+  geom_hline(yintercept = 938.92835, color="blue")+
+  geom_hline(yintercept = 585, color="red")
 
 
 #Check
@@ -247,5 +275,6 @@ WTH_Aggregated_Biomass
 png("WTH_Biomass.png", height=750, width=1000, res=100)
 print(WTH_Aggregated_Biomass)
 dev.off()
+
 
 

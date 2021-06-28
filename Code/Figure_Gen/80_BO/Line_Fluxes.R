@@ -35,9 +35,26 @@ N_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=N_UP, color=
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=N_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=NO3+NH4, color="Leached"))+
   labs(y="N Fluxes (kg/ha/yr)", x="Year", color="Process")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple"))+
   theme_classic()+
-  ggtitle("LN Sedimentary", subtitle = "40 BO")+
-  theme(plot.title = element_text(hjust = 0.5))
+  ggtitle("LN Sedimentary")+
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),    
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),    
+        axis.text.x = element_text(size=12, face="bold", colour = "black"), 
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(15, 30, 45, 60, 75, 90))+
+  coord_cartesian(ylim = c(0, 80))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
+
 
 Ca_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=Ca_LF, color="Litterfall"))+
@@ -47,9 +64,24 @@ Ca_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, colo
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=Ca_WTH, color="Weathered"))+
   labs(y="Ca Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("LN Sedimentary", subtitle = "40 BO")+
+  ggtitle("LN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),
+        axis.text.x = element_text(size=12, face="bold", colour = "black"), 
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(5,10, 15, 20))+
+  coord_cartesian(ylim = c(0, 20))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 
 Mg_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, color="Uptake"))+geom_line()+
@@ -60,9 +92,24 @@ Mg_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, colo
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=Mg_WTH, color="Weathered"))+
   labs(y="Mg Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("LN Sedimentary", subtitle = "40 BO")+
+  ggtitle("LN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),
+        axis.title.y = element_text(size=12, face="bold", colour = "black"), 
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(1,2,3,4, 5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 K_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=K_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=K_LF, color="Litterfall"))+
@@ -72,9 +119,24 @@ K_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=K_UP, color=
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
   labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("LN Sedimentary", subtitle = "40 BO")+
+  ggtitle("LN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
+  coord_cartesian(ylim = c(0, 30))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  ) 
 
 S_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=S_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=S_LF, color="Litterfall"))+
@@ -82,12 +144,26 @@ S_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=S_UP, color=
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=S_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=SO4, color="Leached"))+
   #geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=S_WTH, color="Weathered"))+
-  labs(y="S Fluxes (Kg/ha/yr)", x="Year", color="Srocess")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacS"))+
-  ggtitle("LN Sedimentary", subtitle = "40 BO")+
+  labs(y="S Fluxes (kg/ha/yr)", x="Year", color="Srocess")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  ggtitle("LN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
-
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
+  coord_cartesian(ylim = c(0, 10))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 
 P_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=P_UP, color="Uptake"))+geom_line()+
@@ -95,13 +171,27 @@ P_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=P_UP, color=
   geom_line(aes(y=P_Minz, color="Mineralization"))+
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=1, color="Deposition"))+
   geom_line(subset(Leaching_8_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=P, color="Leached"))+
-  #geom_line(subset(Abov_Flux_LNP, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
-  labs(y="P Fluxes (Kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacP"))+
-  ggtitle("LN Sedimentary", subtitle = "40 BO")+
+  geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
+  labs(y="P Fluxes (kg/ha/yr)", x="Year", color="Process")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  ggtitle("LN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
-
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),            
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(1,2, 3, 4, 5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 # HN SED
 
@@ -127,9 +217,25 @@ N_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=N_UP, color=
   geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=N_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=NO3+NH4, color="Leached"))+
   labs(y="N Fluxes (kg/ha/yr)", x="Year", color="Process")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
   theme_classic()+
-  ggtitle("HN Sedimentary", subtitle = "40 BO")+
-  theme(plot.title = element_text(hjust = 0.5))
+  ggtitle("HN Sedimentary")+
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),        
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(15, 30, 45, 60, 75, 90))+
+  coord_cartesian(ylim = c(0, 80))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 Ca_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=Ca_LF, color="Litterfall"))+
@@ -139,9 +245,24 @@ Ca_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, colo
   geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=Ca_WTH, color="Weathered"))+
   labs(y="Ca Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Sedimentary", subtitle = "40 BO")+
+  ggtitle("HN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
+  coord_cartesian(ylim = c(0, 20))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 
 Mg_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, color="Uptake"))+geom_line()+
@@ -152,9 +273,24 @@ Mg_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, colo
   geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=Mg_WTH, color="Weathered"))+
   labs(y="Mg Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Sedimentary", subtitle = "40 BO")+
+  ggtitle("HN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),        
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(1,2,3,4,5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 K_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=K_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=K_LF, color="Litterfall"))+
@@ -164,9 +300,24 @@ K_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=K_UP, color=
   geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
   labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Sedimentary", subtitle = "40 BO")+
+  ggtitle("HN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
+  coord_cartesian(ylim = c(0, 30))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 S_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=S_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=S_LF, color="Litterfall"))+
@@ -176,9 +327,24 @@ S_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=S_UP, color=
   #geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=S_WTH, color="Weathered"))+
   labs(y="S Fluxes (Kg/ha/yr)", x="Year", color="Srocess")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacS"))+
-  ggtitle("HN Sedimentary", subtitle = "40 BO")+
+  ggtitle("HN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),    
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),           
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),           
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),         
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
+  coord_cartesian(ylim = c(0, 10))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 
 
@@ -187,12 +353,27 @@ P_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=P_UP, color=
   geom_line(aes(y=P_Minz, color="Mineralization"))+
   geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=1, color="Deposition"))+
   geom_line(subset(Leaching_8_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=P, color="Leached"))+
-  #geom_line(subset(Abov_Flux_HNP, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
+  geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
   labs(y="P Fluxes (Kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacP"))+
-  ggtitle("HN Sedimentary", subtitle = "40 BO")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  ggtitle("HN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),            
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(1,2, 3, 4, 5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 # LN BAS
 
@@ -218,9 +399,25 @@ N_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=N_UP, color=
   geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=N_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=NO3+NH4, color="Leached"))+
   labs(y="N Fluxes (kg/ha/yr)", x="Year", color="Process")+
-  ggtitle("LN Basalt", subtitle = "40 BO")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple"))+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  ggtitle("LN Basalt")+
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(15, 30, 45, 60, 75, 90))+
+  coord_cartesian(ylim = c(0, 80))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 Ca_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=Ca_LF, color="Litterfall"))+
@@ -230,9 +427,25 @@ Ca_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, colo
   geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=Ca_WTH, color="Weathered"))+
   labs(y="Ca Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("LN Basalt", subtitle = "40 BO")+
+  ggtitle("LN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),        
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),            
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
+  coord_cartesian(ylim = c(0, 20))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
+
 
 
 Mg_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, color="Uptake"))+geom_line()+
@@ -243,9 +456,24 @@ Mg_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, colo
   geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=Mg_WTH, color="Weathered"))+
   labs(y="Mg Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("LN Basalt", subtitle = "40 BO")+
+  ggtitle("LN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(1,2,3,4,5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 K_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=K_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=K_LF, color="Litterfall"))+
@@ -255,9 +483,24 @@ K_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=K_UP, color=
   geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
   labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("LN Basalt", subtitle = "40 BO")+
+  ggtitle("LN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),        
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),         
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
+  coord_cartesian(ylim = c(0, 30))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 S_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=S_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=S_LF, color="Litterfall"))+
@@ -267,9 +510,25 @@ S_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=S_UP, color=
   #geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=S_WTH, color="Weathered"))+
   labs(y="S Fluxes (Kg/ha/yr)", x="Year", color="Srocess")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacS"))+
-  ggtitle("LN Basalt", subtitle = "40 BO")+
+  ggtitle("LN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),            
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
+  coord_cartesian(ylim = c(0, 10))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
+
 
 
 
@@ -278,12 +537,27 @@ P_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=P_UP, color=
   geom_line(aes(y=P_Minz, color="Mineralization"))+
   geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=1, color="Deposition"))+
   geom_line(subset(Leaching_8_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=P, color="Leached"))+
-  #geom_line(subset(Abov_Flux_HNP, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
+  geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
   labs(y="P Fluxes (Kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacP"))+
-  ggtitle("LN Basalt", subtitle = "40 BO")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  ggtitle("LN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),         
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(1,2, 3, 4, 5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 # HN BAS
 
@@ -309,9 +583,25 @@ N_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=N_UP, color=
   geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=N_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=NO3+NH4, color="Leached"))+
   labs(y="N Fluxes (kg/ha/yr)", x="Year", color="Process")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple"))+
   theme_classic()+
-  ggtitle("HN Basalt", subtitle = "40 BO")+
-  theme(plot.title = element_text(hjust = 0.5))
+  ggtitle("HN Basalt")+
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),         
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(15, 30, 45, 60, 75, 90))+
+  coord_cartesian(ylim = c(0, 80))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 Ca_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=Ca_LF, color="Litterfall"))+
@@ -321,9 +611,24 @@ Ca_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, colo
   geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=Ca_WTH, color="Weathered"))+
   labs(y="Ca Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Basalt", subtitle = "40 BO")+
+  ggtitle("HN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),         
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
+  coord_cartesian(ylim = c(0, 20))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 
 Mg_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, color="Uptake"))+geom_line()+
@@ -334,9 +639,24 @@ Mg_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, colo
   geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=Mg_WTH, color="Weathered"))+
   labs(y="Mg Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Basalt", subtitle = "40 BO")+
+  ggtitle("HN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(1,2,3,4,5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 K_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=K_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=K_LF, color="Litterfall"))+
@@ -346,9 +666,24 @@ K_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=K_UP, color=
   geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
   labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Basalt", subtitle = "40 BO")+
+  ggtitle("HN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),            
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
+  coord_cartesian(ylim = c(0, 30))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 S_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=S_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=S_LF, color="Litterfall"))+
@@ -358,23 +693,53 @@ S_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=S_UP, color=
   #geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=S_WTH, color="Weathered"))+
   labs(y="S Fluxes (Kg/ha/yr)", x="Year", color="Srocess")+
   scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacS"))+
-  ggtitle("HN Basalt", subtitle = "40 BO")+
+  ggtitle("HN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),        
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),            
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
+  coord_cartesian(ylim = c(0, 10))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
 
 
-
-P_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=P_UP, color="Uptake"))+geom_line()+
+P_HNB<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=P_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=P_LF, color="Litterfall"))+
   geom_line(aes(y=P_Minz, color="Mineralization"))+
   geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=1, color="Deposition"))+
   geom_line(subset(Leaching_8_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=P, color="Leached"))+
-  #geom_line(subset(Abov_Flux_HNP, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
+  geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=P_WTH, color="Weathered"))+
   labs(y="P Fluxes (Kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "blacP"))+
-  ggtitle("HN Basalt", subtitle = "40 BO")+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  ggtitle("HN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
+  scale_y_continuous(breaks=c(1,2, 3, 4, 5))+
+  coord_cartesian(ylim = c(0, 5))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
+
 
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_BO")

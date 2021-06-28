@@ -27,5 +27,7 @@ source("~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/Above_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/Minz_Mutator.R")
 
+source("~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/Above_Ghost.R")
 
+source("~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/Plant_Pool_Ghost.R")
 

@@ -1,6 +1,8 @@
 
 # Master Updater
 
+rm(list = ls())
+
 source("~/Project_Master/Test_Rep/Code/LN_SED/Base/Updater.R")
 source("~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/Updater.R")
 source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Updater.R")

@@ -26,3 +26,7 @@ source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Plant_Pool_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Above_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Minz_Mutator.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Above_Ghost.R")
+
+source("~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/Plant_Pool_Ghost.R")

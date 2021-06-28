@@ -276,6 +276,11 @@ PO4_L2<-ggplot(subset(Test, variable %in% 'P' & Depth %in% '100 cm'), aes(x=Site
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-ggarrange(Ca_L1, Ca_L2, Mg_L1, Mg_L2, K_L1, K_L2,
-          ncol = 2, nrow = 3, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+ggarrange(Ca_L1, Ca_L2, Mg_L1, Mg_L2, K_L1, K_L2, NH4_L1, NH4_L2,
+          ncol = 2, nrow = 4, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   ggexport(filename="All_Cal_BC.png", height=1000, width=1000, res=100)
+
+
+ggarrange(NO3_L1, NO3_L2, PO4_L1, PO4_L2, SO4_L1, SO4_L2, 
+          ncol = 2, nrow = 3, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
+  ggexport(filename="All_Cal_AN.png", height=1000, width=1000, res=100)
