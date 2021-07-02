@@ -323,7 +323,7 @@ ggarrange(LNSED_All_Nut, HNSED_All_Nut ,LNBAS_All_Nut,HNBAS_All_Nut, labels=c("A
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1) %>%
   annotate_figure(left = textGrob(expression("Uptake Deficit ( kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                                     font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 WTH")) %>%
   ggexport(filename="QuadDiff.png", height=1000, width=1000, res=100)
 
 
@@ -331,5 +331,5 @@ ggarrange(LNSED_REL, HNSED_REL ,LNBAS_REL,HNBAS_REL, labels=c("A", "B", "C", "D"
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1) %>%
   annotate_figure(left = textGrob(expression("Uptake Deficit : Potential Uptake"), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 WTH")) %>%
   ggexport(filename="REL_Diff.png", height=1000, width=1000, res=100)
