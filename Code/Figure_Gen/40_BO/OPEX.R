@@ -122,7 +122,9 @@ N_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=N+SOM_LNS$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+ 
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=S+SOM_LNS$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNS, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -147,7 +149,9 @@ P_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=P+SOM_LNS$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
 # High N Break
@@ -248,7 +252,9 @@ N_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=N+SOM_HNS$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=S+SOM_HNS$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNS, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -273,7 +279,9 @@ P_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=P+SOM_HNS$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
 # Low N bas break
@@ -371,7 +379,9 @@ N_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=N+SOM_LNB$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=S+SOM_LNB$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNB, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -396,7 +406,9 @@ P_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=P+SOM_LNB$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 # High N bas break
 
@@ -495,7 +507,9 @@ N_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=N+SOM_HNB$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=S+SOM_HNB$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNB, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -520,7 +534,9 @@ P_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=P+SOM_HNB$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
 
@@ -528,14 +544,14 @@ ggarrange(Ca_LNS, Ca_HNS, Ca_LNB, Ca_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("Ca (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                     font.label = list(size = 14, color = "black", face = "bold"))),
-                    bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                    bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
   ggexport(filename="Ca_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(Mg_LNS, Mg_HNS, Mg_LNB, Mg_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("Mg (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
   ggexport(filename="Mg_OPEX.png", height=1000, width=1000, res=100)
 
 
@@ -543,26 +559,26 @@ ggarrange(K_LNS, K_HNS, K_LNB, K_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("K (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
   ggexport(filename="K_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(N_LNS, N_HNS, N_LNB, N_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("Ca (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("N (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
   ggexport(filename="N_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(S_LNS, S_HNS, S_LNB, S_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("S (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
   ggexport(filename="S_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(P_LNS, P_HNS, P_LNB, P_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("P (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
   ggexport(filename="P_OPEX.png", height=1000, width=1000, res=100)

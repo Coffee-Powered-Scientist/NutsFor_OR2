@@ -12,29 +12,29 @@ library(gridtext)
 library(gtable)
 library(cowplot)
 
-setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH")
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_BO")
 
 # Low N Break
 
-Bio_Cycle_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Bio_Cycle.csv")
+Bio_Cycle_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Bio_Cycle.csv")
 
-SOM_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/SOM.csv")
+SOM_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/SOM.csv")
 
-AEC_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/AEC_All.csv")
+AEC_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/AEC_All.csv")
 
 AEC_All_LNS$Year<-as.numeric(format(as.Date(AEC_All_LNS$Date), format = "%Y"))
 
 AEC_All_LNS$Month<-as.numeric(format(as.Date(AEC_All_LNS$Date), format = "%m"))
 
 
-AEC_All_LNS<-AEC_All_LNS %>% group_by(Year, Month)%>% select(-Date) %>% summarize(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
+AEC_All_LNS<-AEC_All_LNS %>% group_by(Year, Month)%>% select(-Date) %>% summarise(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
   filter(Month %in% 12)
 
 
-SOM_LNS<-SOM_LNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+SOM_LNS<-SOM_LNS %>%group_by(Year, Month)%>% select(-Date) %>% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
   mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 12)
 
-Tree_Nut_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Tree_Nut_All.csv")
+Tree_Nut_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
 
 Tree_Nut_LNS<-Tree_Nut_LNS %>% filter(Month %in% 12)
 
@@ -51,11 +51,11 @@ bottom <- textGrob("Time Steps (Years)", gp = gpar(fontsize = 20))
 
 
 
-PP_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Plant_Pool.csv")
+PP_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Plant_Pool.csv")
 
 
-CEC_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
-Litter_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+CEC_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
 
 Litter_All_LNS<-Litter_All_LNS %>% group_by(YEAR) %>% filter(Month %in% 12)
 
@@ -122,7 +122,9 @@ N_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=N+SOM_LNS$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=S+SOM_LNS$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNS, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -147,42 +149,44 @@ P_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=P+SOM_LNS$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
 # High N Break
 
-Bio_Cycle_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/Bio_Cycle.csv")
+Bio_Cycle_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Bio_Cycle.csv")
 
-SOM_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/SOM.csv")
+SOM_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/SOM.csv")
 
 
-AEC_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/AEC_All.csv")
+AEC_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/AEC_All.csv")
 
 AEC_All_HNS$Year<-SOM_HNS$Year
 
 AEC_All_HNS$Month<-SOM_HNS$Month
 
 
-AEC_All_HNS<-AEC_All_HNS %>% group_by(Year, Month)%>% select(-Date) %>% summarize(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
+AEC_All_HNS<-AEC_All_HNS %>% group_by(Year, Month)%>% select(-Date) %>% summarise(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
   filter(Month %in% 12)
 
 
-SOM_HNS<-SOM_HNS %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+SOM_HNS<-SOM_HNS %>%group_by(Year, Month)%>% select(-Date) %>% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
   mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 12)
 
-Tree_Nut_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/Tree_Nut_All.csv")
+Tree_Nut_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
 
 Tree_Nut_HNS<-Tree_Nut_HNS %>% filter(Month %in% 12)
 
 Tree_Nut_HNS$P_Brh<- as.numeric(Tree_Nut_HNS$P_Brh)
 
 
-PP_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/Plant_Pool.csv")
+PP_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Plant_Pool.csv")
 
 
-CEC_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
-Litter_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+CEC_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
 
 Litter_All_HNS<-Litter_All_HNS %>% group_by(YEAR) %>% filter(Month %in% 12)
 
@@ -248,7 +252,9 @@ N_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=N+SOM_HNS$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=S+SOM_HNS$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNS, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -273,40 +279,42 @@ P_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=P+SOM_HNS$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
 # Low N bas break
-Bio_Cycle_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Bio_Cycle.csv")
+Bio_Cycle_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Bio_Cycle.csv")
 
-SOM_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/SOM.csv")
+SOM_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/SOM.csv")
 
 
-AEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/AEC_All.csv")
+AEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/AEC_All.csv")
 
 AEC_All_LNB$Year<-SOM_LNB$Year
 
 AEC_All_LNB$Month<-SOM_LNB$Month
 
 
-AEC_All_LNB<-AEC_All_LNB %>% group_by(Year, Month)%>% select(-Date) %>% summarize(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
+AEC_All_LNB<-AEC_All_LNB %>% group_by(Year, Month)%>% select(-Date) %>% summarise(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
   filter(Month %in% 12)
 
 
-SOM_LNB<-SOM_LNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+SOM_LNB<-SOM_LNB %>%group_by(Year, Month)%>% select(-Date) %>% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
   mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 12)
 
-Tree_Nut_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
+Tree_Nut_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
 
 Tree_Nut_LNB<-Tree_Nut_LNB %>% filter(Month %in% 12)
 
 Tree_Nut_LNB$P_Brh<- as.numeric(Tree_Nut_LNB$P_Brh)
 
-PP_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Plant_Pool.csv")
+PP_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Plant_Pool.csv")
 
 
-CEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
-Litter_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+CEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
 
 Litter_All_LNB<-Litter_All_LNB %>% group_by(YEAR) %>% filter(Month %in% 12)
 
@@ -371,7 +379,9 @@ N_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=N+SOM_LNB$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=S+SOM_LNB$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNB, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -396,41 +406,43 @@ P_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=P+SOM_LNB$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 # High N bas break
 
-Bio_Cycle_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/Bio_Cycle.csv")
+Bio_Cycle_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Bio_Cycle.csv")
 
-SOM_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/SOM.csv")
+SOM_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/SOM.csv")
 
 
-AEC_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/AEC_All.csv")
+AEC_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/AEC_All.csv")
 
 AEC_All_HNB$Year<-SOM_HNB$Year
 
 AEC_All_HNB$Month<-SOM_HNB$Month
 
 
-AEC_All_HNB<-AEC_All_HNB %>% group_by(Year, Month)%>% select(-Date) %>% summarize(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
+AEC_All_HNB<-AEC_All_HNB %>% group_by(Year, Month)%>% select(-Date) %>% summarise(across(SO4:Cl, ~sum(.x, na.rm = TRUE)))%>%
   filter(Month %in% 12)
 
 
-SOM_HNB<-SOM_HNB %>%group_by(Year, Month)%>% select(-Date) %>% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
+SOM_HNB<-SOM_HNB %>%group_by(Year, Month)%>% select(-Date) %>% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %>%
   mutate(Date = make_date(Year, Month)) %>% filter(Month %in% 12)
 
-Tree_Nut_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
+Tree_Nut_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
 
 Tree_Nut_HNB<-Tree_Nut_HNB %>% filter(Month %in% 12)
 
 Tree_Nut_HNB$P_Brh<- as.numeric(Tree_Nut_HNB$P_Brh)
 
 
-PP_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/Plant_Pool.csv")
+PP_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Plant_Pool.csv")
 
 
-CEC_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/CEC_All.csv", header=TRUE)
-Litter_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/Litter_Pool.csv", header=TRUE)
+CEC_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/CEC_All.csv", header=TRUE)
+Litter_All_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Litter_Pool.csv", header=TRUE)
 
 Litter_All_HNB<-Litter_All_HNB %>% group_by(YEAR) %>% filter(Month %in% 12)
 
@@ -495,7 +507,9 @@ N_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=N+SOM_HNB$N*14*10, color="No"))+geom
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
+  coord_cartesian(ylim = c(0, 25000))
 
 S_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=S+SOM_HNB$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNB, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
@@ -520,22 +534,23 @@ P_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=P+SOM_HNB$P*30.97*10, color="So"))+g
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
-
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
 ggarrange(Ca_LNS, Ca_HNS, Ca_LNB, Ca_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("Ca (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                        font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="Ca_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(Mg_LNS, Mg_HNS, Mg_LNB, Mg_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("Mg (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                        font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="Mg_OPEX.png", height=1000, width=1000, res=100)
 
 
@@ -543,26 +558,26 @@ ggarrange(K_LNS, K_HNS, K_LNB, K_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("K (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                       font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="K_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(N_LNS, N_HNS, N_LNB, N_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("Ca (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
-                                                                                                       font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+  annotate_figure(left = textGrob(expression("N (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                                                                                                      font.label = list(size = 14, color = "black", face = "bold"))),
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="N_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(S_LNS, S_HNS, S_LNB, S_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("S (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                       font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="S_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(P_LNS, P_HNS, P_LNB, P_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("P (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                       font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="P_OPEX.png", height=1000, width=1000, res=100)

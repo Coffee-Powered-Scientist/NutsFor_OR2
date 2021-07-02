@@ -57,8 +57,8 @@ K_LNS<-ggplot()+geom_col(Leaching_LNS, mapping= aes(x="Leached", y=K, fill="Leac
   geom_col(Net_Removal_LNS, mapping=aes(x="Harvested", y=K_F*.01+K_Bol*.97+K_Brh*.01+K_Brk*.9, fill="Harvested"))+
   scale_fill_manual(values=c("dark red", "orange"))+labs(x=NULL, y=NULL, title="Low N Sedimentary", fill="Legend")+
   theme_classic2()+theme(plot.title = element_text(hjust = 0.5))+
-  scale_y_continuous(breaks=c(300, 600, 900))+
-  coord_cartesian(ylim = c(0, 900))
+  scale_y_continuous(breaks=c(300, 600, 900, 1200, 1500, 1800))+
+  coord_cartesian(ylim = c(0, 1800))
 
 S_LNS<-ggplot()+geom_col(Leaching_LNS, mapping= aes(x="Leached", y=SO4, fill="Leached"))+
   geom_col(Net_Removal_LNS, mapping=aes(x="Harvested", y=S_F*.01+S_Bol*.97+S_Brh*.01+S_Brk*.9, fill="Harvested"))+
@@ -133,8 +133,8 @@ K_HNS<-ggplot()+geom_col(Leaching_HNS, mapping= aes(x="Leached", y=K, fill="Leac
   geom_col(Net_Removal_HNS, mapping=aes(x="Harvested", y=K_F*.01+K_Bol*.97+K_Brh*.01+K_Brk*.9, fill="Harvested"))+
   scale_fill_manual(values=c("dark red", "orange"))+labs(x=NULL, y=NULL, title="High N Sedimentary", fill="Legend")+
   theme_classic2()+theme(plot.title = element_text(hjust = 0.5))+
-  scale_y_continuous(breaks=c(300, 600, 900))+
-  coord_cartesian(ylim = c(0, 900))
+  scale_y_continuous(breaks=c(300, 600, 900, 1200, 1500, 1800))+
+  coord_cartesian(ylim = c(0, 1800))
 
 S_HNS<-ggplot()+geom_col(Leaching_HNS, mapping= aes(x="Leached", y=SO4, fill="Leached"))+
   geom_col(Net_Removal_HNS, mapping=aes(x="Harvested", y=S_F*.01+S_Bol*.97+S_Brh*.01+S_Brk*.9, fill="Harvested"))+
@@ -206,8 +206,8 @@ K_LNB<-ggplot()+geom_col(Leaching_LNB, mapping= aes(x="Leached", y=K, fill="Leac
   geom_col(Net_Removal_LNB, mapping=aes(x="Harvested", y=K_F*.01+K_Bol*.97+K_Brh*.01+K_Brk*.9, fill="Harvested"))+
   scale_fill_manual(values=c("dark red", "orange"))+labs(x=NULL, y=NULL, title="Low N Basalt", fill="Legend")+
   theme_classic2()+theme(plot.title = element_text(hjust = 0.5))+
-  scale_y_continuous(breaks=c(300, 600, 900))+
-  coord_cartesian(ylim = c(0, 900))
+  scale_y_continuous(breaks=c(300, 600, 900, 1200, 1500, 1800))+
+  coord_cartesian(ylim = c(0, 1800))
 
 S_LNB<-ggplot()+geom_col(Leaching_LNB, mapping= aes(x="Leached", y=SO4, fill="Leached"))+
   geom_col(Net_Removal_LNB, mapping=aes(x="Harvested", y=S_F*.01+S_Bol*.97+S_Brh*.01+S_Brk*.9, fill="Harvested"))+
@@ -279,8 +279,8 @@ K_HNB<-ggplot()+geom_col(Leaching_HNB, mapping= aes(x="Leached", y=K, fill="Leac
   geom_col(Net_Removal_HNB, mapping=aes(x="Harvested", y=K_F*.01+K_Bol*.97+K_Brh*.01+K_Brk*.9, fill="Harvested"))+
   scale_fill_manual(values=c("dark red", "orange"))+labs(x=NULL, y=NULL, title="High N Basalt", fill="Legend")+
   theme_classic2()+theme(plot.title = element_text(hjust = 0.5))+
-  scale_y_continuous(breaks=c(300, 600, 900))+
-  coord_cartesian(ylim = c(0, 900))
+  scale_y_continuous(breaks=c(300, 600, 900, 1200, 1500, 1800))+
+  coord_cartesian(ylim = c(0, 1800))
 
 S_HNB<-ggplot()+geom_col(Leaching_HNB, mapping= aes(x="Leached", y=SO4, fill="Leached"))+
   geom_col(Net_Removal_HNB, mapping=aes(x="Harvested", y=S_F*.01+S_Bol*.97+S_Brh*.01+S_Brk*.9, fill="Harvested"))+
@@ -308,7 +308,7 @@ ggarrange(Ca_LNS, Ca_HNS, Ca_LNB, Ca_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("Ca Loss ( kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                              font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="Ca_Loss.png", height=1000, width=1000, res=100)
 
 
@@ -316,7 +316,7 @@ ggarrange(Mg_LNS, Mg_HNS, Mg_LNB, Mg_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("Mg Loss ( kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                              font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="Mg_Loss.png", height=1000, width=1000, res=100)
 
 
@@ -324,14 +324,14 @@ ggarrange(K_LNS, K_HNS, K_LNB, K_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("K Loss ( kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                             font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="K_Loss.png", height=1000, width=1000, res=100)
 
 ggarrange(S_LNS, S_HNS, S_LNB, S_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("S Loss ( kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                             font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="S_Loss.png", height=1000, width=1000, res=100)
 
 
@@ -339,7 +339,7 @@ ggarrange(P_LNS, P_HNS, P_LNB, P_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("P Loss ( kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                             font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="P_Loss.png", height=1000, width=1000, res=100)
 
 
@@ -347,5 +347,5 @@ ggarrange(N_LNS, N_HNS, N_LNB, N_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("N Loss ( kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                             font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3))) %>%
+                  bottom = textGrob("Loss Type", gp = gpar(cex = 1.3)), top=textGrob("80 BO")) %>%
   ggexport(filename="N_Loss.png", height=1000, width=1000, res=100)

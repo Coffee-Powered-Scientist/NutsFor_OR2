@@ -117,8 +117,9 @@ K_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=YEAR, y=K_UP, color=
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K, color="Leached"))+
   geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
+  geom_line(subset(Abov_Flux_LNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_THRU, color="Foliar Exchange"))+
   labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  scale_color_manual(values = c("red",  "green4" ,"green", "blue", "orange", "purple", "black"))+
   ggtitle("LN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
@@ -218,12 +219,40 @@ N_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=N_UP, color=
   geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=N_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=NO3+NH4, color="Leached"))+
   labs(y="N Fluxes (kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  scale_color_manual(values = c("red", "green", "blue", "orange", "purple"))+
   theme_classic()+
   ggtitle("HN Sedimentary")+
-  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),    
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),    
+        axis.text.x = element_text(size=12, face="bold", colour = "black"), 
+        axis.text.y = element_text(size=12,  colour = "black"))+
+  scale_y_continuous(breaks=c(15, 30, 45, 60, 75, 90))+
+  coord_cartesian(ylim = c(0, 80))+
+  geom_segment(
+    x = 2065, y = 80,
+    xend = 2065, yend = 0,
+    lineend = "round", # See available arrow types in example above
+    linejoin = "round",
+    size = 1, 
+    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
+    colour = "black" # Also accepts "red", "blue' etc
+  )
+
+K_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=K_UP, color="Uptake"))+geom_line()+
+  geom_line(aes(y=K_LF, color="Litterfall"))+
+  geom_line(aes(y=K_Minz, color="Mineralization"))+
+  geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WET, color="Deposition"))+
+  geom_line(subset(Leaching_8_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K, color="Leached"))+
+  geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
+  geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_THRU, color="Foliar Exchange"))+
+  labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
+  scale_color_manual(values = c("red",  "green4" ,"green", "blue", "orange", "purple", "black"))+
+  ggtitle("HN Sedimentary")+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black"))+ 
   scale_y_continuous(breaks=c(15, 30, 45, 60, 75, 90))+
@@ -237,6 +266,7 @@ N_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=N_UP, color=
     arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
     colour = "black" # Also accepts "red", "blue' etc
   )
+
 
 Ca_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=Ca_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=Ca_LF, color="Litterfall"))+
@@ -293,32 +323,6 @@ Mg_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=Mg_UP, colo
     colour = "black" # Also accepts "red", "blue' etc
   )
 
-K_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=K_UP, color="Uptake"))+geom_line()+
-  geom_line(aes(y=K_LF, color="Litterfall"))+
-  geom_line(aes(y=K_Minz, color="Mineralization"))+
-  geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WET, color="Deposition"))+
-  geom_line(subset(Leaching_8_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K, color="Leached"))+
-  geom_line(subset(Abov_Flux_HNS, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
-  labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Sedimentary")+
-  theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
-        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
-        axis.text.y = element_text(size=12,  colour = "black"))+
-  scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
-  coord_cartesian(ylim = c(0, 30))+
-  geom_segment(
-    x = 2065, y = 80,
-    xend = 2065, yend = 0,
-    lineend = "round", # See available arrow types in example above
-    linejoin = "round",
-    size = 1, 
-    arrow = arrow(length = unit(0.15, "inches"), type = "closed"),
-    colour = "black" # Also accepts "red", "blue' etc
-  )
 
 S_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=YEAR, y=S_UP, color="Uptake"))+geom_line()+
   geom_line(aes(y=S_LF, color="Litterfall"))+
@@ -481,15 +485,16 @@ K_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=YEAR, y=K_UP, color=
   geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K, color="Leached"))+
   geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
+  geom_line(subset(Abov_Flux_LNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_THRU, color="Foliar Exchange"))+
   labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
+  scale_color_manual(values = c("red",  "green4" ,"green", "blue", "orange", "purple", "black"))+
   ggtitle("LN Basalt")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
-        axis.text.x = element_text(size=12, face="bold", colour = "black"),         
-        axis.text.y = element_text(size=12,  colour = "black"))+
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),
+        axis.text.x = element_text(size=12, face="bold", colour = "black"),          
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
   scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
   coord_cartesian(ylim = c(0, 30))+
   geom_segment(
@@ -663,15 +668,16 @@ K_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=YEAR, y=K_UP, color=
   geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WET, color="Deposition"))+
   geom_line(subset(Leaching_8_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K, color="Leached"))+
   geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_WTH, color="Weathered"))+
+  geom_line(subset(Abov_Flux_HNB, YEAR %in% Years), mapping=aes(x=YEAR, y=K_THRU, color="Foliar Exchange"))+
   labs(y="K Fluxes (kg/ha/yr)", x="Year", color="Process")+
-  scale_color_manual(values = c("red", "green", "blue", "orange", "purple", "black"))+
-  ggtitle("HN Basalt")+
+  scale_color_manual(values = c("red",  "green4" ,"green", "blue", "orange", "purple", "black"))+
+  ggtitle("LN Sedimentary")+
   theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),         
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),            
+  theme(plot.title = element_text(hjust = 0.5, size=12, face="bold", color="black"),
+        axis.title.x = element_text(size=12, face="bold", colour = "black"),
+        axis.title.y = element_text(size=12, face="bold", colour = "black"),
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
-        axis.text.y = element_text(size=12,  colour = "black"))+
+        axis.text.y = element_text(size=12,  colour = "black"))+ 
   scale_y_continuous(breaks=c(5,10, 15, 20, 25, 30))+
   coord_cartesian(ylim = c(0, 30))+
   geom_segment(
