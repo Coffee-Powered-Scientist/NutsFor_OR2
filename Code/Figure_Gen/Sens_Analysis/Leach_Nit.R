@@ -250,7 +250,7 @@ Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 Y$Sens<-"Nit"
 Y$Response<-"Leach"
 
-Y$value2<-ifelse(abs(Y$value)<=1, "NR", " ")
+Y$value2<-ifelse(abs(Y$value)==0, "NR", " ")
 
 G_LN<-ggplot(data = Y, aes(x = Site, y = value, fill=ID, pattern = Species, width=.75)) +
   geom_col_pattern(position = position_dodge(preserve = "single"),

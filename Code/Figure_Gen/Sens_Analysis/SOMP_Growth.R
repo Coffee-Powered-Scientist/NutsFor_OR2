@@ -158,11 +158,9 @@ Y<-as.data.frame(X)
 Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 
 
-Y$value2<-c("NR", "NR", "NR", "NR", "NR", "NR", "NR", "NR")
+Y$value2<-c(" ", " ", "", " ", "", " ", " ", " ")
 Y$Sens<-"SOMP"
 Y$Response<-"Bio"
-
-Y$value2<-ifelse(abs(Y$value)<=1, "NR", " ")
 
 
 G_SOMPBIO<-ggplot(Y, aes(x=factor(Site), y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+

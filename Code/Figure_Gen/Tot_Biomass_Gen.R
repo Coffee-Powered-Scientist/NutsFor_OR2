@@ -1057,7 +1057,7 @@ WTH_80_HNBAS_H3_MELT<-melt(WTH_80_HNBAS_H3, id.vars = c("Harvest", "Rock_Type", 
 WTH_80_HNBAS_H4_MELT<-melt(WTH_80_HNBAS_H4, id.vars = c("Harvest", "Rock_Type", "N")) 
 WTH_80_HNBAS_H5_MELT<-melt(WTH_80_HNBAS_H5, id.vars = c("Harvest", "Rock_Type", "N"))
 WTH_80_HNBAS_H6_MELT<-melt(WTH_80_HNBAS_H6, id.vars = c("Harvest", "Rock_Type", "N"))
-WTH_80_HNBAS_H7_MELT<-melt(WTH_80_HNBAS_H7, id.vars = c("Harvest", "Rock_Type", "N"))
+
 
 WTH_80_HNBAS_Tot<-rbind(WTH_80_HNBAS_H1_MELT, WTH_80_HNBAS_H2_MELT, WTH_80_HNBAS_H3_MELT, WTH_80_HNBAS_H4_MELT, WTH_80_HNBAS_H5_MELT, WTH_80_HNBAS_H6_MELT)
 

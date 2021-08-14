@@ -51,7 +51,7 @@ R1<-ggplot(Test, aes(x=Sens, y=value, fill=Inc))+geom_col(position = "dodge", wi
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+
   scale_fill_manual(values = c("Lower"= "gray30","Upper"= "orange3"))+
   theme(legend.position = "right", plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
-  #geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)+
   ggtitle("Total Biomass Yield")
 
@@ -64,8 +64,10 @@ R2_K<-ggplot(subset(Test2, ID %in% "K"), aes(x = Sens, y = value, fill=Inc, widt
          fill = guide_legend(override.aes = list(pattern = "none")))+ theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("K Weathering")+
   theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
-  #geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
-  facet_wrap(~Site)
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  facet_wrap(~Site)+
+  scale_y_continuous(breaks=c(-45, -20, 0, 20, 45))+
+  coord_cartesian(ylim = c(-45, 45))
 
 
 R2_Ca<-ggplot(subset(Test2, ID %in% "Ca"), aes(x = Sens, y = value, fill=Inc, pattern = ID, width=.75)) +
@@ -75,8 +77,11 @@ R2_Ca<-ggplot(subset(Test2, ID %in% "Ca"), aes(x = Sens, y = value, fill=Inc, pa
   theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Ca Weathering")+
   theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
-  #geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
-  facet_wrap(~Site)
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  facet_wrap(~Site)+
+  scale_y_continuous(breaks=c(-45, -20, 0, 20, 45))+
+  coord_cartesian(ylim = c(-45, 45))
+
 
 R3_K<-ggplot(subset(Test3, Species %in% "K"), aes(x = Sens, y = value, fill=ID, pattern = Species, width=.75)) +
   geom_col(position="dodge")+
@@ -85,8 +90,13 @@ R3_K<-ggplot(subset(Test3, Species %in% "K"), aes(x = Sens, y = value, fill=ID, 
   theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("K Leaching")+
   theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
-  #geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
-  facet_wrap(~Site)
+  geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  facet_wrap(~Site)+
+  scale_y_continuous(breaks=c(-65, -35, 0, 35, 65))+
+  coord_cartesian(ylim = c(-65, 65))
+
+
+Test3$NR<-c("")
 
 R3_Ca<-ggplot(subset(Test3, Species %in% "Ca"), aes(x = Sens, y = value, fill=ID, pattern = Species, width=.75)) +
   geom_col(position="dodge")+
@@ -95,8 +105,10 @@ R3_Ca<-ggplot(subset(Test3, Species %in% "Ca"), aes(x = Sens, y = value, fill=ID
   theme_bw()+
   geom_hline(yintercept=0, linetype=1, color="black", size=.5)+ggtitle("Ca Leaching")+
   theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
-  #geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
-  facet_wrap(~Site)
+  geom_text(aes(label=value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
+  facet_wrap(~Site)+
+  scale_y_continuous(breaks=c(-65, -35, 0, 35, 65))+
+  coord_cartesian(ylim = c(-65, 65))
 
 
 

@@ -254,6 +254,11 @@ write.csv(Biomass_Master, "Biomass_Master.csv")
 #Load Times New Roman
 windowsFonts(A = windowsFont("Times New Roman"))
 
+
+Line<-read.csv2("~/Liner_2.csv")
+
+Line$value<-as.numeric(Line$value)
+
 BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decreasing=T),], aes(fill=variable, y=value/1000, x=Harvest, group=N)) + 
   geom_bar(position="stack", stat="identity")+ 
   facet_wrap(~Rock_Type+N)+
@@ -263,8 +268,9 @@ BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decre
   scale_fill_brewer(palette = "Pastel1", labels=c("Foliage", "Bark", "Branch", "Bole"))+
   theme_bw()+
   theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=18))+
-  geom_hline(yintercept = 938.92835, color="blue")+
-  geom_hline(yintercept = 585, color="red")
+  geom_hline(data=Line , aes(yintercept = value, color=N), show.legend = FALSE)+
+  scale_y_continuous(breaks=c(200, 400, 600, 800, 1000))+
+  coord_cartesian(ylim = c(0, 1000))
 
 
 #Check

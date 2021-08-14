@@ -112,9 +112,9 @@ Ca_L1<-ggplot(subset(Test, variable %in% 'Ca' & Depth %in% '20 cm'), aes(x=Site,
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=21.83835586*40.078/1000))+
-  geom_point(aes(x="LNS", y=12.8543333*40.078/1000))+
-  labs(y="Ca (mg/L)")+
+  geom_point(aes(x="HNS", y=21.83835586*40.078/1000), size=3)+
+  geom_point(aes(x="LNS", y=12.8543333*40.078/1000), size=3)+
+  labs(y=expression("Ca"~"(mg·"~L^{-1}~")"))+
   ggtitle("20 cm")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -124,9 +124,9 @@ Ca_L2<-ggplot(subset(Test, variable %in% 'Ca' & Depth %in% '100 cm'), aes(x=Site
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=25.03179565*40.078/1000))+
-  geom_point(aes(x="LNS", y=11.89729896*40.078/1000))+
-  labs(y="Ca (mg/L)", title='100cm')+
+  geom_point(aes(x="HNS", y=25.03179565*40.078/1000), size=3)+
+  geom_point(aes(x="LNS", y=11.89729896*40.078/1000), size=3)+
+  labs(y=expression("Ca"~" (mg·"~L^{-1}~")"), title='100cm')+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -136,9 +136,9 @@ Mg_L1<-ggplot(subset(Test, variable %in% 'Mg' & Depth %in% '20 cm'), aes(x=Site,
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=42.40629231*24.453/1000))+
-  geom_point(aes(x="LNS", y=16.04178176*24.453/1000))+
-  labs(y="Mg (mg/L)")+
+  geom_point(aes(x="HNS", y=42.40629231*24.453/1000), size=3)+
+  geom_point(aes(x="LNS", y=16.04178176*24.453/1000), size=3)+
+  labs(y=expression("Mg"~" (mg·"~L^{-1}~")"))+
   ggtitle("20 cm")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -148,9 +148,9 @@ Mg_L2<-ggplot(subset(Test, variable %in% 'Mg' & Depth %in% '100 cm'), aes(x=Site
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=52.30661509*24.453/1000))+
-  geom_point(aes(x="LNS", y=18.17134526*24.453/1000))+
-  labs(y="Mg (mg/L)", title='100cm')+
+  geom_point(aes(x="HNS", y=52.30661509*24.453/1000, size=2))+
+  geom_point(aes(x="LNS", y=18.17134526*24.453/1000), size=3)+
+  labs(y=expression("Mg"~" (mg·"~L^{-1}~")"), title='100cm')+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -160,9 +160,9 @@ K_L1<-ggplot(subset(Test, variable %in% 'K' & Depth %in% '20 cm'), aes(x=Site, y
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=1.682020037*39.0983/1000))+
-  geom_point(aes(x="LNS", y=6.13954833*39.0983/1000))+
-  labs(y="K (mg/L)")+
+  geom_point(aes(x="HNS", y=1.682020037*39.0983/1000), size=3)+
+  geom_point(aes(x="LNS", y=6.13954833*39.0983/1000), size=3)+
+  labs(y=expression("K"~" (mg·"~L^{-1}~")"))+
   ggtitle("20 cm")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -172,9 +172,9 @@ K_L2<-ggplot(subset(Test, variable %in% 'K' & Depth %in% '100 cm'), aes(x=Site, 
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=2.278070711*39.0983/1000))+
-  geom_point(aes(x="LNS", y=3.100115157*39.0983/1000))+
-  labs(y="K (mg/L)", title='100cm')+
+  geom_point(aes(x="HNS", y=2.278070711*39.0983/1000), size=3)+
+  geom_point(aes(x="LNS", y=3.100115157*39.0983/1000), size=3)+
+  labs(y=expression("K"~" (mg·"~L^{-1}~")"), title='100cm')+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -184,9 +184,9 @@ NH4_L1<-ggplot(subset(Test, variable %in% 'NH4' & Depth %in% '20 cm'), aes(x=Sit
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=0.945553739*18*.778/1000))+
-  geom_point(aes(x="LNS", y=1.36167832*18*.778/1000))+
-  labs(y="NH4-N (mg/L)")+
+  geom_point(aes(x="HNS", y=0.945553739*18*.778/1000), size=3)+
+  geom_point(aes(x="LNS", y=1.36167832*18*.778/1000), size=3)+
+  labs(y=expression(NH[4]~"-N"~" (mg·"~L^{-1}~")"))+
   ggtitle("20 cm")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -196,9 +196,9 @@ NH4_L2<-ggplot(subset(Test, variable %in% 'NH4' & Depth %in% '100 cm'), aes(x=Si
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=0.723724383*18*.778/1000))+
-  geom_point(aes(x="LNS", y=0.24807627*18*.778/1000))+
-  labs(y="NH4-N (mg/L)", title='100cm')+
+  geom_point(aes(x="HNS", y=0.723724383*18*.778/1000), size=3)+
+  geom_point(aes(x="LNS", y=0.24807627*18*.778/1000), size=3)+
+  labs(y=expression(NH[4]~"-N"~" (mg·"~L^{-1}~")"), title='100cm')+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -209,9 +209,9 @@ NO3_L1<-ggplot(subset(Test, variable %in% 'NO3' & Depth %in% '20 cm'), aes(x=Sit
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=26.39658753*62*.23/1000))+
-  geom_point(aes(x="LNS", y=2.059239718*62*.23/1000))+
-  labs(y="NO3-N (mg/L)")+
+  geom_point(aes(x="HNS", y=26.39658753*62*.23/1000), size=3)+
+  geom_point(aes(x="LNS", y=2.059239718*62*.23/1000), size=3)+
+  labs(y=expression(NO[3]~"-N"~" (mg·"~L^{-1}~")"))+
   ggtitle("20 cm")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -221,9 +221,9 @@ NO3_L2<-ggplot(subset(Test, variable %in% 'NO3' & Depth %in% '100 cm'), aes(x=Si
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=15.69*62*.23/1000))+
-  geom_point(aes(x="LNS", y=.248*62*.23/1000))+
-  labs(y="NO3-N (mg/L)", title='100cm')+
+  geom_point(aes(x="HNS", y=15.69*62*.23/1000), size=3)+
+  geom_point(aes(x="LNS", y=.248*62*.23/1000), size=3)+
+  labs(y=expression(NO[3]~"-N"~" (mg·"~L^{-1}~")"), title='100cm')+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -233,9 +233,9 @@ SO4_L1<-ggplot(subset(Test, variable %in% 'SO4' & Depth %in% '20 cm'), aes(x=Sit
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=20.92795523*96.07/1000/3))+
-  geom_point(aes(x="LNS", y=8.816901175*96.07/1000/3))+
-  labs(y="SO4_S (mg/L)")+
+  geom_point(aes(x="HNS", y=20.92795523*96.07/1000/3), size=3)+
+  geom_point(aes(x="LNS", y=8.816901175*96.07/1000/3), size=3)+
+  labs(y=expression(SO[4]~"-S"~" (mg·"~L^{-1}~")"))+
   ggtitle("20 cm")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -245,9 +245,9 @@ SO4_L2<-ggplot(subset(Test, variable %in% 'SO4' & Depth %in% '100 cm'), aes(x=Si
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=22.1612*96.07/1000/3))+
-  geom_point(aes(x="LNS", y=14.98*96.07/1000/3))+
-  labs(y="SO4-S (mg/L)", title='100cm')+
+  geom_point(aes(x="HNS", y=22.1612*96.07/1000/3), size=3)+
+  geom_point(aes(x="LNS", y=14.98*96.07/1000/3), size=3)+
+  labs(y=expression(SO[4]~"-S"~" (mg·"~L^{-1}~")"), title='100cm')+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -258,9 +258,9 @@ PO4_L1<-ggplot(subset(Test, variable %in% 'P' & Depth %in% '20 cm'), aes(x=Site,
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=0.001153644))+
-  geom_point(aes(x="LNS", y=0.002384842))+
-  labs(y="PO4-S (mg/L)")+
+  geom_point(aes(x="HNS", y=0.001153644), size=3)+
+  geom_point(aes(x="LNS", y=0.002384842), size=3)+
+  labs(y=expression(PO[4]~"-P"~" (mg·"~L^{-1}~")"))+
   ggtitle("20 cm")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -270,9 +270,9 @@ PO4_L2<-ggplot(subset(Test, variable %in% 'P' & Depth %in% '100 cm'), aes(x=Site
   geom_boxplot(outlier.shape = NA, fatten=NULL)+
   stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
                width = 0.75, size = 1, linetype = "solid")+
-  geom_point(aes(x="HNS", y=0.001809631))+
-  geom_point(aes(x="LNS", y=0.001053764))+
-  labs(y="PO4-S (mg/L)", title='100cm')+
+  geom_point(aes(x="HNS", y=0.001809631), size=3)+
+  geom_point(aes(x="LNS", y=0.001053764), size=3)+
+  labs(y=expression(PO[4]~"-P"~" (mg·"~L^{-1}~")"), title='100cm')+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 

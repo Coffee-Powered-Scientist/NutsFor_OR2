@@ -14,6 +14,8 @@ library(cowplot)
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_WTH")
 
+TimeSteps<-seq(1, 525, 1)
+
 # Low N Break
 
 Bio_Cycle_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/Bio_Cycle.csv")
@@ -70,14 +72,20 @@ CEC_LNS<-CEC_All_LNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(
 
 CEC_LNS$YEAR<-sapply(CEC_LNS$year, as.numeric)
 
-label_color_Ca<-c( expression(Ca[X]),expression(Ca[O]) , expression(Ca[P]))
-label_color_Mg<-c( expression(Mg[X]),expression(Mg[O]) , expression(Mg[P]))
-label_color_K<-c( expression(K[X]),expression(K[O]) , expression(K[P]))
-label_color_N<-c( expression(N[O]), expression(N[P]))
-label_color_S<-c( expression(S[A]),expression(S[O]) , expression(S[P]))
-label_color_P<-c( expression(P[A]),expression(P[O]) , expression(P[P]))
+label_color_Ca<-c( "Exchangeable","Organic" , "Plant")
+label_color_Mg<-c("Exchangeable","Organic" , "Plant")
+label_color_K<-c( "Exchangeable","Organic" , "Plant")
+label_color_N<-c("Organic" , "Plant")
+label_color_S<-c( "Adsorbed","Organic" , "Plant")
+label_color_P<-c( "Adsorbed","Organic" , "Plant")
 
-Ca_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
+
+CEC_LNS$TS<-TimeSteps
+Tree_Nut_LNS$TS<-TimeSteps
+Litter_All_LNS$TS<-TimeSteps
+AEC_All_LNS$TS<-TimeSteps
+
+Ca_LNS<-ggplot(Litter_All_LNS, aes(x=TS, y=Ca, color="Cao"))+geom_line()+
   geom_line(Tree_Nut_LNS, mapping= aes(y=Ca_F+Ca_Brk+Ca_Brh+Ca_Bol, color="CaP"))+
   geom_line(CEC_LNS, mapping =aes(y=CEC_LNS$Ca, color="CaEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Ca)+
@@ -87,9 +95,11 @@ Ca_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1500, 3000, 4500, 6000))+
+  coord_cartesian(ylim = c(0, 6000))
 
-Mg_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
+Mg_LNS<-ggplot(Litter_All_LNS, aes(x=TS, y=Mg, color="Mgo"))+geom_line()+
   geom_line(Tree_Nut_LNS, mapping= aes(y=Mg_F+Mg_Brk+Mg_Brh+Mg_Bol, color="MgP"))+
   geom_line(CEC_LNS, mapping =aes(y=CEC_LNS$Mg, color="MgEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Mg)+
@@ -101,7 +111,7 @@ Mg_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))
 
-K_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
+K_LNS<-ggplot(Litter_All_LNS, aes(x=TS, y=K, color="Ko"))+geom_line()+
   geom_line(Tree_Nut_LNS, mapping= aes(y=K_F+K_Brk+K_Brh+K_Bol, color="KP"))+
   geom_line(CEC_LNS, mapping =aes(y=CEC_LNS$K, color="KEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_K)+
@@ -111,10 +121,13 @@ K_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
-N_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=N+SOM_LNS$N*14*10, color="No"))+geom_line()+
-  geom_line(Tree_Nut_LNS, mapping= aes(y=N_F+N_Brk+N_Brh+N_Bol, color="NP"))+
+
+N_LNS<-ggplot(Litter_All_LNS, aes(x=TS, y=(N+SOM_LNS$N*14*10)/1000, color="No"))+geom_line()+
+  geom_line(Tree_Nut_LNS, mapping= aes(y=(N_F+N_Brk+N_Brh+N_Bol)/1000, color="NP"))+
   scale_color_manual(values=c("magenta", "green"),label = label_color_N)+
   ggtitle("Low N Sedimentary" )+
   labs(y=NULL, x=NULL,  color="Pool")+
@@ -123,12 +136,12 @@ N_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=N+SOM_LNS$N*14*10, color="No"))+geom
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
-  coord_cartesian(ylim = c(0, 25000))
+  scale_y_continuous(breaks=c(0, 5, 10, 15, 20, 25))+
+  coord_cartesian(ylim = c(0, 25))
 
-S_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=S+SOM_LNS$S*32*10, color="So"))+geom_line()+
+S_LNS<-ggplot(Litter_All_LNS, aes(x=TS, y=S+SOM_LNS$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNS, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
-  geom_line(AEC_All_LNS, mapping= aes(x=Year, y=SO4, color="Sads"))+
+  geom_line(AEC_All_LNS, mapping= aes(x=TS, y=SO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_S)+
   ggtitle("Low N Sedimentary" )+
   labs(y=NULL, x=NULL,  color="Pool")+
@@ -139,9 +152,9 @@ S_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=S+SOM_LNS$S*32*10, color="So"))+geom
         axis.text.y= element_text(face="bold", size=12))
 
 
-P_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=P+SOM_LNS$P*30.97*10, color="So"))+geom_line()+
+P_LNS<-ggplot(Litter_All_LNS, aes(x=TS, y=P+SOM_LNS$P*30.97*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNS, mapping= aes(y=P_F+P_Brk+P_Brh+P_Bol, color="SP"))+
-  geom_line(AEC_All_LNS, mapping= aes(x=Year, y=PO4, color="Sads"))+
+  geom_line(AEC_All_LNS, mapping= aes(x=TS, y=PO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_P)+
   ggtitle("Low N Sedimentary" )+
   labs(y=NULL, x=NULL,  color="Pool")+
@@ -150,8 +163,9 @@ P_LNS<-ggplot(Litter_All_LNS, aes(x=YEAR, y=P+SOM_LNS$P*30.97*10, color="So"))+g
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
-  coord_cartesian(ylim = c(0, 3000))
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000, 4000))+
+  coord_cartesian(ylim = c(0, 4000))
+
 
 
 # High N Break
@@ -201,11 +215,14 @@ CEC_HNS<-CEC_All_HNS %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(
 
 CEC_HNS$YEAR<-sapply(CEC_HNS$year, as.numeric)
 
-label_color_Ca<-c( expression(Ca[X]),expression(Ca[O]) , expression(Ca[P]))
-label_color_Mg<-c( expression(Mg[X]),expression(Mg[O]) , expression(Mg[P]))
-label_color_K<-c( expression(K[X]),expression(K[O]) , expression(K[P]))
 
-Ca_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
+
+CEC_HNS$TS<-TimeSteps
+Tree_Nut_HNS$TS<-TimeSteps
+Litter_All_HNS$TS<-TimeSteps
+AEC_All_HNS$TS<-TimeSteps
+
+Ca_HNS<-ggplot(Litter_All_HNS, aes(x=TS, y=Ca, color="Cao"))+geom_line()+
   geom_line(Tree_Nut_HNS, mapping= aes(y=Ca_F+Ca_Brk+Ca_Brh+Ca_Bol, color="CaP"))+
   geom_line(CEC_HNS, mapping =aes(y=CEC_HNS$Ca, color="CaEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Ca)+
@@ -215,9 +232,11 @@ Ca_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1500, 3000, 4500, 6000))+
+  coord_cartesian(ylim = c(0, 6000))
 
-Mg_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
+Mg_HNS<-ggplot(Litter_All_HNS, aes(x=TS, y=Mg, color="Mgo"))+geom_line()+
   geom_line(Tree_Nut_HNS, mapping= aes(y=Mg_F+Mg_Brk+Mg_Brh+Mg_Bol, color="MgP"))+
   geom_line(CEC_HNS, mapping =aes(y=CEC_HNS$Mg, color="MgEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Mg)+
@@ -229,7 +248,7 @@ Mg_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))
 
-K_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
+K_HNS<-ggplot(Litter_All_HNS, aes(x=TS, y=K, color="Ko"))+geom_line()+
   geom_line(Tree_Nut_HNS, mapping= aes(y=K_F+K_Brk+K_Brh+K_Bol, color="KP"))+
   geom_line(CEC_HNS, mapping =aes(y=CEC_HNS$K, color="KEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_K)+
@@ -239,12 +258,15 @@ K_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
 
-N_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=N+SOM_HNS$N*14*10, color="No"))+geom_line()+
-  geom_line(Tree_Nut_HNS, mapping= aes(y=N_F+N_Brk+N_Brh+N_Bol, color="NP"))+
+
+N_HNS<-ggplot(Litter_All_HNS, aes(x=TS, y=(N+SOM_HNS$N*14*10)/1000, color="No"))+geom_line()+
+  geom_line(Tree_Nut_HNS, mapping= aes(y=(N_F+N_Brk+N_Brh+N_Bol)/1000, color="NP"))+
   scale_color_manual(values=c("magenta", "green"),label = label_color_N)+
   ggtitle("High N Sedimentary" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -253,12 +275,13 @@ N_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=N+SOM_HNS$N*14*10, color="No"))+geom
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
-  coord_cartesian(ylim = c(0, 25000))
+  scale_y_continuous(breaks=c(0, 5, 10, 15, 20, 25))+
+  coord_cartesian(ylim = c(0, 25))
 
-S_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=S+SOM_HNS$S*32*10, color="So"))+geom_line()+
+
+S_HNS<-ggplot(Litter_All_HNS, aes(x=TS, y=S+SOM_HNS$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNS, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
-  geom_line(AEC_All_HNS, mapping= aes(x=Year, y=SO4, color="Sads"))+
+  geom_line(AEC_All_HNS, mapping= aes(x=TS, y=SO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_S)+
   ggtitle("High N Sedimentary" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -269,9 +292,9 @@ S_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=S+SOM_HNS$S*32*10, color="So"))+geom
         axis.text.y= element_text(face="bold", size=12))
 
 
-P_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=P+SOM_HNS$P*30.97*10, color="So"))+geom_line()+
+P_HNS<-ggplot(Litter_All_HNS, aes(x=TS, y=P+SOM_HNS$P*30.97*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNS, mapping= aes(y=P_F+P_Brk+P_Brh+P_Bol, color="SP"))+
-  geom_line(AEC_All_HNS, mapping= aes(x=Year, y=PO4, color="Sads"))+
+  geom_line(AEC_All_HNS, mapping= aes(x=TS, y=PO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_P)+
   ggtitle("High N Sedimentary" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -280,8 +303,9 @@ P_HNS<-ggplot(Litter_All_HNS, aes(x=YEAR, y=P+SOM_HNS$P*30.97*10, color="So"))+g
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
-  coord_cartesian(ylim = c(0, 3000))
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000, 4000))+
+  coord_cartesian(ylim = c(0, 4000))
+
 
 
 # Low N bas break
@@ -329,11 +353,13 @@ CEC_LNB<-CEC_All_LNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(
 
 CEC_LNB$YEAR<-sapply(CEC_LNB$year, as.numeric)
 
-label_color_Ca<-c( expression(Ca[X]),expression(Ca[O]) , expression(Ca[P]))
-label_color_Mg<-c( expression(Mg[X]),expression(Mg[O]) , expression(Mg[P]))
-label_color_K<-c( expression(K[X]),expression(K[O]) , expression(K[P]))
 
-Ca_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
+CEC_LNB$TS<-TimeSteps
+Tree_Nut_LNB$TS<-TimeSteps
+Litter_All_LNB$TS<-TimeSteps
+AEC_All_LNB$TS<-TimeSteps
+
+Ca_LNB<-ggplot(Litter_All_LNB, aes(x=TS, y=Ca, color="Cao"))+geom_line()+
   geom_line(Tree_Nut_LNB, mapping= aes(y=Ca_F+Ca_Brk+Ca_Brh+Ca_Bol, color="CaP"))+
   geom_line(CEC_LNB, mapping =aes(y=CEC_LNB$Ca, color="CaEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Ca)+
@@ -343,9 +369,11 @@ Ca_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1500, 3000, 4500, 6000))+
+  coord_cartesian(ylim = c(0, 6000))
 
-Mg_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
+Mg_LNB<-ggplot(Litter_All_LNB, aes(x=TS, y=Mg, color="Mgo"))+geom_line()+
   geom_line(Tree_Nut_LNB, mapping= aes(y=Mg_F+Mg_Brk+Mg_Brh+Mg_Bol, color="MgP"))+
   geom_line(CEC_LNB, mapping =aes(y=CEC_LNB$Mg, color="MgEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Mg)+
@@ -357,7 +385,7 @@ Mg_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))
 
-K_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
+K_LNB<-ggplot(Litter_All_LNB, aes(x=TS, y=K, color="Ko"))+geom_line()+
   geom_line(Tree_Nut_LNB, mapping= aes(y=K_F+K_Brk+K_Brh+K_Bol, color="KP"))+
   geom_line(CEC_LNB, mapping =aes(y=CEC_LNB$K, color="KEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_K)+
@@ -367,11 +395,15 @@ K_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
-N_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=N+SOM_LNB$N*14*10, color="No"))+geom_line()+
-  geom_line(Tree_Nut_LNB, mapping= aes(y=N_F+N_Brk+N_Brh+N_Bol, color="NP"))+
+
+
+N_LNB<-ggplot(Litter_All_LNB, aes(x=TS, y=(N+SOM_LNB$N*14*10)/1000, color="No"))+geom_line()+
+  geom_line(Tree_Nut_LNB, mapping= aes(y=(N_F+N_Brk+N_Brh+N_Bol)/1000, color="NP"))+
   scale_color_manual(values=c("magenta", "green"),label = label_color_N)+
   ggtitle("Low N Basalt" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -380,12 +412,13 @@ N_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=N+SOM_LNB$N*14*10, color="No"))+geom
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
-  coord_cartesian(ylim = c(0, 25000))
+  scale_y_continuous(breaks=c(0, 5, 10, 15, 20, 25))+
+  coord_cartesian(ylim = c(0, 25))
 
-S_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=S+SOM_LNB$S*32*10, color="So"))+geom_line()+
+
+S_LNB<-ggplot(Litter_All_LNB, aes(x=TS, y=S+SOM_LNB$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNB, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
-  geom_line(AEC_All_LNB, mapping= aes(x=Year, y=SO4, color="Sads"))+
+  geom_line(AEC_All_LNB, mapping= aes(x=TS, y=SO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_S)+
   ggtitle("Low N Basalt" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -396,9 +429,9 @@ S_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=S+SOM_LNB$S*32*10, color="So"))+geom
         axis.text.y= element_text(face="bold", size=12))
 
 
-P_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=P+SOM_LNB$P*30.97*10, color="So"))+geom_line()+
+P_LNB<-ggplot(Litter_All_LNB, aes(x=TS, y=P+SOM_LNB$P*30.97*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_LNB, mapping= aes(y=P_F+P_Brk+P_Brh+P_Bol, color="SP"))+
-  geom_line(AEC_All_LNB, mapping= aes(x=Year, y=PO4, color="Sads"))+
+  geom_line(AEC_All_LNB, mapping= aes(x=TS, y=PO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_P)+
   ggtitle("Low N Basalt" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -407,8 +440,9 @@ P_LNB<-ggplot(Litter_All_LNB, aes(x=YEAR, y=P+SOM_LNB$P*30.97*10, color="So"))+g
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
-  coord_cartesian(ylim = c(0, 3000))
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000, 4000))+
+  coord_cartesian(ylim = c(0, 4000))
+
 
 # High N bas break
 
@@ -457,11 +491,14 @@ CEC_HNB<-CEC_All_HNB %>% group_by(year, month) %>% summarise(across(Ca:Al, ~sum(
 
 CEC_HNB$YEAR<-sapply(CEC_HNB$year, as.numeric)
 
-label_color_Ca<-c( expression(Ca[X]),expression(Ca[O]) , expression(Ca[P]))
-label_color_Mg<-c( expression(Mg[X]),expression(Mg[O]) , expression(Mg[P]))
-label_color_K<-c( expression(K[X]),expression(K[O]) , expression(K[P]))
 
-Ca_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
+
+CEC_HNB$TS<-TimeSteps
+Tree_Nut_HNB$TS<-TimeSteps
+Litter_All_HNB$TS<-TimeSteps
+AEC_All_HNB$TS<-TimeSteps
+
+Ca_HNB<-ggplot(Litter_All_HNB, aes(x=TS, y=Ca, color="Cao"))+geom_line()+
   geom_line(Tree_Nut_HNB, mapping= aes(y=Ca_F+Ca_Brk+Ca_Brh+Ca_Bol, color="CaP"))+
   geom_line(CEC_HNB, mapping =aes(y=CEC_HNB$Ca, color="CaEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Ca)+
@@ -471,9 +508,11 @@ Ca_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=Ca, color="Cao"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1500, 3000, 4500, 6000))+
+  coord_cartesian(ylim = c(0, 6000))
 
-Mg_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
+Mg_HNB<-ggplot(Litter_All_HNB, aes(x=TS, y=Mg, color="Mgo"))+geom_line()+
   geom_line(Tree_Nut_HNB, mapping= aes(y=Mg_F+Mg_Brk+Mg_Brh+Mg_Bol, color="MgP"))+
   geom_line(CEC_HNB, mapping =aes(y=CEC_HNB$Mg, color="MgEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_Mg)+
@@ -485,7 +524,7 @@ Mg_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=Mg, color="Mgo"))+geom_line()+
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))
 
-K_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
+K_HNB<-ggplot(Litter_All_HNB, aes(x=TS, y=K, color="Ko"))+geom_line()+
   geom_line(Tree_Nut_HNB, mapping= aes(y=K_F+K_Brk+K_Brh+K_Bol, color="KP"))+
   geom_line(CEC_HNB, mapping =aes(y=CEC_HNB$K, color="KEx"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_K)+
@@ -495,11 +534,13 @@ K_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=K, color="Ko"))+geom_line()+
   theme(plot.title = element_text(hjust = 0.5), legend.key.height= unit(1, 'cm'),
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
-        axis.text.y= element_text(face="bold", size=12))
+        axis.text.y= element_text(face="bold", size=12))+
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000))+
+  coord_cartesian(ylim = c(0, 3000))
 
 
-N_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=N+SOM_HNB$N*14*10, color="No"))+geom_line()+
-  geom_line(Tree_Nut_HNB, mapping= aes(y=N_F+N_Brk+N_Brh+N_Bol, color="NP"))+
+N_HNB<-ggplot(Litter_All_HNB, aes(x=TS, y=(N+SOM_HNB$N*14*10)/1000, color="No"))+geom_line()+
+  geom_line(Tree_Nut_HNB, mapping= aes(y=(N_F+N_Brk+N_Brh+N_Bol)/1000, color="NP"))+
   scale_color_manual(values=c("magenta", "green"),label = label_color_N)+
   ggtitle("High N Basalt" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -508,12 +549,12 @@ N_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=N+SOM_HNB$N*14*10, color="No"))+geom
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(5000, 10000, 15000, 20000, 25000))+
-  coord_cartesian(ylim = c(0, 25000))
+  scale_y_continuous(breaks=c(0, 5, 10, 15, 20, 25))+
+  coord_cartesian(ylim = c(0, 25))
 
-S_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=S+SOM_HNB$S*32*10, color="So"))+geom_line()+
+S_HNB<-ggplot(Litter_All_HNB, aes(x=TS, y=S+SOM_HNB$S*32*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNB, mapping= aes(y=S_F+S_Brk+S_Brh+S_Bol, color="SP"))+
-  geom_line(AEC_All_HNB, mapping= aes(x=Year, y=SO4, color="Sads"))+
+  geom_line(AEC_All_HNB, mapping= aes(x=TS, y=SO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_S)+
   ggtitle("High N Basalt" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -524,9 +565,9 @@ S_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=S+SOM_HNB$S*32*10, color="So"))+geom
         axis.text.y= element_text(face="bold", size=12))
 
 
-P_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=P+SOM_HNB$P*30.97*10, color="So"))+geom_line()+
+P_HNB<-ggplot(Litter_All_HNB, aes(x=TS, y=P+SOM_HNB$P*30.97*10, color="So"))+geom_line()+
   geom_line(Tree_Nut_HNB, mapping= aes(y=P_F+P_Brk+P_Brh+P_Bol, color="SP"))+
-  geom_line(AEC_All_HNB, mapping= aes(x=Year, y=PO4, color="Sads"))+
+  geom_line(AEC_All_HNB, mapping= aes(x=TS, y=PO4, color="Sads"))+
   scale_color_manual(values=c("red", "magenta", "green"),label = label_color_P)+
   ggtitle("High N Basalt" )+
   labs(y=NULL, x=NULL, color="Pool")+
@@ -535,8 +576,9 @@ P_HNB<-ggplot(Litter_All_HNB, aes(x=YEAR, y=P+SOM_HNB$P*30.97*10, color="So"))+g
         legend.key.width= unit(1, 'cm'), legend.text = element_text(size=14), text=element_text(family="A", size=14), 
         legend.title = element_text(size=14), axis.text.x= element_text(face="bold", size=12), 
         axis.text.y= element_text(face="bold", size=12))+
-  scale_y_continuous(breaks=c(500, 1000, 1500, 2000, 2500, 3000))+
-  coord_cartesian(ylim = c(0, 3000))
+  scale_y_continuous(breaks=c(0, 1000, 2000, 3000, 4000))+
+  coord_cartesian(ylim = c(0, 4000))
+
 
 
 
@@ -564,7 +606,7 @@ ggarrange(K_LNS, K_HNS, K_LNB, K_HNB, labels=c("A", "B", "C", "D"),
 
 ggarrange(N_LNS, N_HNS, N_LNB, N_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("N (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("N (Mg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                        font.label = list(size = 14, color = "black", face = "bold"))),
                   bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 WTH")) %>%
   ggexport(filename="N_OPEX.png", height=1000, width=1000, res=100)

@@ -7,7 +7,7 @@
 rm(list = ls())
 
 
-setwd("~/Project_Master/Test_Rep/Output/LN_SED/80_WTH/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data")
 
 library(dplyr)
 library(tidyverse)

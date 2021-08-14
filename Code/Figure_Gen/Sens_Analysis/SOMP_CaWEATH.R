@@ -206,7 +206,7 @@ Y$Response<-"Weath"
 
 
 
-Y$value2<-ifelse(abs(Y$value)<=1, "NR", " ")
+Y$value2<-c(" ", " ", "", " ", "", " ", " ", " ")
 
 G_CaSOMP<-ggplot(data = Y, aes(x = Site, y = value, fill=Inc, pattern = ID, width=.75)) +
   geom_col_pattern(position = position_dodge(preserve = "single"),

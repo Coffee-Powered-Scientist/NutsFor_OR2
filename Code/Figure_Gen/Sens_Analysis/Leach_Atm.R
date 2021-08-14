@@ -246,7 +246,7 @@ Y$Site <- factor(Y$Site,levels = c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 Y$Sens<-"Atm"
 Y$Response<-"Leach"
 
-Y$value2<-ifelse(abs(Y$value)<=1, "NR", " ")
+Y$value2<-ifelse(abs(Y$value)==0, "NR", " ")
 
 
 G_LAtm<-ggplot(data = Y, aes(x = Site, y = value, fill=ID, pattern = Species, width=.75)) +

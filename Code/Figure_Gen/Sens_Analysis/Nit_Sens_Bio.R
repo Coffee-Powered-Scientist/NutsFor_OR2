@@ -163,7 +163,7 @@ Y$value2<-c("NR", " ", " ", " ", " ", "NR", "NR", "NR")
 Y$Sens<-"Nit"
 Y$Response<-"Bio"
 
-Y$value2<-ifelse(abs(Y$value)<=1, "NR", " ")
+Y$value2<-ifelse(abs(Y$value)==0, "NR", " ")
 
 
 G_NitBio<-ggplot(Y, aes(x=factor(Site), y=value, fill=Inc))+geom_col(position = "dodge", width=.75)+

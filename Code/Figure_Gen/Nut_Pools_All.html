@@ -259,11 +259,11 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R&quot;)</c
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/SOM_Mutator.R&quot;)</code></pre>
-<pre><code>## -- Attaching packages ----------------------------------------------------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## -- Attaching packages -------------------------------------------------------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
 <pre><code>## v tibble  3.0.3     v purrr   0.3.4
 ## v tidyr   1.1.1     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.5.0</code></pre>
-<pre><code>## -- Conflicts -------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ----------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x lubridate::as.difftime() masks base::as.difftime()
 ## x gridExtra::combine()     masks dplyr::combine()
 ## x lubridate::date()        masks base::date()
@@ -277,6 +277,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R&quot;)</c
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
 ##     chisq.test, fisher.test</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -345,6 +346,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R&quot;)</c
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/40_BO/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -413,6 +415,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R&quot;)</c
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -481,6 +484,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R&quot;)</c
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -523,10 +527,12 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_BO/CEC_Mutator.R&quot;)</c
 
 # LNS Break
 
+
+
 SOM_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -546,21 +552,29 @@ CEC_LNS&lt;-CEC_All_LNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNS$Date&lt;-as.Date(CEC_LNS$Date)
 
-label_color&lt;-c(&quot;Ca&quot;, &quot;Mg&quot;, &quot;K&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
+label_color&lt;-c(&quot;Ca&quot;, &quot;K&quot;, &quot;Mg&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
 
-LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+TimeSteps&lt;-seq(1, 525, 1)
+
+
+SOM_LNS$TS&lt;-TimeSteps
+CEC_LNS$TS&lt;-TimeSteps
+Litter_All_LNS$TS&lt;-TimeSteps
+
+
+LNS&lt;-ggplot(CEC_LNS, aes(x=TS, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color=&quot;N&quot;, linetype=&quot;N&quot;))+
   geom_line(SOM_LNS, mapping=aes(y=P*30.974*10/667.97+Litter_All_LNS$P/667.97, color=&quot;P&quot;, linetype=&quot;P&quot;))+
   geom_line(SOM_LNS, mapping=aes(y=S*32.065*10/754+Litter_All_LNS$S/754, color=&quot;S&quot;, linetype=&quot;S&quot;))+
   scale_linetype_manual(values=c(&quot;solid&quot;, &quot;solid&quot;, &quot;solid&quot;, &quot;dashed&quot;, &quot;dashed&quot;, &quot;dashed&quot;), label=label_color)+
-  scale_color_manual(values=c(&quot;red3&quot;, &quot;orange&quot;, &quot;magenta2&quot;, &quot;blue&quot;, &quot;green2&quot;, &quot;grey&quot;), label=label_color)+
+ scale_color_manual(values=c(&quot;red3&quot;, &quot;orange&quot;, &quot;magenta2&quot;, &quot;blue&quot;, &quot;green2&quot;, &quot;grey&quot;), label=label_color)+
   theme_classic2()+
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -570,7 +584,7 @@ LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230
 SOM_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -590,7 +604,11 @@ CEC_HNS&lt;-CEC_All_HNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNS$Date&lt;-as.Date(CEC_HNS$Date)
 
-HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_HNS$TS&lt;-TimeSteps
+CEC_HNS$TS&lt;-TimeSteps
+Litter_All_HNS$TS&lt;-TimeSteps
+
+HNS&lt;-ggplot(CEC_HNS, aes(x=TS, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -602,7 +620,7 @@ HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -612,7 +630,7 @@ HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.
 SOM_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -632,7 +650,11 @@ CEC_LNB&lt;-CEC_All_LNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNB$Date&lt;-as.Date(CEC_LNB$Date)
 
-LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_LNB$TS&lt;-TimeSteps
+CEC_LNB$TS&lt;-TimeSteps
+Litter_All_LNB$TS&lt;-TimeSteps
+
+LNB&lt;-ggplot(CEC_LNB, aes(x=TS, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -644,7 +666,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5) , legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+         
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -654,7 +676,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
 SOM_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -674,7 +696,11 @@ CEC_HNB&lt;-CEC_All_HNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNB$Date&lt;-as.Date(CEC_HNB$Date)
 
-HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_HNB$TS&lt;-TimeSteps
+CEC_HNB$TS&lt;-TimeSteps
+Litter_All_HNB$TS&lt;-TimeSteps
+
+HNB&lt;-ggplot(CEC_HNB, aes(x=TS, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -686,7 +712,7 @@ HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -696,35 +722,35 @@ HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
 
 Color_C&lt;-c(expression(C[Litter]),expression(C[SOM]))
 
-C_LNS&lt;-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNS&lt;-ggplot(SOM_LNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_LNB&lt;-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNB&lt;-ggplot(SOM_LNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
 
-C_HNS&lt;-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNS&lt;-ggplot(SOM_HNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_HNB&lt;-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNB&lt;-ggplot(SOM_HNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
@@ -736,10 +762,16 @@ C_HNB&lt;-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&q
 
 ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Carbon Pool Size (Mg/ha)&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;40 BO&quot;)) %&gt;%
   ggexport(filename=&quot;C_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## file saved to C_Pool.png</code></pre>
 <pre class="r"><code>ggarrange(LNS, HNS, LNB, HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Nutrient Pool Size&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;40 BO&quot;)) %&gt;%
   ggexport(filename=&quot;Nutrient_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
 ## found in Windows font database</code></pre>
@@ -1188,48 +1220,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## not found in PostScript font database
 
 ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
-## not found in PostScript font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family &#39;A&#39;
 ## not found in PostScript font database</code></pre>
 <pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
@@ -1259,10 +1249,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -1293,10 +1279,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -1309,62 +1291,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -1939,6 +1865,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -1976,8 +1903,6 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in make_date(V1, V2): NAs introduced by coercion</code></pre>
-<pre><code>## Warning: Unreplaced values treated as NA as .x is not compatible. Please specify
-## replacements exhaustively or supply .default</code></pre>
 <pre><code>## Adding missing grouping variables: `Year`, `group_id`, `Month`</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/CEC_Mutator.R&quot;)</code></pre>
 <pre><code>## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
@@ -2009,6 +1934,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/40_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -2077,6 +2003,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/40_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -2145,6 +2072,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/40_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -2183,7 +2111,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/40_WTH/CEC_Mutator.R&quot;)</
 ## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in make_date(V1, V2): NAs introduced by coercion</code></pre>
 <pre><code>## Adding missing grouping variables: `Year`, `group_id`, `Month`</code></pre>
-<pre class="r"><code>label_color&lt;-c(&quot;Ca&quot;, &quot;Mg&quot;, &quot;K&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
+<pre class="r"><code>label_color&lt;-c(&quot;Ca&quot;, &quot;K&quot;, &quot;Mg&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
 
 setwd(&quot;~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_WTH&quot;)
 
@@ -2192,7 +2120,7 @@ setwd(&quot;~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_WTH&quot;)
 SOM_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -2212,7 +2140,14 @@ CEC_LNS&lt;-CEC_All_LNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNS$Date&lt;-as.Date(CEC_LNS$Date)
 
-LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+TimeSteps&lt;-seq(1, 525, 1)
+
+
+SOM_LNS$TS&lt;-TimeSteps
+CEC_LNS$TS&lt;-TimeSteps
+Litter_All_LNS$TS&lt;-TimeSteps
+
+LNS&lt;-ggplot(CEC_LNS, aes(x=TS, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -2224,7 +2159,7 @@ LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -2234,7 +2169,7 @@ LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230
 SOM_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -2254,19 +2189,23 @@ CEC_HNS&lt;-CEC_All_HNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNS$Date&lt;-as.Date(CEC_HNS$Date)
 
-HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_HNS$TS&lt;-TimeSteps
+CEC_HNS$TS&lt;-TimeSteps
+Litter_All_HNS$TS&lt;-TimeSteps
+
+HNS&lt;-ggplot(CEC_HNS, aes(x=TS, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color=&quot;N&quot;, linetype=&quot;N&quot;))+
-  geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2214+Litter_All_HNS$P/2214, color=&quot;P&quot;, linetype=&quot;P&quot;))+
-  geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1271.698+Litter_All_HNS$S/1271.698, color=&quot;S&quot;, linetype=&quot;S&quot;))+
+  geom_line(SOM_HNS, mapping=aes(y=P*30.974*10/2134.956+Litter_All_HNS$P/2134.956, color=&quot;P&quot;, linetype=&quot;P&quot;))+
+  geom_line(SOM_HNS, mapping=aes(y=S*32.065*10/1675.76+Litter_All_HNS$S/1675.76, color=&quot;S&quot;, linetype=&quot;S&quot;))+
   scale_linetype_manual(values=c(&quot;solid&quot;, &quot;solid&quot;, &quot;solid&quot;, &quot;dashed&quot;, &quot;dashed&quot;, &quot;dashed&quot;), label=label_color)+
   scale_color_manual(values=c(&quot;red3&quot;, &quot;orange&quot;, &quot;magenta2&quot;, &quot;blue&quot;, &quot;green2&quot;, &quot;grey&quot;), label=label_color)+
   theme_classic2()+
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -2276,7 +2215,7 @@ HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.
 SOM_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -2296,7 +2235,11 @@ CEC_LNB&lt;-CEC_All_LNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNB$Date&lt;-as.Date(CEC_LNB$Date)
 
-LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_LNB$TS&lt;-TimeSteps
+CEC_LNB$TS&lt;-TimeSteps
+Litter_All_LNB$TS&lt;-TimeSteps
+
+LNB&lt;-ggplot(CEC_LNB, aes(x=TS, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -2308,7 +2251,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -2318,7 +2261,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
 SOM_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -2338,7 +2281,11 @@ CEC_HNB&lt;-CEC_All_HNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNB$Date&lt;-as.Date(CEC_HNB$Date)
 
-HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_HNB$TS&lt;-TimeSteps
+CEC_HNB$TS&lt;-TimeSteps
+Litter_All_HNB$TS&lt;-TimeSteps
+
+HNB&lt;-ggplot(CEC_HNB, aes(x=TS, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -2350,75 +2297,45 @@ HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
 
 Color_C&lt;-c(expression(C[Litter]),expression(C[SOM]))
 
-C_LNS&lt;-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNS&lt;-ggplot(SOM_LNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_LNB&lt;-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNB&lt;-ggplot(SOM_LNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
 
-C_HNS&lt;-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNS&lt;-ggplot(SOM_HNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_HNB&lt;-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNB&lt;-ggplot(SOM_HNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
-
-Ca_LNB&lt;-CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286
-Ca_LNS&lt;-CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915
-Ca_HNS&lt;-CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037
-Ca_HNB&lt;-CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
-
-Mg_LNS&lt;-CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663
-Mg_LNB&lt;-CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168
-Mg_HNS&lt;-CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244
-Mg_HNB&lt;-CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2
-
-K_HNS&lt;-CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207
-N_HNS&lt;-SOM_HNS$N*14*10/22247.05+Litter_All_HNS$N/22247.05
-P_HNS &lt;-SOM_HNS$P*30.974*10/2214+Litter_All_HNS$P/2214
-S_HNS&lt;-SOM_HNS$S*32.065*10/1271.698+Litter_All_HNS$S/1271.698
-
-K_LNB&lt;-CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967
-N_LNB&lt;-SOM_LNB$N*14*10/9205.251+Litter_All_LNB$N/9205.251
-P_LNB&lt;-SOM_LNB$P*30.974*10/643.33+Litter_All_LNB$P/643.33
-S_LNB&lt;-SOM_LNB$S*32.065*10/824.22+Litter_All_LNB$S/824.22
-
-K_HNB&lt;-CEC_HNB$K/163.11+Litter_All_HNB$K/163.11
-N_HNB&lt;-SOM_HNB$N*14*10/16757+Litter_All_HNB$N/16757
-P_HNB&lt;-SOM_HNB$P*30.974*10/1242.458+Litter_All_HNB$P/1242.458
-S_HNB&lt;-SOM_HNB$S*32.065*10/699.88+Litter_All_HNB$S/699.88
-
-K_LNS&lt;-CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840
-N_LNS &lt;-SOM_LNS$N*14*10/8263+Litter_All_LNS$N/8263
-P_LNS&lt;-SOM_LNS$P*30.974*10/586.2+Litter_All_LNS$P/586.2
-S_LNS&lt;-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 
 
@@ -2427,10 +2344,16 @@ S_LNS&lt;-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Carbon Pool Size (Mg/ha)&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;40 BO&quot;)) %&gt;%
   ggexport(filename=&quot;C_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## file saved to C_Pool.png</code></pre>
 <pre class="r"><code>ggarrange(LNS, HNS, LNB, HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Nutrient Pool Size&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;40 WTH&quot;)) %&gt;%
   ggexport(filename=&quot;Nutrient_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database</code></pre>
@@ -2822,10 +2745,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -2856,10 +2775,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -2872,62 +2787,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -3502,6 +3361,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_BO/CEC_Mutator.R&quot;)</c
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_BO/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -3570,6 +3430,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_BO/CEC_Mutator.R&quot;)</c
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/80_BO/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -3638,6 +3499,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_BO/CEC_Mutator.R&quot;)</c
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/80_BO/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -3706,6 +3568,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_BO/CEC_Mutator.R&quot;)</c
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/80_BO/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -3746,14 +3609,14 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_BO/CEC_Mutator.R&quot;)</c
 <pre><code>## Adding missing grouping variables: `Year`, `group_id`, `Month`</code></pre>
 <pre class="r"><code>setwd(&quot;~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_BO&quot;)
 
-label_color&lt;-c(&quot;Ca&quot;, &quot;Mg&quot;, &quot;K&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
+label_color&lt;-c(&quot;Ca&quot;, &quot;K&quot;, &quot;Mg&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
 
 # LNS Break
 
 SOM_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -3773,7 +3636,14 @@ CEC_LNS&lt;-CEC_All_LNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNS$Date&lt;-as.Date(CEC_LNS$Date)
 
-LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+TimeSteps&lt;-seq(1, 513, 1)
+
+
+SOM_LNS$TS&lt;-TimeSteps
+CEC_LNS$TS&lt;-TimeSteps
+Litter_All_LNS$TS&lt;-TimeSteps
+
+LNS&lt;-ggplot(CEC_LNS, aes(x=TS, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -3785,7 +3655,7 @@ LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -3795,7 +3665,7 @@ LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230
 SOM_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -3815,7 +3685,12 @@ CEC_HNS&lt;-CEC_All_HNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNS$Date&lt;-as.Date(CEC_HNS$Date)
 
-HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+
+SOM_HNS$TS&lt;-TimeSteps
+CEC_HNS$TS&lt;-TimeSteps
+Litter_All_HNS$TS&lt;-TimeSteps
+
+HNS&lt;-ggplot(CEC_HNS, aes(x=TS, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -3827,7 +3702,7 @@ HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -3837,7 +3712,7 @@ HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.
 SOM_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -3857,7 +3732,11 @@ CEC_LNB&lt;-CEC_All_LNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNB$Date&lt;-as.Date(CEC_LNB$Date)
 
-LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_LNB$TS&lt;-TimeSteps
+CEC_LNB$TS&lt;-TimeSteps
+Litter_All_LNB$TS&lt;-TimeSteps
+
+LNB&lt;-ggplot(CEC_LNB, aes(x=TS, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -3869,7 +3748,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -3879,7 +3758,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
 SOM_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -3899,7 +3778,11 @@ CEC_HNB&lt;-CEC_All_HNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNB$Date&lt;-as.Date(CEC_HNB$Date)
 
-HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_HNB$TS&lt;-TimeSteps
+CEC_HNB$TS&lt;-TimeSteps
+Litter_All_HNB$TS&lt;-TimeSteps
+
+HNB&lt;-ggplot(CEC_HNB, aes(x=TS, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -3911,86 +3794,63 @@ HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5, 1.75))+
   coord_cartesian(ylim = c(0, 1.5))
 
 Color_C&lt;-c(expression(C[Litter]),expression(C[SOM]))
 
-C_LNS&lt;-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNS&lt;-ggplot(SOM_LNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_LNB&lt;-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNB&lt;-ggplot(SOM_LNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
 
-C_HNS&lt;-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNS&lt;-ggplot(SOM_HNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_HNB&lt;-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNB&lt;-ggplot(SOM_HNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
 
-Ca_LNB&lt;-CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286
-Ca_LNS&lt;-CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915
-Ca_HNS&lt;-CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037
-Ca_HNB&lt;-CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
-
-Mg_LNS&lt;-CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663
-Mg_LNB&lt;-CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168
-Mg_HNS&lt;-CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244
-Mg_HNB&lt;-CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2
-
-K_HNS&lt;-CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207
-N_HNS&lt;-SOM_HNS$N*14*10/22247.05+Litter_All_HNS$N/22247.05
-P_HNS &lt;-SOM_HNS$P*30.974*10/2214+Litter_All_HNS$P/2214
-S_HNS&lt;-SOM_HNS$S*32.065*10/1271.698+Litter_All_HNS$S/1271.698
-
-K_LNB&lt;-CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967
-N_LNB&lt;-SOM_LNB$N*14*10/9205.251+Litter_All_LNB$N/9205.251
-P_LNB&lt;-SOM_LNB$P*30.974*10/643.33+Litter_All_LNB$P/643.33
-S_LNB&lt;-SOM_LNB$S*32.065*10/824.22+Litter_All_LNB$S/824.22
-
-K_HNB&lt;-CEC_HNB$K/163.11+Litter_All_HNB$K/163.11
-N_HNB&lt;-SOM_HNB$N*14*10/16757+Litter_All_HNB$N/16757
-P_HNB&lt;-SOM_HNB$P*30.974*10/1242.458+Litter_All_HNB$P/1242.458
-S_HNB&lt;-SOM_HNB$S*32.065*10/699.88+Litter_All_HNB$S/699.88
-
-K_LNS&lt;-CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840
-N_LNS &lt;-SOM_LNS$N*14*10/8263+Litter_All_LNS$N/8263
-P_LNS&lt;-SOM_LNS$P*30.974*10/586.2+Litter_All_LNS$P/586.2
-S_LNS&lt;-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 
 # Aggregate
 
 ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Carbon Pool Size (Mg/ha)&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;40 BO&quot;)) %&gt;%
   ggexport(filename=&quot;C_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## file saved to C_Pool.png</code></pre>
 <pre class="r"><code>ggarrange(LNS, HNS, LNB, HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Nutrient Pool Size&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;80 BO&quot;)) %&gt;%
   ggexport(filename=&quot;Nutrient_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database</code></pre>
@@ -4382,10 +4242,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -4416,10 +4272,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -4432,62 +4284,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -5062,6 +4858,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -5130,6 +4927,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_SED/80_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -5198,6 +4996,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/HN_BAS/80_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -5266,6 +5065,7 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/CEC_Mutator.R&quot;)</
 
 ## Warning in lapply(CEC_All[c(2:16)], as.numeric): NAs introduced by coercion</code></pre>
 <pre class="r"><code>source(&quot;~/Project_Master/Test_Rep/Code/LN_BAS/80_WTH/SOM_Mutator.R&quot;)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in lapply(SOM[, c(2, 4:21)], as.numeric): NAs introduced by coercion
 
@@ -5306,14 +5106,13 @@ source(&quot;~/Project_Master/Test_Rep/Code/LN_SED/80_WTH/CEC_Mutator.R&quot;)</
 <pre><code>## Adding missing grouping variables: `Year`, `group_id`, `Month`</code></pre>
 <pre class="r"><code>setwd(&quot;~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH&quot;)
 
-label_color&lt;-c(&quot;Ca&quot;, &quot;Mg&quot;, &quot;K&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
-
+label_color&lt;-c(&quot;Ca&quot;, &quot;K&quot;, &quot;Mg&quot;, expression(N[O]), expression(P[O]), expression(S[O]))
 # LNS Break
 
 SOM_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNS&lt;-SOM_LNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -5333,7 +5132,14 @@ CEC_LNS&lt;-CEC_All_LNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNS$Date&lt;-as.Date(CEC_LNS$Date)
 
-LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+TimeSteps&lt;-seq(1, 513, 1)
+
+
+SOM_LNS$TS&lt;-TimeSteps
+CEC_LNS$TS&lt;-TimeSteps
+Litter_All_LNS$TS&lt;-TimeSteps
+
+LNS&lt;-ggplot(CEC_LNS, aes(x=TS, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNS, mapping=aes(y=N*14*10/9334.201+Litter_All_LNS$N/9334.201, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -5345,7 +5151,7 @@ LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -5355,7 +5161,7 @@ LNS&lt;-ggplot(CEC_LNS, aes(x=Date, y=CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230
 SOM_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNS&lt;-SOM_HNS %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNS&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -5375,7 +5181,11 @@ CEC_HNS&lt;-CEC_All_HNS %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNS$Date&lt;-as.Date(CEC_HNS$Date)
 
-HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_HNS$TS&lt;-TimeSteps
+CEC_HNS$TS&lt;-TimeSteps
+Litter_All_HNS$TS&lt;-TimeSteps
+
+HNS&lt;-ggplot(CEC_HNS, aes(x=TS, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNS$K/437.3307+Litter_All_HNS$K/437.3307, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNS, mapping=aes(y=N*14*10/22247.05+Litter_All_HNS$N/22247.05, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -5387,7 +5197,7 @@ HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -5397,7 +5207,7 @@ HNS&lt;-ggplot(CEC_HNS, aes(x=Date, y=CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.
 SOM_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_LNB&lt;-SOM_LNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_LNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -5417,7 +5227,11 @@ CEC_LNB&lt;-CEC_All_LNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_LNB$Date&lt;-as.Date(CEC_LNB$Date)
 
-LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_LNB$TS&lt;-TimeSteps
+CEC_LNB$TS&lt;-TimeSteps
+Litter_All_LNB$TS&lt;-TimeSteps
+
+LNB&lt;-ggplot(CEC_LNB, aes(x=TS, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_LNB, mapping=aes(y=N*14*10/9205.251+Litter_All_LNB$N/9205.251, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -5429,7 +5243,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;LN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
@@ -5439,7 +5253,7 @@ LNB&lt;-ggplot(CEC_LNB, aes(x=Date, y=CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364
 SOM_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/SOM.csv&quot;)
 
 
-SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarize(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
+SOM_HNB&lt;-SOM_HNB %&gt;%group_by(Year, Month)%&gt;% select(-Date) %&gt;% summarise(across(C:P, ~sum(.x, na.rm = TRUE))) %&gt;%
   mutate(Date = make_date(Year, Month)) %&gt;% filter(Month %in% 1)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;Year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_All_HNB&lt;-read.csv2(&quot;~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/CEC_All.csv&quot;, header=TRUE)
@@ -5459,7 +5273,11 @@ CEC_HNB&lt;-CEC_All_HNB %&gt;% group_by(year, month) %&gt;% summarise(across(Ca:
 <pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <pre class="r"><code>CEC_HNB$Date&lt;-as.Date(CEC_HNB$Date)
 
-HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
+SOM_HNB$TS&lt;-TimeSteps
+CEC_HNB$TS&lt;-TimeSteps
+Litter_All_HNB$TS&lt;-TimeSteps
+
+HNB&lt;-ggplot(CEC_HNB, aes(x=TS, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34, color=&quot;Ca&quot;, linetype=&quot;Ca&quot;)) + geom_line()+
   geom_line(aes(y=CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2, color=&quot;Mg&quot;, linetype=&quot;Mg&quot;))+
   geom_line(aes(y=CEC_HNB$K/163.11+Litter_All_HNB$K/163.11, color=&quot;K&quot;, linetype=&quot;K&quot;))+
   geom_line(SOM_HNB, mapping=aes(y=N*14*10/16757+Litter_All_HNB$N/16757, color=&quot;N&quot;, linetype=&quot;N&quot;))+
@@ -5471,75 +5289,45 @@ HNB&lt;-ggplot(CEC_HNB, aes(x=Date, y=CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
   labs(color  = &quot;Species&quot;, linetype=&quot;Species&quot;)+
   geom_hline(yintercept= 1)+
   ggtitle(&quot;HN Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Change in Nutrient Pool Size&quot;)+
+  labs(x=NULL, y=NULL)+
   theme(plot.title = element_text(hjust = 0.5), legend.key.size = unit(1.5, &#39;cm&#39;),  text=element_text(family=&quot;A&quot;, size=15))+          
   scale_y_continuous(breaks=c(0, .25, .5, .75, 1, 1.25, 1.5))+
   coord_cartesian(ylim = c(0, 1.5))
 
 Color_C&lt;-c(expression(C[Litter]),expression(C[SOM]))
 
-C_LNS&lt;-ggplot(SOM_LNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNS&lt;-ggplot(SOM_LNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_LNB&lt;-ggplot(SOM_LNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_LNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_LNB&lt;-ggplot(SOM_LNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_LNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;Low N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
 
-C_HNS&lt;-ggplot(SOM_HNS, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNS, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNS&lt;-ggplot(SOM_HNS, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNS, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Sedimentary&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 
-C_HNB&lt;-ggplot(SOM_HNB, aes(x=Year, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
-  geom_line(Litter_All_HNB, mapping= aes(x=YEAR, y=C/1000, color=&quot;CLit&quot;))+
+C_HNB&lt;-ggplot(SOM_HNB, aes(x=TS, y=C*12*10000/1000/1000, color=&quot;CSOM&quot;))+geom_line()+
+  geom_line(Litter_All_HNB, mapping= aes(x=TS, y=C/1000, color=&quot;CLit&quot;))+
   ggtitle(&quot;High N Basalt&quot;)+
-  labs(x=&quot;Year&quot;, y=&quot;Soil C Storage (Mg/ha)&quot;, color=&#39;C Pool&#39;)+
+  labs(x=NULL, y=NULL, color=&#39;C Pool&#39;)+
   scale_color_manual(values=c(&quot;red&quot;, &quot;green&quot;),label = Color_C)+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
-
-Ca_LNB&lt;-CEC_LNB$Ca/3364.286+Litter_All_LNB$Ca/3364.286
-Ca_LNS&lt;-CEC_LNS$Ca/6230.915+Litter_All_LNS$Ca/6230.915
-Ca_HNS&lt;-CEC_HNS$Ca/269.4037+Litter_All_HNS$Ca/269.4037
-Ca_HNB&lt;-CEC_HNB$Ca/232.34+Litter_All_HNB$Ca/232.34
-
-Mg_LNS&lt;-CEC_LNS$Mg/2448.663+Litter_All_LNS$Mg/2448.663
-Mg_LNB&lt;-CEC_LNB$Mg/3404.168+Litter_All_LNB$Mg/3404.168
-Mg_HNS&lt;-CEC_HNS$Mg/183.0244+Litter_All_HNS$Mg/183.0244
-Mg_HNB&lt;-CEC_HNB$Mg/267.2+Litter_All_HNB$Mg/267.2
-
-K_HNS&lt;-CEC_HNS$K/406.8207+Litter_All_HNS$K/406.8207
-N_HNS&lt;-SOM_HNS$N*14*10/22247.05+Litter_All_HNS$N/22247.05
-P_HNS &lt;-SOM_HNS$P*30.974*10/2214+Litter_All_HNS$P/2214
-S_HNS&lt;-SOM_HNS$S*32.065*10/1271.698+Litter_All_HNS$S/1271.698
-
-K_LNB&lt;-CEC_LNB$K/880.0967+Litter_All_LNB$K/880.0967
-N_LNB&lt;-SOM_LNB$N*14*10/9205.251+Litter_All_LNB$N/9205.251
-P_LNB&lt;-SOM_LNB$P*30.974*10/643.33+Litter_All_LNB$P/643.33
-S_LNB&lt;-SOM_LNB$S*32.065*10/824.22+Litter_All_LNB$S/824.22
-
-K_HNB&lt;-CEC_HNB$K/163.11+Litter_All_HNB$K/163.11
-N_HNB&lt;-SOM_HNB$N*14*10/16757+Litter_All_HNB$N/16757
-P_HNB&lt;-SOM_HNB$P*30.974*10/1242.458+Litter_All_HNB$P/1242.458
-S_HNB&lt;-SOM_HNB$S*32.065*10/699.88+Litter_All_HNB$S/699.88
-
-K_LNS&lt;-CEC_LNS$K/1325.840+Litter_All_LNS$K/1325.840
-N_LNS &lt;-SOM_LNS$N*14*10/8263+Litter_All_LNS$N/8263
-P_LNS&lt;-SOM_LNS$P*30.974*10/586.2+Litter_All_LNS$P/586.2
-S_LNS&lt;-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 
 
@@ -5548,10 +5336,16 @@ S_LNS&lt;-SOM_LNS$S*32.065*10/754+Litter_All_LNS$S/754
 
 ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Carbon Pool Size (Mg/ha)&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;40 BO&quot;)) %&gt;%
   ggexport(filename=&quot;C_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## file saved to C_Pool.png</code></pre>
 <pre class="r"><code>ggarrange(LNS, HNS, LNB, HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;),
           ncol = 2, nrow = 2, common.legend = TRUE, legend=&quot;right&quot;, heights =1, widths = 1)%&gt;%
+  annotate_figure(left = textGrob(&quot;Nutrient Pool Size&quot;, rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+                    font.label = list(size = 14, color = &quot;black&quot;, face = &quot;bold&quot;))),
+                    bottom = textGrob(&quot;Time Step (Years)&quot;, gp = gpar(cex = 1.3)), top=textGrob(&quot;80 WTH&quot;)) %&gt;%
   ggexport(filename=&quot;Nutrient_Pool.png&quot;, height=1000, width=1000, res=100)</code></pre>
 <pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database</code></pre>
@@ -5943,10 +5737,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -5977,10 +5767,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
@@ -5993,62 +5779,6 @@ ggarrange(C_LNS, C_HNS, C_LNB, C_HNB, labels=c(&quot;A&quot;, &quot;B&quot;, &qu
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
 ## family not found in Windows font database
 
 ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
