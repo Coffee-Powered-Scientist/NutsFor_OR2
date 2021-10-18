@@ -25,7 +25,7 @@ source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/Leach_SOMP.R")
 source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/Mineral_Sens_Bio.R")
 source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/Mineral_Sens_CaWEATH.R")
 source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/Nit_Sens_Bio.R")
-source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/Nit_Sen_CaWEATH.R")
+source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/Nit_Sens_CaWEATH.R")
 source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/SOMP_CaWEATH.R")
 source("~/Project_Master/Test_Rep/Code/Figure_Gen/Sens_Analysis/SOMP_Growth.R")
 

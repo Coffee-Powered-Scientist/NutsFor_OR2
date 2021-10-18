@@ -177,5 +177,5 @@ plot(G)
 dev.off()
 
 write.csv2(Sens_Coef_Tbl, "Sens_Tbl_Growth_Bio.csv")
-write.csv2(Y, "Growth_Bio.csv")
+write.csv(Y, "Growth_Bio.csv")
 write.csv(PerChange_Df, "GrowthBio_Per.csv")

@@ -88,8 +88,8 @@ N_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=TS, y=N_UP-N_LF, col
   theme_classic()+
   ggtitle("LN Sedimentary")+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -129,8 +129,8 @@ Ca_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=TS, y=Ca_UP-Ca_LF-A
   ggtitle("LN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -169,8 +169,8 @@ Mg_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=TS, y=Mg_UP-Mg_LF, 
   ggtitle("LN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),
-        axis.title.y = element_text(size=12, face="bold", colour = "black"), 
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),
+        axis.title.y = element_text(size=20, face="bold", colour = "black"), 
         axis.text.x = element_text(size=12, face="bold", colour = "black"),
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+ 
   scale_y_continuous(breaks=c(1,2,3,4, 5))+
@@ -206,8 +206,8 @@ K_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=TS, y=K_UP-K_LF-Abov
   ggtitle("LN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -245,8 +245,8 @@ S_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=TS, y=S_UP, color="N
   ggtitle("LN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),         
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+ 
   scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
@@ -283,8 +283,8 @@ P_LNS<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=TS, y=P_UP-P_LF, col
   ggtitle("LN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -387,8 +387,8 @@ N_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=TS, y=N_UP-N_LF, col
   theme_classic()+
   ggtitle("HN Sedimentary")+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -427,8 +427,8 @@ Ca_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=TS, y=Ca_UP-Ca_LF-A
   ggtitle("HN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -467,8 +467,8 @@ Mg_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=TS, y=Mg_UP, color=
   ggtitle("HN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+ 
   scale_y_continuous(breaks=c(1,2,3,4,5))+
@@ -504,8 +504,8 @@ K_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=TS, y=K_UP-K_LF-Abov
   ggtitle("HN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -543,8 +543,8 @@ S_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=TS, y=S_UP, color="N
   ggtitle("HN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),    
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),           
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),           
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),           
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),           
         axis.text.x = element_text(size=12, face="bold", colour = "black"),         
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+
   scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
@@ -581,8 +581,8 @@ P_HNS<-ggplot(subset(Bio_Cycle_HNS, YEAR %in% Years), aes(x=TS, y=P_UP-P_LF, col
   ggtitle("HN Sedimentary")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -681,8 +681,8 @@ N_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=TS, y=N_UP-N_LF, col
   theme_classic()+
   ggtitle("LN Basalt")+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -721,8 +721,8 @@ Ca_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=TS, y=Ca_UP-Ca_LF-A
   ggtitle("LN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -762,8 +762,8 @@ Mg_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=TS, y=Mg_UP, color=
   ggtitle("LN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),         
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+ 
   scale_y_continuous(breaks=c(1,2,3,4,5))+
@@ -799,8 +799,8 @@ K_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=TS, y=K_UP-K_LF-Abov
   ggtitle("LN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -838,8 +838,8 @@ S_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=TS, y=S_UP, color="N
   ggtitle("LN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),         
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),            
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),            
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+ 
   scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
@@ -877,8 +877,8 @@ P_LNB<-ggplot(subset(Bio_Cycle_LNB, YEAR %in% Years), aes(x=TS, y=P_UP-P_LF, col
   ggtitle("LN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -977,8 +977,8 @@ N_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=TS, y=N_UP-N_LF, col
   theme_classic()+
   ggtitle("HN Basalt")+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -1017,8 +1017,8 @@ Ca_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=TS, y=Ca_UP-Ca_LF-A
   ggtitle("HN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -1057,8 +1057,8 @@ Mg_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=TS, y=Mg_UP, color=
   ggtitle("HN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),         
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+ 
   scale_y_continuous(breaks=c(1,2,3,4,5))+
@@ -1094,8 +1094,8 @@ K_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=TS, y=K_UP-K_LF-Abov
   ggtitle("HN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -1134,8 +1134,8 @@ S_HNB<-ggplot(subset(Bio_Cycle_HNB, YEAR %in% Years), aes(x=TS, y=S_UP, color="N
   ggtitle("HN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),            
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),            
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"))+
   scale_y_continuous(breaks=c(2, 4, 6, 8, 10))+
@@ -1172,8 +1172,8 @@ P_HNB<-ggplot(subset(Bio_Cycle_LNS, YEAR %in% Years), aes(x=TS, y=P_UP-P_LF, col
   ggtitle("HN Basalt")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5, size=20, face="bold", color="black"),        
-        axis.title.x = element_text(size=12, face="bold", colour = "black"),             
-        axis.title.y = element_text(size=12, face="bold", colour = "black"),             
+        axis.title.x = element_text(size=20, face="bold", colour = "black"),             
+        axis.title.y = element_text(size=20, face="bold", colour = "black"),             
         axis.text.x = element_text(size=12, face="bold", colour = "black"),          
         axis.text.y = element_text(size=12,  colour = "black", face="bold"),
         legend.key.size = unit(1.5, 'cm'),  text=element_text(family="A", size=20),
@@ -1207,38 +1207,38 @@ setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_BO")
 
 ggarrange(N_LNS, N_HNS, N_LNB, N_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("N Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("N Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("40 BO")) %>% 
   ggexport(filename="N.png", height=1000, width=1250, res=100)
 
 
 ggarrange(Ca_LNS, Ca_HNS, Ca_LNB, Ca_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("Ca Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("Ca Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3 ,fontsize=15,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("40 BO")) %>% 
   ggexport(filename="Ca.png", height=1000, width=1250, res=100)
 
 ggarrange(Mg_LNS, Mg_HNS, Mg_LNB, Mg_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1) %>%
-  annotate_figure(left = textGrob(expression("Mg Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("Mg Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("40 BO")) %>% 
   ggexport(filename="Mg.png", height=1000, width=1250, res=100)
 
 ggarrange(K_LNS, K_HNS, K_LNB, K_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("K Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("K Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("40 BO")) %>% 
   ggexport(filename="K.png", height=1000, width=1250, res=100)
 
 ggarrange(P_LNS, P_HNS, P_LNB, P_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("P Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("P Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("40 BO")) %>% 
   ggexport(filename="P.png", height=1000, width=1250, res=100)
 
 ggarrange(S_LNS, S_HNS, S_LNB, S_HNB, labels=c("A", "B", "C", "D"),

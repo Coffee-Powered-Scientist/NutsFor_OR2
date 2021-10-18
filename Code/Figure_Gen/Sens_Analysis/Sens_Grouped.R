@@ -19,7 +19,7 @@ Ex_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Exch_
 Nit_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Nit_Bio.csv")
 SOMP_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/SOMP_Bio.csv")
 Min_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Min_Bio.csv")
-Growth_1<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Growth_Bio.csv")
+Growth_1<-read.csv("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Growth_Bio.csv")
 
 Atm_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Atm_Weath.csv")
 Ex_2<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Sens_Analysis/Ex_Weath.csv")
@@ -45,6 +45,7 @@ Test$Site<-factor(Test$Site, levels=c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 Test2$Site<-factor(Test$Site, levels=c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 Test3$Site<-factor(Test$Site, levels=c("LN SED", "HN SED", "LN BAS", "HN BAS"))
 
+Test$Sens[which(Test$Sens == "Nit")] = "Nit*"
 Test$Sens[which(Test$Sens == "Nit")] = "Nit*"
 Test2$Sens[which(Test2$Sens == "Nit")] = "Nit*"
 Test3$Sens[which(Test3$Sens == "Nit")] = "Nit*"
@@ -74,8 +75,8 @@ R2_K<-ggplot(subset(Test2, ID %in% "K"), aes(x = Sens, y = value, fill=Inc, widt
   theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
   #geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)+
-  scale_y_continuous(breaks=c(-35, -15,0,15, 35))+
-  coord_cartesian(ylim = c(-40, 40))
+  scale_y_continuous(breaks=c(-50, -25,0,50, 25))+
+  coord_cartesian(ylim = c(-50, 50))
 
 R2_Ca<-ggplot(subset(Test2, ID %in% "Ca"), aes(x = Sens, y = value, fill=Inc, pattern = ID, width=.75)) +
   geom_col(position="dodge")+
@@ -86,8 +87,8 @@ R2_Ca<-ggplot(subset(Test2, ID %in% "Ca"), aes(x = Sens, y = value, fill=Inc, pa
   theme(plot.title = element_text(hjust = 0.5, size=14), text = element_text(family='Helvetica'))+
   #geom_text(aes(label =value2, y=5), position = position_dodge(0.9), size=2.5, show.legend = FALSE)+
   facet_wrap(~Site)+
-  scale_y_continuous(breaks=c(-35, -15,0,15, 35))+
-  coord_cartesian(ylim = c(-40, 40))
+  scale_y_continuous(breaks=c(-50, -25,0,25, 50))+
+  coord_cartesian(ylim = c(-50, 50))
 
 R3_K<-ggplot(subset(Test3, Species %in% "K"), aes(x = Sens, y = value, fill=ID, pattern = Species, width=.75)) +
   geom_col(position="dodge")+

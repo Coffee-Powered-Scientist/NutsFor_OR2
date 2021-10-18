@@ -988,38 +988,38 @@ setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/80_WTH")
 
 ggarrange(N_LNS, N_HNS, N_LNB, N_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("N Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("N Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                                                                                                                           font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("80 WTH")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("80 WTH")) %>% 
   ggexport(filename="N.png", height=1000, width=1250, res=100)
 
 
 ggarrange(Ca_LNS, Ca_HNS, Ca_LNB, Ca_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("Ca Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("Ca Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3 ,fontsize=15,
                                                                                                                            font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("80 WTH")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("80 WTH")) %>% 
   ggexport(filename="Ca.png", height=1000, width=1250, res=100)
 
 ggarrange(Mg_LNS, Mg_HNS, Mg_LNB, Mg_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1) %>%
-  annotate_figure(left = textGrob(expression("Mg Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("Mg Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                                                                                                                            font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("80 WTH")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("80 WTH")) %>% 
   ggexport(filename="Mg.png", height=1000, width=1250, res=100)
 
 ggarrange(K_LNS, K_HNS, K_LNB, K_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("K Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("K Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                                                                                                                           font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("80 WTH")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("80 WTH")) %>% 
   ggexport(filename="K.png", height=1000, width=1250, res=100)
 
 ggarrange(P_LNS, P_HNS, P_LNB, P_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
-  annotate_figure(left = textGrob(expression("P Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
+  annotate_figure(left = textGrob(expression("P Fluxes ( kg"~'⋅'~ha^{-1}~'⋅'~yr^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,fontsize=15,
                                                                                                                           font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("80 WTH")) %>% 
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3,fontsize=15)), top=textGrob("80 WTH")) %>% 
   ggexport(filename="P.png", height=1000, width=1250, res=100)
 
 ggarrange(S_LNS, S_HNS, S_LNB, S_HNB, labels=c("A", "B", "C", "D"),
