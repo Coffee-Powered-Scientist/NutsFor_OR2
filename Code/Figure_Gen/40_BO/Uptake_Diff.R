@@ -1,5 +1,8 @@
 
+# Welcome to my long figure code for the Uptake Deficit Graphs
+
 # Compares Uptake Lim. Line Graphs to one another, this file is for 40_BO case
+
 rm(list = ls())
 
 library(ggplot2)
@@ -18,7 +21,7 @@ library(RColorBrewer)
 
 
 
-# Update
+# Update Files that are used in calculations
 
 source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Plant_Pool_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Plant_Pool_Mutator.R")
@@ -29,6 +32,11 @@ source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Plant_Pool_Ghost.R")
 source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Plant_Pool_Ghost.R")
 source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Plant_Pool_Ghost.R")
 source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Plant_Pool_Ghost.R")
+
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/Above_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/Above_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/Above_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/Above_Mutator.R")
 
 # HN BAS File Reading
 
@@ -84,7 +92,7 @@ Plant_Pool_LNSED$Year<-as.Date(paste(Plant_Pool_LNSED$Year, 1, 1, sep = "-"))
 
 All_Df<-cbind(Plant_Pool_HNBAS, Plant_Pool_LNBAS, Plant_Pool_LNSED, Plant_Pool_HNSED)
 
-# SET WD (Needs to ve here)
+# SET WD (Needs to be here)
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_BO")
 
@@ -98,7 +106,7 @@ Above_Flux_LNB$TS<-TimeSteps
 Above_FluxGHOST_LNB$TS<-TimeSteps
 
 Plant_Pool_LNSED$TS<-TimeSteps
-Above_Flux_LNSED$TS<-TimeSteps
+Above_Flux_LNS$TS<-TimeSteps
 Above_FluxGHOST_LNS$TS<-TimeSteps
 
 Plant_Pool_HNSED$TS<-TimeSteps

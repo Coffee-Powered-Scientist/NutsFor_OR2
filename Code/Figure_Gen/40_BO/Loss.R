@@ -46,7 +46,7 @@ Years_R1<-seq(2005, 2036, 1)
 
 
 
-Ex_Table<-read.csv("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/Excess_Table.csv")
+Ex_Table<-read.csv2("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/Excess_Table.csv")
 
 Ex_Table_R1<-read.csv("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/Excess_Tbl_R1.csv")
 
@@ -71,7 +71,7 @@ Leaching_LNS_Cumulative<-Leaching_LNS %>% subset(group_id %in% 8 & YEAR %in% Yea
 Leaching_LNS_Excess<-Ex_Table %>% subset(Harvest %in% "40BO" & Site %in% "LNS")%>% 
     mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Post-Harvest Leaching")%>% 
       rename(Ca=Ca_Ex, Mg=Mg_Ex, K=K_Ex, N=N_Ex, P=P_Ex, S=SO4_Ex) %>%
-        select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2)
+        select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2) %>% mutate(across(Ca:P, as.numeric))
 
 
 Leaching_LNS_CumulativeF<-Leaching_LNS_Cumulative %>% mutate(Ca=Leaching_LNS_Cumulative$Ca-Leaching_LNS_Excess$Ca,
@@ -227,7 +227,7 @@ Leaching_HNS_Cumulative<-Leaching_HNS %>% subset(group_id %in% 8 & YEAR %in% Yea
 Leaching_HNS_Excess<-Ex_Table %>% subset(Harvest %in% "40BO" & Site %in% "HNS")%>% 
   mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Post-Harvest Leaching")%>% 
   rename(Ca=Ca_Ex, Mg=Mg_Ex, K=K_Ex, N=N_Ex, P=P_Ex, S=SO4_Ex) %>%
-  select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2)
+  select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2) %>% mutate(across(Ca:P, as.numeric))
 
 
 Leaching_HNS_CumulativeF<-Leaching_HNS_Cumulative %>% mutate(Ca=Leaching_HNS_Cumulative$Ca-Leaching_HNS_Excess$Ca,
@@ -381,7 +381,7 @@ Leaching_LNB_Cumulative<-Leaching_LNB %>% subset(group_id %in% 8 & YEAR %in% Yea
 Leaching_LNB_Excess<-Ex_Table %>% subset(Harvest %in% "40BO" & Site %in% "LNB")%>% 
   mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Post-Harvest Leaching")%>% 
   rename(Ca=Ca_Ex, Mg=Mg_Ex, K=K_Ex, N=N_Ex, P=P_Ex, S=SO4_Ex) %>%
-  select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2)
+  select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2) %>% mutate(across(Ca:P, as.numeric))
 
 
 Leaching_LNB_CumulativeF<-Leaching_LNB_Cumulative %>% mutate(Ca=Leaching_LNB_Cumulative$Ca-Leaching_LNB_Excess$Ca,
@@ -536,7 +536,7 @@ Leaching_HNB_Cumulative<-Leaching_HNB %>% subset(group_id %in% 8 & YEAR %in% Yea
 Leaching_HNB_Excess<-Ex_Table %>% subset(Harvest %in% "40BO" & Site %in% "HNB")%>% 
   mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Post-Harvest Leaching")%>% 
   rename(Ca=Ca_Ex, Mg=Mg_Ex, K=K_Ex, N=N_Ex, P=P_Ex, S=SO4_Ex) %>%
-  select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2)
+  select(Ca, K, N, P, Site, Harvest,Rot, Loss1, Loss2) %>% mutate(across(Ca:P, as.numeric))
 
 
 Leaching_HNB_CumulativeF<-Leaching_HNB_Cumulative %>% mutate(Ca=Leaching_HNB_Cumulative$Ca-Leaching_HNB_Excess$Ca,
