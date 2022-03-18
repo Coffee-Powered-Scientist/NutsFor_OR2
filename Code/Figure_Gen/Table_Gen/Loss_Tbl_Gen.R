@@ -3,7 +3,7 @@ rm(list = ls())
 
 library(reshape2)
 
-setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated")
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/Table_Prep")
 
 Uno<-read.csv("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_BO/Loss4B.csv", sep=",")
 
