@@ -4,8 +4,6 @@ Here is the list of folders with concise description of function:
 
 Transient: Holds items yet to be officially added to calibration or manuscript
 
-Sources: Holds bibliography files (BetterBibTex) for R markdown citations, and generates a report of the sources or methods used for calibration in a big-ol table! (See, "Parameter Table")
-
 Reports: Holds the code and output of calibration reports
 
 Output: Contains simulation outputs for base case and harvest scenario sites. It is really meant to hold edited data to make report and manuscript figure generation easier to code. 
