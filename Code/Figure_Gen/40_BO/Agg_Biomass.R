@@ -401,7 +401,7 @@ BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decre
   theme_bw()+
   theme(legend.background = element_rect(fill = "lightgray"), text=element_text(family="A", size=18), strip.text.x = element_text(size = 18),
         axis.text.x = element_text(size=12))+
-  geom_hline(data=Line , aes(yintercept = value, color=N), show.legend = FALSE)+
+  #geom_hline(data=Line , aes(yintercept = value, color=N), show.legend = FALSE)+
   #geom_hline(yintercept = 235, color="red")+
   scale_y_continuous(breaks=c(200, 400, 600, 800, 1000))+
   coord_cartesian(ylim = c(0, 1000))
