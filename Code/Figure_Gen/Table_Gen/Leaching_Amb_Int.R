@@ -86,7 +86,7 @@ Leaching_Pre_LNS4B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SE
 
 Leaching_8_LNS4B<-Leaching_Pre_LNS4B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNS_4B<-Leaching_8_LNS4B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNS_4B<-Leaching_8_LNS4B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 
@@ -94,27 +94,27 @@ Leaching_Pre_LNS8B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SE
 
 Leaching_8_LNS8B<-Leaching_Pre_LNS8B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNS_8B<-Leaching_8_LNS8B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNS_8B<-Leaching_8_LNS8B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
-L8_LNS_8B_Inter<-Leaching_8_LNS8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
+L8_LNS_8B_Inter<-Leaching_8_LNS8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
 
 
 Leaching_Pre_LNS4W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_WTH/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_LNS4W<-Leaching_Pre_LNS4W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNS_4W<-Leaching_8_LNS4W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNS_4W<-Leaching_8_LNS4W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
-L8_LNS_4W_Inter<-Leaching_8_LNS4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
+L8_LNS_4W_Inter<-Leaching_8_LNS4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
 
 
 Leaching_Pre_LNS8W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_WTH/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_LNS8W<-Leaching_Pre_LNS8W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNS_8W<-Leaching_8_LNS8W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNS_8W<-Leaching_8_LNS8W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
-L8_LNS_8W_Inter<-Leaching_8_LNS8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
+L8_LNS_8W_Inter<-Leaching_8_LNS8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
 
 
 L8_LNS_4B$Harvest<-"40 BO"
@@ -128,42 +128,42 @@ L8_LNS_8W$Harvest<-"80 WTH"
 L8_LNS_4B_Ambient<-Leaching_8_LNS4B %>% subset(!YEAR %in% Years_40)
 
 Ambient_LNS_4B<-L8_LNS_4B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient")
 
 L8_LNS_4B_Inter<-Leaching_8_LNS4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 Interm_LNS_4B<-L8_LNS_4B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 
 
 L8_LNS_4B_Ambient_R1_Null<-L8_LNS_4B_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-LNS_4B_Amb_R1_Null<-L8_LNS_4B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_4B_Amb_R1_Null<-L8_LNS_4B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_LNS_4B_Ambient_R1<-Leaching_8_LNS4B %>% subset(YEAR %in% Years_R1_40)
 
-LNS_4B_Amb_R1<-L8_LNS_4B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_4B_Amb_R1<-L8_LNS_4B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-LNS_4B_Int_R1<-Leaching_8_LNS4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_4B_Int_R1<-Leaching_8_LNS4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 LNS_4B_Int_R1_Null<- Leaching_8_LNS4B %>% subset(YEAR %in% Years_40)  %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNS_4B_Int_R1_Null<-LNS_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_4B_Int_R1_Null<-LNS_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNS_4B_Int_R1_Null$Ca-LNS_4B_Amb_R1_Null$Ca+LNS_4B_Int_R1$Ca-LNS_4B_Amb_R1$Ca
@@ -201,41 +201,41 @@ LNS_4B_EX<-as.data.frame(LNS_4B_EX) %>% mutate(Site="LNS", Harvest="40BO")
 L8_LNS_4W_Ambient<-Leaching_8_LNS4W %>% subset(!YEAR %in% Years_40)
 
 Ambient_LNS_4W<-L8_LNS_4W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient")
 
 L8_LNS_4W_Inter<-Leaching_8_LNS4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 Interm_LNS_4W<-L8_LNS_4W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 L8_LNS_4W_Ambient_R1_Null<-L8_LNS_4W_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-LNS_4W_Amb_R1_Null<-L8_LNS_4W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_4W_Amb_R1_Null<-L8_LNS_4W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_LNS_4W_Ambient_R1<-Leaching_8_LNS4W %>% subset(YEAR %in% Years_R1_40)
 
-LNS_4W_Amb_R1<-L8_LNS_4W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_4W_Amb_R1<-L8_LNS_4W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-LNS_4W_Int_R1<-Leaching_8_LNS4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_4W_Int_R1<-Leaching_8_LNS4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 LNS_4W_Int_R1_Null<- Leaching_8_LNS4W %>% subset(YEAR %in% Years_40) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNS_4W_Int_R1_Null<-LNS_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_4W_Int_R1_Null<-LNS_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNS_4W_Int_R1_Null$Ca-LNS_4W_Amb_R1_Null$Ca+LNS_4W_Int_R1$Ca-LNS_4W_Amb_R1$Ca
@@ -272,15 +272,15 @@ LNS_4W_EX<-as.data.frame(LNS_4W_EX) %>% mutate(Site="LNS", Harvest="40WTH")
 L8_LNS_8B_Ambient<-Leaching_8_LNS8B %>% subset(!YEAR %in% Years_80)
 
 Ambient_LNS_8B<-L8_LNS_8B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient")
 
 L8_LNS_8B_Inter<-Leaching_8_LNS8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 Interm_LNS_8B<-L8_LNS_8B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 L8_LNS_8B_Ambient_R1_Null<-L8_LNS_8B_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -289,34 +289,34 @@ L8_LNS_8B_Ambient_R1_Null<-L8_LNS_8B_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_LNS_8B_Ambient_R1_Null_TAIL<-L8_LNS_8B_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-LNS_8B_Amb_R1_Null<-L8_LNS_8B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_8B_Amb_R1_Null<-L8_LNS_8B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                             N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                             P=P*10/72)
+                                                             N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                             P=(P+DOP)*10/72)
 
-LNS_8B_TAIL<- L8_LNS_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_8B_TAIL<- L8_LNS_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
 
 L8_LNS_8B_Ambient_R1<-Leaching_8_LNS8B %>% subset(YEAR %in% Years_R1_80)
 
-LNS_8B_Amb_R1<-L8_LNS_8B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_8B_Amb_R1<-L8_LNS_8B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                             N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                             P=P*10/61)
+                                                             N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                             P=(P+DOP)*10/61)
 
-LNS_8B_Int_R1<-Leaching_8_LNS8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_8B_Int_R1<-Leaching_8_LNS8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 LNS_8B_Int_R1_Null<- Leaching_8_LNS8B %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNS_8B_Int_R1_Null<-LNS_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_8B_Int_R1_Null<-LNS_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNS_8B_Int_R1_Null$Ca-LNS_8B_Amb_R1_Null$Ca+LNS_8B_Int_R1$Ca-LNS_8B_Amb_R1$Ca-LNS_8B_TAIL$Ca
@@ -354,15 +354,15 @@ LNS_8B_EX<-as.data.frame(LNS_8B_EX) %>% mutate(Site="LNS", Harvest="80BO")
 L8_LNS_8W_Ambient<-Leaching_8_LNS8W %>% subset(!YEAR %in% Years_80)
 
 Ambient_LNS_8W<-L8_LNS_8W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient")
 
 L8_LNS_8W_Inter<-Leaching_8_LNS8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 Interm_LNS_8W<-L8_LNS_8W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 L8_LNS_8W_Ambient_R1_Null<-L8_LNS_8W_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -371,34 +371,34 @@ L8_LNS_8W_Ambient_R1_Null<-L8_LNS_8W_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_LNS_8W_Ambient_R1_Null_TAIL<-L8_LNS_8W_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-LNS_8W_Amb_R1_Null<-L8_LNS_8W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_8W_Amb_R1_Null<-L8_LNS_8W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                              N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                              P=P*10/72)
+                                                              N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                              P=(P+DOP)*10/72)
 
-LNS_8W_TAIL<- L8_LNS_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_8W_TAIL<- L8_LNS_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                              N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                              P=P*10/21)
+                                                              N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                              P=(P+DOP)*10/21)
 
 
 L8_LNS_8W_Ambient_R1<-Leaching_8_LNS8W %>% subset(YEAR %in% Years_R1_80)
 
-LNS_8W_Amb_R1<-L8_LNS_8W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNS_8W_Amb_R1<-L8_LNS_8W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                              N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                              P=P*10/61)
+                                                              N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                              P=(P+DOP)*10/61)
 
-LNS_8W_Int_R1<-Leaching_8_LNS8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_8W_Int_R1<-Leaching_8_LNS8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 LNS_8W_Int_R1_Null<- Leaching_8_LNS8W %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNS_8W_Int_R1_Null<-LNS_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNS_8W_Int_R1_Null<-LNS_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNS_8W_Int_R1_Null$Ca-LNS_8W_Amb_R1_Null$Ca+LNS_8W_Int_R1$Ca-LNS_8W_Amb_R1$Ca-LNS_8W_TAIL$Ca
@@ -446,33 +446,33 @@ Leaching_Pre_HNS4B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SE
 
 Leaching_8_HNS4B<-Leaching_Pre_HNS4B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNS_4B<-Leaching_8_HNS4B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNS_4B<-Leaching_8_HNS4B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_HNS8B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_HNS8B<-Leaching_Pre_HNS8B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNS_8B<-Leaching_8_HNS8B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNS_8B<-Leaching_8_HNS8B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_HNS4W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_WTH/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_HNS4W<-Leaching_Pre_HNS4W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNS_4W<-Leaching_8_HNS4W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNS_4W<-Leaching_8_HNS4W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_HNS8W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_WTH/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_HNS8W<-Leaching_Pre_HNS8W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNS_8W<-Leaching_8_HNS8W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNS_8W<-Leaching_8_HNS8W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
-L8_HNS_4B_Inter<-Leaching_8_HNS4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 BO")
-L8_HNS_8B_Inter<-Leaching_8_HNS8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
-L8_HNS_4W_Inter<-Leaching_8_HNS4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
-L8_HNS_8W_Inter<-Leaching_8_HNS8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
+L8_HNS_4B_Inter<-Leaching_8_HNS4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 BO")
+L8_HNS_8B_Inter<-Leaching_8_HNS8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
+L8_HNS_4W_Inter<-Leaching_8_HNS4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
+L8_HNS_8W_Inter<-Leaching_8_HNS8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
 
 
 L8_HNS_4B$Harvest<-"40 BO"
@@ -485,42 +485,42 @@ L8_HNS_8W$Harvest<-"80 WTH"
 L8_HNS_4B_Ambient<-Leaching_8_HNS4B %>% subset(!YEAR %in% Years_40)
 
 Ambient_HNS_4B<-L8_HNS_4B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient")
 
 L8_HNS_4B_Inter<-Leaching_8_HNS4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 Interm_HNS_4B<-L8_HNS_4B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 
 L8_HNS_4B_Ambient_R1_Null<-L8_HNS_4B_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-HNS_4B_Amb_R1_Null<-L8_HNS_4B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_4B_Amb_R1_Null<-L8_HNS_4B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_HNS_4B_Ambient_R1<-Leaching_8_HNS4B %>% subset(YEAR %in% Years_R1_40)
 
-HNS_4B_Amb_R1<-L8_HNS_4B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_4B_Amb_R1<-L8_HNS_4B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-HNS_4B_Int_R1<-Leaching_8_HNS4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_4B_Int_R1<-Leaching_8_HNS4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNS_4B_Int_R1_Null<- Leaching_8_HNS4B %>% subset(YEAR %in% Years_40) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNS_4B_Int_R1_Null<-HNS_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_4B_Int_R1_Null<-HNS_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNS_4B_Int_R1_Null$Ca-HNS_4B_Amb_R1_Null$Ca+HNS_4B_Int_R1$Ca-HNS_4B_Amb_R1$Ca
@@ -556,42 +556,42 @@ HNS_4B_EX<-as.data.frame(HNS_4B_EX) %>% mutate(Site="HNS", Harvest="40BO")
 L8_HNS_4W_Ambient<-Leaching_8_HNS4W %>% subset(!YEAR %in% Years_40)
 
 Ambient_HNS_4W<-L8_HNS_4W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient")
 
 L8_HNS_4W_Inter<-Leaching_8_HNS4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 Interm_HNS_4W<-L8_HNS_4W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 
 L8_HNS_4W_Ambient_R1_Null<-L8_HNS_4W_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-HNS_4W_Amb_R1_Null<-L8_HNS_4W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_4W_Amb_R1_Null<-L8_HNS_4W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_HNS_4W_Ambient_R1<-Leaching_8_HNS4W %>% subset(YEAR %in% Years_R1_40)
 
-HNS_4W_Amb_R1<-L8_HNS_4W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_4W_Amb_R1<-L8_HNS_4W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-HNS_4W_Int_R1<-Leaching_8_HNS4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_4W_Int_R1<-Leaching_8_HNS4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNS_4W_Int_R1_Null<- Leaching_8_HNS4W %>% subset(YEAR %in% Years_40) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNS_4W_Int_R1_Null<-HNS_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_4W_Int_R1_Null<-HNS_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNS_4W_Int_R1_Null$Ca-HNS_4W_Amb_R1_Null$Ca+HNS_4W_Int_R1$Ca-HNS_4W_Amb_R1$Ca
@@ -625,15 +625,15 @@ HNS_4W_EX<-as.data.frame(HNS_4W_EX) %>% mutate(Site="HNS", Harvest="40WTH")
 L8_HNS_8B_Ambient<-Leaching_8_HNS8B %>% subset(!YEAR %in% Years_80)
 
 Ambient_HNS_8B<-L8_HNS_8B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient")
 
 L8_HNS_8B_Inter<-Leaching_8_HNS8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 Interm_HNS_8B<-L8_HNS_8B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 L8_HNS_8B_Ambient_R1_Null<-L8_HNS_8B_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -642,34 +642,34 @@ L8_HNS_8B_Ambient_R1_Null<-L8_HNS_8B_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_HNS_8B_Ambient_R1_Null_TAIL<-L8_HNS_8B_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-HNS_8B_Amb_R1_Null<-L8_HNS_8B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_8B_Amb_R1_Null<-L8_HNS_8B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                             N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                             P=P*10/72)
+                                                             N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                             P=(P+DOP)*10/72)
 
-HNS_8B_TAIL<- L8_HNS_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_8B_TAIL<- L8_HNS_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
 
 L8_HNS_8B_Ambient_R1<-Leaching_8_HNS8B %>% subset(YEAR %in% Years_R1_80)
 
-HNS_8B_Amb_R1<-L8_HNS_8B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_8B_Amb_R1<-L8_HNS_8B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                             N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                             P=P*10/61)
+                                                             N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                             P=(P+DOP)*10/61)
 
-HNS_8B_Int_R1<-Leaching_8_HNS8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_8B_Int_R1<-Leaching_8_HNS8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNS_8B_Int_R1_Null<- Leaching_8_HNS8B %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNS_8B_Int_R1_Null<-HNS_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_8B_Int_R1_Null<-HNS_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNS_8B_Int_R1_Null$Ca-HNS_8B_Amb_R1_Null$Ca+HNS_8B_Int_R1$Ca-HNS_8B_Amb_R1$Ca-HNS_8B_TAIL$Ca
@@ -707,15 +707,15 @@ HNS_8B_EX<-as.data.frame(HNS_8B_EX) %>% mutate(Site="HNS", Harvest="80BO")
 L8_HNS_8W_Ambient<-Leaching_8_HNS8W %>% subset(!YEAR %in% Years_80)
 
 Ambient_HNS_8W<-L8_HNS_8W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient")
 
 L8_HNS_8W_Inter<-Leaching_8_HNS8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 Interm_HNS_8W<-L8_HNS_8W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 L8_HNS_8W_Ambient_R1_Null<-L8_HNS_8W_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -724,34 +724,34 @@ L8_HNS_8W_Ambient_R1_Null<-L8_HNS_8W_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_HNS_8W_Ambient_R1_Null_TAIL<-L8_HNS_8W_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-HNS_8W_Amb_R1_Null<-L8_HNS_8W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_8W_Amb_R1_Null<-L8_HNS_8W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                              N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                              P=P*10/72)
+                                                              N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                              P=(P+DOP)*10/72)
 
-HNS_8W_TAIL<- L8_HNS_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_8W_TAIL<- L8_HNS_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                              N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                              P=P*10/21)
+                                                              N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                              P=(P+DOP)*10/21)
 
 
 L8_HNS_8W_Ambient_R1<-Leaching_8_HNS8W %>% subset(YEAR %in% Years_R1_80)
 
-HNS_8W_Amb_R1<-L8_HNS_8W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNS_8W_Amb_R1<-L8_HNS_8W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                              N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                              P=P*10/61)
+                                                              N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                              P=(P+DOP)*10/61)
 
-HNS_8W_Int_R1<-Leaching_8_HNS8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_8W_Int_R1<-Leaching_8_HNS8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNS_8W_Int_R1_Null<- Leaching_8_HNS8W %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNS_8W_Int_R1_Null<-HNS_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNS_8W_Int_R1_Null<-HNS_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNS_8W_Int_R1_Null$Ca-HNS_8W_Amb_R1_Null$Ca+HNS_8W_Int_R1$Ca-HNS_8W_Amb_R1$Ca-HNS_8W_TAIL$Ca
@@ -800,34 +800,34 @@ Leaching_Pre_LNB4B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BA
 
 Leaching_8_LNB4B<-Leaching_Pre_LNB4B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNB_4B<-Leaching_8_LNB4B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNB_4B<-Leaching_8_LNB4B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_LNB8B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_LNB8B<-Leaching_Pre_LNB8B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNB_8B<-Leaching_8_LNB8B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNB_8B<-Leaching_8_LNB8B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_LNB4W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_WTH/Edited Data/Soil_Solution_All2.csv")
  
 Leaching_8_LNB4W<-Leaching_Pre_LNB4W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNB_4W<-Leaching_8_LNB4W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNB_4W<-Leaching_8_LNB4W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_LNB8W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_LNB8W<-Leaching_Pre_LNB8W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_LNB_8W<-Leaching_8_LNB8W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_LNB_8W<-Leaching_8_LNB8W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
-L8_LNB_4B_Inter<-Leaching_8_LNB4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 BO")
-L8_LNB_8B_Inter<-Leaching_8_LNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
-L8_LNB_4W_Inter<-Leaching_8_LNB4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
-L8_LNB_8W_Inter<-Leaching_8_LNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
+L8_LNB_4B_Inter<-Leaching_8_LNB4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 BO")
+L8_LNB_8B_Inter<-Leaching_8_LNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
+L8_LNB_4W_Inter<-Leaching_8_LNB4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
+L8_LNB_8W_Inter<-Leaching_8_LNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
 
 
 L8_LNB_4B$Harvest<-"40 BO"
@@ -840,15 +840,15 @@ L8_LNB_8W$Harvest<-"80 WTH"
 L8_LNB_4B_Ambient<-Leaching_8_LNB4B %>% subset(!YEAR %in% Years_40)
 
 Ambient_LNB_4B<-L8_LNB_4B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient")
 
 L8_LNB_4B_Inter<-Leaching_8_LNB4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 Interm_LNB_4B<-L8_LNB_4B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 # 40 WTH
@@ -857,15 +857,15 @@ Interm_LNB_4B<-L8_LNB_4B_Inter %>% ungroup() %>%
 L8_LNB_4W_Ambient<-Leaching_8_LNB4W %>% subset(!YEAR %in% Years_40)
 
 Ambient_LNB_4W<-L8_LNB_4W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient")
 
 L8_LNB_4W_Inter<-Leaching_8_LNB4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 Interm_LNB_4W<-L8_LNB_4W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 # 80BO
@@ -873,15 +873,15 @@ Interm_LNB_4W<-L8_LNB_4W_Inter %>% ungroup() %>%
 L8_LNB_8B_Ambient<-Leaching_8_LNB8B %>% subset(!YEAR %in% Years_80)
 
 Ambient_LNB_8B<-L8_LNB_8B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient")
 
 L8_LNB_8B_Inter<-Leaching_8_LNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 Interm_LNB_8B<-L8_LNB_8B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 # 80 WTH
@@ -890,15 +890,15 @@ Interm_LNB_8B<-L8_LNB_8B_Inter %>% ungroup() %>%
 L8_LNB_8W_Ambient<-Leaching_8_LNB8W %>% subset(!YEAR %in% Years_80)
 
 Ambient_LNB_8W<-L8_LNB_8W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient")
 
 L8_LNB_8W_Inter<-Leaching_8_LNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 Interm_LNB_8W<-L8_LNB_8W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 ### LNB Extra
@@ -906,28 +906,28 @@ Interm_LNB_8W<-L8_LNB_8W_Inter %>% ungroup() %>%
 
 L8_LNB_4B_Ambient_R1_Null<-L8_LNB_4B_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-LNB_4B_Amb_R1_Null<-L8_LNB_4B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_4B_Amb_R1_Null<-L8_LNB_4B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_LNB_4B_Ambient_R1<-Leaching_8_LNB4B %>% subset(YEAR %in% Years_R1_40)
 
-LNB_4B_Amb_R1<-L8_LNB_4B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_4B_Amb_R1<-L8_LNB_4B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-LNB_4B_Int_R1<-Leaching_8_LNB4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_4B_Int_R1<-Leaching_8_LNB4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 LNB_4B_Int_R1_Null<- Leaching_8_LNB4B %>% subset(YEAR %in% Years_40) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNB_4B_Int_R1_Null<-LNB_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_4B_Int_R1_Null<-LNB_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNB_4B_Int_R1_Null$Ca-LNB_4B_Amb_R1_Null$Ca+LNB_4B_Int_R1$Ca-LNB_4B_Amb_R1$Ca
@@ -959,28 +959,28 @@ LNB_4B_EX<-as.data.frame(LNB_4B_EX) %>% mutate(Site="LNB", Harvest="40BO")
 
 L8_LNB_4W_Ambient_R1_Null<-L8_LNB_4W_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-LNB_4W_Amb_R1_Null<-L8_LNB_4W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_4W_Amb_R1_Null<-L8_LNB_4W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_LNB_4W_Ambient_R1<-Leaching_8_LNB4W %>% subset(YEAR %in% Years_R1_40)
 
-LNB_4W_Amb_R1<-L8_LNB_4W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_4W_Amb_R1<-L8_LNB_4W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-LNB_4W_Int_R1<-Leaching_8_LNB4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_4W_Int_R1<-Leaching_8_LNB4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 LNB_4W_Int_R1_Null<- Leaching_8_LNB4W %>% subset(YEAR %in% Years_40) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNB_4W_Int_R1_Null<-LNB_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_4W_Int_R1_Null<-LNB_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNB_4W_Int_R1_Null$Ca-LNB_4W_Amb_R1_Null$Ca+LNB_4W_Int_R1$Ca-LNB_4W_Amb_R1$Ca
@@ -1017,15 +1017,15 @@ LNB_4W_EX<-as.data.frame(LNB_4W_EX) %>% mutate(Site="LNB", Harvest="40WTH")
 L8_LNB_8B_Ambient<-Leaching_8_LNB8B %>% subset(!YEAR %in% Years_80)
 
 Ambient_LNB_8B<-L8_LNB_8B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient")
 
 L8_LNB_8B_Inter<-Leaching_8_LNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 Interm_LNB_8B<-L8_LNB_8B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 L8_LNB_8B_Ambient_R1_Null<-L8_LNB_8B_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -1034,34 +1034,34 @@ L8_LNB_8B_Ambient_R1_Null<-L8_LNB_8B_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_LNB_8B_Ambient_R1_Null_TAIL<-L8_LNB_8B_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-LNB_8B_Amb_R1_Null<-L8_LNB_8B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_8B_Amb_R1_Null<-L8_LNB_8B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                             N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                             P=P*10/72)
+                                                             N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                             P=(P+DOP)*10/72)
 
-LNB_8B_TAIL<- L8_LNB_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_8B_TAIL<- L8_LNB_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
 
 L8_LNB_8B_Ambient_R1<-Leaching_8_LNB8B %>% subset(YEAR %in% Years_R1_80)
 
-LNB_8B_Amb_R1<-L8_LNB_8B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_8B_Amb_R1<-L8_LNB_8B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                             N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                             P=P*10/61)
+                                                             N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                             P=(P+DOP)*10/61)
 
-LNB_8B_Int_R1<-Leaching_8_LNB8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_8B_Int_R1<-Leaching_8_LNB8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 LNB_8B_Int_R1_Null<- Leaching_8_LNB8B %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNB_8B_Int_R1_Null<-LNB_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_8B_Int_R1_Null<-LNB_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNB_8B_Int_R1_Null$Ca-LNB_8B_Amb_R1_Null$Ca+LNB_8B_Int_R1$Ca-LNB_8B_Amb_R1$Ca-LNB_8B_TAIL$Ca
@@ -1099,15 +1099,15 @@ LNB_8B_EX<-as.data.frame(LNB_8B_EX) %>% mutate(Site="LNB", Harvest="80BO")
 L8_LNB_8W_Ambient<-Leaching_8_LNB8W %>% subset(!YEAR %in% Years_80)
 
 Ambient_LNB_8W<-L8_LNB_8W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient")
 
 L8_LNB_8W_Inter<-Leaching_8_LNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 Interm_LNB_8W<-L8_LNB_8W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 L8_LNB_8W_Ambient_R1_Null<-L8_LNB_8W_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -1116,34 +1116,34 @@ L8_LNB_8W_Ambient_R1_Null<-L8_LNB_8W_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_LNB_8W_Ambient_R1_Null_TAIL<-L8_LNB_8W_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-LNB_8W_Amb_R1_Null<-L8_LNB_8W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_8W_Amb_R1_Null<-L8_LNB_8W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                              N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                              P=P*10/72)
+                                                              N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                              P=(P+DOP)*10/72)
 
-LNB_8W_TAIL<- L8_LNB_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_8W_TAIL<- L8_LNB_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                              N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                              P=P*10/21)
+                                                              N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                              P=(P+DOP)*10/21)
 
 
 L8_LNB_8W_Ambient_R1<-Leaching_8_LNB8W %>% subset(YEAR %in% Years_R1_80)
 
-LNB_8W_Amb_R1<-L8_LNB_8W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+LNB_8W_Amb_R1<-L8_LNB_8W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                              N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                              P=P*10/61)
+                                                              N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                              P=(P+DOP)*10/61)
 
-LNB_8W_Int_R1<-Leaching_8_LNB8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_8W_Int_R1<-Leaching_8_LNB8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 LNB_8W_Int_R1_Null<- Leaching_8_LNB8W %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-LNB_8W_Int_R1_Null<-LNB_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+LNB_8W_Int_R1_Null<-LNB_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-LNB_8W_Int_R1_Null$Ca-LNB_8W_Amb_R1_Null$Ca+LNB_8W_Int_R1$Ca-LNB_8W_Amb_R1$Ca-LNB_8W_TAIL$Ca
@@ -1188,36 +1188,36 @@ Leaching_Pre_HNB4B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BA
 
 Leaching_8_HNB4B<-Leaching_Pre_HNB4B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNB_4B<-Leaching_8_HNB4B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNB_4B<-Leaching_8_HNB4B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_HNB8B<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_HNB8B<-Leaching_Pre_HNB8B %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNB_8B<-Leaching_8_HNB8B %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNB_8B<-Leaching_8_HNB8B %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_HNB4W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_WTH/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_HNB4W<-Leaching_Pre_HNB4W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNB_4W<-Leaching_8_HNB4W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNB_4W<-Leaching_8_HNB4W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 Leaching_Pre_HNB8W<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_WTH/Edited Data/Soil_Solution_All2.csv")
 
 Leaching_8_HNB8W<-Leaching_Pre_HNB8W %>% filter(group_id %in% 8) %>% subset (YEAR %in% Time_Frame)
 
-L8_HNB_8W<-Leaching_8_HNB8W %>% group_by(YEAR) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+L8_HNB_8W<-Leaching_8_HNB8W %>% group_by(YEAR) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 
 
 
-L8_HNB_4B_Inter<-Leaching_8_HNB4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 BO")
-L8_HNB_8B_Inter<-Leaching_8_HNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
-L8_HNB_4W_Inter<-Leaching_8_HNB4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
-L8_HNB_8W_Inter<-Leaching_8_HNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
+L8_HNB_4B_Inter<-Leaching_8_HNB4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 BO")
+L8_HNB_8B_Inter<-Leaching_8_HNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 BO")
+L8_HNB_4W_Inter<-Leaching_8_HNB4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="40 WTH")
+L8_HNB_8W_Inter<-Leaching_8_HNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% mutate(Harvest="80 WTH")
 
 
 L8_HNB_4B$Harvest<-"40 BO"
@@ -1230,15 +1230,15 @@ L8_HNB_8W$Harvest<-"80 WTH"
 L8_HNB_4B_Ambient<-Leaching_8_HNB4B %>% subset(!YEAR %in% Years_40)
 
 Ambient_HNB_4B<-L8_HNB_4B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient")
 
 L8_HNB_4B_Inter<-Leaching_8_HNB4B %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 Interm_HNB_4B<-L8_HNB_4B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="40 BO", Loss_Type="Inter_Harvest")
 
 # 40 WTH
@@ -1247,31 +1247,31 @@ Interm_HNB_4B<-L8_HNB_4B_Inter %>% ungroup() %>%
 L8_HNB_4W_Ambient<-Leaching_8_HNB4W %>% subset(!YEAR %in% Years_40)
 
 Ambient_HNB_4W<-L8_HNB_4W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient")
 
 L8_HNB_4W_Inter<-Leaching_8_HNB4W %>% group_by(YEAR) %>% subset(YEAR %in% Years_40) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 Interm_HNB_4W<-L8_HNB_4W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="40 WTH", Loss_Type="Inter_Harvest")
 
 # 80BO
 
 L8_HNB_8B_Ambient<-Leaching_8_HNB8B %>% subset(!YEAR %in% Years_80)
 Ambient_HNB_8B<-L8_HNB_8B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient")%>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 L8_HNB_8B_Inter<-Leaching_8_HNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 Interm_HNB_8B<-L8_HNB_8B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 # 80 WTH
@@ -1280,15 +1280,15 @@ Interm_HNB_8B<-L8_HNB_8B_Inter %>% ungroup() %>%
 L8_HNB_8W_Ambient<-Leaching_8_HNB8W %>% subset(!YEAR %in% Years_80)
 
 Ambient_HNB_8W<-L8_HNB_8W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient")
 
 L8_HNB_8W_Inter<-Leaching_8_HNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 Interm_HNB_8W<-L8_HNB_8W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 
@@ -1297,28 +1297,28 @@ Interm_HNB_8W<-L8_HNB_8W_Inter %>% ungroup() %>%
 
 L8_HNB_4B_Ambient_R1_Null<-L8_HNB_4B_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-HNB_4B_Amb_R1_Null<-L8_HNB_4B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_4B_Amb_R1_Null<-L8_HNB_4B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_HNB_4B_Ambient_R1<-Leaching_8_HNB4B %>% subset(YEAR %in% Years_R1_40)
 
-HNB_4B_Amb_R1<-L8_HNB_4B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_4B_Amb_R1<-L8_HNB_4B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-HNB_4B_Int_R1<-Leaching_8_HNB4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_4B_Int_R1<-Leaching_8_HNB4B %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNB_4B_Int_R1_Null<- Leaching_8_HNB4B %>% subset(YEAR %in% Years_40) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNB_4B_Int_R1_Null<-HNB_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_4B_Int_R1_Null<-HNB_4B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNB_4B_Int_R1_Null$Ca-HNB_4B_Amb_R1_Null$Ca+HNB_4B_Int_R1$Ca-HNB_4B_Amb_R1$Ca
@@ -1351,28 +1351,28 @@ HNB_4B_EX<-as.data.frame(HNB_4B_EX) %>% mutate(Site="HNB", Harvest="40BO")
 
 L8_HNB_4W_Ambient_R1_Null<-L8_HNB_4W_Ambient %>% subset(!YEAR %in% Years_R1_40)
 
-HNB_4W_Amb_R1_Null<-L8_HNB_4W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_4W_Amb_R1_Null<-L8_HNB_4W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/32, Mg=Mg*10/32, K=K*10/32, 
-                                                             N=(NO3+NH4)*10/32, SO4=SO4*10/32,
-                                                             P=P*10/32)
+                                                             N=(NO3+NH4+DON)*10/32, SO4=SO4*10/32,
+                                                             P=(P+DOP)*10/32)
 
 L8_HNB_4W_Ambient_R1<-Leaching_8_HNB4W %>% subset(YEAR %in% Years_R1_40)
 
-HNB_4W_Amb_R1<-L8_HNB_4W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_4W_Amb_R1<-L8_HNB_4W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="40 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
-HNB_4W_Int_R1<-Leaching_8_HNB4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_4W_Int_R1<-Leaching_8_HNB4W %>% subset(YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNB_4W_Int_R1_Null<- Leaching_8_HNB4W %>% subset(YEAR %in% Years_40) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNB_4W_Int_R1_Null<-HNB_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_4W_Int_R1_Null<-HNB_4W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_40_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNB_4W_Int_R1_Null$Ca-HNB_4W_Amb_R1_Null$Ca+HNB_4W_Int_R1$Ca-HNB_4W_Amb_R1$Ca
@@ -1409,15 +1409,15 @@ HNB_4W_EX<-as.data.frame(HNB_4W_EX) %>% mutate(Site="HNB", Harvest="40WTH")
 L8_HNB_8B_Ambient<-Leaching_8_HNB8B %>% subset(!YEAR %in% Years_80)
 
 Ambient_HNB_8B<-L8_HNB_8B_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient")
 
 L8_HNB_8B_Inter<-Leaching_8_HNB8B %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 Interm_HNB_8B<-L8_HNB_8B_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 BO", Loss_Type="Inter_Harvest")
 
 L8_HNB_8B_Ambient_R1_Null<-L8_HNB_8B_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -1426,34 +1426,34 @@ L8_HNB_8B_Ambient_R1_Null<-L8_HNB_8B_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_HNB_8B_Ambient_R1_Null_TAIL<-L8_HNB_8B_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-HNB_8B_Amb_R1_Null<-L8_HNB_8B_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_8B_Amb_R1_Null<-L8_HNB_8B_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                             N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                             P=P*10/72)
+                                                             N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                             P=(P+DOP)*10/72)
 
-HNB_8B_TAIL<- L8_HNB_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_8B_TAIL<- L8_HNB_8B_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                             N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                             P=P*10/21)
+                                                             N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                             P=(P+DOP)*10/21)
 
 
 L8_HNB_8B_Ambient_R1<-Leaching_8_HNB8B %>% subset(YEAR %in% Years_R1_80)
 
-HNB_8B_Amb_R1<-L8_HNB_8B_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_8B_Amb_R1<-L8_HNB_8B_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 BO", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                             N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                             P=P*10/61)
+                                                             N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                             P=(P+DOP)*10/61)
 
-HNB_8B_Int_R1<-Leaching_8_HNB8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_8B_Int_R1<-Leaching_8_HNB8B %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNB_8B_Int_R1_Null<- Leaching_8_HNB8B %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNB_8B_Int_R1_Null<-HNB_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_8B_Int_R1_Null<-HNB_8B_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNB_8B_Int_R1_Null$Ca-HNB_8B_Amb_R1_Null$Ca+HNB_8B_Int_R1$Ca-HNB_8B_Amb_R1$Ca-HNB_8B_TAIL$Ca
@@ -1491,15 +1491,15 @@ HNB_8B_EX<-as.data.frame(HNB_8B_EX) %>% mutate(Site="HNB", Harvest="80BO")
 L8_HNB_8W_Ambient<-Leaching_8_HNB8W %>% subset(!YEAR %in% Years_80)
 
 Ambient_HNB_8W<-L8_HNB_8W_Ambient  %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient")
 
 L8_HNB_8W_Inter<-Leaching_8_HNB8W %>% group_by(YEAR) %>% subset(YEAR %in% Years_80) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 Interm_HNB_8W<-L8_HNB_8W_Inter %>% ungroup() %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))%>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))%>% 
   mutate(Harvest="80 WTH", Loss_Type="Inter_Harvest")
 
 L8_HNB_8W_Ambient_R1_Null<-L8_HNB_8W_Ambient %>% subset(!YEAR %in% Years_R1_80)
@@ -1508,34 +1508,34 @@ L8_HNB_8W_Ambient_R1_Null<-L8_HNB_8W_Ambient_R1_Null %>% subset(!YEAR %in% Years
 
 L8_HNB_8W_Ambient_R1_Null_TAIL<-L8_HNB_8W_Ambient %>% subset(YEAR %in% Years_80_Tail)
 
-HNB_8W_Amb_R1_Null<-L8_HNB_8W_Ambient_R1_Null %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_8W_Amb_R1_Null<-L8_HNB_8W_Ambient_R1_Null %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/72, Mg=Mg*10/72, K=K*10/72, 
-                                                              N=(NO3+NH4)*10/72, SO4=SO4*10/72,
-                                                              P=P*10/72)
+                                                              N=(NO3+NH4+DON)*10/72, SO4=SO4*10/72,
+                                                              P=(P+DOP)*10/72)
 
-HNB_8W_TAIL<- L8_HNB_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_8W_TAIL<- L8_HNB_8W_Ambient_R1_Null_TAIL %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/21, Mg=Mg*10/21, K=K*10/21, 
-                                                              N=(NO3+NH4)*10/21, SO4=SO4*10/21,
-                                                              P=P*10/21)
+                                                              N=(NO3+NH4+DON)*10/21, SO4=SO4*10/21,
+                                                              P=(P+DOP)*10/21)
 
 
 L8_HNB_8W_Ambient_R1<-Leaching_8_HNB8W %>% subset(YEAR %in% Years_R1_80)
 
-HNB_8W_Amb_R1<-L8_HNB_8W_Ambient_R1%>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>% 
+HNB_8W_Amb_R1<-L8_HNB_8W_Ambient_R1%>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>% 
   mutate(Harvest="80 WTH", Loss_Type="Ambient_R1") %>% mutate(Ca=Ca*10/61, Mg=Mg*10/61, K=K*10/61, 
-                                                              N=(NO3+NH4)*10/61, SO4=SO4*10/61,
-                                                              P=P*10/61)
+                                                              N=(NO3+NH4+DON)*10/61, SO4=SO4*10/61,
+                                                              P=(P+DOP)*10/61)
 
-HNB_8W_Int_R1<-Leaching_8_HNB8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_8W_Int_R1<-Leaching_8_HNB8W %>% subset(YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 HNB_8W_Int_R1_Null<- Leaching_8_HNB8W %>% subset(YEAR %in% Years_80) %>%
-  mutate(N=NO3+NH4)
+  mutate(N=NO3+NH4+DON)
 
 
-HNB_8W_Int_R1_Null<-HNB_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE))) %>%
-  mutate(N=NO3+NH4)
+HNB_8W_Int_R1_Null<-HNB_8W_Int_R1_Null %>% subset(!YEAR %in% Years_R1_80_INT) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE))) %>%
+  mutate(N=NO3+NH4+DON)
 
 
 Ca_Ex<-HNB_8W_Int_R1_Null$Ca-HNB_8W_Amb_R1_Null$Ca+HNB_8W_Int_R1$Ca-HNB_8W_Amb_R1$Ca-HNB_8W_TAIL$Ca

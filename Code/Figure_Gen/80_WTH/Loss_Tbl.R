@@ -59,14 +59,16 @@ Tot_Removed_LNS$S_Har<-Net_Removal_LNS$S_F*.999*.99+Net_Removal_LNS$S_Bol*.97*.9
 Tot_Removed_LNS$Ca_Leach<-Leaching_LNS$Ca
 Tot_Removed_LNS$Mg_Leach<-Leaching_LNS$Mg
 Tot_Removed_LNS$K_Leach<-Leaching_LNS$K
-Tot_Removed_LNS$N_Leach<-Leaching_LNS$NO3+Leaching_LNS$NH4
-Tot_Removed_LNS$P_Leach<-Leaching_LNS$P
+Tot_Removed_LNS$N_Leach<-Leaching_LNS$NO3+Leaching_LNS$NH4+Leaching_LNS$DON
+Tot_Removed_LNS$P_Leach<-Leaching_LNS$P+Leaching_LNS$DOP
 Tot_Removed_LNS$S_Leach<-Leaching_LNS$SO4
 
 Tot_Removed_LNS$P_OCC<-AEC_All_LNS$PO4_Net
 Tot_Removed_LNS$S_OCC<-AEC_All_LNS$SO4_Net
 
 Tot_Removed_LNS$Site<-"LNS"
+
+
 
 
 # LN BAS
@@ -116,134 +118,14 @@ Tot_Removed_LNB$S_Har<-Net_Removal_LNB$S_F*.999*.99+Net_Removal_LNB$S_Bol*.97*.9
 Tot_Removed_LNB$Ca_Leach<-Leaching_LNB$Ca
 Tot_Removed_LNB$Mg_Leach<-Leaching_LNB$Mg
 Tot_Removed_LNB$K_Leach<-Leaching_LNB$K
-Tot_Removed_LNB$N_Leach<-Leaching_LNB$N
-Tot_Removed_LNB$P_Leach<-Leaching_LNB$P
+Tot_Removed_LNB$N_Leach<-Leaching_LNB$NO3+Leaching_LNB$NH4+Leaching_LNB$DON
+Tot_Removed_LNB$P_Leach<-Leaching_LNB$P+Leaching_LNB$DOP
 Tot_Removed_LNB$S_Leach<-Leaching_LNB$SO4
 
 Tot_Removed_LNB$P_OCC<-AEC_All_LNB$PO4_Net
 Tot_Removed_LNB$S_OCC<-AEC_All_LNB$SO4_Net
 
 Tot_Removed_LNB$Site<-"LNB"
-
-
-
-# LN SED
-
-Leaching_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Soil_Solution_All2.csv")
-
-Leaching_LNB<-Leaching_LNB %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
-
-Tree_Nut_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
-
-Net_Removal_LNB<-Tree_Nut_LNB %>% subset(YEAR %in% c(2065, 2147, 2229, 2311, 2393, 2475
-)) %>% subset(Month %in% 8)
-
-Net_Removal_LNB$P_Brh<-as.numeric(Net_Removal_LNB$P_Brh)
-
-Net_Removal_LNB<-Net_Removal_LNB %>% summarise(across(DW_F:P_Bol, ~sum(.x, na.rm=TRUE)))
-
-
-AEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/AEC_All.csv")
-
-AEC_All_LNB<-AEC_All_LNB %>% subset(Date %in% c('2005-08-01', '2505-08-01')) %>% 
-  group_by(Date) %>% summarise(across(SO4:Cl, ~sum(.x, na.rm=TRUE)))
-
-AEC_All_LNB$SO4_Net<-diff(AEC_All_LNB$SO4) 
-
-
-AEC_All_LNB$PO4_Net<-diff(AEC_All_LNB$PO4) 
-
-AEC_All_LNB<-AEC_All_LNB %>% subset(Date %in% c('2005-08-01'))
-
-
-
-Tot_Removed_LNB<-as.data.frame(Leaching_LNB$Ca+Net_Removal_LNB$Ca_F*.999*.99+Net_Removal_LNB$Ca_Bol*.97*.99+Net_Removal_LNB$Ca_Brh*.999*.99+Net_Removal_LNB$Ca_Brk*.9*.99) %>% rename(Ca_Tot=1)
-Tot_Removed_LNB$Mg_Tot<-Leaching_LNB$Mg+Net_Removal_LNB$Mg_F*.999*.99+Net_Removal_LNB$Mg_Bol*.97*.99+Net_Removal_LNB$Mg_Brh*.999*.99+Net_Removal_LNB$Mg_Brk*.9*.99
-Tot_Removed_LNB$K_Tot<-Leaching_LNB$K+Net_Removal_LNB$K_F*.999*.99+Net_Removal_LNB$K_Bol*.97*.99+Net_Removal_LNB$K_Brh*.999*.99+Net_Removal_LNB$K_Brk*.9*.99
-Tot_Removed_LNB$N_Tot<-Leaching_LNB$NO3+Leaching_LNB$NH4+Net_Removal_LNB$N_F*.999*.99+Net_Removal_LNB$N_Bol*.97*.99+Net_Removal_LNB$N_Brh*.999*.99+Net_Removal_LNB$N_Brk*.9*.99
-Tot_Removed_LNB$P_Tot<-AEC_All_LNB$PO4_Net+Leaching_LNB$P+Net_Removal_LNB$P_F*.999*.99+Net_Removal_LNB$P_Bol*.97*.99+Net_Removal_LNB$P_Brh*.999*.99+Net_Removal_LNB$P_Brk*.9*.99
-Tot_Removed_LNB$S_Tot<-AEC_All_LNB$SO4_Net+Leaching_LNB$SO4+Net_Removal_LNB$S_F*.999*.99+Net_Removal_LNB$S_Bol*.97*.99+Net_Removal_LNB$S_Brh*.999*.99+Net_Removal_LNB$S_Brk*.9*.99
-
-Tot_Removed_LNB$Ca_Har<-Net_Removal_LNB$Ca_F*.999*.99+Net_Removal_LNB$Ca_Bol*.97*.99+Net_Removal_LNB$Ca_Brh*.999*.99+Net_Removal_LNB$Ca_Brk*.9*.99
-Tot_Removed_LNB$Mg_Har<-Net_Removal_LNB$Mg_F*.999*.99+Net_Removal_LNB$Mg_Bol*.97*.99+Net_Removal_LNB$Mg_Brh*.999*.99+Net_Removal_LNB$Mg_Brk*.9*.99
-Tot_Removed_LNB$K_Har<-Net_Removal_LNB$K_F*.999*.99+Net_Removal_LNB$K_Bol*.97*.99+Net_Removal_LNB$K_Brh*.999*.99+Net_Removal_LNB$K_Brk*.9*.99
-Tot_Removed_LNB$N_Har<-Net_Removal_LNB$N_F*.999*.99+Net_Removal_LNB$N_Bol*.97*.99+Net_Removal_LNB$N_Brh*.999*.99+Net_Removal_LNB$N_Brk*.9*.99
-Tot_Removed_LNB$P_Har<-Net_Removal_LNB$P_F*.999*.99+Net_Removal_LNB$P_Bol*.97*.99+Net_Removal_LNB$P_Brh*.999*.99+Net_Removal_LNB$P_Brk*.9*.99
-Tot_Removed_LNB$S_Har<-Net_Removal_LNB$S_F*.999*.99+Net_Removal_LNB$S_Bol*.97*.99+Net_Removal_LNB$S_Brh*.999*.99+Net_Removal_LNB$S_Brk*.9*.99
-
-Tot_Removed_LNB$Ca_Leach<-Leaching_LNB$Ca
-Tot_Removed_LNB$Mg_Leach<-Leaching_LNB$Mg
-Tot_Removed_LNB$K_Leach<-Leaching_LNB$K
-Tot_Removed_LNB$N_Leach<-Leaching_LNB$NO3+Leaching_LNB$NH4
-Tot_Removed_LNB$P_Leach<-Leaching_LNB$P
-Tot_Removed_LNB$S_Leach<-Leaching_LNB$SO4
-
-Tot_Removed_LNB$P_OCC<-AEC_All_LNB$PO4_Net
-Tot_Removed_LNB$S_OCC<-AEC_All_LNB$SO4_Net
-
-Tot_Removed_LNB$Site<-"LNB"
-
-
-# LN SED
-
-Leaching_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Soil_Solution_All2.csv")
-
-Leaching_LNB<-Leaching_LNB %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
-
-Tree_Nut_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/Tree_Nut_All.csv")
-
-Net_Removal_LNB<-Tree_Nut_LNB %>% subset(YEAR %in% c(2065, 2147, 2229, 2311, 2393, 2475
-)) %>% subset(Month %in% 8)
-
-Net_Removal_LNB$P_Brh<-as.numeric(Net_Removal_LNB$P_Brh)
-
-Net_Removal_LNB<-Net_Removal_LNB %>% summarise(across(DW_F:P_Bol, ~sum(.x, na.rm=TRUE)))
-
-
-AEC_All_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_WTH/Edited Data/AEC_All.csv")
-
-AEC_All_LNB<-AEC_All_LNB %>% subset(Date %in% c('2005-08-01', '2505-08-01')) %>% 
-  group_by(Date) %>% summarise(across(SO4:Cl, ~sum(.x, na.rm=TRUE)))
-
-AEC_All_LNB$SO4_Net<-diff(AEC_All_LNB$SO4) 
-
-
-AEC_All_LNB$PO4_Net<-diff(AEC_All_LNB$PO4) 
-
-AEC_All_LNB<-AEC_All_LNB %>% subset(Date %in% c('2005-08-01'))
-
-
-
-Tot_Removed_LNB<-as.data.frame(Leaching_LNB$Ca+Net_Removal_LNB$Ca_F*.999*.99+Net_Removal_LNB$Ca_Bol*.97*.99+Net_Removal_LNB$Ca_Brh*.999*.99+Net_Removal_LNB$Ca_Brk*.9*.99) %>% rename(Ca_Tot=1)
-Tot_Removed_LNB$Mg_Tot<-Leaching_LNB$Mg+Net_Removal_LNB$Mg_F*.999*.99+Net_Removal_LNB$Mg_Bol*.97*.99+Net_Removal_LNB$Mg_Brh*.999*.99+Net_Removal_LNB$Mg_Brk*.9*.99
-Tot_Removed_LNB$K_Tot<-Leaching_LNB$K+Net_Removal_LNB$K_F*.999*.99+Net_Removal_LNB$K_Bol*.97*.99+Net_Removal_LNB$K_Brh*.999*.99+Net_Removal_LNB$K_Brk*.9*.99
-Tot_Removed_LNB$N_Tot<-Leaching_LNB$NO3+Leaching_LNB$NH4+Net_Removal_LNB$N_F*.999*.99+Net_Removal_LNB$N_Bol*.97*.99+Net_Removal_LNB$N_Brh*.999*.99+Net_Removal_LNB$N_Brk*.9*.99
-Tot_Removed_LNB$P_Tot<-AEC_All_LNB$PO4_Net+Leaching_LNB$P+Net_Removal_LNB$P_F*.999*.99+Net_Removal_LNB$P_Bol*.97*.99+Net_Removal_LNB$P_Brh*.999*.99+Net_Removal_LNB$P_Brk*.9*.99
-Tot_Removed_LNB$S_Tot<-AEC_All_LNB$SO4_Net+Leaching_LNB$SO4+Net_Removal_LNB$S_F*.999*.99+Net_Removal_LNB$S_Bol*.97*.99+Net_Removal_LNB$S_Brh*.999*.99+Net_Removal_LNB$S_Brk*.9*.99
-
-Tot_Removed_LNB$Ca_Har<-Net_Removal_LNB$Ca_F*.999*.99+Net_Removal_LNB$Ca_Bol*.97*.99+Net_Removal_LNB$Ca_Brh*.999*.99+Net_Removal_LNB$Ca_Brk*.9*.99
-Tot_Removed_LNB$Mg_Har<-Net_Removal_LNB$Mg_F*.999*.99+Net_Removal_LNB$Mg_Bol*.97*.99+Net_Removal_LNB$Mg_Brh*.999*.99+Net_Removal_LNB$Mg_Brk*.9*.99
-Tot_Removed_LNB$K_Har<-Net_Removal_LNB$K_F*.999*.99+Net_Removal_LNB$K_Bol*.97*.99+Net_Removal_LNB$K_Brh*.999*.99+Net_Removal_LNB$K_Brk*.9*.99
-Tot_Removed_LNB$N_Har<-Net_Removal_LNB$N_F*.999*.99+Net_Removal_LNB$N_Bol*.97*.99+Net_Removal_LNB$N_Brh*.999*.99+Net_Removal_LNB$N_Brk*.9*.99
-Tot_Removed_LNB$P_Har<-Net_Removal_LNB$P_F*.999*.99+Net_Removal_LNB$P_Bol*.97*.99+Net_Removal_LNB$P_Brh*.999*.99+Net_Removal_LNB$P_Brk*.9*.99
-Tot_Removed_LNB$S_Har<-Net_Removal_LNB$S_F*.999*.99+Net_Removal_LNB$S_Bol*.97*.99+Net_Removal_LNB$S_Brh*.999*.99+Net_Removal_LNB$S_Brk*.9*.99
-
-Tot_Removed_LNB$Ca_Leach<-Leaching_LNB$Ca
-Tot_Removed_LNB$Mg_Leach<-Leaching_LNB$Mg
-Tot_Removed_LNB$K_Leach<-Leaching_LNB$K
-Tot_Removed_LNB$N_Leach<-Leaching_LNB$NO3+Leaching_LNB$NH4
-Tot_Removed_LNB$P_Leach<-Leaching_LNB$P
-Tot_Removed_LNB$S_Leach<-Leaching_LNB$SO4
-
-Tot_Removed_LNB$P_OCC<-AEC_All_LNB$PO4_Net
-Tot_Removed_LNB$S_OCC<-AEC_All_LNB$SO4_Net
-
-Tot_Removed_LNB$Site<-"LNB"
-
-
-
-
-
 
 
 # HN SED
@@ -293,8 +175,8 @@ Tot_Removed_HNS$S_Har<-Net_Removal_HNS$S_F*.999*.99+Net_Removal_HNS$S_Bol*.97*.9
 Tot_Removed_HNS$Ca_Leach<-Leaching_HNS$Ca
 Tot_Removed_HNS$Mg_Leach<-Leaching_HNS$Mg
 Tot_Removed_HNS$K_Leach<-Leaching_HNS$K
-Tot_Removed_HNS$N_Leach<-Leaching_HNS$NO3+Leaching_HNS$NH4
-Tot_Removed_HNS$P_Leach<-Leaching_HNS$P
+Tot_Removed_HNS$N_Leach<-Leaching_HNS$NO3+Leaching_HNS$NH4+Leaching_HNS$DON
+Tot_Removed_HNS$P_Leach<-Leaching_HNS$P+Leaching_HNS$DOP
 Tot_Removed_HNS$S_Leach<-Leaching_HNS$SO4
 
 Tot_Removed_HNS$P_OCC<-AEC_All_HNS$PO4_Net
@@ -349,8 +231,8 @@ Tot_Removed_HNB$S_Har<-Net_Removal_HNB$S_F*.999*.99+Net_Removal_HNB$S_Bol*.97*.9
 Tot_Removed_HNB$Ca_Leach<-Leaching_HNB$Ca
 Tot_Removed_HNB$Mg_Leach<-Leaching_HNB$Mg
 Tot_Removed_HNB$K_Leach<-Leaching_HNB$K
-Tot_Removed_HNB$N_Leach<-Leaching_HNB$NO3+Leaching_HNB$NH4
-Tot_Removed_HNB$P_Leach<-Leaching_HNB$P
+Tot_Removed_HNB$N_Leach<-Leaching_HNB$NO3+Leaching_HNB$NH4+Leaching_HNB$DON
+Tot_Removed_HNB$P_Leach<-Leaching_HNB$P+Leaching_HNB$DOP
 Tot_Removed_HNB$S_Leach<-Leaching_HNB$SO4
 
 Tot_Removed_HNB$P_OCC<-AEC_All_HNB$PO4_Net

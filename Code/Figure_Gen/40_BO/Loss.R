@@ -64,7 +64,7 @@ Leaching_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_B
 # New Method
 
 Leaching_LNS_Cumulative<-Leaching_LNS %>% subset(group_id %in% 8 & YEAR %in% Years) %>%
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="LNS", Harvest="40BO", N=NO3+NH4)  %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="LNS", Harvest="40BO", N=NO3+NH4+DON, P = P+DOP)  %>% 
   select(N, P, K, Ca, Site, Harvest,Rot, Loss1, Loss2)
 
 
@@ -87,7 +87,7 @@ Leaching_LNS_CumulativeF<-Leaching_LNS_Cumulative %>% mutate(Ca=Leaching_LNS_Cum
 
 
 Leaching_LNS_Background_R1<-Leaching_LNS %>% subset(group_id %in% 8 & YEAR %in% Years_R1) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="LNS", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4) %>%
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="LNS", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4+DON, P = P+DOP) %>%
   select(N, P, K, Ca, Rot, Loss1, Loss2, Site, Harvest)
 
 Leaching_LNS_Excess_R1<-Ex_Table_R1 %>% rename(Ca=Ca_Ex_R1, K=K_Ex_R1, N=N_Ex_R1, P=P_Ex_R1) %>%
@@ -220,7 +220,7 @@ Leaching_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_B
 # New Method
 
 Leaching_HNS_Cumulative<-Leaching_HNS %>% subset(group_id %in% 8 & YEAR %in% Years) %>%
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="HNS", Harvest="40BO", N=NO3+NH4)  %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="HNS", Harvest="40BO", N=NO3+NH4+DON, P = P+DOP)  %>% 
   select(N, P, K, Ca, Site, Harvest,Rot, Loss1, Loss2)
 
 
@@ -243,7 +243,7 @@ Leaching_HNS_CumulativeF<-Leaching_HNS_Cumulative %>% mutate(Ca=Leaching_HNS_Cum
 
 
 Leaching_HNS_Background_R1<-Leaching_HNS %>% subset(group_id %in% 8 & YEAR %in% Years_R1) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="HNS", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4) %>%
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="HNS", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4+DON, P = P+DOP) %>%
   select(N, P, K, Ca, Rot, Loss1, Loss2, Site, Harvest)
 
 Leaching_HNS_Excess_R1<-Ex_Table_R1 %>% rename(Ca=Ca_Ex_R1, K=K_Ex_R1, N=N_Ex_R1, P=P_Ex_R1) %>%
@@ -374,7 +374,7 @@ Leaching_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_B
 # New Method
 
 Leaching_LNB_Cumulative<-Leaching_LNB %>% subset(group_id %in% 8 & YEAR %in% Years) %>%
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="LNB", Harvest="40BO", N=NO3+NH4)  %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="LNB", Harvest="40BO", N=NO3+NH4+DON, P = P+DOP)  %>% 
   select(N, P, K, Ca, Site, Harvest,Rot, Loss1, Loss2)
 
 
@@ -397,7 +397,7 @@ Leaching_LNB_CumulativeF<-Leaching_LNB_Cumulative %>% mutate(Ca=Leaching_LNB_Cum
 
 
 Leaching_LNB_Background_R1<-Leaching_LNB %>% subset(group_id %in% 8 & YEAR %in% Years_R1) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="LNB", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4) %>%
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="LNB", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4+DON, P = P+DOP) %>%
   select(N, P, K, Ca, Rot, Loss1, Loss2, Site, Harvest)
 
 Leaching_LNB_Excess_R1<-Ex_Table_R1 %>% rename(Ca=Ca_Ex_R1, K=K_Ex_R1, N=N_Ex_R1, P=P_Ex_R1) %>%
@@ -529,7 +529,7 @@ Leaching_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_B
 # New Method
 
 Leaching_HNB_Cumulative<-Leaching_HNB %>% subset(group_id %in% 8 & YEAR %in% Years) %>%
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="HNB", Harvest="40BO", N=NO3+NH4)  %>% 
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Rot="Cumulative", Loss1="Leaching",Loss2="Background Leaching" ,Site="HNB", Harvest="40BO", N=NO3+NH4+DON, P = P+DOP)  %>% 
   select(N, P, K, Ca, Site, Harvest,Rot, Loss1, Loss2)
 
 
@@ -552,7 +552,7 @@ Leaching_HNB_CumulativeF<-Leaching_HNB_Cumulative %>% mutate(Ca=Leaching_HNB_Cum
 
 
 Leaching_HNB_Background_R1<-Leaching_HNB %>% subset(group_id %in% 8 & YEAR %in% Years_R1) %>% 
-  summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="HNB", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4) %>%
+  summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))  %>% mutate(Site="HNB", Harvest="40BO",Rot="Rotation 1", Loss1="Leaching",Loss2="Background Leaching", N=NO3+NH4+DON, P = P+DOP) %>%
   select(N, P, K, Ca, Rot, Loss1, Loss2, Site, Harvest)
 
 Leaching_HNB_Excess_R1<-Ex_Table_R1 %>% rename(Ca=Ca_Ex_R1, K=K_Ex_R1, N=N_Ex_R1, P=P_Ex_R1) %>%

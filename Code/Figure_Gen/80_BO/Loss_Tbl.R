@@ -59,8 +59,8 @@ Tot_Removed_LNS$S_Har<-Net_Removal_LNS$S_F*0+Net_Removal_LNS$S_Bol*.97*.99+Net_R
 Tot_Removed_LNS$Ca_Leach<-Leaching_LNS$Ca
 Tot_Removed_LNS$Mg_Leach<-Leaching_LNS$Mg
 Tot_Removed_LNS$K_Leach<-Leaching_LNS$K
-Tot_Removed_LNS$N_Leach<-Leaching_LNS$NO3+Leaching_LNS$NH4
-Tot_Removed_LNS$P_Leach<-Leaching_LNS$P
+Tot_Removed_LNS$N_Leach<-Leaching_LNS$NO3+Leaching_LNS$NH4+Leaching_LNS$DON
+Tot_Removed_LNS$P_Leach<-Leaching_LNS$P+Leaching_LNS$DOP
 Tot_Removed_LNS$S_Leach<-Leaching_LNS$SO4
 
 Tot_Removed_LNS$P_OCC<-AEC_All_LNS$PO4_Net
@@ -116,8 +116,8 @@ Tot_Removed_LNB$S_Har<-Net_Removal_LNB$S_F*0+Net_Removal_LNB$S_Bol*.97*.99+Net_R
 Tot_Removed_LNB$Ca_Leach<-Leaching_LNB$Ca
 Tot_Removed_LNB$Mg_Leach<-Leaching_LNB$Mg
 Tot_Removed_LNB$K_Leach<-Leaching_LNB$K
-Tot_Removed_LNB$N_Leach<-Leaching_LNB$NO3+Leaching_LNB$NH4
-Tot_Removed_LNB$P_Leach<-Leaching_LNB$P
+Tot_Removed_LNB$N_Leach<-Leaching_LNB$NO3+Leaching_LNB$NH4+Leaching_LNB$DON
+Tot_Removed_LNB$P_Leach<-Leaching_LNB$P+Leaching_LNB$DOP
 Tot_Removed_LNB$S_Leach<-Leaching_LNB$SO4
 
 Tot_Removed_LNB$P_OCC<-AEC_All_LNB$PO4_Net
@@ -176,8 +176,8 @@ Tot_Removed_HNS$S_Har<-Net_Removal_HNS$S_F*0+Net_Removal_HNS$S_Bol*.97*.99+Net_R
 Tot_Removed_HNS$Ca_Leach<-Leaching_HNS$Ca
 Tot_Removed_HNS$Mg_Leach<-Leaching_HNS$Mg
 Tot_Removed_HNS$K_Leach<-Leaching_HNS$K
-Tot_Removed_HNS$N_Leach<-Leaching_HNS$NO3+Leaching_HNS$NH4
-Tot_Removed_HNS$P_Leach<-Leaching_HNS$P
+Tot_Removed_HNS$N_Leach<-Leaching_HNS$NO3+Leaching_HNS$NH4+Leaching_HNS$DON
+Tot_Removed_HNS$P_Leach<-Leaching_HNS$P+Leaching_HNS$DOP
 Tot_Removed_HNS$S_Leach<-Leaching_HNS$SO4
 
 Tot_Removed_HNS$P_OCC<-AEC_All_HNS$PO4_Net
@@ -232,8 +232,8 @@ Tot_Removed_HNB$S_Har<-Net_Removal_HNB$S_F*0+Net_Removal_HNB$S_Bol*.97*.99+Net_R
 Tot_Removed_HNB$Ca_Leach<-Leaching_HNB$Ca
 Tot_Removed_HNB$Mg_Leach<-Leaching_HNB$Mg
 Tot_Removed_HNB$K_Leach<-Leaching_HNB$K
-Tot_Removed_HNB$N_Leach<-Leaching_HNB$NO3+Leaching_HNB$NH4
-Tot_Removed_HNB$P_Leach<-Leaching_HNB$P
+Tot_Removed_HNB$N_Leach<-Leaching_HNB$NO3+Leaching_HNB$NH4+Leaching_HNB$DON
+Tot_Removed_HNB$P_Leach<-Leaching_HNB$P+Leaching_HNB$DOP
 Tot_Removed_HNB$S_Leach<-Leaching_HNB$SO4
 
 Tot_Removed_HNB$P_OCC<-AEC_All_HNB$PO4_Net
