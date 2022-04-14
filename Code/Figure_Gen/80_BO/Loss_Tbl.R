@@ -16,7 +16,7 @@ Years<-seq(2005, 2505, 1)
 
 Leaching_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Soil_Solution_All2.csv")
 
-Leaching_LNS<-Leaching_LNS %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+Leaching_LNS<-Leaching_LNS %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 Tree_Nut_LNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
 
@@ -73,7 +73,7 @@ Tot_Removed_LNS$Site<-"LNS"
 
 Leaching_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Soil_Solution_All2.csv")
 
-Leaching_LNB<-Leaching_LNB %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+Leaching_LNB<-Leaching_LNB %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 Tree_Nut_LNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
 
@@ -133,7 +133,7 @@ Tot_Removed_LNB$Site<-"LNB"
 
 Leaching_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Soil_Solution_All2.csv")
 
-Leaching_HNS<-Leaching_HNS %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+Leaching_HNS<-Leaching_HNS %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 Tree_Nut_HNS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/80_BO/Edited Data/Tree_Nut_All.csv")
 
@@ -189,7 +189,7 @@ Tot_Removed_HNS$Site<-"HNS"
 
 Leaching_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Soil_Solution_All2.csv")
 
-Leaching_HNB<-Leaching_HNB %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:Si, ~sum(.x, na.rm=TRUE)))
+Leaching_HNB<-Leaching_HNB %>% subset(group_id %in% 8 & YEAR %in% Years ) %>% summarise(across(Ca:DOP, ~sum(.x, na.rm=TRUE)))
 
 Tree_Nut_HNB<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data/Tree_Nut_All.csv")
 
