@@ -1,11 +1,12 @@
-
 rm(list = ls())
+
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/HN_BAS/40_BO")
 
 library(dplyr)
 
 # SOM Files: In mol/m2
 
-Files<- list.files("C:/Users/siahl/OneDrive - Oregon State University/Documents/NutsForSEDLN/40_BO/Output data/SOM",
+Files<- list.files("C:/Users/siahl/OneDrive - Oregon State University/Documents/NutsForBASHN/40_BO/Output data/SOM",
                    pattern = "SOM", full.names = TRUE)
 
 
@@ -37,13 +38,13 @@ SOM_Final<-SOM_Initial %>% summarise(across(C_SOM:MB_P, ~sum(.x, na.rm=TRUE)))
 
 
 SOM_Final<-SOM_Final %>% mutate(C_SOM = (C_SOM+MB_C)*10*12.01, N_SOM = (N_SOM+MB_N)*10*14, Ca_SOM = (Ca_SOM+MB_Ca)*40.078*10, 
-                     Mg_SOM = (Mg_SOM+MB_Mg)*24.305*10 , K_SOM = (K_SOM+MB_K)*39.0983*10 ,
-                     S_SOM = (S_SOM+MB_S)*32.065*10, P_SOM = (P_SOM+MB_P)*30.974*10)
+                                Mg_SOM = (Mg_SOM+MB_Mg)*24.305*10 , K_SOM = (K_SOM+MB_K)*39.0983*10 ,
+                                S_SOM = (S_SOM+MB_S)*32.065*10, P_SOM = (P_SOM+MB_P)*30.974*10)
 
 
 # CEC 
 
-files <- list.files(path = "~/NutsforSEDLN/40_BO/Output data/CEC", pattern = "CEC", full.names = TRUE)
+files <- list.files(path = "~/NutsforBASHN/40_BO/Output data/CEC", pattern = "CEC", full.names = TRUE)
 
 CEC_All<- sapply(files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
@@ -71,7 +72,7 @@ CEC_Final<-CEC_All %>% summarise(across(Ca:Al, ~sum(.x, na.rm=TRUE)))
 
 # Make sure to check kg/ha units (as P or PO4, S or SO4)
 
-AEC_Files <- list.files(path = "~/NutsforSEDLN/40_BO/Output data/AEC", pattern = "AEC", full.names = TRUE)
+AEC_Files <- list.files(path = "~/NutsforBASHN/40_BO/Output data/AEC", pattern = "AEC", full.names = TRUE)
 
 AEC_All<- sapply(AEC_Files, read.csv2, simplify=FALSE, header=FALSE) %>% 
   bind_rows(.id = "id")
@@ -90,7 +91,7 @@ AEC_Final <- subset(AEC_All, Year == 2005 & Month ==1) %>% summarise(across(S:Cl
 
 # Litter 
 
-Litter<-read.csv2("~/NutsforSEDLN/40_BO/Output data/Litter/Litter pool kg_ha data.csv")
+Litter<-read.csv2("~/NutsforBASHN/40_BO/Output data/Litter/Litter pool kg_ha data.csv")
 
 Litter_Headers<-c("Year", "Month", "C", "N", "Ca", "Mg", "K", "S", "P")
 
@@ -119,3 +120,4 @@ C = Litter$C+SOM_Final$C_SOM
 
 Initial_Tbl<-cbind(Ca, Mg, K, N, P, S, C)
 
+write.csv(Initial_Tbl, "Initial_Nutrients.csv")

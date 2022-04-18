@@ -1,6 +1,8 @@
 
 rm(list = ls())
 
+setwd("~/Project_Master/Test_Rep/Manuscript/Images/LN_SED/40_BO")
+
 library(dplyr)
 
 # SOM Files: In mol/m2
@@ -118,4 +120,6 @@ S= Litter$S+CEC_Final$S+SOM_Final$S_SOM
 C = Litter$C+SOM_Final$C_SOM
 
 Initial_Tbl<-cbind(Ca, Mg, K, N, P, S, C)
+
+write.csv(Initial_Tbl, "Initial_Nutrients.csv")
 
