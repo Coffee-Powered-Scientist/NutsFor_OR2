@@ -58,4 +58,4 @@ N_Mineralization<-as.data.frame(N_Manz)
 N_Mineralization$YEAR<-YEAR
 
 
-write.csv2(N_Mineralization, "N_Minz.csv", row.names=TRUE)
+write.csv(N_Mineralization, "N_Minz.csv", row.names=TRUE)

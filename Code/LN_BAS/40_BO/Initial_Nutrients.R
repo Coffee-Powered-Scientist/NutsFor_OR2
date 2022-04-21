@@ -115,7 +115,7 @@ Mg = Litter$Mg+CEC_Final$Mg+SOM_Final$Mg_SOM
 K= Litter$K+CEC_Final$K+SOM_Final$K_SOM
 N=Litter$N+CEC_Final$NH4+SOM_Final$N_SOM 
 P = Litter$P+AEC_Final$P+SOM_Final$P_SOM
-S= Litter$S+CEC_Final$S+SOM_Final$S_SOM
+S= Litter$S+AEC_Final$S+SOM_Final$S_SOM
 C = Litter$C+SOM_Final$C_SOM
 
 Initial_Tbl<-cbind(Ca, Mg, K, N, P, S, C)

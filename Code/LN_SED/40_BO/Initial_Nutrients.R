@@ -38,7 +38,7 @@ SOM_Initial<-subset(SOM, Year == 2005 & Month ==1)
 SOM_Final<-SOM_Initial %>% summarise(across(C_SOM:MB_P, ~sum(.x, na.rm=TRUE)))
 
 
-SOM_Final<-SOM_Final %>% mutate(C_SOM = (C_SOM+MB_C)*10*12.01, N_SOM = (N_SOM+MB_N)*10*14, Ca_SOM = (Ca_SOM+MB_Ca)*40.078*10, 
+SOM_Final<-SOM_Final %>% mutate(C_SOM = (C_SOM+MB_C)*10*12.01, N_SOM = (N_SOM+MB_N)*10*14.0067, Ca_SOM = (Ca_SOM+MB_Ca)*40.078*10, 
                      Mg_SOM = (Mg_SOM+MB_Mg)*24.305*10 , K_SOM = (K_SOM+MB_K)*39.0983*10 ,
                      S_SOM = (S_SOM+MB_S)*32.065*10, P_SOM = (P_SOM+MB_P)*30.974*10)
 
@@ -116,7 +116,7 @@ Mg = Litter$Mg+CEC_Final$Mg+SOM_Final$Mg_SOM
 K= Litter$K+CEC_Final$K+SOM_Final$K_SOM
 N=Litter$N+CEC_Final$NH4+SOM_Final$N_SOM 
 P = Litter$P+AEC_Final$P+SOM_Final$P_SOM
-S= Litter$S+CEC_Final$S+SOM_Final$S_SOM
+S= Litter$S+AEC_Final$S+SOM_Final$S_SOM
 C = Litter$C+SOM_Final$C_SOM
 
 Initial_Tbl<-cbind(Ca, Mg, K, N, P, S, C)
