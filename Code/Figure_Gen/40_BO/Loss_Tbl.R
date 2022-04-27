@@ -118,7 +118,7 @@ Tot_Removed_LNB$S_Har<-Net_Removal_LNB$S_F*0+Net_Removal_LNB$S_Bol*.97*.99+Net_R
 Tot_Removed_LNB$Ca_Leach<-Leaching_LNB$Ca
 Tot_Removed_LNB$Mg_Leach<-Leaching_LNB$Mg
 Tot_Removed_LNB$K_Leach<-Leaching_LNB$K
-Tot_Removed_LNB$N_Leach<-Leaching_LNB$NO3+Leaching_LNB$NH4
+Tot_Removed_LNB$N_Leach<-Leaching_LNB$NO3+Leaching_LNB$NH4+Leaching_LNB$DON
 Tot_Removed_LNB$P_Leach<-Leaching_LNB$P+Leaching_LNB$DOP
 Tot_Removed_LNB$S_Leach<-Leaching_LNB$SO4
 
