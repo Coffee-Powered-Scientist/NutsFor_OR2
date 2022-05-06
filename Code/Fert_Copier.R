@@ -1,4 +1,5 @@
 
+rm(list = ls())
 
 ##-- Takes 40 BO base files and pastes them into the Fert. Folder of sites --##
 
