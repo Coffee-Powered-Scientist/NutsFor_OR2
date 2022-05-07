@@ -110,6 +110,7 @@ Above_Flux_LNS$TS<-TimeSteps
 Above_FluxGHOST_LNS$TS<-TimeSteps
 
 Plant_Pool_HNSED$TS<-TimeSteps
+Plant_Pool_HNSED_Ghost$TS<-TimeSteps
 Above_Flux_HNS$TS<-TimeSteps
 Above_FluxGHOST_HNS$TS<-TimeSteps
 
@@ -258,7 +259,7 @@ plot(LNSED_All_Nut)
 dev.off()
 
 
-HNSED_All_Nut<- ggplot(Plant_Pool_HNSED, mapping= aes(x=TS, y=S_Diff*32.065*10000/1e6/1000, color="S", linetype="S"))+geom_line()+ 
+HNSED_All_Nut<- ggplot(Plant_Pool_HNSED_Ghost, mapping= aes(x=TS, y=S_Diff*32.065*10000/1e6/1000, color="S", linetype="S"))+geom_line()+ 
   geom_line(aes(y=K_THRU+K_Diff*39.0983*10000/1e6/1000, color="K", linetype="K"))+
   geom_line(aes(y=Mg_THRU+Mg_Diff*24.305*10000/1e6/1000, color="Mg", linetype="Mg"))+
   geom_line(aes(y=Ca_THRU+Ca_Diff*40.078*10000/1e6/1000, color="Ca", linetype="Ca"))+
@@ -285,6 +286,7 @@ HNSED_REL<-ggplot(Plant_Pool_HNSED, mapping= aes(x=TS, y=100*(S_Diff*32.065*1000
   scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
   scale_y_continuous(breaks=c(0, 25,50, 75, 100))+
   coord_cartesian(ylim = c(0, 100))
+
 
 
 png('HNSED_All_Nut.png', height=480, width=650, res=125)

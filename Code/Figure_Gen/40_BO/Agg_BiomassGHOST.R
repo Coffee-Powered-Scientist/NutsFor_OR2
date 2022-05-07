@@ -1,4 +1,3 @@
-# This specific code is for the 40_BO
 
 rm(list = ls())
 
@@ -11,13 +10,13 @@ library(extrafont)
 
 # Update Files
 
-source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_SED/40_BO/TreeNut_GHOST.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_SED/40_BO/TreeNut_GHOST.R")
 
-source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/LN_BAS/40_BO/TreeNut_GHOST.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/TreeNut_Mutator.R")
+source("~/Project_Master/Test_Rep/Code/HN_BAS/40_BO/TreeNut_GHOST.R")
 
 # Set Working Directory
 
@@ -25,22 +24,22 @@ setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_BO")
 
 # 40_BO LN SED
 
-BO_40_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_LNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_SED/40_BO/Edited Data/Tree_Nut_AllGHOST.csv")
 
 BO_40_LNSED_H1<-BO_40_LNSED %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
-    mutate(Harvest="H1", Rock_Type="Sedimentary", N="Low") %>% 
-      select(Harvest,Rock_Type ,N,matches("DW"))
+  mutate(Harvest="H1", Rock_Type="Sedimentary", N="Low") %>% 
+  select(Harvest,Rock_Type ,N,matches("DW"))
 
 BO_40_LNSED_H2<- BO_40_LNSED %>% 
   filter(YEAR == "2067" & Month == "8") %>% 
-    mutate(Harvest="H2", Rock_Type="Sedimentary", N="Low") %>% 
-      select(Harvest,Rock_Type ,N, matches("DW"))
+  mutate(Harvest="H2", Rock_Type="Sedimentary", N="Low") %>% 
+  select(Harvest,Rock_Type ,N, matches("DW"))
 
 BO_40_LNSED_H3<-BO_40_LNSED %>%
   filter(YEAR == "2109" & Month == "8") %>%
-    mutate(Harvest="H3", Rock_Type="Sedimentary", N="Low") %>%
-        select(Harvest, Rock_Type, N, matches ("DW"))
+  mutate(Harvest="H3", Rock_Type="Sedimentary", N="Low") %>%
+  select(Harvest, Rock_Type, N, matches ("DW"))
 
 BO_40_LNSED_H4<-BO_40_LNSED %>% 
   filter(YEAR == "2151" & Month == "8") %>% 
@@ -109,7 +108,7 @@ BO_40_LNSED_H13_MELT<-melt(BO_40_LNSED_H13, id.vars = c("Harvest", "Rock_Type", 
 
 # 40_BO LN BAS
 
-BO_40_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_LNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/LN_BAS/40_BO/Edited Data/Tree_Nut_AllGHOST.csv")
 
 BO_40_LNBAS_H1<-BO_40_LNBAS %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
@@ -194,7 +193,7 @@ BO_40_LNBAS_H13_MELT<-melt(BO_40_LNBAS_H13, id.vars = c("Harvest", "Rock_Type", 
 
 # 40_BO HN BAS
 
-BO_40_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_HNBAS<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/40_BO/Edited Data/Tree_Nut_AllGHOST.csv")
 BO_40_HNBAS_H1<-BO_40_HNBAS %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
   mutate(Harvest="H1", Rock_Type="Basalt", N="High") %>% 
@@ -278,7 +277,7 @@ BO_40_HNBAS_H13_MELT<-melt(BO_40_HNBAS_H13, id.vars = c("Harvest", "Rock_Type", 
 
 # 40 BO HN SED
 
-BO_40_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data/Tree_Nut_All.csv")
+BO_40_HNSED<-read.csv2("~/Project_Master/Test_Rep/Output/Manuscript/HN_SED/40_BO/Edited Data/Tree_Nut_AllGHOST.csv")
 
 BO_40_HNSED_H1<-BO_40_HNSED %>% 
   filter(YEAR == "2025" & Month == "8") %>% 
@@ -407,12 +406,5 @@ BO_Aggregated_Biomass<-ggplot(Biomass_Master[order(Biomass_Master$variable,decre
 #Check
 BO_Aggregated_Biomass
 
-  
-#Save to Image Directory
 
-png("BO_Biomass.png", height=750, width=1000, res=100)
-print(BO_Aggregated_Biomass)
-dev.off()
-
-  
-  
+write.csv(Biomass_Master, "Biomass_MasterGHOST.csv")
