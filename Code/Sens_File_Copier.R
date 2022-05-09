@@ -1,4 +1,5 @@
 
+rm(list = ls())
 
 ##-Copy paste file for Sensitivty Analysis Folders-##
 

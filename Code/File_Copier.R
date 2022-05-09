@@ -1,4 +1,5 @@
 
+rm(list = ls())
 
 Files<- list.files("C:/Users/siahl/OneDrive - Oregon State University/Documents/NutsForSEDLN/40_BO/Input data")
 
