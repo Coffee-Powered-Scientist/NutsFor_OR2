@@ -366,5 +366,5 @@ ggarrange(LNSED_REL, HNSED_REL ,LNBAS_REL,HNBAS_REL, labels=c("A", "B", "C", "D"
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1) %>%
   annotate_figure(left = textGrob(expression("Relative Uptake Deficit (%)"), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                             font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3))) %>%
   ggexport(filename="REL_Diff.png", height=1000, width=1000, res=100)

@@ -13,6 +13,8 @@ library(gridtext)
 library(gtable)
 library(cowplot)
 library(lubridate)
+library(ggpubr)
+
 
 setwd("~/Project_Master/Test_Rep/Manuscript/Images/Aggregated/40_BO")
 
@@ -588,7 +590,7 @@ ggarrange(Ca_LNS, Ca_HNS, Ca_LNB, Ca_HNB, labels=c("A", "B", "C", "D"),
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1)%>%
   annotate_figure(left = textGrob(expression("Ca (kg"~'⋅'~ha^{-1}~')'), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                        font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
+                  bottom = textGrob("Time Step (Years)", gp = gpar(cex = 1.3))) %>%
   ggexport(filename="Ca_OPEX.png", height=1000, width=1000, res=100)
 
 ggarrange(Mg_LNS, Mg_HNS, Mg_LNB, Mg_HNB, labels=c("A", "B", "C", "D"),

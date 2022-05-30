@@ -236,7 +236,7 @@ LNSED_All_Nut<- ggplot(Plant_Pool_LNSED, mapping= aes(x=TS, y=S_Diff*32.065*1000
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="Low N Sedimentary", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 5, 10, 15, 20))+
   coord_cartesian(ylim = c(0, 20))
 
@@ -250,7 +250,7 @@ LNSED_REL<-ggplot(Plant_Pool_LNSED, mapping= aes(x=TS, y=100*(S_Diff*32.065*1000
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="Low N Sedimentary", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 25,50, 75, 100))+
   coord_cartesian(ylim = c(0, 100))
 
@@ -269,7 +269,7 @@ HNSED_All_Nut<- ggplot(Plant_Pool_HNSED_Ghost, mapping= aes(x=TS, y=S_Diff*32.06
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="High N Sedimentary", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 5, 10, 15, 20))+
   coord_cartesian(ylim = c(0, 20))
 
@@ -283,7 +283,7 @@ HNSED_REL<-ggplot(Plant_Pool_HNSED, mapping= aes(x=TS, y=100*(S_Diff*32.065*1000
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="High N Sedimentary", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 25,50, 75, 100))+
   coord_cartesian(ylim = c(0, 100))
 
@@ -304,7 +304,7 @@ LNBAS_All_Nut<- ggplot(Plant_Pool_LNBAS, mapping= aes(x=TS, y=S_Diff*32.065*1000
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="Low N Basalt", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 5, 10, 15, 20))+
   coord_cartesian(ylim = c(0, 20))
 
@@ -318,7 +318,7 @@ LNBAS_REL<-ggplot(Plant_Pool_LNBAS, mapping= aes(x=TS, y=100*(S_Diff*32.065*1000
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="Low N Basalt", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 25,50, 75, 100))+
   coord_cartesian(ylim = c(0, 100))
 
@@ -338,7 +338,7 @@ HNBAS_All_Nut<- ggplot(Plant_Pool_HNBAS, mapping= aes(x=TS, y=S_Diff*32.065*1000
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="High N Basalt", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 5, 10, 15, 20))+
   coord_cartesian(ylim = c(0, 20))
 
@@ -353,7 +353,7 @@ HNBAS_REL<-ggplot(Plant_Pool_HNBAS, mapping= aes(x=TS, y=100*(S_Diff*32.065*1000
   scale_linetype_manual(values=c("solid", "solid", "solid", "dashed", "dashed", "dashed"))+
   labs(x=NULL, y=NULL, color="Nutrient", title="High N Basalt", linetype="Nutrient")+
   theme_bw()+theme(plot.title = element_text(hjust = 0.5),  text=element_text(family="A", size=15), strip.text.x = element_text(size = 15))+
-  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green2", "grey"))+
+  scale_color_manual(values=c("red3", "orange", "magenta2", "blue", "green4", "grey"))+
   scale_y_continuous(breaks=c(0, 25,50, 75, 100))+
   coord_cartesian(ylim = c(0, 100))
 
@@ -376,7 +376,7 @@ ggarrange(LNSED_REL, HNSED_REL ,LNBAS_REL,HNBAS_REL, labels=c("A", "B", "C", "D"
           ncol = 2, nrow = 2, common.legend = TRUE, legend="right", heights =1, widths = 1) %>%
   annotate_figure(left = textGrob(expression("Relative Uptake Deficit (%)"), rot = 90, vjust=.45, gp = gpar(cex = 1.3,
                                                                                                                   font.label = list(size = 14, color = "black", face = "bold"))),
-                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3)), top=textGrob("40 BO")) %>%
+                  bottom = textGrob("Time Step (Year)", gp = gpar(cex = 1.3))) %>%
   ggexport(filename="REL_Diff.png", height=1000, width=1000, res=100)
 
 

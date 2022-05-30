@@ -58,3 +58,5 @@ Weathering_All<-Weathering_All %>% mutate(Date=make_date(YEAR,Month))
 
 #write csv
 write.csv2(Weathering_All, "Weathering_All.csv", row.names=TRUE)
+write.csv(Weathering_All, "Weathering_All_ManualCheck.csv", row.names=TRUE)
+
