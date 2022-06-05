@@ -15,8 +15,6 @@ source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/CEC_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/AEC_Mutator.R")
 
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/Analysis_1_Mutator.R")
-
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/Hydro_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/SOM_Mutator.R")
@@ -24,9 +22,3 @@ source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/SOM_Mutator.R")
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/Plant_Pool_Mutator.R")
 
 source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/Above_Mutator.R")
-
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/Minz_Mutator.R")
-
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/Above_Ghost.R")
-
-source("~/Project_Master/Test_Rep/Code/HN_BAS/80_OH/Plant_Pool_Ghost.R")

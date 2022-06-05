@@ -8,7 +8,7 @@ library(dplyr)
 library(ggplot2)
 library(lubridate)
 
-setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_BO/Edited Data")
+setwd("~/Project_Master/Test_Rep/Output/Manuscript/HN_BAS/80_OH/Edited Data")
 
 Hydro<-read.csv2("~/NutsForBASHN/Base/Output data/Hydrology/Hydrology Monthly Output.csv")
 
